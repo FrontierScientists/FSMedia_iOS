@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>27FA89B9-9EC4-432E-A1AC-CBC7CE74ACC3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>FrontierScientistsMedia</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3CE1AC8A2BA9E20412D1ABB055E0158F0418E8CE</key>
+		<string>https://github.alaska.edu/FrontierScientists/Swift_iOS.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>FrontierScientistsMedia/FrontierScientistsMedia.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3CE1AC8A2BA9E20412D1ABB055E0158F0418E8CE</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.alaska.edu/FrontierScientists/Swift_iOS.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3CE1AC8A2BA9E20412D1ABB055E0158F0418E8CE</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3CE1AC8A2BA9E20412D1ABB055E0158F0418E8CE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Swift_iOS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
