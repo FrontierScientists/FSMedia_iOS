@@ -16,6 +16,7 @@
 		3B6ED9F71B0BC967003E8903 /* research_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F61B0BC967003E8903 /* research_icon.png */; };
 		3B6ED9F91B0BC96D003E8903 /* video_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F81B0BC96D003E8903 /* video_icon.png */; };
 		3B6ED9FD1B0BD9A0003E8903 /* drawer_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */; };
+		3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */; };
 		3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17E31B06C36D003510D7 /* AppDelegate.swift */; };
 		3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17E51B06C36D003510D7 /* ViewController.swift */; };
 		3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17E71B06C36D003510D7 /* Main.storyboard */; };
@@ -44,6 +45,7 @@
 		3B6ED9F61B0BC967003E8903 /* research_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = research_icon.png; sourceTree = "<group>"; };
 		3B6ED9F81B0BC96D003E8903 /* video_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_icon.png; sourceTree = "<group>"; };
 		3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drawer_shadow.png; sourceTree = "<group>"; };
+		3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		3BAA17DE1B06C36D003510D7 /* FrontierScientistsMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontierScientistsMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAA17E21B06C36D003510D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAA17E31B06C36D003510D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				3BAA17EA1B06C36D003510D7 /* Images.xcassets */,
 				3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */,
 				3BAA17E11B06C36D003510D7 /* Supporting Files */,
+				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 			);
 			path = FrontierScientistsMedia;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,
 			);

@@ -8,14 +8,9 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
-    @IBOutlet var iconImage: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
-}
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet var mainMenu: UITableView!
+    @IBOutlet weak var mainMenu: UITableView!
     @IBOutlet var bindingBack: UIView!
     @IBOutlet var pageBack: UIView!
     @IBOutlet var shadow: UIImageView!
@@ -28,10 +23,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "section")
-        cell.imageView?.layoutMargins = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 10)
-        cell.imageView?.image = UIImage(named: icons[indexPath.row])
-        cell.textLabel?.text = sections[indexPath.row]
+        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as CustomTableViewCell
+        cell.cellImage.image = UIImage(named: icons[indexPath.row])
+        cell.cellLabel.text = sections[indexPath.row]
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }
@@ -39,9 +33,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Frontier Scientists"
-        mainMenu.rowHeight = 60
-        mainMenu.separatorColor = UIColor.blackColor()
-        mainMenu.separatorInset = UIEdgeInsetsZero
+        mainMenu.rowHeight = 80
+        mainMenu.separatorColor = UIColor.clearColor()
         mainMenu.backgroundColor = UIColor.clearColor()
         shadow.backgroundColor = UIColor(patternImage: UIImage(named: "drawer_shadow.png")!)
         bindingBack.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
