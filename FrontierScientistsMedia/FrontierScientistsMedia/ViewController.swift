@@ -26,8 +26,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as CustomTableViewCell
         cell.cellImage.image = UIImage(named: icons[indexPath.row])
         cell.cellLabel.text = sections[indexPath.row]
+        cell.cellLabel.font = UIFont(name: "EraserDust", size: 20)
+        cell.cellLabel.textColor = UIColorFromRGB(0x3E3535)
         cell.backgroundColor = UIColor.clearColor()
         return cell
+    }
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
     
     override func viewDidLoad() {
