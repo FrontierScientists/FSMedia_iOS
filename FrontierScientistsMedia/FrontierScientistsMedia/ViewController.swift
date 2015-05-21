@@ -32,14 +32,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        switch indexPath.row {
+            case 0:
+                performSegueWithIdentifier("research", sender: nil)
+                break
+            case 1:
+                performSegueWithIdentifier("videos", sender: nil)
+                break
+            case 2:
+                performSegueWithIdentifier("maps", sender: nil)
+                break
+            case 3:
+                performSegueWithIdentifier("articles", sender: nil)
+                break
+            case 4:
+                performSegueWithIdentifier("ask", sender: nil)
+                break
+            default:
+                performSegueWithIdentifier("about", sender:nil)
+                break
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected row.
     }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +74,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
 
+/*
+    Helper Function
+*/
+    // UIColorFromRGB
+    // This function generated a UIColor object from an RGB value
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
 
 }
 
