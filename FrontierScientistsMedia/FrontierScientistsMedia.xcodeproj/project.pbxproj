@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B6ED9E91B0BA5B9003E8903 /* navigation_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9E81B0BA5B9003E8903 /* navigation_bg.jpg */; };
+		3B6ED9ED1B0BB8E7003E8903 /* page.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9EC1B0BB8E7003E8903 /* page.jpeg */; };
+		3B6ED9EF1B0BC93F003E8903 /* about_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9EE1B0BC93F003E8903 /* about_icon.png */; };
+		3B6ED9F11B0BC947003E8903 /* article_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F01B0BC947003E8903 /* article_icon.png */; };
+		3B6ED9F31B0BC94E003E8903 /* ask_a_scientist_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F21B0BC94E003E8903 /* ask_a_scientist_icon.png */; };
+		3B6ED9F51B0BC95F003E8903 /* map_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F41B0BC95F003E8903 /* map_icon.png */; };
+		3B6ED9F71B0BC967003E8903 /* research_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F61B0BC967003E8903 /* research_icon.png */; };
+		3B6ED9F91B0BC96D003E8903 /* video_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F81B0BC96D003E8903 /* video_icon.png */; };
+		3B6ED9FD1B0BD9A0003E8903 /* drawer_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */; };
 		3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17E31B06C36D003510D7 /* AppDelegate.swift */; };
 		3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17E51B06C36D003510D7 /* ViewController.swift */; };
 		3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17E71B06C36D003510D7 /* Main.storyboard */; };
@@ -26,6 +35,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B6ED9E81B0BA5B9003E8903 /* navigation_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = navigation_bg.jpg; sourceTree = "<group>"; };
+		3B6ED9EC1B0BB8E7003E8903 /* page.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = page.jpeg; sourceTree = "<group>"; };
+		3B6ED9EE1B0BC93F003E8903 /* about_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_icon.png; sourceTree = "<group>"; };
+		3B6ED9F01B0BC947003E8903 /* article_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = article_icon.png; sourceTree = "<group>"; };
+		3B6ED9F21B0BC94E003E8903 /* ask_a_scientist_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ask_a_scientist_icon.png; sourceTree = "<group>"; };
+		3B6ED9F41B0BC95F003E8903 /* map_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_icon.png; sourceTree = "<group>"; };
+		3B6ED9F61B0BC967003E8903 /* research_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = research_icon.png; sourceTree = "<group>"; };
+		3B6ED9F81B0BC96D003E8903 /* video_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_icon.png; sourceTree = "<group>"; };
+		3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drawer_shadow.png; sourceTree = "<group>"; };
 		3BAA17DE1B06C36D003510D7 /* FrontierScientistsMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontierScientistsMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAA17E21B06C36D003510D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAA17E31B06C36D003510D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +98,15 @@
 				3BAA17E31B06C36D003510D7 /* AppDelegate.swift */,
 				3BAA17E51B06C36D003510D7 /* ViewController.swift */,
 				3BAA17E71B06C36D003510D7 /* Main.storyboard */,
+				3B6ED9E81B0BA5B9003E8903 /* navigation_bg.jpg */,
+				3B6ED9EE1B0BC93F003E8903 /* about_icon.png */,
+				3B6ED9F01B0BC947003E8903 /* article_icon.png */,
+				3B6ED9F21B0BC94E003E8903 /* ask_a_scientist_icon.png */,
+				3B6ED9F41B0BC95F003E8903 /* map_icon.png */,
+				3B6ED9F61B0BC967003E8903 /* research_icon.png */,
+				3B6ED9EC1B0BB8E7003E8903 /* page.jpeg */,
+				3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */,
+				3B6ED9F81B0BC96D003E8903 /* video_icon.png */,
 				3BAA17EA1B06C36D003510D7 /* Images.xcassets */,
 				3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */,
 				3BAA17E11B06C36D003510D7 /* Supporting Files */,
@@ -192,9 +219,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B6ED9EF1B0BC93F003E8903 /* about_icon.png in Resources */,
+				3B6ED9F11B0BC947003E8903 /* article_icon.png in Resources */,
+				3B6ED9E91B0BA5B9003E8903 /* navigation_bg.jpg in Resources */,
 				3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */,
+				3B6ED9F51B0BC95F003E8903 /* map_icon.png in Resources */,
 				3BAA17EE1B06C36D003510D7 /* LaunchScreen.xib in Resources */,
+				3B6ED9ED1B0BB8E7003E8903 /* page.jpeg in Resources */,
 				3BAA17EB1B06C36D003510D7 /* Images.xcassets in Resources */,
+				3B6ED9F31B0BC94E003E8903 /* ask_a_scientist_icon.png in Resources */,
+				3B6ED9F71B0BC967003E8903 /* research_icon.png in Resources */,
+				3B6ED9FD1B0BD9A0003E8903 /* drawer_shadow.png in Resources */,
+				3B6ED9F91B0BC96D003E8903 /* video_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +443,7 @@
 				3BAA17FF1B06C36E003510D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3BAA18001B06C36E003510D7 /* Build configuration list for PBXNativeTarget "FrontierScientistsMediaTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +452,7 @@
 				3BAA18021B06C36E003510D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
