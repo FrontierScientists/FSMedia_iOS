@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as CustomTableViewCell
+        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as! CustomTableViewCell
         cell.cellImage.image = UIImage(named: icons[indexPath.row])
         cell.cellLabel.text = sections[indexPath.row]
         cell.cellLabel.font = UIFont(name: "EraserDust", size: 20)
@@ -47,7 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("articles", sender: nil)
                 break
             case 4:
-                performSegueWithIdentifier("ask", sender: nil)
+                performSegueWithIdentifier("myask", sender: nil)
                 break
             default:
                 performSegueWithIdentifier("about", sender:nil)

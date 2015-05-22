@@ -24,6 +24,8 @@
 		3BAA17EB1B06C36D003510D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17EA1B06C36D003510D7 /* Images.xcassets */; };
 		3BAA17EE1B06C36D003510D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */; };
 		3BAA17FA1B06C36E003510D7 /* FrontierScientistsMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17F91B06C36E003510D7 /* FrontierScientistsMediaTests.swift */; };
+		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
+		7EFEB1B51B0E8DD40056100A /* askascientist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* askascientist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		3BAA17F31B06C36E003510D7 /* FrontierScientistsMediaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrontierScientistsMediaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAA17F81B06C36E003510D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAA17F91B06C36E003510D7 /* FrontierScientistsMediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontierScientistsMediaTests.swift; sourceTree = "<group>"; };
+		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		7EFEB1B41B0E8DD40056100A /* askascientist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = askascientist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 		3BAA17D51B06C36D003510D7 = {
 			isa = PBXGroup;
 			children = (
+				7EFEB1B41B0E8DD40056100A /* askascientist.swift */,
 				3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */,
 				3BAA17F61B06C36E003510D7 /* FrontierScientistsMediaTests */,
 				3BAA17DF1B06C36D003510D7 /* Products */,
@@ -126,6 +131,7 @@
 				3B6ED9EE1B0BC93F003E8903 /* about_icon.png */,
 				3B6ED9F01B0BC947003E8903 /* article_icon.png */,
 				3B6ED9F21B0BC94E003E8903 /* ask_a_scientist_icon.png */,
+				7E31EFB21B0EA8FC00C05F0C /* bg.png */,
 				3B6ED9F41B0BC95F003E8903 /* map_icon.png */,
 				3B6ED9F61B0BC967003E8903 /* research_icon.png */,
 				3B6ED9EC1B0BB8E7003E8903 /* page.jpeg */,
@@ -237,6 +243,7 @@
 				3B6ED9EF1B0BC93F003E8903 /* about_icon.png in Resources */,
 				3B6ED9F11B0BC947003E8903 /* article_icon.png in Resources */,
 				3B6ED9E91B0BA5B9003E8903 /* navigation_bg.jpg in Resources */,
+				7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */,
 				3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */,
 				3B6ED9F51B0BC95F003E8903 /* map_icon.png in Resources */,
 				3BAA17EE1B06C36D003510D7 /* LaunchScreen.xib in Resources */,
@@ -263,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EFEB1B51B0E8DD40056100A /* askascientist.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,
@@ -391,6 +399,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FrontierScientistsMedia/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -401,6 +410,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FrontierScientistsMedia/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

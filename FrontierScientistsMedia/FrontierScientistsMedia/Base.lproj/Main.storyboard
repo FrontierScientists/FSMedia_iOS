@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -148,7 +148,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofO-bH-nBe">
                                                     <rect key="frame" x="97" y="17" width="473" height="45"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -207,8 +207,8 @@
                         <segue destination="m0R-S3-sa9" kind="push" identifier="videos" id="sk8-Dx-qZ6"/>
                         <segue destination="g62-x1-3zm" kind="push" identifier="maps" id="DKJ-QQ-Ik9"/>
                         <segue destination="8ll-k3-VXg" kind="push" identifier="articles" id="0aM-QA-zvN"/>
-                        <segue destination="CvC-96-2ea" kind="push" identifier="ask" id="cJV-dE-E5Y"/>
                         <segue destination="19M-LF-YxW" kind="push" identifier="about" id="xqa-HY-ihQ"/>
+                        <segue destination="pyM-E1-Imh" kind="push" identifier="myask" id="Y4Z-EC-hch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InU-ob-QOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -242,32 +242,75 @@
             </objects>
             <point key="canvasLocation" x="292" y="1522"/>
         </scene>
-        <!--Table View Controller-->
-        <scene sceneID="Htw-vr-v5W">
+        <!--Ask View Controller-->
+        <scene sceneID="56t-uW-c4x">
             <objects>
-                <tableViewController id="CvC-96-2ea" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="M3a-XC-ebI">
+                <viewController id="pyM-E1-Imh" customClass="askViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="osy-0b-pdY"/>
+                        <viewControllerLayoutGuide type="bottom" id="ftl-Qw-aTC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AiM-eZ-ZyS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="John Smith, super smart guy, researches something" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5F-lO-lgn">
+                                <rect key="frame" x="162" y="137" width="161" height="139"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="161" id="ZcK-Uq-Wds"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" scrollEnabled="NO" editable="NO" text="Have a question? Ask our on-call scientists your questions!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1q-Ib-ues">
+                                <rect key="frame" x="16" y="79" width="316" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="316" id="MYM-BW-nHt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ask_a_scientist_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="KNh-RF-jDO">
+                                <rect key="frame" x="16" y="137" width="111" height="119"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="111" id="5oG-Gj-Bph"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5k-Ta-9cy">
+                                <rect key="frame" x="16" y="280" width="292" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="Gu6-nr-v2T"/>
+                                    <constraint firstAttribute="width" constant="292" id="aHg-3a-tFv"/>
+                                </constraints>
+                                <state key="normal" title="Email our Scientist">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMail:" destination="pyM-E1-Imh" eventType="touchUpInside" id="RXc-re-jHP"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="nLr-Ut-EU8">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nLr-Ut-EU8" id="CUX-84-qix">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="CvC-96-2ea" id="BrE-4B-LYv"/>
-                            <outlet property="delegate" destination="CvC-96-2ea" id="zNF-Xn-jZ0"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="I9x-iy-26P"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tai-O0-kxm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <constraints>
+                            <constraint firstItem="KNh-RF-jDO" firstAttribute="top" secondItem="r5F-lO-lgn" secondAttribute="top" id="9pk-cM-ylP"/>
+                            <constraint firstItem="ftl-Qw-aTC" firstAttribute="top" secondItem="k5k-Ta-9cy" secondAttribute="bottom" constant="281" id="Rdw-ls-pfp"/>
+                            <constraint firstItem="r5F-lO-lgn" firstAttribute="leading" secondItem="KNh-RF-jDO" secondAttribute="trailing" constant="35" id="VvF-DB-ZNh"/>
+                            <constraint firstItem="P1q-Ib-ues" firstAttribute="top" secondItem="osy-0b-pdY" secondAttribute="bottom" constant="15" id="YGz-Jo-Jjb"/>
+                            <constraint firstItem="k5k-Ta-9cy" firstAttribute="leading" secondItem="AiM-eZ-ZyS" secondAttribute="leadingMargin" id="ZEj-dH-SS5"/>
+                            <constraint firstItem="k5k-Ta-9cy" firstAttribute="top" secondItem="KNh-RF-jDO" secondAttribute="bottom" constant="24" id="cT1-hY-x0d"/>
+                            <constraint firstItem="KNh-RF-jDO" firstAttribute="leading" secondItem="k5k-Ta-9cy" secondAttribute="leading" id="deB-hG-UrO"/>
+                            <constraint firstItem="k5k-Ta-9cy" firstAttribute="top" secondItem="r5F-lO-lgn" secondAttribute="bottom" constant="4" id="iEp-Gz-A6N"/>
+                            <constraint firstItem="KNh-RF-jDO" firstAttribute="top" secondItem="P1q-Ib-ues" secondAttribute="bottom" constant="8" symbolic="YES" id="jTI-yu-Djk"/>
+                            <constraint firstItem="P1q-Ib-ues" firstAttribute="leading" secondItem="KNh-RF-jDO" secondAttribute="leading" id="lkM-9n-sPO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Wac-rV-vTc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i1z-ay-c9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1226" y="1592"/>
+            <point key="canvasLocation" x="1667" y="1660"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="sfJ-Xu-g0E">
@@ -297,4 +340,7 @@
             <point key="canvasLocation" x="1919" y="875"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ask_a_scientist_icon.png" width="142" height="142"/>
+    </resources>
 </document>
