@@ -25,7 +25,7 @@
 		3BAA17EE1B06C36D003510D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */; };
 		3BAA17FA1B06C36E003510D7 /* FrontierScientistsMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17F91B06C36E003510D7 /* FrontierScientistsMediaTests.swift */; };
 		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
-		7EFEB1B51B0E8DD40056100A /* askascientist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* askascientist.swift */; };
+		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,7 @@
 		3BAA17F81B06C36E003510D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAA17F91B06C36E003510D7 /* FrontierScientistsMediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontierScientistsMediaTests.swift; sourceTree = "<group>"; };
 		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
-		7EFEB1B41B0E8DD40056100A /* askascientist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = askascientist.swift; sourceTree = "<group>"; };
+		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,6 @@
 		3BAA17D51B06C36D003510D7 = {
 			isa = PBXGroup;
 			children = (
-				7EFEB1B41B0E8DD40056100A /* askascientist.swift */,
 				3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */,
 				3BAA17F61B06C36E003510D7 /* FrontierScientistsMediaTests */,
 				3BAA17DF1B06C36D003510D7 /* Products */,
@@ -114,6 +113,7 @@
 			children = (
 				3B6EDA081B0E5FB9003E8903 /* Fonts */,
 				3BAA17E31B06C36D003510D7 /* AppDelegate.swift */,
+				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				3BAA17E51B06C36D003510D7 /* ViewController.swift */,
 				3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */,
@@ -270,7 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EFEB1B51B0E8DD40056100A /* askascientist.swift in Sources */,
+				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,
