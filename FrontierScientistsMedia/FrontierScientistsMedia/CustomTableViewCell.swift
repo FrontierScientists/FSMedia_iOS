@@ -23,5 +23,4 @@ class CustomTableViewCell: UITableViewCell {
         CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height)
         CGContextStrokePath(context)
     }
-    
 }

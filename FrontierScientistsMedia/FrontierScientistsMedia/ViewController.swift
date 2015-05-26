@@ -8,12 +8,18 @@
 
 import UIKit
 
+var projectData = Dictionary<String, AnyObject>()
+var nextUpdate = ""
+var scientistInfo = Dictionary<String, AnyObject>()
+var aboutInfo = Dictionary<String, AnyObject>()
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mainMenu: UITableView!
     @IBOutlet var bindingBack: UIView!
     @IBOutlet var pageBack: UIView!
     @IBOutlet var shadow: UIImageView!
+    @IBOutlet weak var loadingDialog: UIView!
     
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
@@ -61,6 +67,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         // Beautify.
+        loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Frontier Scientists"
         mainMenu.rowHeight = 80
         mainMenu.separatorColor = UIColor.clearColor()
@@ -90,6 +97,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     self.loadDataFromJson(self.filePath)
                 }
             }
+            projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData")! as Dictionary
+            nextUpdate = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as String
+            scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist")! as Dictionary
+            aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about")! as Dictionary
+            self.loadingDialog.hidden = true
         }
     }
 
@@ -99,7 +111,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
 /*
-    Helper Function
+    Helper Functions
 */
     // UIColorFromRGB
     // This function generated a UIColor object from an RGB value
