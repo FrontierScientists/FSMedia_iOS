@@ -8,10 +8,14 @@
 
 import UIKit
 
-var projectData = Dictionary<String, AnyObject>()
-var nextUpdate = ""
-var scientistInfo = Dictionary<String, AnyObject>()
+var projectData = Dictionary<String, Dictionary<String, AnyObject>>()
+var scientistInfo = Dictionary<String, String>()
 var aboutInfo = Dictionary<String, AnyObject>()
+var orderedTitles = Array<String>()
+var projectImages = Dictionary<String, UIImage>()
+var scientistImage = UIImage()
+var aboutPeopleImages = Array<UIImage>()
+var aboutSnippetImages = Array<UIImage>()
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -54,7 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("articles", sender: nil)
                 break
             case 4:
-                performSegueWithIdentifier("myask", sender: nil)
+                performSegueWithIdentifier("ask", sender: nil)
                 break
             default:
                 performSegueWithIdentifier("about", sender:nil)
@@ -77,30 +81,47 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         pageBack.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
         
         // Load content.
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
+        let group = dispatch_group_create()
+        // This first task ensures that data is loaded and stored and that the global variables are set.
+        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             if NSUserDefaults.standardUserDefaults().objectForKey("projectData") != nil { // There has been data previously stored.
                 let nextUpdateString = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as String
                 let nextUpdateDate = NSDate(dateString: nextUpdateString)
                 let today = NSDate()
                 
                 if today.compare(nextUpdateDate) != NSComparisonResult.OrderedAscending { // If the next update date is either before today or is today, an update is needed.
-                    dispatch_async(dispatch_get_main_queue()) {
-                        println("Updating stored data...")
-                        self.loadDataFromJson(self.filePath)
-                    }
+                    println("Updating stored data...")
+                    self.loadDataFromJson(self.filePath)
                 } else {
                     println("Data is current.  No update needed.")
                 }
             } else { // There is no previously stored data.
-                dispatch_async(dispatch_get_main_queue()) {
-                    println("Retrieving data for first time...")
-                    self.loadDataFromJson(self.filePath)
-                }
+                println("Retrieving data for first time...")
+                self.loadDataFromJson(self.filePath)
             }
             projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData")! as Dictionary
-            nextUpdate = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as String
             scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist")! as Dictionary
             aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about")! as Dictionary
+        }
+        // This second task waits for the first to finish then downloads all the photos mentioned in the stored dictionaries, lastly hiding the loading animation.
+        dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            println("This is where the downloading goes.")
+            // Process all project images
+//            for (title, data) in enumerate(projectData) {
+//                imageInfoByProject[title] = data["preview_image"]
+//            }
+//            // Populate aboutPeopleImages
+//            for person in aboutInfo["people"] {
+//                aboutPeopleImages.append(person["image"])
+//            }
+//            // Populate aboutSnippetImages
+//            for snippet in aboutInfo["snippets"] {
+//                aboutSnippetImages.append(snippet["image"])
+//            }
+            
+            
+            
+            println("The loading dialog is hidden.")
             self.loadingDialog.hidden = true
         }
     }
@@ -124,7 +145,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         )
     }
     // loadDataFromJson
-    // This function establishes a connection with the VM, loads the content of frontSciData.json into a dictionary and saves data from that dictionary into dictionaries in storage.
+    // This function establishes a connection with the VM, loads the content of frontSciData.json into a dictionary and saves data from that dictionary into storage.
     func loadDataFromJson(filePath: String) {
         let data: NSData = NSData(contentsOfURL: NSURL(string: filePath)!)!
         var error: NSError?
@@ -134,9 +155,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSUserDefaults.standardUserDefaults().setObject(jsonDict["next_update"], forKey: "nextUpdate")
         NSUserDefaults.standardUserDefaults().setObject(jsonDict["scientist"], forKey: "scientist")
         NSUserDefaults.standardUserDefaults().setObject(jsonDict["about"], forKey: "about")
-        
-        println(NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as String)
     }
+    // processImage
+    // This function
+//    func processImage(type: String, imagePath: String, projectTitle: String) {
+//        let imageTitle = NSURL(string: imagePath)?.lastPathComponent
+//        // Check for it already being stored
+//        let image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)))
+//        if type == project {
+//            projectImages[projectTitle] = getImage
+//        }
+//    }
 }
 
 /*

@@ -11,11 +11,9 @@ import UIKit
 import MessageUI
 
 
-class askViewController: UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate, UITextViewDelegate {
-    @IBOutlet var subject: UITextField!
-//    @IBOutlet var body: UIImageView!
+class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    
+    @IBOutlet weak var thing: UILabel!
     @IBAction func sendMail(sender: AnyObject) {
         var subject_prefix = "[frontsci]"
         var recepient = ["sfarabaugh@alaska.edu"]
@@ -23,18 +21,13 @@ class askViewController: UIViewController, MFMailComposeViewControllerDelegate, 
         mailer.mailComposeDelegate = self
         mailer.setToRecipients(recepient)
         mailer.setSubject(subject_prefix)
-
-        
         presentViewController(mailer, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
-        
-//        subject.delegate = self
-//        body.delegate = self
+        thing.text = "You finally worked!"
     }
     
     override func didReceiveMemoryWarning() {

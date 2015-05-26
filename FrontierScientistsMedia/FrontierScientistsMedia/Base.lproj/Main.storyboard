@@ -249,7 +249,7 @@
                         <segue destination="g62-x1-3zm" kind="show" identifier="maps" id="DKJ-QQ-Ik9"/>
                         <segue destination="8ll-k3-VXg" kind="show" identifier="articles" id="0aM-QA-zvN"/>
                         <segue destination="19M-LF-YxW" kind="show" identifier="about" id="xqa-HY-ihQ"/>
-                        <segue destination="pyM-E1-Imh" kind="show" identifier="myask" id="Y4Z-EC-hch"/>
+                        <segue destination="eGJ-hs-1SG" kind="show" identifier="ask" id="kQ0-v6-U6u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InU-ob-QOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -283,76 +283,6 @@
             </objects>
             <point key="canvasLocation" x="292" y="1522"/>
         </scene>
-        <!--Ask View Controller-->
-        <scene sceneID="56t-uW-c4x">
-            <objects>
-                <viewController id="pyM-E1-Imh" customClass="askViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="osy-0b-pdY"/>
-                        <viewControllerLayoutGuide type="bottom" id="ftl-Qw-aTC"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AiM-eZ-ZyS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" scrollEnabled="NO" editable="NO" text="John Smith, super smart guy, researches something" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5F-lO-lgn">
-                                <rect key="frame" x="162" y="137" width="161" height="139"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="161" id="ZcK-Uq-Wds"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" scrollEnabled="NO" editable="NO" text="Have a question? Ask our on-call scientists your questions!" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1q-Ib-ues">
-                                <rect key="frame" x="16" y="79" width="316" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="316" id="MYM-BW-nHt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ask_a_scientist_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="KNh-RF-jDO">
-                                <rect key="frame" x="16" y="137" width="111" height="119"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="111" id="5oG-Gj-Bph"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k5k-Ta-9cy">
-                                <rect key="frame" x="16" y="280" width="292" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="39" id="Gu6-nr-v2T"/>
-                                    <constraint firstAttribute="width" constant="292" id="aHg-3a-tFv"/>
-                                </constraints>
-                                <state key="normal" title="Email our Scientist">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendMail:" destination="pyM-E1-Imh" eventType="touchUpInside" id="RXc-re-jHP"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="KNh-RF-jDO" firstAttribute="top" secondItem="r5F-lO-lgn" secondAttribute="top" id="9pk-cM-ylP"/>
-                            <constraint firstItem="ftl-Qw-aTC" firstAttribute="top" secondItem="k5k-Ta-9cy" secondAttribute="bottom" constant="281" id="Rdw-ls-pfp"/>
-                            <constraint firstItem="r5F-lO-lgn" firstAttribute="leading" secondItem="KNh-RF-jDO" secondAttribute="trailing" constant="35" id="VvF-DB-ZNh"/>
-                            <constraint firstItem="P1q-Ib-ues" firstAttribute="top" secondItem="osy-0b-pdY" secondAttribute="bottom" constant="15" id="YGz-Jo-Jjb"/>
-                            <constraint firstItem="k5k-Ta-9cy" firstAttribute="leading" secondItem="AiM-eZ-ZyS" secondAttribute="leadingMargin" id="ZEj-dH-SS5"/>
-                            <constraint firstItem="k5k-Ta-9cy" firstAttribute="top" secondItem="KNh-RF-jDO" secondAttribute="bottom" constant="24" id="cT1-hY-x0d"/>
-                            <constraint firstItem="KNh-RF-jDO" firstAttribute="leading" secondItem="k5k-Ta-9cy" secondAttribute="leading" id="deB-hG-UrO"/>
-                            <constraint firstItem="k5k-Ta-9cy" firstAttribute="top" secondItem="r5F-lO-lgn" secondAttribute="bottom" constant="4" id="iEp-Gz-A6N"/>
-                            <constraint firstItem="KNh-RF-jDO" firstAttribute="top" secondItem="P1q-Ib-ues" secondAttribute="bottom" constant="8" symbolic="YES" id="jTI-yu-Djk"/>
-                            <constraint firstItem="P1q-Ib-ues" firstAttribute="leading" secondItem="KNh-RF-jDO" secondAttribute="leading" id="lkM-9n-sPO"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="Wac-rV-vTc"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i1z-ay-c9b" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1667" y="1660"/>
-        </scene>
         <!--Table View Controller-->
         <scene sceneID="sfJ-Xu-g0E">
             <objects>
@@ -379,6 +309,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mBR-cG-mV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1919" y="875"/>
+        </scene>
+        <!--Ask View Controller-->
+        <scene sceneID="smD-ye-t6o">
+            <objects>
+                <viewController id="eGJ-hs-1SG" customClass="AskViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="A61-zo-cip"/>
+                        <viewControllerLayoutGuide type="bottom" id="mW2-mQ-8w5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hc6-UJ-akL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="This is the Ask a Scientist page!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYs-g0-3kx">
+                                <rect key="frame" x="16" y="72" width="568" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ask_a_scientist_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="u3w-E4-KNA">
+                                <rect key="frame" x="37" y="128" width="165" height="128"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V40-ef-geI">
+                                <rect key="frame" x="252" y="128" width="192" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stuff about them" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azw-zl-ye8">
+                                <rect key="frame" x="252" y="181" width="253" height="75"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09z-du-oMQ">
+                                <rect key="frame" x="252" y="312" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMail:" destination="eGJ-hs-1SG" eventType="touchUpInside" id="YbZ-BG-12g"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="thing" destination="azw-zl-ye8" id="5eL-2O-z05"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GKz-ew-tKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1277" y="1624"/>
         </scene>
     </scenes>
     <resources>
