@@ -8,14 +8,12 @@
 
 import UIKit
 
-var projectData = Dictionary<String, Dictionary<String, AnyObject>>()
-var scientistInfo = Dictionary<String, String>()
-var aboutInfo = Dictionary<String, AnyObject>()
-var orderedTitles = Array<String>()
-var projectImages = Dictionary<String, UIImage>()
+var projectData = [String: [String: AnyObject]]()
+var scientistInfo = [String: String]()
+var aboutInfo = [String: AnyObject]()
+var orderedTitles = [String]()
 var scientistImage = UIImage()
-var aboutPeopleImages = Array<UIImage>()
-var aboutSnippetImages = Array<UIImage>()
+var storedImages = [String: UIImage]()
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -28,6 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
     let filePath = "http://frontsci.arsc.edu/frontsci/frontSciData.json"
+    var savedImages = [String]()
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
@@ -105,23 +104,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         // This second task waits for the first to finish then downloads all the photos mentioned in the stored dictionaries, lastly hiding the loading animation.
         dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            println("This is where the downloading goes.")
+            if NSUserDefaults.standardUserDefaults().objectForKey("storedImages") == nil {
+                NSUserDefaults.standardUserDefaults().setObject([String: UIImage](), forKey: "storedImages")
+            }
             // Process all project images
-//            for (title, data) in enumerate(projectData) {
-//                imageInfoByProject[title] = data["preview_image"]
-//            }
-//            // Populate aboutPeopleImages
-//            for person in aboutInfo["people"] {
-//                aboutPeopleImages.append(person["image"])
-//            }
-//            // Populate aboutSnippetImages
-//            for snippet in aboutInfo["snippets"] {
-//                aboutSnippetImages.append(snippet["image"])
-//            }
-            
-            
-            
-            println("The loading dialog is hidden.")
+            for (title, data) in projectData {
+                self.processImage(data["preview_image"] as String)
+            }
+            // Process all about page people images
+            for person in aboutInfo["people"] as [[String: String]] {
+                self.processImage(person["image"]!)
+            }
+            // Process all about page snippet images
+            for snippet in aboutInfo["snippets"] as [[String: String]] {
+                self.processImage(snippet["image"]!)
+            }
+            // Retrieve the data and store the images as UIImages.
+            var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as [String: NSData]
+            for (title, imageData) in currentStoredImages {
+                storedImages[title] = UIImage(data: imageData)
+            }
+            // Remove any images that need not be there.
+            self.removeOldImages()
+            // Hide the loading dialog.
+            println("UI Ready!")
             self.loadingDialog.hidden = true
         }
     }
@@ -157,15 +163,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSUserDefaults.standardUserDefaults().setObject(jsonDict["about"], forKey: "about")
     }
     // processImage
-    // This function
-//    func processImage(type: String, imagePath: String, projectTitle: String) {
-//        let imageTitle = NSURL(string: imagePath)?.lastPathComponent
-//        // Check for it already being stored
-//        let image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)))
-//        if type == project {
-//            projectImages[projectTitle] = getImage
-//        }
-//    }
+    // This function checks to see if the image of the passed path is already stored on the device.  If it is not, it is downloaded and stored.
+    func processImage(imagePath: String) {
+        var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as [String: NSData]
+        let imageTitle = NSURL(string: imagePath)?.lastPathComponent
+        savedImages.append(imageTitle!) // Add the image to the list of images to be saved, not purged.
+        // Make sure it hasn't already been stored.
+        if currentStoredImages[imageTitle!] == nil {
+            println("Downloading " + imageTitle! + "...")
+            let image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)!)!)
+            currentStoredImages[imageTitle!] = UIImagePNGRepresentation(image)
+            println(imageTitle! + " now stored.")
+        } else {
+            println(imageTitle! + " already stored.")
+        }
+        NSUserDefaults.standardUserDefaults().setObject(currentStoredImages, forKey: "storedImages")
+    }
+    // removeOldImages
+    // This function removes all images stored on the device that are not mentioned in the current JSON file.
+    func removeOldImages() {
+        for (title, image) in storedImages {
+            if !contains(savedImages, title) {
+                println("Deleting " + title + ".")
+                storedImages[title] = nil
+            }
+        }
+    }
 }
 
 /*
