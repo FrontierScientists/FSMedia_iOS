@@ -33,10 +33,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as CustomTableViewCell
+        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as! CustomTableViewCell
         cell.cellImage.image = UIImage(named: icons[indexPath.row])
         cell.cellLabel.text = sections[indexPath.row]
-        cell.cellLabel.font = UIFont(name: "EraserDust", size: 20)
+        cell.cellLabel.font = UIFont(name: "Chalkduster", size: 20)
         cell.cellLabel.textColor = UIColorFromRGB(0x3E3535)
         cell.backgroundColor = UIColor.clearColor()
         return cell
@@ -84,7 +84,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // This first task ensures that data is loaded and stored and that the global variables are set.
         dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             if NSUserDefaults.standardUserDefaults().objectForKey("projectData") != nil { // There has been data previously stored.
-                let nextUpdateString = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as String
+                let nextUpdateString = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as! String
                 let nextUpdateDate = NSDate(dateString: nextUpdateString)
                 let today = NSDate()
                 
@@ -98,9 +98,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 println("Retrieving data for first time...")
                 self.loadDataFromJson(self.filePath)
             }
-            projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData")! as Dictionary
-            scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist")! as Dictionary
-            aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about")! as Dictionary
+            projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData") as! Dictionary
+            scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist") as! Dictionary
+            aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about") as! Dictionary
         }
         // This second task waits for the first to finish then downloads all the photos mentioned in the stored dictionaries, lastly hiding the loading animation.
         dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
@@ -109,18 +109,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             // Process all project images
             for (title, data) in projectData {
-                self.processImage(data["preview_image"] as String)
+                self.processImage(data["preview_image"] as! String)
             }
             // Process all about page people images
-            for person in aboutInfo["people"] as [[String: String]] {
+            for person in aboutInfo["people"] as! [[String: String]] {
                 self.processImage(person["image"]!)
             }
             // Process all about page snippet images
-            for snippet in aboutInfo["snippets"] as [[String: String]] {
+            for snippet in aboutInfo["snippets"] as! [[String: String]] {
                 self.processImage(snippet["image"]!)
             }
             // Retrieve the data and store the images as UIImages.
-            var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as [String: NSData]
+            var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as! [String: NSData]
             for (title, imageData) in currentStoredImages {
                 storedImages[title] = UIImage(data: imageData)
             }
@@ -155,7 +155,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func loadDataFromJson(filePath: String) {
         let data: NSData = NSData(contentsOfURL: NSURL(string: filePath)!)!
         var error: NSError?
-        var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as NSDictionary
+        var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
         // Load data into persistant storage
         NSUserDefaults.standardUserDefaults().setObject(jsonDict["android"], forKey: "projectData")
         NSUserDefaults.standardUserDefaults().setObject(jsonDict["next_update"], forKey: "nextUpdate")
@@ -165,7 +165,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // processImage
     // This function checks to see if the image of the passed path is already stored on the device.  If it is not, it is downloaded and stored.
     func processImage(imagePath: String) {
-        var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as [String: NSData]
+        var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as! [String: NSData]
         let imageTitle = NSURL(string: imagePath)?.lastPathComponent
         savedImages.append(imageTitle!) // Add the image to the list of images to be saved, not purged.
         // Make sure it hasn't already been stored.
