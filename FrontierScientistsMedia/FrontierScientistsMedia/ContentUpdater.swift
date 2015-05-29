@@ -48,7 +48,7 @@ func updateContent() {
 func loadDataFromJson(filePath: String) {
     let data: NSData = NSData(contentsOfURL: NSURL(string: filePath)!)!
     var error: NSError?
-    var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as NSDictionary
+    var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
     // Load data into persistant storage
     NSUserDefaults.standardUserDefaults().setObject(jsonDict["android"], forKey: "projectData")
     NSUserDefaults.standardUserDefaults().setObject(jsonDict["next_update"], forKey: "nextUpdate")

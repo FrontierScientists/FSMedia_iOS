@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         bindingBack.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
         pageBack.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
         
-        // Hide loading screen when doneLoading is true
+        // Hide loading screen when done loading
         dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
             while true {
                 if doneLoading {
