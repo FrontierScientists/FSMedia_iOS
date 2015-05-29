@@ -1,5 +1,5 @@
 //
-//  askascientist.swift
+//  AskViewController.swift
 //  FrontierScientistsMedia
 //
 //  Created by sfarabaugh on 5/21/15.
