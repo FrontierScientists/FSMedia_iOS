@@ -25,10 +25,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as CustomTableViewCell
+        let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as! CustomTableViewCell
         cell.cellImage.image = UIImage(named: icons[indexPath.row])
         cell.cellLabel.text = sections[indexPath.row]
-        cell.cellLabel.font = UIFont(name: "EraserDust", size: 20)
+        cell.cellLabel.font = UIFont(name: "Chalkduster", size: 20)
         cell.cellLabel.textColor = UIColorFromRGB(0x3E3535)
         cell.backgroundColor = UIColor.clearColor()
         return cell

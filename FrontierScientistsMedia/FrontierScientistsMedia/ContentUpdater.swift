@@ -18,7 +18,7 @@ func updateContent() {
     
     // Load content.
     if NSUserDefaults.standardUserDefaults().objectForKey("projectData") != nil { // There has been data previously stored.
-        let nextUpdateString = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate")! as String
+        let nextUpdateString = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate") as! String
         let nextUpdateDate = NSDate(dateString: nextUpdateString)
         let today = NSDate()
         
@@ -32,9 +32,9 @@ func updateContent() {
         println("Retrieving data for first time...")
         loadDataFromJson(filePath)
     }
-    projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData")! as Dictionary
-    scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist")! as Dictionary
-    aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about")! as Dictionary
+    projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData") as! Dictionary
+    scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist") as! Dictionary
+    aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about") as! Dictionary
     for title in sorted(projectData.keys.array) {
         orderedTitles.append(title)
     }
