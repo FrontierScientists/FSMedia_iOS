@@ -9,6 +9,7 @@
 import UIKit
 
 var projectData = [String: [String: AnyObject]]()
+var iosProjectData: [[String: AnyObject]] = []
 var scientistInfo = [String: String]()
 var aboutInfo = [String: AnyObject]()
 var orderedTitles = [String]()
@@ -32,7 +33,10 @@ func updateContent() {
         println("Retrieving data for first time...")
         loadDataFromJson(filePath)
     }
+    
+    loadDataFromJson(filePath)
     projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData") as! Dictionary
+    iosProjectData = NSUserDefaults.standardUserDefaults().objectForKey("iosProjectData") as! Array
     scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist") as! Dictionary
     aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about") as! Dictionary
     for title in sorted(projectData.keys.array) {
@@ -50,7 +54,9 @@ func loadDataFromJson(filePath: String) {
     var error: NSError?
     var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
     // Load data into persistant storage
+    
     NSUserDefaults.standardUserDefaults().setObject(jsonDict["android"], forKey: "projectData")
+    NSUserDefaults.standardUserDefaults().setObject(jsonDict["ios"], forKey: "iosProjectData")
     NSUserDefaults.standardUserDefaults().setObject(jsonDict["next_update"], forKey: "nextUpdate")
     NSUserDefaults.standardUserDefaults().setObject(jsonDict["scientist"], forKey: "scientist")
     NSUserDefaults.standardUserDefaults().setObject(jsonDict["about"], forKey: "about")

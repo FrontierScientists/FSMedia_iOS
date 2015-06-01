@@ -20,6 +20,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Beautify.
+        loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
+        self.title = "Frontier Scientists"
+        mainMenu.rowHeight = 80
+        mainMenu.separatorColor = UIColor.clearColor()
+        mainMenu.backgroundColor = UIColor.clearColor()
+        shadow.backgroundColor = UIColor(patternImage: UIImage(named: "drawer_shadow.png")!)
+        bindingBack.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
+        pageBack.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
+        
+        // Hide loading screen when done loading
+        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
+            while true {
+                if doneLoading {
+                    self.loadingScreen.hidden = true
+                    break
+                }
+            }
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
     }
@@ -56,30 +80,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 break
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected row.
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Beautify.
-        loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
-        self.title = "Frontier Scientists"
-        mainMenu.rowHeight = 80
-        mainMenu.separatorColor = UIColor.clearColor()
-        mainMenu.backgroundColor = UIColor.clearColor()
-        shadow.backgroundColor = UIColor(patternImage: UIImage(named: "drawer_shadow.png")!)
-        bindingBack.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
-        pageBack.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
-        
-        // Hide loading screen when done loading
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
-            while true {
-                if doneLoading {
-                    self.loadingScreen.hidden = true
-                    break
-                }
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {

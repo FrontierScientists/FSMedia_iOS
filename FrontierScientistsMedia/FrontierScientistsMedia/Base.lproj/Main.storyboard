@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -49,7 +49,7 @@
                                                 <constraint firstAttribute="height" constant="21" id="gWS-3W-4oz"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -81,7 +81,7 @@
         <!--VideosTableViewController-->
         <scene sceneID="MQn-MB-3Bf">
             <objects>
-                <tableViewController title="VideosTableViewController" id="m0R-S3-sa9" sceneMemberID="viewController">
+                <tableViewController title="VideosTableViewController" id="m0R-S3-sa9" customClass="MySwiftVideoTableViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="hmz-tY-CE0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,11 +99,81 @@
                             <outlet property="delegate" destination="m0R-S3-sa9" id="mQv-ak-cKj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="n0C-9C-pbk"/>
+                    <navigationItem key="navigationItem" id="n0C-9C-pbk">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="WbK-dJ-ia2">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u8V-iN-8Sq">
+                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
+                                <state key="normal" title="Manage Downloads">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="openManageDownloadsView:" destination="m0R-S3-sa9" eventType="touchUpInside" id="4cd-9y-cX4"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="changeVidoesModeButton" destination="u8V-iN-8Sq" id="XuQ-DP-HWr"/>
+                        <segue destination="j7W-gc-TiM" kind="show" identifier="YoutubeStreaming" id="hkL-Qy-nlx"/>
+                        <segue destination="Zta-Ee-zOf" kind="show" id="fUu-Te-DRj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25X-HZ-GP9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1218" y="-512"/>
+            <point key="canvasLocation" x="1251" y="-512"/>
+        </scene>
+        <!--My Swift Downloaded Video Player-->
+        <scene sceneID="JJU-dB-Zqn">
+            <objects>
+                <viewController id="Zta-Ee-zOf" customClass="MySwiftDownloadedVideoPlayer" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fbn-Ha-X9v"/>
+                        <viewControllerLayoutGuide type="bottom" id="vOu-QB-EFl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ttb-Xe-QgQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="videoPlayerView" destination="Ttb-Xe-QgQ" id="f19-sj-8zg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vj7-0w-Vpf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="-1175"/>
+        </scene>
+        <!--You Tube Streaming-->
+        <scene sceneID="iPV-0J-OmN">
+            <objects>
+                <viewController id="j7W-gc-TiM" customClass="YouTubeStreaming" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aQ9-86-MKV"/>
+                        <viewControllerLayoutGuide type="bottom" id="ae1-wv-2pX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2ob-cC-kvZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVc-Sn-19V" customClass="YTPlayerView">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gVc-Sn-19V" firstAttribute="leading" secondItem="2ob-cC-kvZ" secondAttribute="leading" id="4TL-GZ-EER"/>
+                            <constraint firstItem="gVc-Sn-19V" firstAttribute="bottom" secondItem="ae1-wv-2pX" secondAttribute="top" id="620-mG-bZb"/>
+                            <constraint firstAttribute="trailing" secondItem="gVc-Sn-19V" secondAttribute="trailing" id="Z95-gz-G9i"/>
+                            <constraint firstItem="gVc-Sn-19V" firstAttribute="top" secondItem="aQ9-86-MKV" secondAttribute="bottom" id="jBk-UZ-7Mv"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZUf-jR-yDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="-440"/>
         </scene>
         <!--Maps-->
         <scene sceneID="Tqw-3q-dbO">
@@ -226,13 +296,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading content..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knN-YG-OSi">
                                                 <rect key="frame" x="20" y="8" width="163" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="please wait..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Gx-ub-UFv">
                                                 <rect key="frame" x="49" y="67" width="93" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -325,10 +395,10 @@
             </objects>
             <point key="canvasLocation" x="292" y="1522"/>
         </scene>
-        <!--Table View Controller-->
+        <!--My Swift Articles Table View Controller-->
         <scene sceneID="sfJ-Xu-g0E">
             <objects>
-                <tableViewController id="8ll-k3-VXg" sceneMemberID="viewController">
+                <tableViewController id="8ll-k3-VXg" customClass="MySwiftArticlesTableViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="j5E-0S-eTN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -347,10 +417,66 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="cgx-c1-q5p"/>
+                    <connections>
+                        <outlet property="articleTableView" destination="j5E-0S-eTN" id="hmV-tN-Fuy"/>
+                        <segue destination="PvR-9z-8Zv" kind="show" identifier="RSSFeed" id="RCj-HX-rgm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mBR-cG-mV4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1919" y="875"/>
+        </scene>
+        <!--My Swift Articles View Controller-->
+        <scene sceneID="cIi-ei-zsT">
+            <objects>
+                <viewController id="PvR-9z-8Zv" customClass="MySwiftArticlesViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dEu-gA-EDh"/>
+                        <viewControllerLayoutGuide type="bottom" id="7GV-c2-5gW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U5j-nC-P2S">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="98C-oi-k0n">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfV-iB-eKF">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Back" id="RV6-CA-HPW">
+                                        <connections>
+                                            <action selector="goBack:" destination="PvR-9z-8Zv" id="Rlt-1e-Net"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="NcC-1F-ivc"/>
+                                    <barButtonItem title="Forward" id="ZaV-9v-re0">
+                                        <connections>
+                                            <action selector="goForward:" destination="PvR-9z-8Zv" id="PAG-61-VSC"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LfV-iB-eKF" firstAttribute="leading" secondItem="U5j-nC-P2S" secondAttribute="leading" id="DGm-fg-5YB"/>
+                            <constraint firstAttribute="trailing" secondItem="LfV-iB-eKF" secondAttribute="trailing" id="GSy-cn-zvd"/>
+                            <constraint firstItem="LfV-iB-eKF" firstAttribute="bottom" secondItem="7GV-c2-5gW" secondAttribute="top" id="Q1z-hK-Dvh"/>
+                            <constraint firstItem="98C-oi-k0n" firstAttribute="top" secondItem="U5j-nC-P2S" secondAttribute="top" id="YIU-F5-vVD"/>
+                            <constraint firstItem="LfV-iB-eKF" firstAttribute="leading" secondItem="98C-oi-k0n" secondAttribute="leading" id="gr6-R5-Juz"/>
+                            <constraint firstItem="LfV-iB-eKF" firstAttribute="trailing" secondItem="98C-oi-k0n" secondAttribute="trailing" id="hu6-Q4-3Rk"/>
+                            <constraint firstItem="LfV-iB-eKF" firstAttribute="bottom" secondItem="98C-oi-k0n" secondAttribute="bottom" id="wTZ-Cp-csV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="98C-oi-k0n" id="ffc-bs-aT6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i2g-Gg-ROQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2599" y="875"/>
         </scene>
         <!--Ask View Controller-->
         <scene sceneID="smD-ye-t6o">
@@ -404,6 +530,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKz-ew-tKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1277" y="1624"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="oEe-Pz-Utp">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="6TH-lc-Dn1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IW1-YJ-pGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="489" y="-440"/>
         </scene>
     </scenes>
     <resources>

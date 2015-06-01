@@ -18,3 +18,19 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         alpha: CGFloat(1.0)
     )
 }
+
+
+// Returns the last component of a url string
+func lastComponentOfUrlString(url: String) -> String
+{
+    if(url != "")
+    {
+        let compArray: Array = url.pathComponents;
+        let compArraySize = compArray.count;
+        if(compArraySize > 1)
+        {
+            return compArray[compArraySize - 1];
+        }
+    }
+    return "";
+}

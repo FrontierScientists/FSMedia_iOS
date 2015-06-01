@@ -7,6 +7,7 @@
 //
 
 import UIKit
+let iPadDeviceType = UIUserInterfaceIdiom.Pad
 
 var doneLoading = false
 

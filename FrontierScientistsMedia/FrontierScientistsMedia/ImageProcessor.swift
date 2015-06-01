@@ -12,6 +12,8 @@ var storedImages = [String: UIImage]()
 var savedImages = [String]()
 
 func processImages() {
+    createImageFolderIfNone()
+    
     if NSUserDefaults.standardUserDefaults().objectForKey("storedImages") == nil {
         NSUserDefaults.standardUserDefaults().setObject([String: UIImage](), forKey: "storedImages")
     }
@@ -44,7 +46,9 @@ func processImages() {
     }
     // Restore the updated data.
     currentStoredImages = [String: NSData]()
+    let IMAGEFILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/Images");
     for (title, image) in storedImages {
+        UIImagePNGRepresentation(image).writeToFile(IMAGEFILEPATH.stringByAppendingPathComponent(title), atomically: true)
         currentStoredImages[title] = UIImagePNGRepresentation(image)
     }
     NSUserDefaults.standardUserDefaults().setObject(currentStoredImages, forKey: "storedImages")
@@ -63,7 +67,10 @@ func processImage(imagePath: String) {
     if currentStoredImages[imageTitle!] == nil {
         println("Downloading " + imageTitle! + "...")
         println(imagePath)
-        let image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)!)!)
+        var image = UIImage.alloc();
+        if(NSData(contentsOfURL: NSURL(string: imagePath)!) != nil){
+            image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)!)!)!
+        }
         currentStoredImages[imageTitle!] = UIImagePNGRepresentation(image)
         println(imageTitle! + " now stored.")
     } else {
@@ -71,3 +78,16 @@ func processImage(imagePath: String) {
     }
     NSUserDefaults.standardUserDefaults().setObject(currentStoredImages, forKey: "storedImages")
 }
+
+// createImageFileIfNone
+// Creates the image file if it doesn't exist
+func createImageFolderIfNone()
+{
+    let IMAGEFILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/Images");
+    var isDir = ObjCBool(true);
+    println(IMAGEFILEPATH);
+    if(!NSFileManager.defaultManager().fileExistsAtPath(IMAGEFILEPATH, isDirectory: &isDir)){
+        if(!NSFileManager.defaultManager().createDirectoryAtPath(IMAGEFILEPATH, withIntermediateDirectories: false, attributes: nil, error: nil)){
+            println("The images file failed to be created.");
+        }
+    }}
