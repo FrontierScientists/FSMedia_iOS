@@ -13,7 +13,11 @@ import MessageUI
 
 class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
-    @IBOutlet weak var thing: UILabel!
+    
+    @IBOutlet weak var scientist_image: UIImageView!
+    @IBOutlet weak var scientist_name: UILabel!
+    @IBOutlet weak var scientist_info: UILabel!
+    
     @IBAction func sendMail(sender: AnyObject) {
         var subject_prefix = "[frontsci]"
         var recepient = ["sfarabaugh@alaska.edu"]
@@ -27,7 +31,10 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
-        thing.text = "You finally worked!"
+        scientist_info.text = scientistInfo["bio"]
+        scientist_name.text = scientistInfo["name"]
+        let scientist_image_key = NSURL(string: scientistInfo["image"]!)?.lastPathComponent
+        scientist_image.image = storedImages[scientist_image_key!]!
     }
     
     override func didReceiveMemoryWarning() {
