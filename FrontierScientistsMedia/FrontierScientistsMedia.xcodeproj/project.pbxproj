@@ -96,7 +96,7 @@
 		F56E9E551B1CD1A80027D39B /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		F56E9E5F1B1CE3BC0027D39B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
 		F56E9E601B1CE3BC0027D39B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../Reachability.m; sourceTree = "<group>"; };
-		F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RiR_plainyellow_iphone.png; path = FrontierScientistsMedia/RiR_plainyellow_iphone.png; sourceTree = "<group>"; };
+		F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RiR_plainyellow_iphone.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +128,6 @@
 		3BAA17D51B06C36D003510D7 = {
 			isa = PBXGroup;
 			children = (
-				F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */,
 				3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */,
 				3BAA17F61B06C36E003510D7 /* FrontierScientistsMediaTests */,
 				3BAA17DF1B06C36D003510D7 /* Products */,
@@ -178,6 +177,7 @@
 		3BAA17E11B06C36D003510D7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */,
 				3B6ED9EE1B0BC93F003E8903 /* about_icon.png */,
 				3B6ED9F01B0BC947003E8903 /* article_icon.png */,
 				3B6ED9F21B0BC94E003E8903 /* ask_a_scientist_icon.png */,

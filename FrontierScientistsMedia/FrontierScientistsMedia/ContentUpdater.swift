@@ -18,8 +18,8 @@ func updateContent() {
     let filePath = "http://frontsci.arsc.edu/frontsci/frontSciData.json"
     
     // Load content.
-    if NSUserDefaults.standardUserDefaults().objectForKey("projectData") != nil { // There has been data previously stored.
-        let nextUpdateString = NSUserDefaults.standardUserDefaults().objectForKey("nextUpdate") as! String
+    if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) != nil { // There has been data previously stored.
+        let nextUpdateString = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("nextUpdate").path!) as! String
         let nextUpdateDate = NSDate(dateString: nextUpdateString)
         let today = NSDate()
         
@@ -34,11 +34,10 @@ func updateContent() {
         loadDataFromJson(filePath)
     }
     
-    loadDataFromJson(filePath)
-    projectData = NSUserDefaults.standardUserDefaults().objectForKey("projectData") as! Dictionary
-    iosProjectData = NSUserDefaults.standardUserDefaults().objectForKey("iosProjectData") as! Array
-    scientistInfo = NSUserDefaults.standardUserDefaults().objectForKey("scientist") as! Dictionary
-    aboutInfo = NSUserDefaults.standardUserDefaults().objectForKey("about") as! Dictionary
+    projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
+    iosProjectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("iosProjectData").path!) as! Array
+    scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
+    aboutInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("about").path!) as! Dictionary
     for title in sorted(projectData.keys.array) {
         orderedTitles.append(title)
     }
@@ -54,10 +53,21 @@ func loadDataFromJson(filePath: String) {
     var error: NSError?
     var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
     // Load data into persistant storage
-    
-    NSUserDefaults.standardUserDefaults().setObject(jsonDict["android"], forKey: "projectData")
-    NSUserDefaults.standardUserDefaults().setObject(jsonDict["ios"], forKey: "iosProjectData")
-    NSUserDefaults.standardUserDefaults().setObject(jsonDict["next_update"], forKey: "nextUpdate")
-    NSUserDefaults.standardUserDefaults().setObject(jsonDict["scientist"], forKey: "scientist")
-    NSUserDefaults.standardUserDefaults().setObject(jsonDict["about"], forKey: "about")
+    NSKeyedArchiver.archiveRootObject(jsonDict["android"]!, toFile: getFileUrl("projectData").path!)
+    NSKeyedArchiver.archiveRootObject(jsonDict["ios"]!, toFile: getFileUrl("iosProjectData").path!)
+    NSKeyedArchiver.archiveRootObject(jsonDict["next_update"]!, toFile: getFileUrl("nextUpdate").path!)
+    NSKeyedArchiver.archiveRootObject(jsonDict["scientist"]!, toFile: getFileUrl("scientist").path!)
+    NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!)
 }
+
+/*
+    Helper Function
+*/
+// getFileUrl
+// This function retrieves a valid url from the document directory.
+func getFileUrl(fileName: String) -> NSURL {
+    let manager = NSFileManager.defaultManager()
+    let dirURL = manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: nil)
+    return dirURL!.URLByAppendingPathComponent(fileName)
+}
+
