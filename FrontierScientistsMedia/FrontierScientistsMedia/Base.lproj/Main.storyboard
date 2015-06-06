@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -21,63 +21,117 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1S-4l-qoU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-450" y="442"/>
+            <point key="canvasLocation" x="-444" y="418"/>
         </scene>
-        <!--ResearchTableViewController-->
-        <scene sceneID="njO-z2-3Su">
+        <!--Research Navigation-->
+        <scene sceneID="N9E-nc-JvR">
             <objects>
-                <tableViewController title="ResearchTableViewController" id="li3-vn-d3M" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="qDv-VY-KUf">
+                <viewController storyboardIdentifier="NavigationTableView" title="Research Navigation" id="My1-GU-aaj" customClass="ResearchNavigationTableView" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BWN-fa-VMh"/>
+                        <viewControllerLayoutGuide type="bottom" id="PhZ-zn-l1m"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sac-4O-3LH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="YDx-nh-T3b">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="project" rowHeight="80" id="OzA-qK-FcN" customClass="CustomTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OzA-qK-FcN" id="sjl-ct-Ri4">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCp-5t-013">
+                                                    <rect key="frame" x="8" y="0.0" width="79" height="79"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUp-7h-h0K">
+                                                    <rect key="frame" x="113" y="29" width="315" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellImage" destination="cCp-5t-013" id="v8m-B9-Deh"/>
+                                            <outlet property="cellLabel" destination="XUp-7h-h0K" id="RCh-wN-mua"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="My1-GU-aaj" id="bqH-BR-6fM"/>
+                                    <outlet property="delegate" destination="My1-GU-aaj" id="ksC-sj-a3R"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="YDx-nh-T3b" secondAttribute="trailing" constant="-16" id="Gfe-WI-yF6"/>
+                            <constraint firstItem="PhZ-zn-l1m" firstAttribute="top" secondItem="YDx-nh-T3b" secondAttribute="bottom" id="IKA-Jo-KoR"/>
+                            <constraint firstItem="YDx-nh-T3b" firstAttribute="top" secondItem="BWN-fa-VMh" secondAttribute="bottom" id="hdq-vA-Ptx"/>
+                            <constraint firstItem="YDx-nh-T3b" firstAttribute="leading" secondItem="sac-4O-3LH" secondAttribute="leadingMargin" constant="-16" id="pU6-9x-Uyy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5rx-O3-7zn"/>
+                    <connections>
+                        <outlet property="navigationTableView" destination="YDx-nh-T3b" id="u3h-Ih-mD2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cGW-g4-Zb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1118" y="-440"/>
+        </scene>
+        <!--Project View-->
+        <scene sceneID="rag-gd-zSK">
+            <objects>
+                <viewController storyboardIdentifier="ProjectView" title="Project View" id="dxx-bl-zBY" customClass="ProjectView" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aFs-jl-qrz"/>
+                        <viewControllerLayoutGuide type="bottom" id="Feu-vL-uMD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0HP-Z5-g6A">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="project" selectionStyle="default" indentationWidth="10" rowHeight="80" id="DfJ-Tq-sk2" customClass="CustomTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DfJ-Tq-sk2" id="pk7-On-X8W">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DXH-yd-NQM">
-                                            <rect key="frame" x="16" y="12" width="56" height="56"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="56" id="OUV-00-i6h"/>
-                                                <constraint firstAttribute="width" constant="56" id="yjb-oR-9qe"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnU-ei-P9I">
-                                            <rect key="frame" x="90" y="31" width="502" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="21" id="gWS-3W-4oz"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="rnU-ei-P9I" firstAttribute="trailing" secondItem="pk7-On-X8W" secondAttribute="trailingMargin" id="a0K-tz-eGm"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="rnU-ei-P9I" secondAttribute="bottom" constant="20" id="axt-tv-06y"/>
-                                        <constraint firstItem="rnU-ei-P9I" firstAttribute="leading" secondItem="DXH-yd-NQM" secondAttribute="trailing" constant="18" id="kn6-AH-Bs2"/>
-                                        <constraint firstItem="DXH-yd-NQM" firstAttribute="top" secondItem="pk7-On-X8W" secondAttribute="topMargin" constant="4" id="mBq-ue-Wk7"/>
-                                        <constraint firstItem="DXH-yd-NQM" firstAttribute="leading" secondItem="pk7-On-X8W" secondAttribute="leadingMargin" constant="8" id="pGU-hI-vg5"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="cellImage" destination="DXH-yd-NQM" id="frY-uE-HDQ"/>
-                                    <outlet property="cellLabel" destination="rnU-ei-P9I" id="4rV-Li-txk"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="li3-vn-d3M" id="Kwv-bD-ppL"/>
-                            <outlet property="delegate" destination="li3-vn-d3M" id="eJD-Dj-Zrw"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="vnn-gR-dd1"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZEM-jm-Lga" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Back" id="E9N-1X-NEE"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B1q-Ne-13x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-279" y="-544"/>
+            <point key="canvasLocation" x="-406" y="-440"/>
+        </scene>
+        <!--Research Container-->
+        <scene sceneID="uhu-nw-Wl5">
+            <objects>
+                <viewController id="als-D8-zIo" customClass="ResearchContainer" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XhM-fi-h4V"/>
+                        <viewControllerLayoutGuide type="bottom" id="n8U-kH-jd2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ws9-yP-9Cf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="HjD-g6-gav">
+                        <barButtonItem key="leftBarButtonItem" title="Projects" id="oUU-qP-3bI">
+                            <connections>
+                                <action selector="showProjects:" destination="als-D8-zIo" id="jrJ-8d-qe3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dGR-I9-Gbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1829" y="-440"/>
         </scene>
         <!--VideosTableViewController-->
         <scene sceneID="MQn-MB-3Bf">
@@ -357,17 +411,36 @@
                         <outlet property="mainMenu" destination="Mrs-L2-4Nw" id="azw-55-jRK"/>
                         <outlet property="pageBack" destination="Mhc-jT-yua" id="M31-kw-fmZ"/>
                         <outlet property="shadow" destination="E2E-RE-jxQ" id="CHZ-42-HYN"/>
-                        <segue destination="li3-vn-d3M" kind="show" identifier="research" id="o0h-iO-XV2"/>
                         <segue destination="m0R-S3-sa9" kind="show" identifier="videos" id="sk8-Dx-qZ6"/>
                         <segue destination="g62-x1-3zm" kind="show" identifier="maps" id="DKJ-QQ-Ik9"/>
                         <segue destination="8ll-k3-VXg" kind="show" identifier="articles" id="0aM-QA-zvN"/>
                         <segue destination="19M-LF-YxW" kind="show" identifier="about" id="xqa-HY-ihQ"/>
                         <segue destination="eGJ-hs-1SG" kind="show" identifier="ask" id="kQ0-v6-U6u"/>
+                        <segue destination="als-D8-zIo" kind="show" identifier="research" id="KIv-co-ZEf"/>
+                        <segue destination="7Km-KD-9AQ" kind="show" identifier="game" id="qhv-6G-tew"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InU-ob-QOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="378" y="418"/>
+        </scene>
+        <!--Game View Controller-->
+        <scene sceneID="h1M-G3-Zd5">
+            <objects>
+                <viewController id="7Km-KD-9AQ" customClass="GameViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3NE-XG-KmH"/>
+                        <viewControllerLayoutGuide type="bottom" id="iEf-mL-IlY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5gU-7g-2a3" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="azq-m4-vkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-509" y="1522"/>
         </scene>
         <!--About-->
         <scene sceneID="Ehw-ll-mDX">
@@ -509,18 +582,12 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Scientist Name" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V40-ef-geI">
                                 <rect key="frame" x="155" y="121" width="50" height="28"/>
-                                <constraints>
-                                    
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Stuff about them. Stuff about them. Stuff about them. Stuff about them. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azw-zl-ye8">
                                 <rect key="frame" x="155" y="157" width="253" height="75"/>
-                                <constraints>
-                                    
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
