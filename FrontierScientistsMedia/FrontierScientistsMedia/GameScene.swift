@@ -10,50 +10,79 @@ import SpriteKit
 
 class GameScene: SKScene {
     
-    var bird = SKSpriteNode()
+    var uav = SKSpriteNode()
     var bg = SKSpriteNode()
+    var land = SKSpriteNode()
+    var boat = SKSpriteNode()
+    var wave = SKSpriteNode()
+    var waveFg = SKSpriteNode()
     
     override func didMoveToView(view: SKView) {
-        var birdTexture = SKTexture(imageNamed: "img/flappy1.png")
-        var birdTexture2 = SKTexture(imageNamed: "img/flappy2.png")
-        var bgTexture = SKTexture(imageNamed: "img/bg.png")
+        var UAVTexture = SKTexture(imageNamed: "Game/uav.png")
+        var bgTexture = SKTexture(imageNamed: "Game/bg.jpg")
+        var landTexture = SKTexture(imageNamed: "Game/land.png")
+        var boatTexture = SKTexture(imageNamed: "Game/boat.png")
+        var waveTexture = SKTexture(imageNamed: "Game/wave.png")
+        var waveFgTexture = SKTexture(imageNamed: "Game/waveFg.png")
         
-        var moveBg = SKAction.moveByX(-bgTexture.size().width, y: 0, duration: 9)
-        var replaceBg = SKAction.moveByX(bgTexture.size().width, y: 0, duration: 0)
-        var moveBgForever = SKAction.repeatActionForever(SKAction.sequence([moveBg, replaceBg]))
+        var moveWaveUp = SKAction.moveBy(CGVectorMake(0, 10), duration: 1.0)
+        var moveWaveDown = SKAction.moveBy(CGVectorMake(0, -10), duration: 1.0)
+        var moveWaveLeft = SKAction.moveByX(-5, y: 0, duration: 2.0)
+        var moveWaveRight = SKAction.moveByX(5, y: 0, duration: 2.0)
+        var moveBoatUp = SKAction.moveBy(CGVectorMake(0, 8), duration: 1.2)
+        var moveBoatDown = SKAction.moveBy(CGVectorMake(0, -8), duration: 1.2)
+        var moveWaveUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveWaveUp, moveWaveDown]))
+        var moveWaveFgUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveWaveDown, moveWaveUp]))
+        var moveWaveLeftAndRight = SKAction.repeatActionForever(SKAction.sequence([moveWaveLeft, moveWaveRight]))
+        var moveWaveFgLeftAndRight = SKAction.repeatActionForever(SKAction.sequence([moveWaveRight, moveWaveLeft]))
+        var moveBoatUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveBoatDown, moveBoatUp]))
         
         for var i:CGFloat = 0; i < 3; i++ {
             bg = SKSpriteNode(texture: bgTexture)
+            land = SKSpriteNode(texture: landTexture)
+            waveFg = SKSpriteNode(texture: waveFgTexture)
+            boat = SKSpriteNode(texture: boatTexture)
+            wave = SKSpriteNode(texture: waveTexture)
             bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
+            land.position = CGPoint(x: landTexture.size().width/2 + landTexture.size().width * i, y: CGRectGetMinY(self.frame))
+            boat.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + 62)
+            wave.position = CGPoint(x: waveTexture.size().width/2 + waveTexture.size().width * i - 15, y: CGRectGetMinY(self.frame) + 10)
+            waveFg.position = CGPoint(x: waveFgTexture.size().width/2 + waveFgTexture.size().width * i - 15, y: CGRectGetMinY(self.frame) - 5)
             bg.size.height = self.frame.height
-            bg.runAction(moveBgForever)
+            wave.runAction(moveWaveUpAndDown)
+            wave.runAction(moveWaveLeftAndRight)
+            waveFg.runAction(moveWaveFgUpAndDown)
+            waveFg.runAction(moveWaveFgLeftAndRight)
+            boat.runAction(moveBoatUpAndDown)
             self.addChild(bg)
+            self.addChild(land)
+            self.addChild(boat)
+            self.addChild(wave)
+            self.addChild(waveFg)
         }
         
-        var animation = SKAction.animateWithTextures([birdTexture, birdTexture2], timePerFrame: 0.1)
-        var makeBirdFlap = SKAction.repeatActionForever(animation)
-        bird = SKSpriteNode(texture: birdTexture)
-        bird.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame))
-        bird.runAction(makeBirdFlap)
+        uav = SKSpriteNode(texture: UAVTexture)
+        uav.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame) + CGRectGetMidY(self.frame)/2)
         
-        bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2)
-        bird.physicsBody?.dynamic = true
-        bird.physicsBody?.allowsRotation = false
+        uav.physicsBody = SKPhysicsBody(circleOfRadius: uav.size.height / 2)
+        uav.physicsBody?.dynamic = true
+        uav.physicsBody?.allowsRotation = false
         
-        self.addChild(bird)
+        self.addChild(uav)
         
         var ground = SKNode()
-        ground.position = CGPointMake(0, 0)
+        ground.position = CGPointMake(0, boat.position.y + 35)
         ground.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(self.frame.size.width, 1))
         ground.physicsBody?.dynamic = false
+        ground.runAction(moveBoatUpAndDown)
         
         self.addChild(ground)
         
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        bird.physicsBody?.velocity = CGVectorMake(0, 0)
-        bird.physicsBody?.applyImpulse(CGVectorMake(0, 50))
+        uav.physicsBody?.velocity = CGVectorMake(0, 0)
+        uav.physicsBody?.applyImpulse(CGVectorMake(0, 20))
     }
     
     override func update(currentTime: CFTimeInterval) {
