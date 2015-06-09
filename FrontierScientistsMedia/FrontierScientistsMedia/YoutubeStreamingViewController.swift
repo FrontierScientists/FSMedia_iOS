@@ -9,31 +9,18 @@
 import Foundation
 import UIKit
 
-class YouTubeStreaming: UIViewController
-{
+class YouTubeStreaming: UIViewController{
     var uTubeUrl: String = String();
-    @IBOutlet weak var YouTubeStreamingView: YTPlayerView!
+    @IBOutlet weak var YouTubeStreamingView: YTPlayerView!;
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad(){
         super.viewDidLoad();
-        
-        println("\(uTubeUrl)");
-        println("\(getUTubeUrlId(uTubeUrl))");
-        
         YouTubeStreamingView.loadWithVideoId(getUTubeUrlId(uTubeUrl));
     }
     
-    func getUTubeUrlId(fullUTubeUrl: String) -> String
-    {
+    func getUTubeUrlId(fullUTubeUrl: String) -> String{
         var urlArray: Array = fullUTubeUrl.pathComponents
         var arraySize: Int = urlArray.count;
-        
-        if(arraySize > 1)
-        {
-            return urlArray[arraySize-1].stringByReplacingOccurrencesOfString("watch?v=", withString: "");
-        }
-        
-        return "";
+        return urlArray[arraySize-1].stringByReplacingOccurrencesOfString("watch?v=", withString: "");
     }
 }

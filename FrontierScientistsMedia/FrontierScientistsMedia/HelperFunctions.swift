@@ -34,3 +34,16 @@ func lastComponentOfUrlString(url: String) -> String
     }
     return "";
 }
+
+// createFolderNamed
+// Creates the folder if it doesn't exist in the Library/Caches/ directory
+func createFolderNamed(folderName: String)
+{
+    let FOLDEREPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/\(folderName)");
+    var isDir = ObjCBool(true);
+    if(!NSFileManager.defaultManager().fileExistsAtPath(FOLDEREPATH, isDirectory: &isDir)){
+        if(!NSFileManager.defaultManager().createDirectoryAtPath(FOLDEREPATH, withIntermediateDirectories: false, attributes: nil, error: nil)){
+            println("The folder, \(folderName), failed to be created.");
+        }
+    }
+}
