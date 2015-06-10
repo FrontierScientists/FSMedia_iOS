@@ -28,8 +28,15 @@
 		3BAA17EB1B06C36D003510D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17EA1B06C36D003510D7 /* Images.xcassets */; };
 		3BAA17EE1B06C36D003510D7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */; };
 		3BAA17FA1B06C36E003510D7 /* FrontierScientistsMediaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17F91B06C36E003510D7 /* FrontierScientistsMediaTests.swift */; };
+		3BBBD4881B20CC6600C628B1 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD4871B20CC6600C628B1 /* ProjectView.swift */; };
+		3BBBD48A1B20CD9200C628B1 /* ResearchNavigationTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */; };
+		3BBBD48C1B20D38300C628B1 /* ResearchContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD48B1B20D38300C628B1 /* ResearchContainer.swift */; };
+		3BBBD48E1B227CBB00C628B1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD48D1B227CBB00C628B1 /* GameViewController.swift */; };
+		3BBBD4901B227CFC00C628B1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD48F1B227CFC00C628B1 /* GameScene.swift */; };
+		3BBBD4921B227D8400C628B1 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 3BBBD4911B227D8400C628B1 /* Game */; };
 		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
+		F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F01B28ED87007929A0 /* nav_bar_bg.png */; };
 		F56E9E3E1B1CCE170027D39B /* CellBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E3D1B1CCE170027D39B /* CellBorder.png */; };
 		F56E9E441B1CD0670027D39B /* ArticlesTableViewController_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */; };
 		F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */; };
@@ -41,7 +48,6 @@
 		F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4D1B1CD1890027D39B /* YoutubeStreamingViewController.swift */; };
 		F56E9E541B1CD1890027D39B /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */; };
 		F56E9E611B1CE3BC0027D39B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E601B1CE3BC0027D39B /* Reachability.m */; };
-		F56E9E661B1D09C00027D39B /* RiR_plainyellow_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */; };
 		F56E9E6A1B1E15B80027D39B /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E691B1E15B80027D39B /* Assets */; };
 		F56E9E6C1B1E18260027D39B /* download_icon-web.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E6B1B1E18260027D39B /* download_icon-web.png */; };
 		F56E9E6E1B1E18450027D39B /* delete_icon-web.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E6D1B1E18450027D39B /* delete_icon-web.png */; };
@@ -83,8 +89,15 @@
 		3BAA17F31B06C36E003510D7 /* FrontierScientistsMediaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FrontierScientistsMediaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAA17F81B06C36E003510D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAA17F91B06C36E003510D7 /* FrontierScientistsMediaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrontierScientistsMediaTests.swift; sourceTree = "<group>"; };
+		3BBBD4871B20CC6600C628B1 /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchNavigationTableView.swift; sourceTree = "<group>"; };
+		3BBBD48B1B20D38300C628B1 /* ResearchContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchContainer.swift; sourceTree = "<group>"; };
+		3BBBD48D1B227CBB00C628B1 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		3BBBD48F1B227CFC00C628B1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		3BBBD4911B227D8400C628B1 /* Game */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Game; sourceTree = "<group>"; };
 		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
+		F560C6F01B28ED87007929A0 /* nav_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_bg.png; sourceTree = "<group>"; };
 		F56E9E3D1B1CCE170027D39B /* CellBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellBorder.png; sourceTree = "<group>"; };
 		F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesTableViewController_Swift.swift; sourceTree = "<group>"; };
 		F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
@@ -99,7 +112,6 @@
 		F56E9E551B1CD1A80027D39B /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		F56E9E5F1B1CE3BC0027D39B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = ../Reachability.h; sourceTree = "<group>"; };
 		F56E9E601B1CE3BC0027D39B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = ../Reachability.m; sourceTree = "<group>"; };
-		F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RiR_plainyellow_iphone.png; path = FrontierScientistsMedia/RiR_plainyellow_iphone.png; sourceTree = "<group>"; };
 		F56E9E691B1E15B80027D39B /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
 		F56E9E6B1B1E18260027D39B /* download_icon-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download_icon-web.png"; sourceTree = "<group>"; };
 		F56E9E6D1B1E18450027D39B /* delete_icon-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_icon-web.png"; sourceTree = "<group>"; };
@@ -134,7 +146,6 @@
 		3BAA17D51B06C36D003510D7 = {
 			isa = PBXGroup;
 			children = (
-				F56E9E651B1D09C00027D39B /* RiR_plainyellow_iphone.png */,
 				3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */,
 				3BAA17F61B06C36E003510D7 /* FrontierScientistsMediaTests */,
 				3BAA17DF1B06C36D003510D7 /* Products */,
@@ -166,8 +177,13 @@
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,
+				3BBBD48F1B227CFC00C628B1 /* GameScene.swift */,
+				3BBBD48D1B227CBB00C628B1 /* GameViewController.swift */,
 				3B22C1BB1B1666E7004AADAE /* HelperFunctions.swift */,
 				3B22C1BF1B1790F3004AADAE /* ImageProcessor.swift */,
+				3BBBD4871B20CC6600C628B1 /* ProjectView.swift */,
+				3BBBD48B1B20D38300C628B1 /* ResearchContainer.swift */,
+				3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */,
 				F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */,
 				F56E9E4B1B1CD1890027D39B /* VideoDownloadPlayerViewController.swift */,
 				F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */,
@@ -185,6 +201,7 @@
 		3BAA17E11B06C36D003510D7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3BBBD4911B227D8400C628B1 /* Game */,
 				3B6ED9EE1B0BC93F003E8903 /* about_icon.png */,
 				3B6ED9F01B0BC947003E8903 /* article_icon.png */,
 				3B6ED9F21B0BC94E003E8903 /* ask_a_scientist_icon.png */,
@@ -194,6 +211,7 @@
 				F56E9E6B1B1E18260027D39B /* download_icon-web.png */,
 				3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */,
 				3B6ED9F41B0BC95F003E8903 /* map_icon.png */,
+				F560C6F01B28ED87007929A0 /* nav_bar_bg.png */,
 				3B6ED9E81B0BA5B9003E8903 /* navigation_bg.jpg */,
 				F56E9E461B1CD1600027D39B /* new_icon-web.png */,
 				3B6ED9EC1B0BB8E7003E8903 /* page.jpeg */,
@@ -308,7 +326,6 @@
 				F56E9E6A1B1E15B80027D39B /* Assets in Resources */,
 				3B6ED9F11B0BC947003E8903 /* article_icon.png in Resources */,
 				3B6ED9E91B0BA5B9003E8903 /* navigation_bg.jpg in Resources */,
-				F56E9E661B1D09C00027D39B /* RiR_plainyellow_iphone.png in Resources */,
 				F56E9E6E1B1E18450027D39B /* delete_icon-web.png in Resources */,
 				7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */,
 				3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */,
@@ -317,10 +334,12 @@
 				F56E9E6C1B1E18260027D39B /* download_icon-web.png in Resources */,
 				F56E9E3E1B1CCE170027D39B /* CellBorder.png in Resources */,
 				3B6ED9ED1B0BB8E7003E8903 /* page.jpeg in Resources */,
+				F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */,
 				3BAA17EB1B06C36D003510D7 /* Images.xcassets in Resources */,
 				3B6ED9F31B0BC94E003E8903 /* ask_a_scientist_icon.png in Resources */,
 				3B6ED9F71B0BC967003E8903 /* research_icon.png in Resources */,
 				3B6ED9FD1B0BD9A0003E8903 /* drawer_shadow.png in Resources */,
+				3BBBD4921B227D8400C628B1 /* Game in Resources */,
 				3B6ED9F91B0BC96D003E8903 /* video_icon.png in Resources */,
 				F56E9E491B1CD1700027D39B /* Transition_Icon.png in Resources */,
 			);
@@ -340,14 +359,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BBBD48E1B227CBB00C628B1 /* GameViewController.swift in Sources */,
+				3BBBD48A1B20CD9200C628B1 /* ResearchNavigationTableView.swift in Sources */,
 				F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */,
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */,
+				3BBBD4881B20CC6600C628B1 /* ProjectView.swift in Sources */,
 				3B22C1BE1B178BA7004AADAE /* ContentUpdater.swift in Sources */,
 				3B22C1C21B1791ED004AADAE /* Extensions.swift in Sources */,
 				F56E9E511B1CD1890027D39B /* VideoDownloadPlayerViewController.swift in Sources */,
+				3BBBD48C1B20D38300C628B1 /* ResearchContainer.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
+				3BBBD4901B227CFC00C628B1 /* GameScene.swift in Sources */,
 				3B22C1C01B1790F3004AADAE /* ImageProcessor.swift in Sources */,
 				F56E9E441B1CD0670027D39B /* ArticlesTableViewController_Swift.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,

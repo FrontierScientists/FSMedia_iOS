@@ -17,8 +17,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var loadingDialog: UIView!
     @IBOutlet weak var loadingScreen: UIView!
     
-    let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
-    let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
+    let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About", "Nothing Important..."]
+    let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png", "RiR_plainyellow_iphone.png"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +33,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         bindingBack.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
         pageBack.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
         
-        // Hide loading screen when done loading
-        dispatch_async(dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)) {
-            while true {
-                if doneLoading {
-                    self.loadingScreen.hidden = true
-                    break
-                }
+        // Hide loading screen when done loading.
+        dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.loadingScreen.hidden = true
             }
         }
     }
@@ -75,8 +72,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             case 4:
                 performSegueWithIdentifier("ask", sender: nil)
                 break
+            case 5:
+                performSegueWithIdentifier("about", sender: nil)
             default:
-                performSegueWithIdentifier("about", sender:nil)
+                performSegueWithIdentifier("game", sender:nil)
                 break
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected row.

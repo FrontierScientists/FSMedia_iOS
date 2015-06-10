@@ -18,7 +18,7 @@ var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary.alloc()
 
 class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     @IBOutlet var articleTableView: UITableView?;
-    var posts = NSMutableArray();
+    var posts = [[String(): String()]];
     var parser = NSXMLParser.alloc();
     var articleReadStatusFilePath: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/ArticlesReadStatus.txt");
     
@@ -29,6 +29,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         articleTableView?.dataSource = self;
         
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
+        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
         self.title = "About Frontier Scientists";
         beginParsing();
         
@@ -50,6 +51,11 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         saveArticlesReadStatusDictToArticlesReadStatusFile();
         
         println("Finished loading view");
+        
+        for ii in posts{
+            
+            println("\(ii)");
+        }
     }
     
     // Table Section Functions
@@ -92,7 +98,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         cell.backgroundColor = UIColor.clearColor();
         cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"));
         cell.textLabel?.backgroundColor = UIColor.clearColor();
-        cell.textLabel!.text = posts[indexPath.row]["title"] as? String;
+        cell.textLabel!.text = posts[indexPath.row]["title"]!;
         
         var accessoryImageView: UIImageView;
         
@@ -124,9 +130,9 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        selectedArtcileIndex = indexPath.row;
         
-        var articleStoryLink = posts[indexPath.row]["link"] as! String;
+        selectedArtcileIndex = indexPath.row;
+        var articleStoryLink = posts[indexPath.row]["link"]!;
         articleReadStatusFileDict[articleStoryLink] = NSNumber(int: 1);
         saveArticlesReadStatusDictToArticlesReadStatusFile();
         self.tableView.reloadData();
@@ -168,11 +174,11 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         var dictHasBeenReadValue: NSNumber = 1;
         var articleStoryLink: NSString = "";
         
-        articleStoryLink = posts[0]["link"] as! String;
+        //articleStoryLink = posts[0]["link"] as! String;
         newArticlesReadStatusDict = [:];
         for ii in 0...posts.count-1{
             println("updateArticlesReadStatusDict, in for loop");
-            articleStoryLink = posts[ii]["link"] as! String;
+            articleStoryLink = posts[ii]["link"]!;
             
             if(articleReadStatusFileDict.objectForKey(articleStoryLink) != nil &&
                 articleReadStatusFileDict.objectForKey(articleStoryLink)!.integerValue == dictHasBeenReadValue.integerValue){
@@ -187,7 +193,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     
     func articleHasBeenRead(index: Int) -> Bool{
         println("articleHasBeenRead");
-        var linkString: String = posts[index]["link"] as! String;
+        var linkString: String = posts[index]["link"]!;
         
         if(articleReadStatusFileDict.objectForKey(linkString) != nil &&
             articleReadStatusFileDict.objectForKey(linkString)?.integerValue == NSNumber(int: 1)){
@@ -259,7 +265,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         if(elementName == "item"){
             if(!(articleTitle.isEqual(nil)) && !articleLink.isEqual(nil)){
                 var dictionaryEntry: Dictionary = ["title": (articleTitle as String), "link": (articleLink as String)];
-                posts.addObject(dictionaryEntry);
+                posts.append(dictionaryEntry);
             }
         }
     }
@@ -273,13 +279,13 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         if(segue.identifier == "RSSFeed"){
             let avc = segue.destinationViewController as? MySwiftArticlesViewController;
-            var str = posts[selectedArtcileIndex]["link"] as? String;
+            var str = posts[selectedArtcileIndex]["link"];
             
             str = str?.stringByReplacingOccurrencesOfString(" ", withString: "");
             str = str?.stringByReplacingOccurrencesOfString("\n", withString: "");
             str = str?.stringByReplacingOccurrencesOfString("   ", withString: "");
             str = str?.stringByReplacingOccurrencesOfString("\t", withString: "");
-            
+
             avc?.articleLinkString = str;
             println(avc!.articleLinkString);
         }

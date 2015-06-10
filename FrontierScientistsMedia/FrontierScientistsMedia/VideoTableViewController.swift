@@ -28,11 +28,13 @@ class MySwiftVideoTableViewController: UITableViewController
     let WATCH: String = "Watch_videos";
     
     override func viewDidLoad(){
+        
+    
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadVideosTableView:",name:"reloadVideosTableView", object: nil);
         
         super.viewDidLoad();
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"RiR_plainyellow_iphone"), forBarMetrics: .Default);
+        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
         self.navigationController?.navigationBar.translucent = false;
         setAllVideoDownloadsToNone();
         
@@ -96,7 +98,7 @@ class MySwiftVideoTableViewController: UITableViewController
         
         // The header background subview
         var headerBackgroundImageView: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width, 110.0));
-        headerBackgroundImageView.backgroundColor = UIColor(patternImage: UIImage(named: "RiR_plainyellow_iphone")!);
+        headerBackgroundImageView.backgroundColor = UIColor.yellowColor();
         
         // The blue line seperating the headers
         var blueLineImageHeaderView: UIImageView =  UIImageView(frame: CGRectMake(0, headerView.frame.size.height-1, self.view.frame.size.width, 1));
@@ -204,7 +206,9 @@ class MySwiftVideoTableViewController: UITableViewController
     
     // Get the view for the cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        
         var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell");
+        var videoDict: Dictionary = iosProjectData[indexPath.section]["videos"]?[indexPath.row] as! [String: String];
         
         // cell background
         cell.backgroundColor = UIColor.clearColor();
@@ -212,7 +216,7 @@ class MySwiftVideoTableViewController: UITableViewController
         cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"));
         
         // cell title
-        let VIDEOTITLE: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["title"] as? String;
+        let VIDEOTITLE: String = videoDict["title"]!;
         cell.textLabel?.text = VIDEOTITLE;
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 17);
         cell.textLabel?.textAlignment = NSTextAlignment.Left;
@@ -226,18 +230,18 @@ class MySwiftVideoTableViewController: UITableViewController
             cell.accessoryView?.frame = CGRectMake(0, 0, 34, 34);
         }
         
-        let VIDEOMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["MP4"] as? String;
-        let VIDEOCOMPRESSEDMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["compressedMP4"] as? String;
+        let VIDEOMP4URL: String = videoDict["MP4"]!;
+        let VIDEOCOMPRESSEDMP4URL: String = videoDict["compressedMP4"]!;
         
-        if(videoTitleForDownloadStatusDictionary[VIDEOTITLE!] != "none"){
+        if(videoTitleForDownloadStatusDictionary[VIDEOTITLE] != "none"){
             var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40));
             activityIndicatorView.color = UIColor.blackColor();
             activityIndicatorView.startAnimating();
             cell.accessoryView = activityIndicatorView;
         }
         else if(currentMode == MANAGE && (VIDEOMP4URL != "" || VIDEOCOMPRESSEDMP4URL != "")){
-            let MP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/MP4/\(getImageOrVideoName(VIDEOMP4URL!))");
-            let COMPRESSEDMP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/compressedMP4/\(getImageOrVideoName(VIDEOCOMPRESSEDMP4URL!))");
+            let MP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/MP4/\(getImageOrVideoName(VIDEOMP4URL))");
+            let COMPRESSEDMP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/compressedMP4/\(getImageOrVideoName(VIDEOCOMPRESSEDMP4URL))");
             
             var accessoryImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40));
             
@@ -264,15 +268,16 @@ class MySwiftVideoTableViewController: UITableViewController
     // Cell has been selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
+        var videoDict: Dictionary = iosProjectData[indexPath.section]["videos"]?[indexPath.row] as! [String: String];
         selectedIndexPath = indexPath;
-        let VIDEOTITLE: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["title"] as? String;
-        let VIDEOMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["MP4"] as? String;
-        let VIDEOCOMPRESSEDMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["compressedMP4"] as? String;
-        let MP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/MP4/\(getImageOrVideoName(VIDEOMP4URL!))");
-        let COMPRESSEDMP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/compressedMP4/\(getImageOrVideoName(VIDEOCOMPRESSEDMP4URL!))");
+        let VIDEOTITLE: String = videoDict["title"]!;
+        let VIDEOMP4URL: String = videoDict["MP4"]!;
+        let VIDEOCOMPRESSEDMP4URL: String = videoDict["compressedMP4"]!;
+        let MP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/MP4/\(getImageOrVideoName(VIDEOMP4URL))");
+        let COMPRESSEDMP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/compressedMP4/\(getImageOrVideoName(VIDEOCOMPRESSEDMP4URL))");
         
-        if(currentMode == MANAGE && videoTitleForDownloadStatusDictionary[VIDEOTITLE!] != "none"){
-            cancel_Download_Alert(VIDEOTITLE!);
+        if(currentMode == MANAGE && videoTitleForDownloadStatusDictionary[VIDEOTITLE] != "none"){
+            cancel_Download_Alert(VIDEOTITLE);
             selectedResearchProjectIndex = -1;
         }
         else if(currentMode == MANAGE && MP4FILEPATH.lastPathComponent != "MP4"){
@@ -290,15 +295,15 @@ class MySwiftVideoTableViewController: UITableViewController
             selectedResearchProjectIndex = indexPath.section;
         }
         else if(currentMode == WATCH){
-            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)){
+            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && MP4FILEPATH.lastPathComponent != "MP4"){
                 playDownloadedVideo(MP4FILEPATH);
             }
-            else if(NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)){
+            else if(NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && COMPRESSEDMP4FILEPATH.lastPathComponent != "compressedMP4"){
                 playDownloadedVideo(COMPRESSEDMP4FILEPATH);
             }
             else{ // stream video
                 // stream video
-                self.selectedVideoUrl = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["utubeurl"] as! String;
+                self.selectedVideoUrl = videoDict["utubeurl"]!;
                 self.performSegueWithIdentifier("YoutubeStreaming", sender: self);
             }
         }
@@ -335,6 +340,7 @@ class MySwiftVideoTableViewController: UITableViewController
     
     // Alert that asks the user to choose between downloading the HD or compressed version of the video
     func HD_or_Compressed_Alert(){
+        var videoDict: Dictionary = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row] as! [String: String];
         var alert = UIAlertController(title: "Choose video quality",
             message: "",
             preferredStyle: UIAlertControllerStyle.Alert);
@@ -342,13 +348,13 @@ class MySwiftVideoTableViewController: UITableViewController
         alert.addAction(UIAlertAction(title: "MP4", style: UIAlertActionStyle.Default, handler:
             {(action: UIAlertAction!) in
                 self.selectedVideoQuality = "MP4";
-                self.selectedVideoUrl = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row]?["MP4"] as! String;
+                self.selectedVideoUrl = videoDict["MP4"]!;
                 self.downloadVideo();
         }));
         alert.addAction(UIAlertAction(title: "compressedMP4", style: UIAlertActionStyle.Default, handler:
             {(action: UIAlertAction!) in
                 self.selectedVideoQuality = "compressedMP4";
-                self.selectedVideoUrl = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row]?["compressedMP4"] as! String;
+                self.selectedVideoUrl = videoDict["compressedMP4"]!;
                 self.downloadVideo();
         }));
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
@@ -357,10 +363,12 @@ class MySwiftVideoTableViewController: UITableViewController
     
     // Downloads the chosen video at the chosen video quality
     func downloadVideo(){
+        
+        var videoDict: Dictionary = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row] as! [String: String];
         var videoDownloadHelperHandle: videoDownloadHelper = videoDownloadHelper.alloc();
         videoDownloadHelperHandle.videoQualityFolder = selectedVideoQuality;
-        videoDownloadHelperHandle.videoTitleString = iosProjectData[selectedIndexPath.section]["videos"]?[selectedIndexPath.row]?["title"] as! String;
-        videoDownloadHelperHandle.videoUrlString = iosProjectData[selectedIndexPath.section]["videos"]?[selectedIndexPath.row]?[selectedVideoQuality] as! String;
+        videoDownloadHelperHandle.videoTitleString = videoDict["title"]!;
+        videoDownloadHelperHandle.videoUrlString = videoDict[selectedVideoQuality]!;
         videoDownloadHelperHandle.executeBackgroundDownloadForURL();
         self.tableView.reloadData();
     }
@@ -422,7 +430,8 @@ class MySwiftVideoTableViewController: UITableViewController
             var sectionVideoCount: Int? = iosProjectData[sectionIndex]["videos"]?.count;
             if(sectionVideoCount > 0){
                 for rowIndex in 0...sectionVideoCount!-1{
-                    var videoTitle: String = iosProjectData[sectionIndex]["videos"]?[rowIndex]["title"] as! String;
+                    var videoDict: Dictionary = iosProjectData[sectionIndex]["videos"]?[rowIndex] as! [String: String];
+                    var videoTitle: String = videoDict["title"]!;
                     videoTitleForDownloadStatusDictionary[videoTitle] = "none";
                 }
             }
