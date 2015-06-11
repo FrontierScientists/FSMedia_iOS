@@ -437,6 +437,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6XD-3k-hGC">
+                        <barButtonItem key="rightBarButtonItem" title="Next Demo" id="V28-ON-WmO">
+                            <connections>
+                                <action selector="nextDemo:" destination="7Km-KD-9AQ" id="ZaQ-UE-6St"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azq-m4-vkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
