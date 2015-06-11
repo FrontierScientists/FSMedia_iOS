@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -445,8 +444,8 @@
         <!--About-->
         <scene sceneID="Ehw-ll-mDX">
             <objects>
-                <tableViewController title="About" id="19M-LF-YxW" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3e2-ia-ou7">
+                <tableViewController title="About" id="19M-LF-YxW" customClass="aboutViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3e2-ia-ou7" customClass="aboutViewController" customModule="FrontierScientistsMedia" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -573,57 +572,63 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ask_a_scientist_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="u3w-E4-KNA">
-                                <rect key="frame" x="16" y="121" width="123" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="UMm-Vm-Ht6"/>
-                                    <constraint firstAttribute="width" constant="123" id="VhZ-zY-vKk"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Scientist Name" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V40-ef-geI">
-                                <rect key="frame" x="155" y="121" width="50" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scientist Name" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V40-ef-geI">
+                                <rect key="frame" x="155" y="121" width="429" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Stuff about them. Stuff about them. Stuff about them. Stuff about them. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azw-zl-ye8">
-                                <rect key="frame" x="155" y="157" width="253" height="75"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stuff about them. Stuff about them. Stuff about them. Stuff about them. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azw-zl-ye8">
+                                <rect key="frame" x="155" y="157" width="429" height="164"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="164" id="ocH-FI-ENv"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09z-du-oMQ">
-                                <rect key="frame" x="252" y="312" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="XA4-ik-ves"/>
-                                    <constraint firstAttribute="width" secondItem="09z-du-oMQ" secondAttribute="height" multiplier="23:15" id="xQu-Hv-GWT"/>
-                                </constraints>
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09z-du-oMQ">
+                                <rect key="frame" x="16" y="331" width="568" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Ask Our Scientist">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="sendMail:" destination="eGJ-hs-1SG" eventType="touchUpInside" id="YbZ-BG-12g"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sY3-Rl-Cs6">
+                                <rect key="frame" x="16" y="121" width="131" height="202"/>
+                                <state key="normal" title="Button" image="ask_a_scientist_icon.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="scientist_bio_image:" destination="eGJ-hs-1SG" eventType="touchUpInside" id="CMk-mB-BDB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="azw-zl-ye8" firstAttribute="leading" secondItem="u3w-E4-KNA" secondAttribute="trailing" constant="8" id="4ar-wn-ObS"/>
-                            <constraint firstItem="gYs-g0-3kx" firstAttribute="top" secondItem="A61-zo-cip" secondAttribute="bottom" constant="8" id="6EW-wE-e2F"/>
-                            <constraint firstItem="u3w-E4-KNA" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leadingMargin" constant="16" id="QNs-Qj-ea1"/>
-                            <constraint firstItem="gYs-g0-3kx" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leadingMargin" id="fOS-wY-2Ap"/>
-                            <constraint firstItem="gYs-g0-3kx" firstAttribute="top" secondItem="A61-zo-cip" secondAttribute="bottom" constant="8" symbolic="YES" id="gZP-zi-evN"/>
-                            <constraint firstItem="V40-ef-geI" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leadingMargin" constant="236" id="jK8-bd-Gy1"/>
-                            <constraint firstItem="09z-du-oMQ" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leading" constant="252" id="mFs-8k-VMH"/>
-                            <constraint firstItem="gYs-g0-3kx" firstAttribute="trailing" secondItem="hc6-UJ-akL" secondAttribute="trailingMargin" id="rfu-tx-Qg2"/>
-                            <constraint firstItem="mW2-mQ-8w5" firstAttribute="top" secondItem="09z-du-oMQ" secondAttribute="bottom" constant="258" id="wAI-p0-dcE"/>
-                            <constraint firstItem="u3w-E4-KNA" firstAttribute="top" secondItem="gYs-g0-3kx" secondAttribute="bottom" constant="8" id="wpY-tO-lue"/>
+                            <constraint firstItem="V40-ef-geI" firstAttribute="top" secondItem="hc6-UJ-akL" secondAttribute="top" constant="121" id="5mP-d9-NhU"/>
+                            <constraint firstAttribute="centerX" secondItem="09z-du-oMQ" secondAttribute="centerX" id="F3n-ry-NBw"/>
+                            <constraint firstItem="gYs-g0-3kx" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leading" constant="16" id="FsU-fb-a9H"/>
+                            <constraint firstItem="azw-zl-ye8" firstAttribute="top" secondItem="hc6-UJ-akL" secondAttribute="top" constant="157" id="LT1-1J-JHj"/>
+                            <constraint firstAttribute="trailing" secondItem="gYs-g0-3kx" secondAttribute="trailing" constant="16" id="WXO-Mg-i85"/>
+                            <constraint firstItem="09z-du-oMQ" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leading" constant="16" id="YIY-oO-pwR"/>
+                            <constraint firstItem="gYs-g0-3kx" firstAttribute="top" secondItem="hc6-UJ-akL" secondAttribute="top" constant="72" id="ZsO-rU-hwr"/>
+                            <constraint firstAttribute="trailing" secondItem="azw-zl-ye8" secondAttribute="trailing" constant="16" id="buX-zt-vQH"/>
+                            <constraint firstAttribute="trailing" secondItem="09z-du-oMQ" secondAttribute="trailing" constant="16" id="cd9-dD-pPy"/>
+                            <constraint firstItem="azw-zl-ye8" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leading" constant="155" id="sK8-y2-rYi"/>
+                            <constraint firstItem="09z-du-oMQ" firstAttribute="top" secondItem="hc6-UJ-akL" secondAttribute="top" constant="331" id="tnj-As-mwk"/>
+                            <constraint firstItem="V40-ef-geI" firstAttribute="leading" secondItem="hc6-UJ-akL" secondAttribute="leading" constant="155" id="yYX-e6-Bq4"/>
+                            <constraint firstAttribute="trailing" secondItem="V40-ef-geI" secondAttribute="trailing" constant="16" id="yr5-LD-JNg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="scientist_image" destination="u3w-E4-KNA" id="l89-Ux-MiB"/>
+                        <outlet property="scientist_image" destination="sY3-Rl-Cs6" id="clJ-zU-Eug"/>
                         <outlet property="scientist_info" destination="azw-zl-ye8" id="dbS-S4-vW7"/>
                         <outlet property="scientist_name" destination="V40-ef-geI" id="ftL-UN-Vfz"/>
+                        <segue destination="j7W-gc-TiM" kind="show" identifier="scientist_bio" id="W8w-vN-aSZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKz-ew-tKG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -642,4 +647,7 @@
     <resources>
         <image name="ask_a_scientist_icon.png" width="142" height="142"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="W8w-vN-aSZ"/>
+    </inferredMetricsTieBreakers>
 </document>
