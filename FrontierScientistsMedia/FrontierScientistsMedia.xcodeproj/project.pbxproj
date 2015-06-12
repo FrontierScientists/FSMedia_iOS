@@ -21,7 +21,6 @@
 		3B6ED9F91B0BC96D003E8903 /* video_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9F81B0BC96D003E8903 /* video_icon.png */; };
 		3B6ED9FD1B0BD9A0003E8903 /* drawer_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */; };
 		3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */; };
-		3B6EDA0A1B0E6194003E8903 /* erasdust.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B6EDA091B0E6108003E8903 /* erasdust.ttf */; };
 		3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17E31B06C36D003510D7 /* AppDelegate.swift */; };
 		3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAA17E51B06C36D003510D7 /* ViewController.swift */; };
 		3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BAA17E71B06C36D003510D7 /* Main.storyboard */; };
@@ -34,7 +33,9 @@
 		3BBBD48E1B227CBB00C628B1 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD48D1B227CBB00C628B1 /* GameViewController.swift */; };
 		3BBBD4901B227CFC00C628B1 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD48F1B227CFC00C628B1 /* GameScene.swift */; };
 		3BBBD4921B227D8400C628B1 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 3BBBD4911B227D8400C628B1 /* Game */; };
+		3BBBD4941B28D3D600C628B1 /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD4931B28D3D600C628B1 /* GameScene2.swift */; };
 		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
+		7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* aboutViewController.swift */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
 		F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F01B28ED87007929A0 /* nav_bar_bg.png */; };
 		F560C6F31B28FBB5007929A0 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F21B28FBB5007929A0 /* play_icon.png */; };
@@ -81,7 +82,6 @@
 		3B6ED9F81B0BC96D003E8903 /* video_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video_icon.png; sourceTree = "<group>"; };
 		3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drawer_shadow.png; sourceTree = "<group>"; };
 		3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
-		3B6EDA091B0E6108003E8903 /* erasdust.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = erasdust.ttf; sourceTree = "<group>"; };
 		3BAA17DE1B06C36D003510D7 /* FrontierScientistsMedia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FrontierScientistsMedia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAA17E21B06C36D003510D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3BAA17E31B06C36D003510D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -98,7 +98,9 @@
 		3BBBD48D1B227CBB00C628B1 /* GameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		3BBBD48F1B227CFC00C628B1 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		3BBBD4911B227D8400C628B1 /* Game */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Game; sourceTree = "<group>"; };
+		3BBBD4931B28D3D600C628B1 /* GameScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
 		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		7E8E89B71B279C8300966C82 /* aboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
 		F560C6F01B28ED87007929A0 /* nav_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_bg.png; sourceTree = "<group>"; };
 		F560C6F21B28FBB5007929A0 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
@@ -141,14 +143,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3B6EDA081B0E5FB9003E8903 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				3B6EDA091B0E6108003E8903 /* erasdust.ttf */,
-			);
-			name = Fonts;
-			sourceTree = "<group>";
-		};
 		3BAA17D51B06C36D003510D7 = {
 			isa = PBXGroup;
 			children = (
@@ -175,15 +169,16 @@
 				F56E9E601B1CE3BC0027D39B /* Reachability.m */,
 				F56E9E4E1B1CD1890027D39B /* YTPlayerView.h */,
 				F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */,
-				3B6EDA081B0E5FB9003E8903 /* Fonts */,
 				3BAA17E31B06C36D003510D7 /* AppDelegate.swift */,
 				F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */,
+				7E8E89B71B279C8300966C82 /* aboutViewController.swift */,
 				F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */,
 				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,
 				3BBBD48F1B227CFC00C628B1 /* GameScene.swift */,
+				3BBBD4931B28D3D600C628B1 /* GameScene2.swift */,
 				3BBBD48D1B227CBB00C628B1 /* GameViewController.swift */,
 				3B22C1BB1B1666E7004AADAE /* HelperFunctions.swift */,
 				3B22C1BF1B1790F3004AADAE /* ImageProcessor.swift */,
@@ -330,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F56E9E471B1CD1600027D39B /* new_icon-web.png in Resources */,
-				3B6EDA0A1B0E6194003E8903 /* erasdust.ttf in Resources */,
 				3B6ED9EF1B0BC93F003E8903 /* about_icon.png in Resources */,
 				F56E9E6A1B1E15B80027D39B /* Assets in Resources */,
 				3B6ED9F11B0BC947003E8903 /* article_icon.png in Resources */,
@@ -375,6 +369,7 @@
 				3BBBD48A1B20CD9200C628B1 /* ResearchNavigationTableView.swift in Sources */,
 				F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */,
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
+				7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */,
 				3BBBD4881B20CC6600C628B1 /* ProjectView.swift in Sources */,
@@ -390,6 +385,7 @@
 				F56E9E521B1CD1890027D39B /* VideoTableViewController.swift in Sources */,
 				3B22C1BC1B1666E7004AADAE /* HelperFunctions.swift in Sources */,
 				F56E9E541B1CD1890027D39B /* YTPlayerView.m in Sources */,
+				3BBBD4941B28D3D600C628B1 /* GameScene2.swift in Sources */,
 				F56E9E501B1CD1890027D39B /* VideoDownloadHelper.swift in Sources */,
 				F56E9E611B1CE3BC0027D39B /* Reachability.m in Sources */,
 			);
