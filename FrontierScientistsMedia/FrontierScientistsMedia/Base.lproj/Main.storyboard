@@ -452,24 +452,38 @@
         <scene sceneID="Ehw-ll-mDX">
             <objects>
                 <tableViewController title="About" id="19M-LF-YxW" customClass="aboutViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="3e2-ia-ou7" customClass="aboutViewController" customModule="FrontierScientistsMedia" customModuleProvider="target">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bPp-zv-AsG">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="9Au-Xe-89k">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="goal" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="goal" id="DxL-L6-1fl" customClass="CustomTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Au-Xe-89k" id="O1b-5C-5ii">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DxL-L6-1fl" id="Jui-lx-EVb">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwl-Vp-WGh">
+                                            <rect key="frame" x="58" y="11" width="534" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="aboutLabel" destination="lwl-Vp-WGh" id="Hqo-QN-SzF"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="19M-LF-YxW" id="STZ-WF-bSx"/>
-                            <outlet property="delegate" destination="19M-LF-YxW" id="Cob-Zo-8I9"/>
+                            <outlet property="dataSource" destination="19M-LF-YxW" id="asi-K6-Xx0"/>
+                            <outlet property="delegate" destination="19M-LF-YxW" id="VBj-FZ-qFU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="O7i-iu-P35"/>
+                    <connections>
+                        <outlet property="aboutTable" destination="bPp-zv-AsG" id="fJY-Na-FBw"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Msm-j4-nqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -585,7 +599,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stuff about them. Stuff about them. Stuff about them. Stuff about them. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azw-zl-ye8">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stuff about them. Stuff about them. Stuff about them. Stuff about them. Stuff about them. " lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azw-zl-ye8">
                                 <rect key="frame" x="155" y="157" width="429" height="164"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="164" id="ocH-FI-ENv"/>
