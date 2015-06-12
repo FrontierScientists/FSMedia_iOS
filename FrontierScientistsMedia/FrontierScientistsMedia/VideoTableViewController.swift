@@ -10,10 +10,13 @@ import Foundation
 import UIKit
 import MediaPlayer
 
+var videoTitleForDownloadStatusDictionary: Dictionary<String, String> = ["video_title": "downloadTask.id"];
+
 class MySwiftVideoTableViewController: UITableViewController
 {
     @IBOutlet weak var changeVidoesModeButton: UIButton!
     @IBOutlet var videoTableView: UITableView!
+    var loadIsNotReloadBool: Bool = true;
     var openSectionArray: Array<String> = ["closed"];
     var selectedResearchProjectIndex: Int = 0;
     var scrollPath: NSIndexPath = NSIndexPath(forRow: NSNotFound, inSection: NSNotFound);
@@ -24,23 +27,38 @@ class MySwiftVideoTableViewController: UITableViewController
     var currentMode: String = "Watch_videos";
     let MANAGE: String = "Manage_downloads";
     let WATCH: String = "Watch_videos";
+    let CACHESDIRECTORYPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/");
+    
     
     override func viewDidLoad(){
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadVideosTableView:",name:"reloadVideosTableView", object: nil);
-
-        var str = iosProjectData[0]["title"] as! String!;
-        println(str);
+        
+        
+        // Check if there is a network connection, and alert the user if there isn't
+        reachability.startNotifier();
+        netStatus = reachability.currentReachabilityStatus();
+        if(netStatus.value == NOTREACHABLE && loadIsNotReloadBool)
+        {
+            noInternetConnectionAlert();
+            loadIsNotReloadBool = false;
+        }
         
         super.viewDidLoad();
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named:"RiR_plainyellow_iphone"), forBarMetrics: .Default);
+        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
+        self.navigationController?.navigationBar.translucent = false;
+        
         setAllVideoDownloadsToNone();
+        createFolderNamed("MP4"); // Calls to function in HelperFunctions.swift
+        createFolderNamed("compressedMP4");
         
         var sectionCount: Int = iosProjectData.count;
         for sectionIndex in 0...sectionCount-2{
             openSectionArray.append("closed");
         }
         
+        // Open a section if coming from a research project page
         if(selectedResearchProjectIndex != -1){
             self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: selectedResearchProjectIndex);
             self.tableView.scrollToRowAtIndexPath(self.scrollPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true);
@@ -56,7 +74,25 @@ class MySwiftVideoTableViewController: UITableViewController
         }
     }
     
+    //noInternetConnectionAlert
+    //
+    func noInternetConnectionAlert(){
+        
+        println("noInternetConnectionAlert triggered in video table.");
+        let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
+    
     // Table Section Functions
+    //  dropDownListToggle(pressedButton: UIButton!)
     //  numberOfSectionsInTableView:(UITableView *)tableView
     //  heightForHeaderInSection section: Int)
     //  viewForHeaderInSection section: Int)
@@ -65,10 +101,30 @@ class MySwiftVideoTableViewController: UITableViewController
     //
     //
     
+    //dropDownListToggle
+    // Button command to open/close a section
+    func dropDownListToggle(pressedButton: UIButton!){
+        if(openSectionArray[pressedButton.tag] == "open"){
+            openSectionArray[pressedButton.tag] = "closed";
+        }
+        else{ //(openSectionArray[pressedButton.tag] == "closed")
+            openSectionArray[pressedButton.tag] = "open";
+        }
+        
+        self.tableView.reloadData();
+        selectedResearchProjectIndex = pressedButton.tag;
+        self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: selectedResearchProjectIndex);
+        self.tableView.scrollToRowAtIndexPath(self.scrollPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true);
+    }
+    
+    // numberOfSectionsInTableView
+    //
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         return iosProjectData.count;
     }
     
+    // heightForHeaderInSection
+    //
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         var sectionVideoCount: Int? = iosProjectData[section]["videos"]?.count;
         if(sectionVideoCount == 0){
@@ -79,6 +135,8 @@ class MySwiftVideoTableViewController: UITableViewController
         }
     }
     
+    // viewForHeaderInSection
+    //
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         //println("viewForHeaderInSection");
         var sectionVideoCount: Int? = iosProjectData[section]["videos"]?.count;
@@ -90,14 +148,14 @@ class MySwiftVideoTableViewController: UITableViewController
         // The main header view that all subviews will go into
         var headerView: UIView = UIView(frame: CGRectMake(0, 0, self.view.frame.size.width, 110));
         headerView.backgroundColor = UIColor.clearColor();
-
+        
+        // The header background subview
+        var headerBackgroundImageView: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width, 110.0));
+        headerBackgroundImageView.backgroundColor = UIColor.yellowColor();
+        
         // The blue line seperating the headers
         var blueLineImageHeaderView: UIImageView =  UIImageView(frame: CGRectMake(0, headerView.frame.size.height-1, self.view.frame.size.width, 1));
         blueLineImageHeaderView.backgroundColor = UIColor.blueColor();
-        
-        // The header background subview
-        var headerBackgroundImageView: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width, 104.0));
-        headerBackgroundImageView.backgroundColor = UIColor(patternImage: UIImage(named: "RiR_plainyellow_iphone")!);
         
         // The arrow image subview
         var headerArrowImageView: UIImageView = UIImageView(frame: CGRect(x: 15, y: 20, width: 50, height: 50));
@@ -112,7 +170,7 @@ class MySwiftVideoTableViewController: UITableViewController
         // The research image subview
         let headerResearchImageView: UIImageView = UIImageView(frame: CGRect(x: 70, y: 10, width: 110, height: 70));
         let researchImageUrl: String = iosProjectData[section]["preview_image"] as! String;
-        headerResearchImageView.image = UIImage(contentsOfFile: NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/Images/".stringByAppendingPathComponent(getImageOrVideoName(researchImageUrl))));
+        headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH.stringByAppendingPathComponent("Images/\(researchImageUrl.lastPathComponent)"));
         
 
         // The header label subview
@@ -139,8 +197,8 @@ class MySwiftVideoTableViewController: UITableViewController
         }
         
         // Add the subviews
-        headerView.addSubview(blueLineImageHeaderView);
         headerView.addSubview(headerBackgroundImageView);
+        headerView.addSubview(blueLineImageHeaderView);
         headerView.addSubview(headerArrowImageView);
         headerView.addSubview(headerResearchImageView);
         headerView.addSubview(headerTitleView);
@@ -149,10 +207,14 @@ class MySwiftVideoTableViewController: UITableViewController
         return headerView;
     }
     
+    // heightForFooterInSection
+    //
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat{
         return 1;
     }
     
+    // viewForFooterInSection
+    //
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         var footerImageView: UIImageView =  UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width, 1));
         // The blue line seperating the headers when one is opened
@@ -166,29 +228,16 @@ class MySwiftVideoTableViewController: UITableViewController
     }
     
     // Table Cell Functions
-    //  dropDownListToggle(pressedButton: UIButton!)
     //  numberOfRowsInSection section: Int)
+    //  heightForRowAtIndexPath indexPath: NSIndexPath)
     //  cellForRowAtIndexPath indexPath: NSIndexPath)
     //  didSelectRowAtIndexPath indexPath: NSIndexPath)
     //
     //
-    
-    func dropDownListToggle(pressedButton: UIButton!){
-        if(openSectionArray[pressedButton.tag] == "open"){
-            openSectionArray[pressedButton.tag] = "closed";
-        }
-        else{ //(openSectionArray[pressedButton.tag] == "closed")
-            openSectionArray[pressedButton.tag] = "open";
-        }
-        
-        self.tableView.reloadData();
-        selectedResearchProjectIndex = pressedButton.tag;
-        self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: selectedResearchProjectIndex);
-        self.tableView.scrollToRowAtIndexPath(self.scrollPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true);
-    }
-    
+
+    // numberOfRowsInSection
+    // Get the number of rows per section
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        //println("numberOfRowsInSection");
         if(openSectionArray[section] == "open"){
             var sectionVideoCount: Int? = iosProjectData[section]["videos"]?.count;
             return sectionVideoCount!;
@@ -198,91 +247,156 @@ class MySwiftVideoTableViewController: UITableViewController
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell");
+    // heightForRowAtIndexPath
+    // Height for the table cells
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
+        // Apply differences for iPad and iPhone
+        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
+            return 90;
+        }
+        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+            return 40;
+        }
+    }
+    
+    // cellForRowAtIndexPath
+    // Get the view for the cell
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        
+        netStatus = reachability.currentReachabilityStatus();
+        if(netStatus.value == NOTREACHABLE)
+        {
+            //noInternetConnectionAlert();
+        }
+        
+        var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell");
+        var videoDict: Dictionary = iosProjectData[indexPath.section]["videos"]?[indexPath.row] as! [String: String];
+        var accessoryImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40));
+        
+        // cell background
         cell.backgroundColor = UIColor.clearColor();
         cell.selectionStyle = UITableViewCellSelectionStyle.None;
         cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"));
         
-        let VIDEOTITLE: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["title"] as? String;
+        // cell title
+        let VIDEOTITLE: String = videoDict["title"]!;
         cell.textLabel?.text = VIDEOTITLE;
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 17);
         cell.textLabel?.textAlignment = NSTextAlignment.Left;
         cell.textLabel?.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
         
         // Apply differences for iPad and iPhone
-        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType)
-        {
-            cell.accessoryView?.frame = CGRectMake(0, 0, 68, 68);
+        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
+            accessoryImageView.frame = CGRectMake(0, 0, 60, 60);
         }
-        else // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-        {
-            cell.accessoryView?.frame = CGRectMake(0, 0, 34, 34);
+        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+            accessoryImageView.frame = CGRectMake(0, 0, 30, 30);
         }
         
-        let VIDEOMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["MP4"] as? String;
-        let VIDEOCOMPRESSEDMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["compressedMP4"] as? String;
+        let VIDEOMP4URL: String = videoDict["MP4"]!;
+        let VIDEOCOMPRESSEDMP4URL: String = videoDict["compressedMP4"]!;
+        let MP4FILEPATH: String = CACHESDIRECTORYPATH.stringByAppendingPathComponent("MP4/\(VIDEOMP4URL.lastPathComponent)");
+        let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH.stringByAppendingPathComponent("compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)");
         
-        if(NSUserDefaults.standardUserDefaults().valueForKey(VIDEOTITLE!) as! String != "none"){
-            var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 40, 40));
+        // Video is being downloaded
+        if(videoTitleForDownloadStatusDictionary[VIDEOTITLE] != "none"){
+            
+            var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 5, 30, 30));
             activityIndicatorView.color = UIColor.blackColor();
             activityIndicatorView.startAnimating();
-            cell.accessoryView = activityIndicatorView;
+            cell.imageView?.image = UIImage(named: "blank_icon.png");
+            cell.imageView?.addSubview(activityIndicatorView);
+            accessoryImageView.image = UIImage(named: "cancel_icon.png");
+            // Apply differences for iPad
+            if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
+                activityIndicatorView.frame = CGRectMake(0, 10, 60, 60);
+            }
         }
-        else if(currentMode == MANAGE && (VIDEOMP4URL != "" || VIDEOCOMPRESSEDMP4URL != "")){
-            let MP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/MP4/\(getImageOrVideoName(VIDEOMP4URL!))");
-            let COMPRESSEDMP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/compressedMP4/\(getImageOrVideoName(VIDEOCOMPRESSEDMP4URL!))");
+        // Video managing options
+        else if(currentMode == MANAGE){
             
-            var accessoryImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40));
-            
-            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) ||
-               NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)){
-                accessoryImageView.image = UIImage(named: "delete_icon-web.png");
+            if((VIDEOMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) ||
+               (VIDEOCOMPRESSEDMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH))){
+                
+                println("MP4FILEPATH: \(MP4FILEPATH)");
+                    accessoryImageView.image = UIImage(named: "delete_icon-web.png");
+            }
+            else if(netStatus.value != NOTREACHABLE &&
+                (VIDEOMP4URL != "" || VIDEOCOMPRESSEDMP4URL != "")){
+                    
+                    accessoryImageView.image = UIImage(named: "download_icon-web.png");
             }
             else{
-                accessoryImageView.image = UIImage(named: "download_icon-web.png");
+                // There is no downloaded video or network connection, so show nothing
+                cell.textLabel?.textColor = UIColor.grayColor();
             }
-            cell.accessoryView = accessoryImageView;
         }
+        // Video watching options
+        else if(currentMode == WATCH){
+            
+            if(netStatus.value != NOTREACHABLE ||
+                (NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL != "") ||
+                (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL != "")){
+        
+                    cell.textLabel?.textColor = UIColor.blackColor();
+                    accessoryImageView.image = UIImage(named: "play_icon.png");
+            }
+            else{
+                // There is no network connection, so show nothing
+                cell.textLabel?.textColor = UIColor.grayColor();
+            }
+        }
+        // Video can't be accessed
+        else{
+            cell.textLabel?.textColor = UIColor.grayColor();
+        }
+        
+        cell.accessoryView = accessoryImageView;
         return cell;
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
-    {
-        selectedIndexPath = indexPath;
-        let VIDEOTITLE: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["title"] as? String;
-        let VIDEOMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["MP4"] as? String;
-        let VIDEOCOMPRESSEDMP4URL: String? = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["compressedMP4"] as? String;
-        let MP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/MP4/\(getImageOrVideoName(VIDEOMP4URL!))");
-        let COMPRESSEDMP4FILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/compressedMP4/\(getImageOrVideoName(VIDEOCOMPRESSEDMP4URL!))");
+    // didSelectRowAtIndexPath
+    // Cell has been selected
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
-        if(currentMode == MANAGE && NSUserDefaults.standardUserDefaults().valueForKey(VIDEOTITLE!) as! String != "none"){
-            cancel_Download_Alert(VIDEOTITLE!);
+        var videoDict: Dictionary = iosProjectData[indexPath.section]["videos"]?[indexPath.row] as! [String: String];
+        selectedIndexPath = indexPath;
+        let VIDEOTITLE: String = videoDict["title"]!;
+        let VIDEOMP4URL: String = videoDict["MP4"]!;
+        let VIDEOCOMPRESSEDMP4URL: String = videoDict["compressedMP4"]!;
+        let MP4FILEPATH: String = CACHESDIRECTORYPATH.stringByAppendingPathComponent("MP4/\(VIDEOMP4URL.lastPathComponent)");
+        let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH.stringByAppendingPathComponent("compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)");
+        
+        // Video is being downloaded
+        if(videoTitleForDownloadStatusDictionary[VIDEOTITLE] != "none"){
+            
+            cancel_Download_Alert(VIDEOTITLE);
             selectedResearchProjectIndex = -1;
         }
         else if(currentMode == MANAGE){
-            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)){
+            
+            if(VIDEOMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)){
                 delete_Video_Alert(MP4FILEPATH);
             }
-            else if(NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)){
+            else if(VIDEOCOMPRESSEDMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)){
                 delete_Video_Alert(COMPRESSEDMP4FILEPATH);
             }
-            else{ // No video is currently downloaded
+            else if(netStatus.value != NOTREACHABLE &&
+                VIDEOMP4URL != ""){
                 HD_or_Compressed_Alert();
             }
             selectedResearchProjectIndex = indexPath.section;
         }
-        else{ //(currentMode == WATCH)
-            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)){
+        else if(currentMode == WATCH){
+            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL != ""){
                 playDownloadedVideo(MP4FILEPATH);
             }
-            else if(NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)){
+            else if(NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL != ""){
                 playDownloadedVideo(COMPRESSEDMP4FILEPATH);
             }
-            else{ // stream video
-                // stream video
-                self.selectedVideoUrl = iosProjectData[indexPath.section]["videos"]?[indexPath.row]?["utubeurl"] as! String;
+            else if(netStatus.value != NOTREACHABLE){
+                self.selectedVideoUrl = videoDict["utubeurl"]!;
                 self.performSegueWithIdentifier("YoutubeStreaming", sender: self);
             }
         }
@@ -298,7 +412,8 @@ class MySwiftVideoTableViewController: UITableViewController
     //
     //
     
-    // Aert that asks the user if they are sure they want to cancel their in-progress download
+    // cancel_Download_Alert
+    // Alert that asks the user if they are sure they want to cancel their in-progress download
     func cancel_Download_Alert(videoTitleString: String){
         var alert = UIAlertController(title: "Download in Progress",
             message: "Cancel the download?",
@@ -314,8 +429,10 @@ class MySwiftVideoTableViewController: UITableViewController
         self.presentViewController(alert, animated: true, completion: nil);
     }
     
+    // HD_or_Compressed_Alert
     // Alert that asks the user to choose between downloading the HD or compressed version of the video
     func HD_or_Compressed_Alert(){
+        var videoDict: Dictionary = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row] as! [String: String];
         var alert = UIAlertController(title: "Choose video quality",
             message: "",
             preferredStyle: UIAlertControllerStyle.Alert);
@@ -323,29 +440,33 @@ class MySwiftVideoTableViewController: UITableViewController
         alert.addAction(UIAlertAction(title: "MP4", style: UIAlertActionStyle.Default, handler:
             {(action: UIAlertAction!) in
                 self.selectedVideoQuality = "MP4";
-                println(self.selectedVideoQuality)
+                self.selectedVideoUrl = videoDict["MP4"]!;
                 self.downloadVideo();
         }));
         alert.addAction(UIAlertAction(title: "compressedMP4", style: UIAlertActionStyle.Default, handler:
             {(action: UIAlertAction!) in
                 self.selectedVideoQuality = "compressedMP4";
-                println(self.selectedVideoQuality)
+                self.selectedVideoUrl = videoDict["compressedMP4"]!;
                 self.downloadVideo();
         }));
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil);
     }
     
+    // downloadVideo
     // Downloads the chosen video at the chosen video quality
     func downloadVideo(){
+        
+        var videoDict: Dictionary = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row] as! [String: String];
         var videoDownloadHelperHandle: videoDownloadHelper = videoDownloadHelper.alloc();
         videoDownloadHelperHandle.videoQualityFolder = selectedVideoQuality;
-        videoDownloadHelperHandle.videoTitleString = iosProjectData[selectedIndexPath.section]["videos"]?[selectedIndexPath.row]?["title"] as! String;
-        videoDownloadHelperHandle.videoTitleString = iosProjectData[selectedIndexPath.section]["videos"]?[selectedIndexPath.row]?[selectedVideoQuality] as! String;
+        videoDownloadHelperHandle.videoTitleString = videoDict["title"]!;
+        videoDownloadHelperHandle.videoUrlString = videoDict[selectedVideoQuality]!;
         videoDownloadHelperHandle.executeBackgroundDownloadForURL();
         self.tableView.reloadData();
     }
     
+    // delete_Video_Alert
     // Alert that asks the user if they are sure they want to delete their downloaded video
     func delete_Video_Alert(videoFilePath: String){
         var alert = UIAlertController(title: "About to delete video",
@@ -360,12 +481,14 @@ class MySwiftVideoTableViewController: UITableViewController
         self.presentViewController(alert, animated: true, completion: nil);
     }
     
+    // deleteVideo
     // Deletes the selected downloaded video
     func deleteVideo(videoFilePath: String){
         NSFileManager.defaultManager().removeItemAtPath(videoFilePath, error: nil);
         self.tableView.reloadData();
     }
     
+    // playDownloadedVideo
     // Plays a downloaded video
     func playDownloadedVideo(videoFilePath: String){
         self.selectedVideoPath = videoFilePath;
@@ -373,29 +496,17 @@ class MySwiftVideoTableViewController: UITableViewController
     }
     
     // Utility and Button Functions
-    //  getImageOrVideoName:(NSString *)url
     //  reloadVideosTableView(notification: NSNotification)
     //  openManageDownloadsView(sender: AnyObject)
     //
     //
-    
-    // Returns the last component of a url
-    func getImageOrVideoName(url: String) -> String{
-        if(url != ""){
-            let compArray: Array = url.pathComponents;
-            let compArraySize = compArray.count;
-            if(compArraySize > 1){
-                return compArray[compArraySize - 1];
-            }
-        }
-        return "";
-    }
 
     // Reload the table's data
     @objc func reloadVideosTableView(notification: NSNotification){
         self.tableView.reloadData();
     }
     
+    // setAllVideoDownloadsToNone
     // Inits the state of the video downloads, because empty entries cause an error
     func setAllVideoDownloadsToNone(){
         var sectionCount: Int = iosProjectData.count;
@@ -403,13 +514,15 @@ class MySwiftVideoTableViewController: UITableViewController
             var sectionVideoCount: Int? = iosProjectData[sectionIndex]["videos"]?.count;
             if(sectionVideoCount > 0){
                 for rowIndex in 0...sectionVideoCount!-1{
-                    var videoTitle: String = iosProjectData[sectionIndex]["videos"]?[rowIndex]["title"] as! String;
-                    NSUserDefaults.standardUserDefaults().setValue("none", forKey: videoTitle);
+                    var videoDict: Dictionary = iosProjectData[sectionIndex]["videos"]?[rowIndex] as! [String: String];
+                    var videoTitle: String = videoDict["title"]!;
+                    videoTitleForDownloadStatusDictionary[videoTitle] = "none";
                 }
             }
         }
     }
     
+    // openManageDownloadsView
     // The user pressed the upper-right-hand button
     @IBAction func openManageDownloadsView(sender: AnyObject){
         var sectionCount: Int? = iosProjectData.count;
@@ -424,10 +537,6 @@ class MySwiftVideoTableViewController: UITableViewController
             sender.setTitle("Done", forState: UIControlState.Normal);
         }
         else{ // (currentMode == MANAGE)
-            // Close all sections
-            for sectionIndex in 0...sectionCount!-1{
-                openSectionArray[sectionIndex] = "closed";
-            }
             
             // Switch to downloads view
             currentMode = WATCH;
@@ -445,6 +554,8 @@ class MySwiftVideoTableViewController: UITableViewController
     //
     //
     
+    // prepareForSegue
+    //
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         if(segue.identifier == "playDownloadedVideo"){
             let downloadedVideoPlayerView = segue.destinationViewController as? MySwiftDownloadedVideoPlayer;

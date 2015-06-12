@@ -12,7 +12,7 @@ var storedImages = [String: UIImage]()
 var savedImages = [String]()
 
 func processImages() {
-    createImageFolderIfNone()
+    createFolderNamed("Images") // Call to function in HelperFunctions.swift
     
     if NSUserDefaults.standardUserDefaults().objectForKey("storedImages") == nil {
         NSUserDefaults.standardUserDefaults().setObject([String: UIImage](), forKey: "storedImages")
@@ -78,16 +78,3 @@ func processImage(imagePath: String) {
     }
     NSUserDefaults.standardUserDefaults().setObject(currentStoredImages, forKey: "storedImages")
 }
-
-// createImageFileIfNone
-// Creates the image file if it doesn't exist
-func createImageFolderIfNone()
-{
-    let IMAGEFILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/Images");
-    var isDir = ObjCBool(true);
-    println(IMAGEFILEPATH);
-    if(!NSFileManager.defaultManager().fileExistsAtPath(IMAGEFILEPATH, isDirectory: &isDir)){
-        if(!NSFileManager.defaultManager().createDirectoryAtPath(IMAGEFILEPATH, withIntermediateDirectories: false, attributes: nil, error: nil)){
-            println("The images file failed to be created.");
-        }
-    }}

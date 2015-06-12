@@ -9,7 +9,7 @@
 import UIKit
 
 var projectData = [String: [String: AnyObject]]()
-var iosProjectData: [[String: AnyObject]] = []
+var iosProjectData: Array<Dictionary<String, AnyObject>> = [];
 var scientistInfo = [String: String]()
 var aboutInfo = [String: AnyObject]()
 var orderedTitles = [String]()
@@ -35,7 +35,7 @@ func updateContent() {
     }
     
     projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
-    iosProjectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("iosProjectData").path!) as! Array
+    iosProjectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("iosProjectData").path!) as! [[String: AnyObject]]
     scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
     aboutInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("about").path!) as! Dictionary
     for title in sorted(projectData.keys.array) {
@@ -49,15 +49,19 @@ func updateContent() {
 // loadDataFromJson
 // This function establishes a connection with the VM, loads the content of frontSciData.json into a dictionary and saves data from that dictionary into storage.
 func loadDataFromJson(filePath: String) {
-    let data: NSData = NSData(contentsOfURL: NSURL(string: filePath)!)!
+    let data: NSData? = NSData(contentsOfURL: NSURL(string: filePath)!)
+    if(data == nil){
+        println("Error: Could not update data because the downloaded json data was nil")
+        return
+    }
     var error: NSError?
-    var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+    var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
     // Load data into persistant storage
     NSKeyedArchiver.archiveRootObject(jsonDict["android"]!, toFile: getFileUrl("projectData").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["ios"]!, toFile: getFileUrl("iosProjectData").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["next_update"]!, toFile: getFileUrl("nextUpdate").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["scientist"]!, toFile: getFileUrl("scientist").path!)
-    NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!)
+    NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!) 
 }
 
 /*
