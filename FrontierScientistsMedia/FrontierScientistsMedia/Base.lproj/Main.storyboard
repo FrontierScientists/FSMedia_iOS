@@ -435,15 +435,43 @@
                     <view key="view" contentMode="scaleToFill" id="5gU-7g-2a3" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.49999999999999961" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DT3-TA-PP2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eZ1-Bw-sYe">
+                                        <rect key="frame" x="200" y="215" width="200" height="171"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tap to begin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTq-V6-IFO">
+                                        <rect key="frame" x="253" y="397" width="95" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="eZ1-Bw-sYe" secondAttribute="centerX" id="EKN-h8-gVo"/>
+                                    <constraint firstAttribute="centerX" secondItem="kTq-V6-IFO" secondAttribute="centerX" id="JdI-Zb-aB9"/>
+                                    <constraint firstItem="kTq-V6-IFO" firstAttribute="top" secondItem="eZ1-Bw-sYe" secondAttribute="bottom" constant="8" id="OsG-zJ-Iac"/>
+                                    <constraint firstAttribute="centerY" secondItem="eZ1-Bw-sYe" secondAttribute="centerY" id="ZMv-bq-o0Q"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DT3-TA-PP2" firstAttribute="leading" secondItem="5gU-7g-2a3" secondAttribute="leadingMargin" constant="-16" id="GQ7-PB-kxC"/>
+                            <constraint firstItem="DT3-TA-PP2" firstAttribute="top" secondItem="5gU-7g-2a3" secondAttribute="topMargin" id="cKz-NS-FHE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DT3-TA-PP2" secondAttribute="trailing" constant="-16" id="ukS-TQ-zc9"/>
+                            <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="DT3-TA-PP2" secondAttribute="bottom" id="yQM-rj-hhK"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6XD-3k-hGC">
-                        <barButtonItem key="rightBarButtonItem" title="Next Demo" id="V28-ON-WmO">
-                            <connections>
-                                <action selector="nextDemo:" destination="7Km-KD-9AQ" id="ZaQ-UE-6St"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="6XD-3k-hGC"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="tapIcon" destination="eZ1-Bw-sYe" id="8LR-mF-g9D"/>
+                        <outlet property="tapScreen" destination="DT3-TA-PP2" id="ONI-zi-lfY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azq-m4-vkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

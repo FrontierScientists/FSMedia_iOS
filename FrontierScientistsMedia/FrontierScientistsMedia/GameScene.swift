@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var firstTouch = true
+    var gameHasBegun = false
     var uav = SKSpriteNode()
     var bg = SKSpriteNode()
     var land = SKSpriteNode()
@@ -24,9 +26,6 @@ class GameScene: SKScene {
     var handPosition = CGPoint(x: 0, y: 0)
     
     override func didMoveToView(view: SKView) {
-        NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveBoat", userInfo: nil, repeats: true)
-        NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveCatcher", userInfo: nil, repeats: true)
-        
         var UAVTexture = SKTexture(imageNamed: "Game/uav.png")
         var bgTexture = SKTexture(imageNamed: "Game/bg.jpg")
         var landTexture = SKTexture(imageNamed: "Game/land.png")
@@ -97,6 +96,11 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         touched = true
+        if firstTouch {
+            firstTouch = false
+            gameHasBegun = true
+            touched = false
+        }        
         for touch: AnyObject in touches {
             touchPosition = touch.locationInNode(self)
         }
@@ -115,6 +119,12 @@ class GameScene: SKScene {
     }
     
     override func update(currentTime: CFTimeInterval) {
+        if gameHasBegun {
+            gameHasBegun = false
+            NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveBoat", userInfo: nil, repeats: true)
+            NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveCatcher", userInfo: nil, repeats: true)
+        }
+        
         if touched {
             let leftDivider = self.frame.width/3
             let rightDivider = leftDivider*2
