@@ -22,6 +22,7 @@ class MySwiftDownloadedVideoPlayer: UIViewController{
         playDownloadedVideo();
     }
     
+    // playDownloadedVideo
     // Sets up and plays the downloaded video
     func playDownloadedVideo(){
         let URL  = NSURL.fileURLWithPath(videoFullPathString);
@@ -33,6 +34,7 @@ class MySwiftDownloadedVideoPlayer: UIViewController{
         self.downloadedMoviePlayer.play();
     }
 
+    // resetVideoFrameToMatchNewOrientation
     // Resets the view of the player in case of an orientation change
     func resetVideoFrameToMatchNewOrientation(){
         self.downloadedMoviePlayer.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);

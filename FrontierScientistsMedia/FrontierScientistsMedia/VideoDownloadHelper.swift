@@ -26,6 +26,8 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
     //
     //
     
+    // executeBackgroundDownloadForURL
+    //
     func executeBackgroundDownloadForURL(){
         
         let IDENTIFIER: String = "com.scientistsfrontier.\(self.videoTitleString)";
@@ -45,18 +47,21 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
         downloadTask.resume();
     }
     
+    // didResumeAtOffset
     // Begins/Resumes the download
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didResumeAtOffset fileOffset: Int64, expectedTotalBytes: Int64){
         println("Got into didResumeAtOffset");
         println("downloadTask.taskIdentifier: \(downloadTask.taskIdentifier)");
     }
     
+    // didWriteData
     // Called after downloading a chunk of the data
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64){
         println("Got into didWriteData");
         videoTitleForDownloadStatusDictionary[self.videoTitleString] = "\(downloadTask.taskIdentifier)";
     }
     
+    // didFinishDownloadingToURL
     // Called when finished downloading to a temporary url in memory
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL){
 
@@ -90,6 +95,7 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
         })
     }
     
+    // didCompleteWithError
     // Called when an error stops the download
     func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?){
         
@@ -115,6 +121,7 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
     //
     //
     
+    // cancelDownloadNotification
     // Receives the notification from the video table to cancel an in-progress download
     @objc func cancelDownloadNotification(notification: NSNotification){
         

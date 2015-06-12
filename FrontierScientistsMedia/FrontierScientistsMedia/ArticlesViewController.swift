@@ -29,10 +29,14 @@ class MySwiftArticlesViewController: UIViewController{
     //
     //
     
+    // goBack
+    //
     @IBAction func goBack(AnyObject){
         webView.goBack();
     }
     
+    // goForward
+    //
     @IBAction func goForward(AnyObject){
         webView.goForward();
     }

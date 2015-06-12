@@ -8,6 +8,10 @@
 
 import UIKit
 
+var reachability = Reachability.reachabilityForInternetConnection();
+var netStatus = reachability.currentReachabilityStatus();
+let NOTREACHABLE: Int = 0;
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mainMenu: UITableView!
@@ -41,6 +45,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    func noArticlesAlert(){
+        
+        println("noArticlesAlert triggered.");
+        let ALERTMESSAGE = "No network connection was found. Articles are unavailable.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
     }
@@ -67,7 +86,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("maps", sender: nil)
                 break
             case 3:
-                performSegueWithIdentifier("articles", sender: nil)
+                netStatus = reachability.currentReachabilityStatus();
+                if(netStatus.value == NOTREACHABLE){
+                    noArticlesAlert();
+                }
+                else{
+                    performSegueWithIdentifier("articles", sender: nil)
+                }
                 break
             case 4:
                 performSegueWithIdentifier("ask", sender: nil)

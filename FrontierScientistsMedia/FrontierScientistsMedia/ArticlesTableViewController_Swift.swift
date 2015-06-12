@@ -64,34 +64,45 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     //
     //
     
+    // numberOfSectionsInTableView
+    //
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int{
         return 1;
     }
     
+    // heightForHeaderInSection
+    //
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
         return 0.001;
     }
     
     // Table Cell Functions
     //  numberOfRowsInSection section: Int)
+    //  heightForRowAtIndexPath indexPath: NSIndexPath)
     //  cellForRowAtIndexPath indexPath: NSIndexPath)
     //  didSelectRowAtIndexPath indexPath: NSIndexPath)
     //
     //
     
+    // numberOfRowsInSection
+    //
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) ->Int{
         return 10;
     }
     
+    // heightForRowAtIndexPath
+    //
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
         if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
-            return 160;
+            return 80;
         }
         else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
             return 40;
         }
     }
     
+    // cellForRowAtIndexPath
+    //
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->UITableViewCell{
         var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ArticleTitle");
         
@@ -120,15 +131,13 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         
         cell.accessoryView = accessoryImageView;
         
-        var blackLine: UIView = UIView(frame: CGRectMake(0, cell.frame.size.height-6, self.view.frame.size.width, 2));
-        blackLine.backgroundColor = UIColor.blackColor();
-        cell.addSubview(blackLine);
-        
         cell.contentView.layer.borderColor = UIColor.clearColor().CGColor;
         
         return cell;
     }
     
+    // didSelectRowAtIndexPath
+    //
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         
         selectedArtcileIndex = indexPath.row;
@@ -148,6 +157,8 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     //
     //
     
+    // createReadArticlesFileIfNone
+    //
     func createReadArticlesFileIfNone(){
         let fileMgr = NSFileManager.defaultManager();
         
@@ -158,15 +169,21 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         }
     }
     
+    // loadArticlesReadStatusFileToArticlesReadStatusDict
+    //
     func loadArticlesReadStatusFileToArticlesReadStatusDict(){
         var dict = NSMutableDictionary(contentsOfFile: articleReadStatusFilePath)!;
         articleReadStatusFileDict = dict;
     }
     
+    // saveArticlesReadStatusDictToArticlesReadStatusFile
+    //
     func saveArticlesReadStatusDictToArticlesReadStatusFile(){
         articleReadStatusFileDict.writeToFile(articleReadStatusFilePath, atomically: true);
     }
     
+    // updateArticlesReadStatusDict
+    //
     func updateArticlesReadStatusDict()
     {
         println("updateArticlesReadStatusDict");
@@ -191,6 +208,8 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         articleReadStatusFileDict = newArticlesReadStatusDict;
     }
     
+    // articleHasBeenRead
+    //
     func articleHasBeenRead(index: Int) -> Bool{
         println("articleHasBeenRead");
         var linkString: String = posts[index]["link"]!;
@@ -213,12 +232,14 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     //
     //
     
-    // Gives the output of errors that occurr during parsing
+    // parseErrorOccurred
+    //
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError){
         println("error = \(parseError.localizedDescription)");
     }
     
-    // Begins the parsing of the XML file
+    // beginParsing
+    //
     func beginParsing(){
         //println("beginParsing");
         posts = [];
@@ -230,7 +251,8 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         }
     }
     
-    // Called when a new element is found
+    // didStartElement
+    //
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]){
         // println("didStartElement with \(elementName)");
         element = elementName;
@@ -240,7 +262,8 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         }
     }
     
-    // Called when a new char is found
+    // foundCharacters
+    //
     func parser(parser: NSXMLParser, foundCharacters string: String?){
         //println("foundCharacters");
         if(element == "title"){
@@ -251,7 +274,8 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         }
     }
     
-    // Called when the end of an element is found
+    // didEndElement
+    //
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?){
         //println("didEndElement with \(elementName)");
         
@@ -276,6 +300,8 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
     //
     //
     
+    // prepareForSegue
+    //
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         if(segue.identifier == "RSSFeed"){
             let avc = segue.destinationViewController as? MySwiftArticlesViewController;
