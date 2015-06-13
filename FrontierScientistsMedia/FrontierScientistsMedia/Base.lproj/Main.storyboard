@@ -431,11 +431,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCA-fL-5jE">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap to start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QV-8u-UQZ">
+                                        <rect key="frame" x="228" y="282" width="143" height="37"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="0QV-8u-UQZ" secondAttribute="centerY" id="Uui-XV-1Pe"/>
+                                    <constraint firstAttribute="centerX" secondItem="0QV-8u-UQZ" secondAttribute="centerX" id="qwz-RL-tVU"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DT3-TA-PP2" firstAttribute="leading" secondItem="5gU-7g-2a3" secondAttribute="leadingMargin" constant="-16" id="GQ7-PB-kxC"/>
+                            <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="OCA-fL-5jE" secondAttribute="bottom" id="ZBZ-rV-IGM"/>
                             <constraint firstItem="DT3-TA-PP2" firstAttribute="top" secondItem="5gU-7g-2a3" secondAttribute="topMargin" id="cKz-NS-FHE"/>
+                            <constraint firstItem="OCA-fL-5jE" firstAttribute="top" secondItem="5gU-7g-2a3" secondAttribute="topMargin" id="gzj-HZ-i0d"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OCA-fL-5jE" secondAttribute="trailing" constant="-16" id="nUU-4s-5tx"/>
+                            <constraint firstItem="OCA-fL-5jE" firstAttribute="leading" secondItem="5gU-7g-2a3" secondAttribute="leadingMargin" constant="-16" id="ok1-TU-7HD"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DT3-TA-PP2" secondAttribute="trailing" constant="-16" id="ukS-TQ-zc9"/>
                             <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="DT3-TA-PP2" secondAttribute="bottom" id="yQM-rj-hhK"/>
                         </constraints>
@@ -443,6 +463,7 @@
                     <navigationItem key="navigationItem" id="6XD-3k-hGC"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="messageView" destination="OCA-fL-5jE" id="exg-RD-qdH"/>
                         <outlet property="tapScreen" destination="DT3-TA-PP2" id="ONI-zi-lfY"/>
                     </connections>
                 </viewController>

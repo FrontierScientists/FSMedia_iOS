@@ -30,6 +30,7 @@ class GameViewController: UIViewController {
     var scene: GameScene!
     var scene2: GameScene2!
     @IBOutlet weak var tapScreen: UIView!
+    @IBOutlet weak var messageView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +49,6 @@ class GameViewController: UIViewController {
         scene.paused = true
         
         // Format the tutorial tap screen
-        // Add in the "Tap to start" icon
-//        var startTapIcon = UIImageView(image: UIImage(named: "Game/tap.png"))
-//        startTapIcon.frame = CGRectMake(self.view.frame.width/2 - (self.view.frame.width/3)/2 - 1, (self.view.frame.width/3)/2, self.view.frame.width/3 - 2, self.view.frame.width/3 - 2)
-//        tapScreen.addSubview(startTapIcon)
         // Add in the divider display lines
         var leftTutorialDivider = UIView(frame: CGRectMake(self.view.frame.width/3, 0, 1, self.view.frame.height))
         var rightTutorialDivider = UIView(frame: CGRectMake((self.view.frame.width/3)*2, 0, 1, self.view.frame.height))
@@ -98,6 +95,7 @@ class GameViewController: UIViewController {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         tapScreen.hidden = true
+        messageView.hidden = true
         scene.paused = false
     }
     
