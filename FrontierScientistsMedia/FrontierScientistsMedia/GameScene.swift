@@ -13,6 +13,7 @@ class GameScene: SKScene {
     var firstTouch = true
     var gameHasBegun = false
     var touched = false
+    var failed = false
     
     var bg = SKSpriteNode()
     var land = SKSpriteNode()
@@ -21,6 +22,7 @@ class GameScene: SKScene {
     var wave = SKSpriteNode()
     var waveFg = SKSpriteNode()
     var uav = SKSpriteNode()
+    var pauseButton = SKSpriteNode()
     
     var angle:CGFloat = 0.0
     var touchPosition = CGPointMake(0, 0)
@@ -29,6 +31,10 @@ class GameScene: SKScene {
     
     var batteryLife:CGFloat = 100
     var battery = Battery(timeCapacity: 0, frameWidth: 0)
+    var levelAltitude:CGFloat = 100
+    var altitude = UILabel()
+    
+    var pauseScreen = UIView()
     
     override func didMoveToView(view: SKView) {
         // All textures declared here
@@ -39,6 +45,7 @@ class GameScene: SKScene {
         var waveTexture = SKTexture(imageNamed: "Game/wave.png")
         var waveFgTexture = SKTexture(imageNamed: "Game/waveFg.png")
         var catcherTexture = SKTexture(imageNamed: "Game/catcher.png")
+        var pauseButtonTexture = SKTexture(imageNamed: "Game/pause.png")
         // Actions declared here
         var moveWaveUp = SKAction.moveBy(CGVectorMake(0, 10), duration: 1.0)
         var moveWaveDown = SKAction.moveBy(CGVectorMake(0, -10), duration: 1.0)
@@ -48,6 +55,8 @@ class GameScene: SKScene {
         var moveBoatDown = SKAction.moveBy(CGVectorMake(0, -8), duration: 1.2)
         var rotateCatcherRight = SKAction.rotateByAngle(0.1, duration: 0.1)
         var rotateCatcherLeft = SKAction.rotateByAngle(-0.1, duration: 0.1)
+        var movePauseButtonOff = SKAction.moveByX(self.frame.width, y: 0, duration: 0.5)
+        var movePauseButtonOn = SKAction.moveByX(-self.frame.width, y: 0, duration: 0.5)
         var moveWaveUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveWaveUp, moveWaveDown]))
         var moveWaveFgUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveWaveDown, moveWaveUp]))
         var moveWaveLeftAndRight = SKAction.repeatActionForever(SKAction.sequence([moveWaveLeft, moveWaveRight]))
@@ -92,15 +101,30 @@ class GameScene: SKScene {
         battery = Battery(timeCapacity: batteryLife, frameWidth: self.frame.width)
         self.view?.addSubview(battery.powerView)
         self.view?.addSubview(battery.batteryView)
+        altitude = UILabel(frame: CGRectMake(1, 1, 60, 20))
+        altitude.textAlignment = NSTextAlignment.Center
+        self.view?.addSubview(altitude)
+        // The pause button is added
+        pauseButton = SKSpriteNode(texture: pauseButtonTexture)
+        pauseButton.size = CGSize(width: 50, height: 50)
+        pauseButton.position = CGPoint(x: pauseButton.frame.width/2, y: self.frame.height - pauseButton.frame.height/2 - 25)
+        self.addChild(pauseButton)
         // The UAV itself is included
         uav = SKSpriteNode(texture: UAVTexture)
         uav.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame) + CGRectGetMidY(self.frame)/2)
+        altitude.text = "ALT: " + String(stringInterpolationSegment: (uav.position.y / self.frame.height)*levelAltitude)
         uav.physicsBody = SKPhysicsBody(circleOfRadius: uav.size.height / 2)
         uav.physicsBody?.dynamic = true
         uav.physicsBody?.allowsRotation = false
         self.addChild(uav)
         // The gravity of the world is slowed to give the UAV a floating effect
         self.physicsWorld.gravity = CGVectorMake(0, -1)
+        // Format the pause screen
+        pauseScreen = UIView(frame: CGRectMake(-self.frame.width, 0, self.frame.width, self.frame.height))
+        pauseScreen.backgroundColor = UIColor.blackColor()
+        pauseScreen.alpha = 0.75
+        pauseScreen.layer.borderColor = UIColor.grayColor().CGColor
+        pauseScreen.layer.borderWidth = 2
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -134,6 +158,11 @@ class GameScene: SKScene {
             NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveCatcher", userInfo: nil, repeats: true)
             NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "dropPower", userInfo: nil, repeats: true)
         }
+        if failed {
+            self.paused = true
+            
+            // Display failure screen
+        }
         if touched {
             let leftDivider = self.frame.width/3
             let rightDivider = leftDivider*2
@@ -157,10 +186,27 @@ class GameScene: SKScene {
         let withinXBounds = uav.position.x > handPosition.x - 7 && uav.position.x < handPosition.x + 7
         let withinYBounds = uav.position.y > handPosition.y - 7 && uav.position.y < handPosition.y + 7
         if withinXBounds && withinYBounds {
-            uav.runAction(SKAction.rotateToAngle(0, duration: 0))
             self.paused = true
             uav.position = handPosition
         }
+        let frameHeight:CGFloat = self.frame.height
+        altitude.text = "ALT: " + String(stringInterpolationSegment: ((Int)((uav.position.y / self.frame.height)*levelAltitude) + 4) / 5 * 5)
+        
+        // Check all failure conditions
+        let offLeft = uav.position.x < (self.frame.minX - 10)
+        let offRight = uav.position.x > (self.frame.maxX + 10)
+        let offTop = uav.position.y < (self.frame.minY - 10)
+        let offBottom = uav.position.y > (self.frame.maxY + 10)
+        if offLeft || offRight || offTop {
+            failed = true
+        } else if offBottom {
+            failed = true
+            // Animate splash!!!
+        }
+//        if battery.percent <= 0 {
+//            failed = true
+//            // Animate fall and splash!!
+//        }
     }
     
     func moveBoat() {
@@ -202,7 +248,9 @@ class GameScene: SKScene {
     func dropPower() {
         battery.current = battery.current - 1
         battery.percent = battery.current/battery.capacity
-        battery.powerView.frame.size.width = battery.powerWidth*battery.percent
+        let oldHeight = battery.powerView.frame.height
+        battery.powerView.frame.size.height = battery.powerHeight*battery.percent
+        battery.powerView.frame.offset(dx: 0, dy: oldHeight - battery.powerView.frame.height)
         if battery.percent <= 0.2 {
             battery.powerView.backgroundColor = UIColor.redColor()
         }
