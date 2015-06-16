@@ -30,10 +30,10 @@ class GameViewController: UIViewController {
     var scene: GameScene!
     var scene2: GameScene2!
     @IBOutlet weak var tapScreen: UIView!
-    @IBOutlet weak var messageView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.hidden = true
         // Configure the view.
         let skView = self.view as! SKView
         skView.showsFPS = true
@@ -95,7 +95,6 @@ class GameViewController: UIViewController {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         tapScreen.hidden = true
-        messageView.hidden = true
         scene.paused = false
     }
     

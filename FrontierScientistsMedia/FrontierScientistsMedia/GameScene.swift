@@ -12,20 +12,26 @@ class GameScene: SKScene {
     
     var firstTouch = true
     var gameHasBegun = false
-    var uav = SKSpriteNode()
+    var touched = false
+    
     var bg = SKSpriteNode()
     var land = SKSpriteNode()
     var catcher = SKSpriteNode()
     var boat = SKSpriteNode()
     var wave = SKSpriteNode()
     var waveFg = SKSpriteNode()
+    var uav = SKSpriteNode()
+    
     var angle:CGFloat = 0.0
-    var touched = false
     var touchPosition = CGPointMake(0, 0)
     let interval:NSTimeInterval = 0.3
     var handPosition = CGPoint(x: 0, y: 0)
     
+    var batteryLife:CGFloat = 100
+    var battery = Battery(timeCapacity: 0, frameWidth: 0)
+    
     override func didMoveToView(view: SKView) {
+        // All textures declared here
         var UAVTexture = SKTexture(imageNamed: "Game/uav.png")
         var bgTexture = SKTexture(imageNamed: "Game/bg.jpg")
         var landTexture = SKTexture(imageNamed: "Game/land.png")
@@ -33,7 +39,7 @@ class GameScene: SKScene {
         var waveTexture = SKTexture(imageNamed: "Game/wave.png")
         var waveFgTexture = SKTexture(imageNamed: "Game/waveFg.png")
         var catcherTexture = SKTexture(imageNamed: "Game/catcher.png")
-        
+        // Actions declared here
         var moveWaveUp = SKAction.moveBy(CGVectorMake(0, 10), duration: 1.0)
         var moveWaveDown = SKAction.moveBy(CGVectorMake(0, -10), duration: 1.0)
         var moveWaveLeft = SKAction.moveByX(-5, y: 0, duration: 2.0)
@@ -48,7 +54,7 @@ class GameScene: SKScene {
         var moveWaveFgLeftAndRight = SKAction.repeatActionForever(SKAction.sequence([moveWaveRight, moveWaveLeft]))
         var moveBoatUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveBoatDown, moveBoatUp]))
         var shakeCatcher = SKAction.repeatActionForever(SKAction.sequence([rotateCatcherRight, rotateCatcherLeft]))
-        
+        // The land and the background are displayed repeated 3 times across (accounts for differing screen sizes)
         for var i:CGFloat = 0; i < 3; i++ {
             bg = SKSpriteNode(texture: bgTexture)
             land = SKSpriteNode(texture: landTexture)
@@ -58,7 +64,7 @@ class GameScene: SKScene {
             self.addChild(bg)
             self.addChild(land)
         }
-        
+        // The catcher and boat are then set up
         catcher = SKSpriteNode(texture: catcherTexture)
         boat = SKSpriteNode(texture: boatTexture)
         boat.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMinY(self.frame) + 65)
@@ -69,7 +75,7 @@ class GameScene: SKScene {
         boat.runAction(moveBoatUpAndDown)
         self.addChild(catcher)
         self.addChild(boat)
-        
+        // Here the waves are created and repeated 3 times (again for screen size purposes)
         for var i:CGFloat = 0; i < 3; i++ {
             wave = SKSpriteNode(texture: waveTexture)
             waveFg = SKSpriteNode(texture: waveFgTexture)
@@ -82,16 +88,19 @@ class GameScene: SKScene {
             self.addChild(wave)
             self.addChild(waveFg)
         }
-        
+        // The UAV information tools are added
+        battery = Battery(timeCapacity: batteryLife, frameWidth: self.frame.width)
+        self.view?.addSubview(battery.powerView)
+        self.view?.addSubview(battery.batteryView)
+        // The UAV itself is included
         uav = SKSpriteNode(texture: UAVTexture)
         uav.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame) + CGRectGetMidY(self.frame)/2)
-        
         uav.physicsBody = SKPhysicsBody(circleOfRadius: uav.size.height / 2)
         uav.physicsBody?.dynamic = true
         uav.physicsBody?.allowsRotation = false
-        self.physicsWorld.gravity = CGVectorMake(0, -1)
-        
         self.addChild(uav)
+        // The gravity of the world is slowed to give the UAV a floating effect
+        self.physicsWorld.gravity = CGVectorMake(0, -1)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -123,8 +132,8 @@ class GameScene: SKScene {
             gameHasBegun = false
             NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveBoat", userInfo: nil, repeats: true)
             NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveCatcher", userInfo: nil, repeats: true)
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "dropPower", userInfo: nil, repeats: true)
         }
-        
         if touched {
             let leftDivider = self.frame.width/3
             let rightDivider = leftDivider*2
@@ -189,5 +198,15 @@ class GameScene: SKScene {
         var moveCatcherLeftOrRght = SKAction.moveByX(x, y: 0, duration: 0.3)
         catcher.runAction(moveCatcherLeftOrRght)
     }
+    
+    func dropPower() {
+        battery.current = battery.current - 1
+        battery.percent = battery.current/battery.capacity
+        battery.powerView.frame.size.width = battery.powerWidth*battery.percent
+        if battery.percent <= 0.2 {
+            battery.powerView.backgroundColor = UIColor.redColor()
+        }
+    }
+
 }
 
