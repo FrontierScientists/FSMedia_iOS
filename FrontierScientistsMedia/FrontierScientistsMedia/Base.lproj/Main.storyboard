@@ -427,6 +427,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHH-tP-hJa">
+                                <rect key="frame" x="545" y="565" width="46" height="30"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="next:" destination="7Km-KD-9AQ" eventType="touchUpInside" id="sMg-rF-oqs"/>
+                                </connections>
+                            </button>
                             <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DT3-TA-PP2">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -435,7 +444,9 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DT3-TA-PP2" firstAttribute="leading" secondItem="5gU-7g-2a3" secondAttribute="leadingMargin" constant="-16" id="GQ7-PB-kxC"/>
+                            <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="MHH-tP-hJa" secondAttribute="bottom" constant="5" id="acA-WJ-Btd"/>
                             <constraint firstItem="DT3-TA-PP2" firstAttribute="top" secondItem="5gU-7g-2a3" secondAttribute="topMargin" id="cKz-NS-FHE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MHH-tP-hJa" secondAttribute="trailing" constant="-7" id="jMu-j7-Gsp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DT3-TA-PP2" secondAttribute="trailing" constant="-16" id="ukS-TQ-zc9"/>
                             <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="DT3-TA-PP2" secondAttribute="bottom" id="yQM-rj-hhK"/>
                         </constraints>

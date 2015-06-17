@@ -13,7 +13,7 @@ class Battery {
     let powerWidth:CGFloat = 21
     let powerHeight:CGFloat = 56
     
-    var batteryView = UIImageView(image: UIImage(named: "Game/battery.png"))
+    var batteryView = UIImageView(image: UIImage(named: "Game/battery.png")) // CHANGE TO NODES!!!!!
     var powerView = UIView()
     var capacity:CGFloat = 0.0
     var current:CGFloat = 0.0
