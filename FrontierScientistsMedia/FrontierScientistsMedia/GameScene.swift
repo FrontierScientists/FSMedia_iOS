@@ -15,6 +15,7 @@ class GameScene: SKScene {
     var touched = false
     var failed = false
     
+    var container = SKNode()
     var bg = SKSpriteNode()
     var land = SKSpriteNode()
     var catcher = SKSpriteNode()
@@ -22,7 +23,6 @@ class GameScene: SKScene {
     var wave = SKSpriteNode()
     var waveFg = SKSpriteNode()
     var uav = SKSpriteNode()
-    var pauseButton = SKSpriteNode()
     
     var angle:CGFloat = 0.0
     var touchPosition = CGPointMake(0, 0)
@@ -34,7 +34,14 @@ class GameScene: SKScene {
     var levelAltitude:CGFloat = 100
     var altitude = UILabel()
     
-    var pauseScreen = UIView()
+    var pauseMenu = SKNode()
+    var pauseButton = SKSpriteNode()
+    var pauseScreen = SKShapeNode()
+    var movePauseMenuOff = SKAction()
+    var movePauseMenuOn = SKAction()
+    var pauseAnimationInterval:NSTimeInterval = 0.5
+    
+    var batteryTimer = NSTimer()
     
     override func didMoveToView(view: SKView) {
         // All textures declared here
@@ -55,8 +62,8 @@ class GameScene: SKScene {
         var moveBoatDown = SKAction.moveBy(CGVectorMake(0, -8), duration: 1.2)
         var rotateCatcherRight = SKAction.rotateByAngle(0.1, duration: 0.1)
         var rotateCatcherLeft = SKAction.rotateByAngle(-0.1, duration: 0.1)
-        var movePauseButtonOff = SKAction.moveByX(self.frame.width, y: 0, duration: 0.5)
-        var movePauseButtonOn = SKAction.moveByX(-self.frame.width, y: 0, duration: 0.5)
+        movePauseMenuOff = SKAction.moveByX(self.frame.width, y: 0, duration: pauseAnimationInterval)
+        movePauseMenuOn = SKAction.moveByX(-self.frame.width, y: 0, duration: pauseAnimationInterval)
         var moveWaveUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveWaveUp, moveWaveDown]))
         var moveWaveFgUpAndDown = SKAction.repeatActionForever(SKAction.sequence([moveWaveDown, moveWaveUp]))
         var moveWaveLeftAndRight = SKAction.repeatActionForever(SKAction.sequence([moveWaveLeft, moveWaveRight]))
@@ -70,8 +77,8 @@ class GameScene: SKScene {
             bg.position = CGPoint(x: bgTexture.size().width/2 + bgTexture.size().width * i, y: CGRectGetMidY(self.frame))
             land.position = CGPoint(x: landTexture.size().width/2 + landTexture.size().width * i, y: CGRectGetMinY(self.frame))
             bg.size.height = self.frame.height
-            self.addChild(bg)
-            self.addChild(land)
+            container.addChild(bg)
+            container.addChild(land)
         }
         // The catcher and boat are then set up
         catcher = SKSpriteNode(texture: catcherTexture)
@@ -82,8 +89,8 @@ class GameScene: SKScene {
         catcher.runAction(shakeCatcher)
         catcher.runAction(moveBoatUpAndDown)
         boat.runAction(moveBoatUpAndDown)
-        self.addChild(catcher)
-        self.addChild(boat)
+        container.addChild(catcher)
+        container.addChild(boat)
         // Here the waves are created and repeated 3 times (again for screen size purposes)
         for var i:CGFloat = 0; i < 3; i++ {
             wave = SKSpriteNode(texture: waveTexture)
@@ -94,8 +101,8 @@ class GameScene: SKScene {
             wave.runAction(moveWaveLeftAndRight)
             waveFg.runAction(moveWaveFgUpAndDown)
             waveFg.runAction(moveWaveFgLeftAndRight)
-            self.addChild(wave)
-            self.addChild(waveFg)
+            container.addChild(wave)
+            container.addChild(waveFg)
         }
         // The UAV information tools are added
         battery = Battery(timeCapacity: batteryLife, frameWidth: self.frame.width)
@@ -108,7 +115,6 @@ class GameScene: SKScene {
         pauseButton = SKSpriteNode(texture: pauseButtonTexture)
         pauseButton.size = CGSize(width: 50, height: 50)
         pauseButton.position = CGPoint(x: pauseButton.frame.width/2, y: self.frame.height - pauseButton.frame.height/2 - 25)
-        self.addChild(pauseButton)
         // The UAV itself is included
         uav = SKSpriteNode(texture: UAVTexture)
         uav.position = CGPoint(x: CGRectGetMidX(self.frame), y: CGRectGetMidY(self.frame) + CGRectGetMidY(self.frame)/2)
@@ -116,15 +122,22 @@ class GameScene: SKScene {
         uav.physicsBody = SKPhysicsBody(circleOfRadius: uav.size.height / 2)
         uav.physicsBody?.dynamic = true
         uav.physicsBody?.allowsRotation = false
-        self.addChild(uav)
+        container.addChild(uav)
         // The gravity of the world is slowed to give the UAV a floating effect
         self.physicsWorld.gravity = CGVectorMake(0, -1)
         // Format the pause screen
-        pauseScreen = UIView(frame: CGRectMake(-self.frame.width, 0, self.frame.width, self.frame.height))
-        pauseScreen.backgroundColor = UIColor.blackColor()
-        pauseScreen.alpha = 0.75
-        pauseScreen.layer.borderColor = UIColor.grayColor().CGColor
-        pauseScreen.layer.borderWidth = 2
+        let path = CGPathCreateMutable()
+        CGPathAddRect(path, nil, CGRectMake(-self.frame.width, 0, self.frame.width, self.frame.height))
+        pauseScreen.path = path
+        pauseScreen.strokeColor = UIColor.whiteColor()
+        pauseScreen.fillColor = UIColor.blackColor()
+        pauseScreen.zPosition = 11
+        pauseScreen.alpha = 0.5
+        pauseMenu.addChild(pauseButton)
+        pauseMenu.addChild(pauseScreen)
+        // Add container to the main scene
+        self.addChild(container)
+        self.addChild(pauseMenu)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -136,6 +149,12 @@ class GameScene: SKScene {
         }        
         for touch: AnyObject in touches {
             touchPosition = touch.locationInNode(self)
+            if pauseButton.containsPoint(touchPosition) {
+                touched = false
+            }
+        }
+        if container.paused {
+            touched = false
         }
     }
     
@@ -149,6 +168,24 @@ class GameScene: SKScene {
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         // Stop UAV moving actions when touch released
         touched = false
+        if container.paused {
+            pauseMenu.runAction(movePauseMenuOn)
+            container.paused = false
+            batteryTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "dropPower", userInfo: nil, repeats: true)
+            self.physicsWorld.speed = 1
+        }
+        for touch: AnyObject in touches {
+            touchPosition = touch.locationInNode(self)
+            if pauseButton.containsPoint(touchPosition) {
+                pauseMenu.runAction(movePauseMenuOff)
+                container.paused = true
+                batteryTimer.invalidate()
+                self.physicsWorld.speed = 0
+                break
+            }
+            
+        }
+        
     }
     
     override func update(currentTime: CFTimeInterval) {
@@ -156,7 +193,7 @@ class GameScene: SKScene {
             gameHasBegun = false
             NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveBoat", userInfo: nil, repeats: true)
             NSTimer.scheduledTimerWithTimeInterval(interval, target: self, selector: "moveCatcher", userInfo: nil, repeats: true)
-            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "dropPower", userInfo: nil, repeats: true)
+            batteryTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "dropPower", userInfo: nil, repeats: true)
         }
         if failed {
             self.paused = true
