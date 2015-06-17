@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -426,15 +426,26 @@
                     <view key="view" contentMode="scaleToFill" id="5gU-7g-2a3" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DT3-TA-PP2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DT3-TA-PP2" firstAttribute="leading" secondItem="5gU-7g-2a3" secondAttribute="leadingMargin" constant="-16" id="GQ7-PB-kxC"/>
+                            <constraint firstItem="DT3-TA-PP2" firstAttribute="top" secondItem="5gU-7g-2a3" secondAttribute="topMargin" id="cKz-NS-FHE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="DT3-TA-PP2" secondAttribute="trailing" constant="-16" id="ukS-TQ-zc9"/>
+                            <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="DT3-TA-PP2" secondAttribute="bottom" id="yQM-rj-hhK"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6XD-3k-hGC">
-                        <barButtonItem key="rightBarButtonItem" title="Next Demo" id="V28-ON-WmO">
-                            <connections>
-                                <action selector="nextDemo:" destination="7Km-KD-9AQ" id="ZaQ-UE-6St"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tapScreen" destination="DT3-TA-PP2" id="ONI-zi-lfY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="azq-m4-vkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

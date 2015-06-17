@@ -21,8 +21,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var loadingDialog: UIView!
     @IBOutlet weak var loadingScreen: UIView!
     
-    let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About", "Nothing Important..."]
-    let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png", "RiR_plainyellow_iphone.png"]
+    let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About", "UAV Challenge"]
+    let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png", "uavIcon.png"]
     
     override func viewDidLoad() {
         super.viewDidLoad()

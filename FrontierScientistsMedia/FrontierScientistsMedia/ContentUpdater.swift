@@ -15,7 +15,6 @@ var aboutInfo = [String: AnyObject]()
 var orderedTitles = [String]()
 
 func updateContent() {
-    //let filePath = "http://frontsci.arsc.edu/frontsci/frontSciData.json"
     let filePath = "http://frontsci.arsc.edu/frontsci/devFrontSciData.json"
     
     // Load content.
