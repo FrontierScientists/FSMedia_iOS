@@ -13,9 +13,6 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLabel: UILabel!
     
-    @IBOutlet weak var aboutLabel: UILabel!
-    
-    
     // This override draws in a custom separator with the desired dimensions
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)

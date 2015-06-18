@@ -38,6 +38,7 @@
 		3BBBD4941B28D3D600C628B1 /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD4931B28D3D600C628B1 /* GameScene2.swift */; };
 		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
 		7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* aboutViewController.swift */; };
+		7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
 		F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F01B28ED87007929A0 /* nav_bar_bg.png */; };
 		F560C6F31B28FBB5007929A0 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F21B28FBB5007929A0 /* play_icon.png */; };
@@ -105,6 +106,7 @@
 		3BBBD4931B28D3D600C628B1 /* GameScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
 		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		7E8E89B71B279C8300966C82 /* aboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
+		7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
 		F560C6F01B28ED87007929A0 /* nav_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_bg.png; sourceTree = "<group>"; };
 		F560C6F21B28FBB5007929A0 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				7E8E89B71B279C8300966C82 /* aboutViewController.swift */,
 				F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */,
 				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
+				7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */,
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,
@@ -378,6 +381,7 @@
 				F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */,
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
 				7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */,
+				7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */,
 				3BBBD4881B20CC6600C628B1 /* ProjectView.swift in Sources */,

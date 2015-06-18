@@ -40,6 +40,11 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
         scientist_name.text = scientistInfo["name"]
         let scientist_image_key = NSURL(string: scientistInfo["image"]!)?.lastPathComponent
         scientist_image.setImage(storedImages[scientist_image_key!]!,forState: .Normal)
+        if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType)
+        {
+            println("This is an iPad")
+            scientist_image.frame = CGRectMake(100, 100, 100, 100)
+        }
     }
     
     override func didReceiveMemoryWarning() {

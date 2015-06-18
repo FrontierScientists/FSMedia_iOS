@@ -27,6 +27,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Define the nav bar colors
+        // UIColor(red:153.0, green:75.0, blue:34.0, alpha:1.0)
+        // make nav bar brown
+        navigationController!.navigationBar.barTintColor = UIColor(red:153.0/255.0, green:75.0/255.0, blue:34.0/255.0, alpha:1.0)
+        // makes title font ChalkDuster
+        navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!]
+        // makes all of the text in the bar white
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        // makes topmost bar stuff white
+        navigationController!.navigationBar.barStyle = UIBarStyle.Black
+        
         // Beautify.
         loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Frontier Scientists"

@@ -29,7 +29,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         articleTableView?.dataSource = self;
         
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
-        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
+//        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
         self.title = "About Frontier Scientists";
         beginParsing();
         
@@ -43,6 +43,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         else{
             println("Above load");
             loadArticlesReadStatusFileToArticlesReadStatusDict();
+            println("do i get here")
         }
         
         println("Above update");
