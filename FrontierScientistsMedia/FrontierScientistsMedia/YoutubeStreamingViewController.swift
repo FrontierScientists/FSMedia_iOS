@@ -15,7 +15,7 @@ class YouTubeStreaming: UIViewController{
     
     override func viewDidLoad(){
         super.viewDidLoad();
-        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
+//        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
         
         println("uTubeUrl: \(uTubeUrl)");
         

@@ -42,6 +42,7 @@ class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDele
         else{
             println("Above load");
             loadArticlesReadStatusFileToArticlesReadStatusDict();
+            println("do i get here")
         }
         
         println("Above update");

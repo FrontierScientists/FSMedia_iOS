@@ -46,7 +46,7 @@ class MySwiftVideoTableViewController: UITableViewController
         
         super.viewDidLoad();
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
-        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
+//        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
         self.navigationController?.navigationBar.translucent = false;
         
         setAllVideoDownloadsToNone();
