@@ -36,6 +36,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
         super.viewDidLoad()
 //        self.navigationController.
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
+        self.title = "Ask A Scientist"
         scientist_info.text = scientistInfo["bio"]
         scientist_name.text = scientistInfo["name"]
         let scientist_image_key = NSURL(string: scientistInfo["image"]!)?.lastPathComponent

@@ -10,5 +10,12 @@ import UIKit
 
 class AboutTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var aboutLabel: UITextView!
+
+    
+    @IBOutlet weak var openingLabel: UITextView!
+    
+
+    @IBOutlet weak var snippetLabel: UITextView!
+    
+    
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -517,7 +517,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="redraw" restorationIdentifier="goal" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="goal" rowHeight="110" id="DxL-L6-1fl" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
+                            <tableViewCell contentMode="redraw" restorationIdentifier="opening" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="opening" rowHeight="110" id="DxL-L6-1fl" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DxL-L6-1fl" id="Jui-lx-EVb">
@@ -539,10 +539,37 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="aboutLabel" destination="4yh-ZU-k32" id="zi4-c5-OEx"/>
+                                    <outlet property="openingLabel" destination="4yh-ZU-k32" id="Va3-GQ-Dsz"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="redraw" restorationIdentifier="snippets" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="snippets" rowHeight="110" id="nui-Oc-pZY" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nui-Oc-pZY" id="QQe-S6-ikr">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSC-0E-5hb">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
+                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="XSC-0E-5hb" firstAttribute="leading" secondItem="QQe-S6-ikr" secondAttribute="leading" id="QYp-bM-6iX"/>
+                                        <constraint firstItem="XSC-0E-5hb" firstAttribute="top" secondItem="QQe-S6-ikr" secondAttribute="top" id="Z7E-N7-mTm"/>
+                                        <constraint firstAttribute="bottom" secondItem="XSC-0E-5hb" secondAttribute="bottom" id="bBA-oL-igl"/>
+                                        <constraint firstAttribute="trailing" secondItem="XSC-0E-5hb" secondAttribute="trailing" id="bJT-kJ-x7v"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="openingLabel" destination="XSC-0E-5hb" id="7FP-wB-RF6"/>
+                                    <outlet property="snippetLabel" destination="XSC-0E-5hb" id="7Kp-rg-Chh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
+                        <sections/>
                         <connections>
                             <outlet property="dataSource" destination="19M-LF-YxW" id="asi-K6-Xx0"/>
                             <outlet property="delegate" destination="19M-LF-YxW" id="VBj-FZ-qFU"/>
