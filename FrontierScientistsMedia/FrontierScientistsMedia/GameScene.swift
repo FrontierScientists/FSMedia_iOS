@@ -142,6 +142,10 @@ class GameScene: SKScene {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         touched = true
+        if failed{
+            self.removeFromParent()
+            
+        }
         if firstTouch {
             firstTouch = false
             gameHasBegun = true
