@@ -113,7 +113,6 @@ class GameViewController: UIViewController {
         scene.paused = false
         
         if(scene.failed){
-            println("can't touch this")
             self.navigationController?.popViewControllerAnimated(true)
         }
         
