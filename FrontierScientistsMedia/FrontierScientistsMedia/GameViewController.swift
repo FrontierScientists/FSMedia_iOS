@@ -111,6 +111,11 @@ class GameViewController: UIViewController {
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         tapScreen.hidden = true
         scene.paused = false
+        
+        if(scene.failed){
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        
     }
     
     override func shouldAutorotate() -> Bool {
