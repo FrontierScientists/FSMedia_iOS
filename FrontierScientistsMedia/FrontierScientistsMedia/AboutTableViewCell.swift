@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class AboutTableViewCell: UITableViewCell {
     
@@ -16,6 +17,8 @@ class AboutTableViewCell: UITableViewCell {
     
 
     @IBOutlet weak var snippetLabel: UITextView!
+    @IBOutlet weak var snippetImage: UIButton!
+
     
     
 }

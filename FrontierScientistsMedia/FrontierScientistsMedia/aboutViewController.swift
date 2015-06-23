@@ -8,9 +8,21 @@
 
 import UIKit
 
+var aboutCurrentImage = "Petroglyphs_SodSurveyingPatrickLance.jpg"
+
+
 class aboutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
     @IBOutlet var aboutTable: UITableView!
-    @IBOutlet weak var aboutNavBar: UINavigationItem!
+   
+//    @IBAction func snippetImageClick(sender: AnyObject) {
+//        performSegueWithIdentifier("myimage", sender: nil)
+//    }
+    @IBAction func snippetImageClick(sender: AnyObject) {
+        aboutCurrentImage = aboutDisplayableContent.imageKeys[sender.tag - sections.count]
+        performSegueWithIdentifier("myimage", sender: nil)
+    }
     
     let sections = ["opening","goal","people_intro"]
     let aboutDisplayableContent = aboutDisplayableContentFrameworkized()
@@ -23,7 +35,11 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         for var i:Int=0; i < aboutInfo["snippets"]!.count; i++  {
             aboutDisplayableContent.snippets.append((aboutInfo["snippets"]![i] as! [String: String])["text"]!)
-            aboutDisplayableContent.imageKeys.append((aboutInfo["snippets"]![i] as! [String: String])["image"]!)
+
+
+            let tempImageKey = NSURL(string: (aboutInfo["snippets"]![i] as! [String: String])["image"]!)!.lastPathComponent
+            aboutDisplayableContent.imageKeys.append(tempImageKey!)
+            
         }
         
         aboutTable.estimatedRowHeight = 110.0
@@ -34,31 +50,36 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count + aboutDisplayableContent.snippets.count
     }
+
+
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        aboutCurrentImage = aboutDisplayableContent.imageKeys[indexPath.row - sections.count]
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let celll: AboutTableViewCell = tableView.dequeueReusableCellWithIdentifier("opening") as! AboutTableViewCell
-        println(indexPath.row)
-        println("debug 1")
+        
         if indexPath.row < sections.count{
         let cell: AboutTableViewCell = tableView.dequeueReusableCellWithIdentifier("opening") as! AboutTableViewCell
-        println("debug 2")
         cell.openingLabel.text = aboutInfo[sections[indexPath.row]] as? String
-        println("debug 3")
         cell.openingLabel.font = UIFont(name: "Chalkduster", size: 20)
-        println("debug 4")
         cell.backgroundColor = UIColor.clearColor()
-        println("debug 5")
             return cell
         }
+        
         if (indexPath.row > sections.count) || (indexPath.row == sections.count) {
-        println("debug 6")
         let cell: AboutTableViewCell = tableView.dequeueReusableCellWithIdentifier("snippets") as! AboutTableViewCell
-        println("debug 7")
         cell.snippetLabel.text = aboutDisplayableContent.snippets[indexPath.row - sections.count]
-        println("debug 8")
+//        let tempImageKey = NSURL(string: aboutDisplayableContent.imageKeys[indexPath.row - sections.count])!.lastPathComponent
+        cell.snippetImage.setImage(storedImages[aboutDisplayableContent.imageKeys[indexPath.row - sections.count]],forState: .Normal)
         cell.snippetLabel.font = UIFont(name: "Chalkduster", size: 20)
         cell.backgroundColor = UIColor.clearColor()
+            
+            let exclusionPath = UIBezierPath(rect: CGRectMake(0, 0, 170, 120))
+            cell.snippetLabel.textContainer.exclusionPaths = [exclusionPath]
+        cell.snippetImage.tag = indexPath.row
+    
         return cell
         }
         return celll

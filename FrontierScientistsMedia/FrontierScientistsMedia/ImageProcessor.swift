@@ -27,6 +27,7 @@ func processImages() {
     }
     // Process all about page snippet images
     for snippet in aboutInfo["snippets"] as! [[String: String]] {
+        println(snippet["image"])
         processImage(snippet["image"]!)
     }
     // Process the Ask a Scientist image
