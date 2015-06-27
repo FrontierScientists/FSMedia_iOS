@@ -14,6 +14,8 @@ enum SlideOutState {
     case panelExpanded
 }
 
+var projectViewRef: ProjectView!
+
 class ResearchContainer: UIViewController {
     
     var researchNavigationController: UINavigationController!
@@ -29,11 +31,14 @@ class ResearchContainer: UIViewController {
         super.viewDidLoad()
         projectView = UIStoryboard.projectView()
         projectView.delegate = self
+        projectViewRef = projectView
         
         researchNavigationController = UINavigationController(rootViewController: projectView)
         view.addSubview(researchNavigationController.view)
         addChildViewController(researchNavigationController)
         researchNavigationController.didMoveToParentViewController(self)
+        
+        projectView.delegate?.togglePanel?()
     }
     
 }
@@ -67,9 +72,9 @@ extension ResearchContainer: ProjectViewDelegate {
         if (shouldExpand) {
             currentState = .panelExpanded
             
-            animateCenterPanelXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
+            animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
         } else {
-            animateCenterPanelXPosition(targetPosition: 0) { finished in
+            animateProjectViewXPosition(targetPosition: 0) { finished in
                 self.currentState = .panelCollapsed
                 
                 self.navigationViewController!.view.removeFromSuperview()
@@ -78,7 +83,7 @@ extension ResearchContainer: ProjectViewDelegate {
         }
     }
     
-    func animateCenterPanelXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
+    func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             self.researchNavigationController.view.frame.origin.x = targetPosition
             }, completion: completion)

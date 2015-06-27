@@ -57,6 +57,7 @@ extension ResearchNavigationTableView: UITableViewDataSource {
         cell.imageView?.image = scaledImage
         cell.cellLabel.font = UIFont(name: "Chalkduster", size: 17)
         cell.cellLabel.textColor = UIColorFromRGB(0x3E3535)
+        cell.cellLabel.lineBreakMode = NSLineBreakMode.ByTruncatingTail
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }
@@ -66,6 +67,13 @@ extension ResearchNavigationTableView: UITableViewDataSource {
 extension ResearchNavigationTableView: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // Reset stuff in ProjectView
+        var projectTitle = orderedTitles[indexPath.row]
+        var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+        var projectText = (projectData[projectTitle]!["project_description"] as! String)
+        var image:UIImage = storedImages[imageTitle]!
+        projectViewRef.projectImage.image = image
+        projectViewRef.projectText.text = projectText
+        
+        projectViewRef.delegate?.togglePanel?()
     }
 }
