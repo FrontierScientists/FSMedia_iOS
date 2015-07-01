@@ -16,11 +16,15 @@ protocol ProjectViewDelegate {
 
 class ProjectView: UIViewController {
     
-    // Add IBOutlets to view contents (e.g. project image, text)
+    @IBOutlet weak var projectImage: UIImageView!
+    @IBOutlet weak var projectText: UITextView!
     var delegate: ProjectViewDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
+        projectText.backgroundColor = UIColor.clearColor()
+        projectText.font = UIFont(name: "Chalkduster", size: 17)
     }
     
 }
