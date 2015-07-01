@@ -26,6 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidAppear(animated: Bool) {
                 self.navigationController?.navigationBar.hidden = false
+        mainMenu.reloadData()
     }
     
     override func viewDidLoad() {
