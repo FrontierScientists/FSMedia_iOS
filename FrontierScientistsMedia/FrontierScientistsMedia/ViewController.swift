@@ -24,11 +24,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About", "UAV Challenge"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png", "uavIcon.png"]
     
+    override func viewDidAppear(animated: Bool) {
+                self.navigationController?.navigationBar.hidden = false
+        mainMenu.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Define the nav bar colors
-        // UIColor(red:153.0, green:75.0, blue:34.0, alpha:1.0)
+        // brown color UIColor(red:153.0, green:75.0, blue:34.0, alpha:1.0)
+        // yellow color UIColor(red:249.0/255.0 , green:244.0/255.0 , blue:174.0/255.0 , alpha:1.0)
         // make nav bar brown
         navigationController!.navigationBar.barTintColor = UIColor(red:153.0/255.0, green:75.0/255.0, blue:34.0/255.0, alpha:1.0)
         // makes title font ChalkDuster
@@ -37,6 +43,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationController!.navigationBar.tintColor = UIColor.whiteColor()
         // makes topmost bar stuff white
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
+        
+
         
         // Beautify.
         loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)

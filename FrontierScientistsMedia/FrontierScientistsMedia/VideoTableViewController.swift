@@ -151,8 +151,8 @@ class MySwiftVideoTableViewController: UITableViewController
         
         // The header background subview
         var headerBackgroundImageView: UIImageView = UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width, 110.0));
-        headerBackgroundImageView.backgroundColor = UIColor.yellowColor();
-        
+//        headerBackgroundImageView.backgroundColor = UIColor.yellowColor();
+        headerBackgroundImageView.backgroundColor = UIColor(red:249.0/255.0 , green:244.0/255.0 , blue:174.0/255.0 , alpha:1.0)
         // The blue line seperating the headers
         var blueLineImageHeaderView: UIImageView =  UIImageView(frame: CGRectMake(0, headerView.frame.size.height-1, self.view.frame.size.width, 1));
         blueLineImageHeaderView.backgroundColor = UIColor.blueColor();
@@ -543,7 +543,7 @@ class MySwiftVideoTableViewController: UITableViewController
             sender.setTitle("Manage Downloads", forState: UIControlState.Normal);
         }
         sender.setAttributedTitle(nil, forState: UIControlState.Normal)
-        sender.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal);
+        sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal);
         self.tableView.reloadData();
     }
     

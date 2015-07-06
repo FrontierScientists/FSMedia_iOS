@@ -37,8 +37,12 @@
 		3BBBD4921B227D8400C628B1 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 3BBBD4911B227D8400C628B1 /* Game */; };
 		3BBBD4941B28D3D600C628B1 /* GameScene2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BBBD4931B28D3D600C628B1 /* GameScene2.swift */; };
 		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
+		7E8D518A1B43AF6C0099EAD2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8D51891B43AF6C0099EAD2 /* MapKit.framework */; };
+		7E8D518C1B43AFD10099EAD2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */; };
 		7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* aboutViewController.swift */; };
 		7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */; };
+		7EC192581B38CA6500D0D421 /* AboutImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */; };
+		7EC248EA1B438B2500C66357 /* AskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC248E91B438B2500C66357 /* AskTableViewCell.swift */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
 		F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F01B28ED87007929A0 /* nav_bar_bg.png */; };
 		F560C6F31B28FBB5007929A0 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F21B28FBB5007929A0 /* play_icon.png */; };
@@ -105,8 +109,12 @@
 		3BBBD4911B227D8400C628B1 /* Game */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Game; sourceTree = "<group>"; };
 		3BBBD4931B28D3D600C628B1 /* GameScene2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene2.swift; sourceTree = "<group>"; };
 		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		7E8D51891B43AF6C0099EAD2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7E8E89B71B279C8300966C82 /* aboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
 		7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
+		7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutImageViewController.swift; sourceTree = "<group>"; };
+		7EC248E91B438B2500C66357 /* AskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskTableViewCell.swift; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
 		F560C6F01B28ED87007929A0 /* nav_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_bg.png; sourceTree = "<group>"; };
 		F560C6F21B28FBB5007929A0 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
@@ -136,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E8D518A1B43AF6C0099EAD2 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +161,7 @@
 		3BAA17D51B06C36D003510D7 = {
 			isa = PBXGroup;
 			children = (
+				7E8D51891B43AF6C0099EAD2 /* MapKit.framework */,
 				3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */,
 				3BAA17F61B06C36E003510D7 /* FrontierScientistsMediaTests */,
 				3BAA17DF1B06C36D003510D7 /* Products */,
@@ -178,9 +188,11 @@
 				3BAA17E31B06C36D003510D7 /* AppDelegate.swift */,
 				F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */,
 				7E8E89B71B279C8300966C82 /* aboutViewController.swift */,
-				F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */,
-				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
 				7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */,
+				F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */,
+				7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */,
+				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
+				7EC248E91B438B2500C66357 /* AskTableViewCell.swift */,
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,
@@ -191,6 +203,7 @@
 				3B22C1BB1B1666E7004AADAE /* HelperFunctions.swift */,
 				3B22C1BF1B1790F3004AADAE /* ImageProcessor.swift */,
 				3BBBD4871B20CC6600C628B1 /* ProjectView.swift */,
+				7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */,
 				3BBBD48B1B20D38300C628B1 /* ResearchContainer.swift */,
 				3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */,
 				F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */,
@@ -302,6 +315,7 @@
 				TargetAttributes = {
 					3BAA17DD1B06C36D003510D7 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 5B5RHQ93SY;
 					};
 					3BAA17F21B06C36E003510D7 = {
 						CreatedOnToolsVersion = 6.2;
@@ -379,6 +393,7 @@
 				3B4507A31B2F47F100BEFD24 /* GameBattery.swift in Sources */,
 				3BBBD48A1B20CD9200C628B1 /* ResearchNavigationTableView.swift in Sources */,
 				F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */,
+				7EC192581B38CA6500D0D421 /* AboutImageViewController.swift in Sources */,
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
 				7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */,
 				7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */,
@@ -388,6 +403,7 @@
 				3B22C1BE1B178BA7004AADAE /* ContentUpdater.swift in Sources */,
 				3B22C1C21B1791ED004AADAE /* Extensions.swift in Sources */,
 				F56E9E511B1CD1890027D39B /* VideoDownloadPlayerViewController.swift in Sources */,
+				7EC248EA1B438B2500C66357 /* AskTableViewCell.swift in Sources */,
 				3BBBD48C1B20D38300C628B1 /* ResearchContainer.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
 				3BBBD4901B227CFC00C628B1 /* GameScene.swift in Sources */,
@@ -400,6 +416,7 @@
 				3BBBD4941B28D3D600C628B1 /* GameScene2.swift in Sources */,
 				F56E9E501B1CD1890027D39B /* VideoDownloadHelper.swift in Sources */,
 				F56E9E611B1CE3BC0027D39B /* Reachability.m in Sources */,
+				7E8D518C1B43AFD10099EAD2 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,10 +541,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FrontierScientistsMedia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = FrontierScientistsMedia/BridgingHeader.h;
 			};
 			name = Debug;
@@ -536,10 +556,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FrontierScientistsMedia/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = FrontierScientistsMedia/BridgingHeader.h;
 			};
 			name = Release;
