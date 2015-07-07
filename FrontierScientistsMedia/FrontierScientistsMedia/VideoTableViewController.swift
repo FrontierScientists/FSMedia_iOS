@@ -31,7 +31,6 @@ class MySwiftVideoTableViewController: UITableViewController
     
     
     override func viewDidLoad(){
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadVideosTableView:",name:"reloadVideosTableView", object: nil);
         
         
@@ -47,7 +46,7 @@ class MySwiftVideoTableViewController: UITableViewController
         super.viewDidLoad();
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
 //        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
-        self.navigationController?.navigationBar.translucent = false;
+//        self.navigationController?.navigationBar.translucent = false;
         
         setAllVideoDownloadsToNone();
         createFolderNamed("MP4"); // Calls to function in HelperFunctions.swift
@@ -69,9 +68,9 @@ class MySwiftVideoTableViewController: UITableViewController
         if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
             changeVidoesModeButton.frame = CGRectMake(0, 0, 320, 40);
         }
-//        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-//            changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20);
-//        }
+        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+            changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20);
+        }
     }
     
     //noInternetConnectionAlert

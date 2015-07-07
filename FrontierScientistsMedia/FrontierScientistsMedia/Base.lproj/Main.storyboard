@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -258,17 +258,21 @@
                         <barButtonItem title="Back" id="1RC-Vx-xgG"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Research" id="HjD-g6-gav">
-                        <barButtonItem key="leftBarButtonItem" title="Projects" id="oUU-qP-3bI">
+                        <barButtonItem key="leftBarButtonItem" title="Projects" id="RgT-w1-6Mh">
                             <connections>
-                                <action selector="showProjects:" destination="als-D8-zIo" id="jrJ-8d-qe3"/>
+                                <action selector="showProjects:" destination="als-D8-zIo" id="K2j-d0-Auu"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Main Menu" id="eEe-08-5Rv">
+                        <barButtonItem key="rightBarButtonItem" title="Main Menu" id="T3V-3F-ep7">
                             <connections>
-                                <action selector="goToMenu:" destination="als-D8-zIo" id="5MY-Kk-AIC"/>
+                                <action selector="goToMenu:" destination="als-D8-zIo" id="J0v-Dq-uYP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="m0R-S3-sa9" kind="show" identifier="videosLink" id="bJn-nc-CCu"/>
+                        <segue destination="fKn-3k-ilC" kind="show" identifier="mapsLink" id="0Iq-56-ydQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGR-I9-Gbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -993,6 +997,8 @@
         <image name="ask_a_scientist_icon.png" width="142" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0Iq-56-ydQ"/>
+        <segue reference="bJn-nc-CCu"/>
         <segue reference="hkL-Qy-nlx"/>
     </inferredMetricsTieBreakers>
 </document>

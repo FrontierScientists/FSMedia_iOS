@@ -13,6 +13,8 @@ protocol ResearchNavigationTableViewDelegate {
     func projectSelected(title: String, image: UIImage)
 }
 
+var projectTitle = ""
+
 class ResearchNavigationTableView: UIViewController {
     
     @IBOutlet weak var navigationTableView: UITableView!
@@ -68,7 +70,7 @@ extension ResearchNavigationTableView: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         notFirstTime = true
-        var projectTitle = orderedTitles[indexPath.row]
+        projectTitle = orderedTitles[indexPath.row]
         var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
         var projectText = (projectData[projectTitle]!["project_description"] as! String)
         var image:UIImage = storedImages[imageTitle]!

@@ -14,6 +14,7 @@ enum SlideOutState {
     case panelExpanded
 }
 
+var researchContainerRef = ResearchContainer()
 var projectViewRef: ProjectView!
 var notFirstTime = false
 
@@ -36,6 +37,7 @@ class ResearchContainer: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        researchContainerRef = self
         projectView = UIStoryboard.projectView()
         projectView.delegate = self
         projectViewRef = projectView

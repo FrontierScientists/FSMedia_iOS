@@ -60,10 +60,10 @@ extension ProjectView: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 { // Videos
-            selectedResearchProjectIndex = indexPath.row
-            navigationController?.pushViewController(MySwiftVideoTableViewController(), animated: true)
+            selectedResearchProjectIndex = find(orderedTitles, projectTitle)!
+            researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
         } else { // Maps
-            
+            researchContainerRef.performSegueWithIdentifier("mapsLink", sender: nil)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected link
     }
