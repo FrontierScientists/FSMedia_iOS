@@ -11,6 +11,7 @@ import UIKit
 import MediaPlayer
 
 var videoTitleForDownloadStatusDictionary: Dictionary<String, String> = ["video_title": "downloadTask.id"];
+var selectedResearchProjectIndex: Int = 0;
 
 class MySwiftVideoTableViewController: UITableViewController
 {
@@ -18,7 +19,6 @@ class MySwiftVideoTableViewController: UITableViewController
     @IBOutlet var videoTableView: UITableView!
     var loadIsNotReloadBool: Bool = true;
     var openSectionArray: Array<String> = ["closed"];
-    var selectedResearchProjectIndex: Int = 0;
     var scrollPath: NSIndexPath = NSIndexPath(forRow: NSNotFound, inSection: NSNotFound);
     var selectedIndexPath: NSIndexPath = NSIndexPath(forRow: NSNotFound, inSection: NSNotFound);
     var selectedVideoQuality: String = String();
@@ -69,9 +69,9 @@ class MySwiftVideoTableViewController: UITableViewController
         if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
             changeVidoesModeButton.frame = CGRectMake(0, 0, 320, 40);
         }
-        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-            changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20);
-        }
+//        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+//            changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20);
+//        }
     }
     
     //noInternetConnectionAlert
