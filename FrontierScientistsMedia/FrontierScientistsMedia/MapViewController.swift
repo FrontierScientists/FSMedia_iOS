@@ -86,6 +86,7 @@ return nil
 }
     func pressed(sender: UIButton!){
         println("A button Press!")
+        // Set currentLinkedProject to whatever name of project is
         performSegueWithIdentifier("fromMaps",sender: nil)
     }
     

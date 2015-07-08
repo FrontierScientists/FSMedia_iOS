@@ -16,6 +16,7 @@ enum SlideOutState {
 
 var researchContainerRef = ResearchContainer()
 var projectViewRef: ProjectView!
+var currentLinkedProject = ""
 var notFirstTime = false
 
 class ResearchContainer: UIViewController {
@@ -48,6 +49,11 @@ class ResearchContainer: UIViewController {
         researchNavigationController.didMoveToParentViewController(self)
         
         projectView.delegate?.togglePanel?()
+        
+        if currentLinkedProject != "" {
+            // Go to that page
+            currentLinkedProject = ""
+        }
     }
 }
 

@@ -14,8 +14,8 @@ var savedImages = [String]()
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
     
-    if NSUserDefaults.standardUserDefaults().objectForKey("storedImages") == nil {
-        NSUserDefaults.standardUserDefaults().setObject([String: UIImage](), forKey: "storedImages")
+    if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {
+        NSKeyedArchiver.archiveRootObject([String: UIImage](), toFile: getFileUrl("storedImages").path!)
     }
     // Process all project images
     for (title, data) in projectData {
@@ -32,7 +32,7 @@ func processImages() {
     // Process the Ask a Scientist image
     processImage(scientistInfo["image"]!)
     // Retrieve the data.
-    var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as! [String: NSData]
+    var currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     // Populate the storedImages dictionary, converting the data into UIImages
     for (title, imageData) in currentStoredImages {
         storedImages[title] = UIImage(data: imageData)
@@ -51,7 +51,7 @@ func processImages() {
         UIImagePNGRepresentation(image).writeToFile(IMAGEFILEPATH.stringByAppendingPathComponent(title), atomically: true)
         currentStoredImages[title] = UIImagePNGRepresentation(image)
     }
-    NSUserDefaults.standardUserDefaults().setObject(currentStoredImages, forKey: "storedImages")
+    NSKeyedArchiver.archiveRootObject(currentStoredImages, toFile: getFileUrl("storedImages").path!)
 }
 
 /*
@@ -60,7 +60,7 @@ func processImages() {
 // processImage
 // This function checks to see if the image of the passed path is already stored on the device.  If it is not, it is downloaded and stored.
 func processImage(imagePath: String) {
-    var currentStoredImages = NSUserDefaults.standardUserDefaults().objectForKey("storedImages") as! [String: NSData]
+    var currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     let imageTitle = NSURL(string: imagePath)?.lastPathComponent
     savedImages.append(imageTitle!) // Add the image to the list of images to be saved, not purged.
     // Make sure it hasn't already been stored.
@@ -76,5 +76,5 @@ func processImage(imagePath: String) {
     } else {
         println(imageTitle! + " already stored.")
     }
-    NSUserDefaults.standardUserDefaults().setObject(currentStoredImages, forKey: "storedImages")
+    NSKeyedArchiver.archiveRootObject(currentStoredImages, toFile: getFileUrl("storedImages").path!)
 }
