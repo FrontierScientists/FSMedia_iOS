@@ -44,8 +44,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // makes topmost bar stuff white
         navigationController!.navigationBar.barStyle = UIBarStyle.Black
         
-
-        
         // Beautify.
         loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Frontier Scientists"

@@ -161,15 +161,65 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Hmu-EP-USy">
+                                        <rect key="frame" x="25" y="453" width="550" height="139"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="139" id="hUG-oF-hIj"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="link" rowHeight="70" id="zfy-cP-Se2">
+                                                <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zfy-cP-Se2" id="1qP-9U-v4h">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fBo-32-j9F">
+                                                            <rect key="frame" x="8" y="5" width="60" height="60"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="60" id="jLY-hq-BK7"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zwo-Iz-Gtp">
+                                                            <rect key="frame" x="76" y="18" width="466" height="33"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="fBo-32-j9F" secondAttribute="bottom" constant="-4" id="9fW-o0-uHR"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="Zwo-Iz-Gtp" secondAttribute="bottom" constant="10" id="Iqj-G0-TRw"/>
+                                                        <constraint firstItem="Zwo-Iz-Gtp" firstAttribute="leading" secondItem="fBo-32-j9F" secondAttribute="trailing" constant="8" id="QMM-RX-X3S"/>
+                                                        <constraint firstItem="fBo-32-j9F" firstAttribute="leading" secondItem="1qP-9U-v4h" secondAttribute="leadingMargin" id="Thz-pM-fDe"/>
+                                                        <constraint firstItem="Zwo-Iz-Gtp" firstAttribute="trailing" secondItem="1qP-9U-v4h" secondAttribute="trailingMargin" id="ZJH-Di-k3Z"/>
+                                                        <constraint firstItem="Zwo-Iz-Gtp" firstAttribute="top" secondItem="1qP-9U-v4h" secondAttribute="topMargin" constant="10" id="xAo-Q1-abI"/>
+                                                        <constraint firstItem="fBo-32-j9F" firstAttribute="top" secondItem="1qP-9U-v4h" secondAttribute="topMargin" constant="-3" id="zgz-G1-N7e"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="dxx-bl-zBY" id="vi5-Zs-tUa"/>
+                                            <outlet property="delegate" destination="dxx-bl-zBY" id="8AI-dS-dth"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0kf-eT-5m9" firstAttribute="leading" secondItem="Eil-PJ-LjO" secondAttribute="leading" constant="25" id="2Yc-wY-JhW"/>
                                     <constraint firstAttribute="centerX" secondItem="0kf-eT-5m9" secondAttribute="centerX" id="9KJ-Ry-d4i"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hmu-EP-USy" secondAttribute="trailing" constant="25" id="XqS-jb-bn4"/>
+                                    <constraint firstAttribute="centerX" secondItem="Hmu-EP-USy" secondAttribute="centerX" id="eYN-JO-4un"/>
+                                    <constraint firstItem="Hmu-EP-USy" firstAttribute="top" secondItem="0kf-eT-5m9" secondAttribute="bottom" constant="8" id="ey3-8K-Gzj"/>
+                                    <constraint firstItem="Hmu-EP-USy" firstAttribute="leading" secondItem="Eil-PJ-LjO" secondAttribute="leading" constant="25" id="hNP-H7-wgg"/>
                                     <constraint firstAttribute="trailing" secondItem="0kf-eT-5m9" secondAttribute="trailing" constant="25" id="j7b-e4-33O"/>
                                     <constraint firstItem="AKV-6Q-gKc" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="top" constant="25" id="k6P-8A-SxQ"/>
                                     <constraint firstItem="0kf-eT-5m9" firstAttribute="top" secondItem="AKV-6Q-gKc" secondAttribute="bottom" constant="25" id="tKb-RG-vOD"/>
                                     <constraint firstAttribute="centerX" secondItem="AKV-6Q-gKc" secondAttribute="centerX" id="vSn-eA-ZiC"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="dxx-bl-zBY" id="H5M-gI-Wmf"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,6 +232,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="links" destination="Hmu-EP-USy" id="jZH-8a-h2N"/>
                         <outlet property="projectImage" destination="AKV-6Q-gKc" id="Pmx-id-Pib"/>
                         <outlet property="projectText" destination="0kf-eT-5m9" id="ZAB-ru-10t"/>
                     </connections>
@@ -190,7 +241,7 @@
             </objects>
             <point key="canvasLocation" x="-1286" y="1160"/>
         </scene>
-        <!--Research Container-->
+        <!--Research-->
         <scene sceneID="uhu-nw-Wl5">
             <objects>
                 <viewController id="als-D8-zIo" customClass="ResearchContainer" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
@@ -203,14 +254,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="HjD-g6-gav">
-                        <barButtonItem key="leftBarButtonItem" title="Projects" id="oUU-qP-3bI">
+                    <toolbarItems>
+                        <barButtonItem title="Back" id="1RC-Vx-xgG"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Research" id="HjD-g6-gav">
+                        <barButtonItem key="leftBarButtonItem" title="Projects" id="RgT-w1-6Mh">
                             <connections>
-                                <action selector="showProjects:" destination="als-D8-zIo" id="jrJ-8d-qe3"/>
+                                <action selector="showProjects:" destination="als-D8-zIo" id="K2j-d0-Auu"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Main Menu" id="T3V-3F-ep7">
+                            <connections>
+                                <action selector="goToMenu:" destination="als-D8-zIo" id="J0v-Dq-uYP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="m0R-S3-sa9" kind="show" identifier="videosLink" id="bJn-nc-CCu"/>
+                        <segue destination="fKn-3k-ilC" kind="show" identifier="mapsLink" id="0Iq-56-ydQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGR-I9-Gbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -939,6 +1001,8 @@
         <image name="ask_a_scientist_icon.png" width="142" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="0Iq-56-ydQ"/>
+        <segue reference="bJn-nc-CCu"/>
         <segue reference="hkL-Qy-nlx"/>
         <segue reference="ojR-uG-VJA"/>
     </inferredMetricsTieBreakers>

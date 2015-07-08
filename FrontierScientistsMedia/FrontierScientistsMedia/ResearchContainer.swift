@@ -14,7 +14,9 @@ enum SlideOutState {
     case panelExpanded
 }
 
+var researchContainerRef = ResearchContainer()
 var projectViewRef: ProjectView!
+var notFirstTime = false
 
 class ResearchContainer: UIViewController {
     
@@ -24,11 +26,18 @@ class ResearchContainer: UIViewController {
     var navigationViewController: ResearchNavigationTableView?
     let panelExpandedOffset: CGFloat = 60
     @IBAction func showProjects(sender: AnyObject) {
-        projectView.delegate?.togglePanel?()
+        if notFirstTime {
+            projectView.delegate?.togglePanel?()
+        }
+    }
+    @IBAction func goToMenu(sender: AnyObject) {
+        navigationController?.popViewControllerAnimated(true)
+        notFirstTime = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        researchContainerRef = self
         projectView = UIStoryboard.projectView()
         projectView.delegate = self
         projectViewRef = projectView
@@ -40,7 +49,6 @@ class ResearchContainer: UIViewController {
         
         projectView.delegate?.togglePanel?()
     }
-    
 }
 
 extension ResearchContainer: ProjectViewDelegate {
@@ -101,5 +109,4 @@ private extension UIStoryboard {
     class func projectView() -> ProjectView? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("ProjectView") as? ProjectView
     }
-    
 }
