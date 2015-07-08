@@ -41,6 +41,7 @@
 		7E8D518C1B43AFD10099EAD2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */; };
 		7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* aboutViewController.swift */; };
 		7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */; };
+		7EBAF7641B4C7ECB00E287DD /* diamond_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */; };
 		7EC192581B38CA6500D0D421 /* AboutImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */; };
 		7EC248EA1B438B2500C66357 /* AskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC248E91B438B2500C66357 /* AskTableViewCell.swift */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
@@ -113,6 +114,7 @@
 		7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7E8E89B71B279C8300966C82 /* aboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
 		7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
+		7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_blue.png; sourceTree = "<group>"; };
 		7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutImageViewController.swift; sourceTree = "<group>"; };
 		7EC248E91B438B2500C66357 /* AskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskTableViewCell.swift; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				F560C6FA1B290978007929A0 /* cancel_icon.png */,
 				F56E9E3D1B1CCE170027D39B /* CellBorder.png */,
 				F56E9E6D1B1E18450027D39B /* delete_icon-web.png */,
+				7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */,
 				F56E9E6B1B1E18260027D39B /* download_icon-web.png */,
 				3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */,
 				3B6ED9F41B0BC95F003E8903 /* map_icon.png */,
@@ -361,6 +364,7 @@
 				3BAA17EE1B06C36D003510D7 /* LaunchScreen.xib in Resources */,
 				F56E9E6C1B1E18260027D39B /* download_icon-web.png in Resources */,
 				F560C6F31B28FBB5007929A0 /* play_icon.png in Resources */,
+				7EBAF7641B4C7ECB00E287DD /* diamond_blue.png in Resources */,
 				F56E9E3E1B1CCE170027D39B /* CellBorder.png in Resources */,
 				3B6ED9ED1B0BB8E7003E8903 /* page.jpeg in Resources */,
 				F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */,

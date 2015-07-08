@@ -9,7 +9,7 @@
 import UIKit
 import MessageUI
 
-var aboutCurrentImage = "Petroglyphs_SodSurveyingPatrickLance.jpg"
+var aboutCurrentImage = "about_icon.jpg"
 
 
 class aboutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
