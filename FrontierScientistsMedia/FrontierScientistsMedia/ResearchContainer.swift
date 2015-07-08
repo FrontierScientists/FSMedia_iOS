@@ -17,7 +17,7 @@ enum SlideOutState {
 var researchContainerRef = ResearchContainer()
 var projectViewRef: ProjectView!
 var currentLinkedProject = ""
-var notFirstTime = false
+var firstTime = true
 
 class ResearchContainer: UIViewController {
     
@@ -27,16 +27,19 @@ class ResearchContainer: UIViewController {
     var navigationViewController: ResearchNavigationTableView?
     let panelExpandedOffset: CGFloat = 60
     @IBAction func showProjects(sender: AnyObject) {
-        if notFirstTime {
-            projectView.delegate?.togglePanel?()
-            if (currentState == .panelExpanded) {
-                projectView.scrollView.userInteractionEnabled = false
-            }
+        projectView.delegate?.togglePanel?()
+        if (currentState == .panelExpanded) {
+            projectView.scrollView.userInteractionEnabled = false
+        }
+        if firstTime {
+            firstTime = false
+            projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
+            projectView.scrollView.userInteractionEnabled = true
         }
     }
     @IBAction func goToMenu(sender: AnyObject) {
+        firstTime = true
         navigationController?.popViewControllerAnimated(true)
-        notFirstTime = false
     }
     
     override func viewDidLoad() {
@@ -52,7 +55,6 @@ class ResearchContainer: UIViewController {
         researchNavigationController.didMoveToParentViewController(self)
         
         projectView.delegate?.togglePanel?()
-        currentState = .panelExpanded
         
         if currentLinkedProject != "" {
             // Go to that page
@@ -68,7 +70,6 @@ class ResearchContainer: UIViewController {
                     projectView.delegate?.togglePanel?()
                     projectView.scrollView.userInteractionEnabled = true
                     projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
-                    notFirstTime = true
                 }
             }
         }
