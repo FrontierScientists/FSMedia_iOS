@@ -16,6 +16,7 @@ protocol ProjectViewDelegate {
 
 class ProjectView: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
     @IBOutlet weak var links: UITableView!
@@ -29,6 +30,13 @@ class ProjectView: UIViewController {
         projectText.backgroundColor = UIColor.clearColor()
         projectText.font = UIFont(name: "Chalkduster", size: 17)
         links.backgroundColor = UIColor.clearColor()
+        links.separatorColor = UIColor.clearColor()
+        projectTitle = orderedTitles[0]
+        var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+        var text = (projectData[projectTitle]!["project_description"] as! String)
+        var image:UIImage = storedImages[imageTitle]!
+        projectImage.image = image
+        projectText.text = text
     }
 }
 

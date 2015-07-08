@@ -76,7 +76,9 @@ extension ResearchNavigationTableView: UITableViewDelegate {
         var image:UIImage = storedImages[imageTitle]!
         projectViewRef.projectImage.image = image
         projectViewRef.projectText.text = projectText
-        
+        projectViewRef.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
+        projectViewRef.scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
         projectViewRef.delegate?.togglePanel?()
+        projectViewRef.scrollView.userInteractionEnabled = true
     }
 }
