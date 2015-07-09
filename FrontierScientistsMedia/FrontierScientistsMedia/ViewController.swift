@@ -20,18 +20,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var shadow: UIImageView!
     @IBOutlet weak var loadingDialog: UIView!
     @IBOutlet weak var loadingScreen: UIView!
+    @IBOutlet weak var splashScreen: UIView!
     
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About", "UAV Challenge"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png", "uavIcon.png"]
     
     override func viewDidAppear(animated: Bool) {
-                self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.hidden = false
         mainMenu.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mainMenu.userInteractionEnabled = false // Start the menu off as unselectable
+        
+        // Format the splash screen
+        let imageDimension = self.view.frame.width / 4
+        let heightSpacer = self.view.frame.height / 4
+        let fsLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 2) - (imageDimension / 2), heightSpacer / 2, imageDimension, imageDimension))
+        let arscLogo = UIImageView(frame: CGRectMake(imageDimension / 2, (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
+        let giLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 2) + (imageDimension / 2), (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
+        fsLogo.image = UIImage(named: "fs_icon.png")
+        arscLogo.image = UIImage(named: "arsc_icon.png")
+        giLogo.image = UIImage(named: "gi_icon.png")
+        splashScreen.addSubview(fsLogo)
+        splashScreen.addSubview(arscLogo)
+        splashScreen.addSubview(giLogo)
+        // Hide the splash screen after 3 seconds
+        NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: Selector("hideSplashScreen"), userInfo: nil, repeats: false)
+            
         //Define the nav bar colors
         // brown color UIColor(red:153.0, green:75.0, blue:34.0, alpha:1.0)
         // yellow color UIColor(red:249.0/255.0 , green:244.0/255.0 , blue:174.0/255.0 , alpha:1.0)
@@ -55,10 +73,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         pageBack.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
         
         // Hide loading screen when done loading.
-        dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            dispatch_async(dispatch_get_main_queue()) {
-                self.loadingScreen.hidden = true
-            }
+        dispatch_group_notify(group, dispatch_get_main_queue()) {
+            self.loadingScreen.hidden = true
+            self.mainMenu.userInteractionEnabled = true // Make menu selectable when loading screen hides
         }
     }
     
@@ -126,5 +143,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func hideSplashScreen() {
+        self.splashScreen.hidden = true
     }
 }

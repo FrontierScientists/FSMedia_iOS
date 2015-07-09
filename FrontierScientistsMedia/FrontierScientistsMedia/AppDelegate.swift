@@ -17,29 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            dispatch_async(dispatch_get_main_queue()) {
-                
-                reachability.startNotifier();
-                netStatus = reachability.currentReachabilityStatus();
-                if(netStatus.value == NOTREACHABLE)
-                {
-                    println("noInternetConnectionAlert triggered.");
-                    let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
-                    var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
-                    alert.show();
+            
+            reachability.startNotifier();
+            netStatus = reachability.currentReachabilityStatus();
+            if(netStatus.value == NOTREACHABLE) {
+                println("noInternetConnectionAlert triggered.");
+                let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
+                var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+                alert.show();
                     
-                    // Delay the dismissal
-                    let delay = 4.0 * Double(NSEC_PER_SEC)
-                    var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                    dispatch_after(time, dispatch_get_main_queue(), {
-                        alert.dismissWithClickedButtonIndex(-1, animated: true)
-                    })
-                }
-                
-                updateContent()
-                processImages()
-                println("UI Ready!")
+                // Delay the dismissal
+                let delay = 4.0 * Double(NSEC_PER_SEC)
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                    alert.dismissWithClickedButtonIndex(-1, animated: true)
+                })
             }
+                
+            updateContent()
+            processImages()
+            println("UI Ready!")
         }
         return true
     }

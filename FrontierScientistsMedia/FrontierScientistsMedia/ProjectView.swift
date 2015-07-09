@@ -42,7 +42,6 @@ class ProjectView: UIViewController {
             // Go to that page
             projectTitle = currentLinkedProject
             var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-            println(imageTitle)
             var text = (projectData[projectTitle]!["project_description"] as! String)
             var currentImage:UIImage = storedImages[imageTitle]!
             projectImage.image = currentImage
