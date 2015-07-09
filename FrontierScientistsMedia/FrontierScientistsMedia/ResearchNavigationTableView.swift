@@ -69,7 +69,6 @@ extension ResearchNavigationTableView: UITableViewDataSource {
 extension ResearchNavigationTableView: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        notFirstTime = true
         projectTitle = orderedTitles[indexPath.row]
         var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
         var projectText = (projectData[projectTitle]!["project_description"] as! String)
