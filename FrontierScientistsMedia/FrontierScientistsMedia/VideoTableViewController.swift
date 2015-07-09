@@ -90,6 +90,13 @@ class MySwiftVideoTableViewController: UITableViewController
         })
     }
     
+    //orientationChangeUpdate
+    //
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        self.tableView.reloadData();
+    }
+    
     // Table Section Functions
     //  dropDownListToggle(pressedButton: UIButton!)
     //  numberOfSectionsInTableView:(UITableView *)tableView
