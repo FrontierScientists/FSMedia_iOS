@@ -37,6 +37,23 @@ class ProjectView: UIViewController {
         var image:UIImage = storedImages[imageTitle]!
         projectImage.image = image
         projectText.text = text
+        
+        if currentLinkedProject != "" {
+            // Go to that page
+            notFirstTime = true
+            projectTitle = currentLinkedProject
+            var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+            println(imageTitle)
+            var text = (projectData[projectTitle]!["project_description"] as! String)
+            var currentImage:UIImage = storedImages[imageTitle]!
+            projectImage.image = currentImage
+            projectText.text = text
+            projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
+            scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
+            delegate?.togglePanel?()
+            scrollView.userInteractionEnabled = true
+            currentLinkedProject = ""
+        }
     }
 }
 
@@ -71,6 +88,7 @@ extension ProjectView: UITableViewDelegate {
             selectedResearchProjectIndex = find(orderedTitles, projectTitle)!
             researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
         } else { // Maps
+            currentLinkedProject = projectTitle
             researchContainerRef.performSegueWithIdentifier("mapsLink", sender: nil)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected link

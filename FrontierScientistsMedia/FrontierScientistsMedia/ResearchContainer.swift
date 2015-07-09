@@ -54,10 +54,6 @@ class ResearchContainer: UIViewController {
         projectView.delegate?.togglePanel?()
         currentState = .panelExpanded
         
-        if currentLinkedProject != "" {
-            // Go to that page
-            currentLinkedProject = ""
-        }
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
