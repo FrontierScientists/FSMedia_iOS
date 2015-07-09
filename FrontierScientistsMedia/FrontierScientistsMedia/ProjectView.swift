@@ -40,7 +40,6 @@ class ProjectView: UIViewController {
         
         if currentLinkedProject != "" {
             // Go to that page
-            notFirstTime = true
             projectTitle = currentLinkedProject
             var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
             println(imageTitle)
