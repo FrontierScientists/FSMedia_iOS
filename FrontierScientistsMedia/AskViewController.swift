@@ -23,8 +23,8 @@ class AskViewController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     @IBAction func sendMail(sender: AnyObject) {
         println("Ask A Scientists: I am the bottom button")
-        var subject_prefix = "[frontscidevelopers] "
-        var recepient = ["developer@frontierscientists.com"]
+        var subject_prefix = "[frontsci]"
+        var recepient = ["liz@frontierscientists.com"]
         var mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self
         mailer.setToRecipients(recepient)

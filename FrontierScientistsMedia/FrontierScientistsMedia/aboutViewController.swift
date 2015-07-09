@@ -26,8 +26,10 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     @IBAction func emailDevs(sender: AnyObject) {
-        var subject_prefix = "[frontsci]"
-        var recepient = ["liz@frontierscientists.com"]
+        
+        var subject_prefix = "[frontscidevelopers] "
+        var recepient = ["developer@frontierscientists.com"]
+
         var mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self
         mailer.setToRecipients(recepient)
