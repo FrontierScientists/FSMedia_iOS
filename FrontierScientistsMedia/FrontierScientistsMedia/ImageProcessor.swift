@@ -10,6 +10,7 @@ import UIKit
 
 var storedImages = [String: UIImage]()
 var savedImages = [String]()
+var currentStoredImages = [String: NSData]()
 
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
@@ -17,6 +18,8 @@ func processImages() {
     if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {
         NSKeyedArchiver.archiveRootObject([String: UIImage](), toFile: getFileUrl("storedImages").path!)
     }
+    // Retrieve the data.
+    currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     // Process all project images
     for (title, data) in projectData {
         processImage(data["preview_image"] as! String)
@@ -31,8 +34,6 @@ func processImages() {
     }
     // Process the Ask a Scientist image
     processImage(scientistInfo["image"]!)
-    // Retrieve the data.
-    var currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     // Populate the storedImages dictionary, converting the data into UIImages
     for (title, imageData) in currentStoredImages {
         storedImages[title] = UIImage(data: imageData)
@@ -60,7 +61,6 @@ func processImages() {
 // processImage
 // This function checks to see if the image of the passed path is already stored on the device.  If it is not, it is downloaded and stored.
 func processImage(imagePath: String) {
-    var currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     let imageTitle = NSURL(string: imagePath)?.lastPathComponent
     savedImages.append(imageTitle!) // Add the image to the list of images to be saved, not purged.
     // Make sure it hasn't already been stored.
@@ -76,5 +76,4 @@ func processImage(imagePath: String) {
     } else {
         println(imageTitle! + " already stored.")
     }
-    NSKeyedArchiver.archiveRootObject(currentStoredImages, toFile: getFileUrl("storedImages").path!)
 }
