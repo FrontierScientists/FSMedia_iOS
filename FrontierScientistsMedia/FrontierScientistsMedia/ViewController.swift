@@ -11,7 +11,6 @@ import UIKit
 var reachability = Reachability.reachabilityForInternetConnection();
 var netStatus = reachability.currentReachabilityStatus();
 let NOTREACHABLE: Int = 0;
-var splashScreenRef = UIView()
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -34,7 +33,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        splashScreenRef = self.splashScreen
+        mainMenu.userInteractionEnabled = false // Start the menu off as unselectable
         
         // Format the splash screen
         let imageDimension = self.view.frame.width / 4
@@ -76,6 +75,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Hide loading screen when done loading.
         dispatch_group_notify(group, dispatch_get_main_queue()) {
             self.loadingScreen.hidden = true
+            self.mainMenu.userInteractionEnabled = true // Make menu selectable when loading screen hides
         }
     }
     
