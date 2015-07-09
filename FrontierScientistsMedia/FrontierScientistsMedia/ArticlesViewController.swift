@@ -14,6 +14,7 @@ class MySwiftArticlesViewController: UIViewController{
     var articleLinkString: String?;
 
     override func viewDidLoad(){
+        
         var str: String = articleLinkString!;
         let url = NSURL(string: str);
         let request = NSURLRequest(URL: url!);

@@ -45,8 +45,6 @@ class MySwiftVideoTableViewController: UITableViewController
         
         super.viewDidLoad();
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
-//        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
-//        self.navigationController?.navigationBar.translucent = false;
         
         setAllVideoDownloadsToNone();
         createFolderNamed("MP4"); // Calls to function in HelperFunctions.swift
@@ -59,8 +57,10 @@ class MySwiftVideoTableViewController: UITableViewController
         
         // Open a section if coming from a research project page
         if(selectedResearchProjectIndex != -1){
+            println("The research project index is " + String(selectedResearchProjectIndex));
             self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: selectedResearchProjectIndex);
             self.tableView.scrollToRowAtIndexPath(self.scrollPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true);
+            openSectionArray[selectedResearchProjectIndex] = "open";
             selectedResearchProjectIndex = -1;
         }
         
@@ -88,6 +88,13 @@ class MySwiftVideoTableViewController: UITableViewController
         dispatch_after(time, dispatch_get_main_queue(), {
             alert.dismissWithClickedButtonIndex(-1, animated: true)
         })
+    }
+    
+    //orientationChangeUpdate
+    //
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        self.tableView.reloadData();
     }
     
     // Table Section Functions

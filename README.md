@@ -1,4 +1,4 @@
 Swift_iOS
 =========
 
-A repository for the iOS app in Swift
+A cool repository for the iOS app in Swift
