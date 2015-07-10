@@ -15,7 +15,7 @@ protocol ProjectViewDelegate {
 }
 
 class ProjectView: UIViewController {
-    
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!

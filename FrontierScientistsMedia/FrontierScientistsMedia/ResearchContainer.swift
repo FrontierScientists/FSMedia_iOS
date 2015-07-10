@@ -21,8 +21,8 @@ var firstTime = true
 
 class ResearchContainer: UIViewController {
     
-    @IBOutlet var swipeGesture: UISwipeGestureRecognizer!
-    @IBOutlet var edgeSwipeGesture: UIScreenEdgePanGestureRecognizer!
+    @IBOutlet var openSwipe: UISwipeGestureRecognizer!
+    @IBOutlet var closeSwipe: UISwipeGestureRecognizer!
     var researchNavigationController: UINavigationController!
     var projectView: ProjectView!
     var currentState: SlideOutState = .panelCollapsed
@@ -51,8 +51,8 @@ class ResearchContainer: UIViewController {
     }
     @IBAction func closeDrawer(sender: AnyObject) {
         if (currentState == .panelExpanded) {
-            projectViewRef.delegate?.togglePanel!()
-            projectViewRef.scrollView.userInteractionEnabled = true
+            projectView.delegate?.togglePanel!()
+            projectView.scrollView.userInteractionEnabled = true
         }
         if firstTime {
             firstTime = false
@@ -62,8 +62,6 @@ class ResearchContainer: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        edgeSwipeGesture.edges = UIRectEdge.Left
-        swipeGesture.direction = .Left
         researchContainerRef = self
         projectView = UIStoryboard.projectView()
         projectView.delegate = self
@@ -93,7 +91,7 @@ class ResearchContainer: UIViewController {
 }
 
 extension ResearchContainer: ProjectViewDelegate {
-    
+
     func togglePanel() {
         let notAlreadyExpanded = (currentState != .panelExpanded)
         
@@ -102,36 +100,27 @@ extension ResearchContainer: ProjectViewDelegate {
         }
         animatePanel(shouldExpand: notAlreadyExpanded)
     }
-    
     func addPanelViewController() {
         if (navigationViewController == nil) {
             navigationViewController = UIStoryboard.navigationTableView()
-            
             addChildSidePanelController(navigationViewController!)
         }
     }
-    
     func addChildSidePanelController(sidePanelController: ResearchNavigationTableView) {
         view.insertSubview(sidePanelController.view, atIndex: 0)
         addChildViewController(sidePanelController)
         sidePanelController.didMoveToParentViewController(self)
     }
-    
     func animatePanel(#shouldExpand: Bool) {
         if (shouldExpand) {
             currentState = .panelExpanded
-            
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
         } else {
             animateProjectViewXPosition(targetPosition: 0) { finished in
                 self.currentState = .panelCollapsed
-                
-                self.navigationViewController!.view.removeFromSuperview()
-                self.navigationViewController = nil;
             }
         }
     }
-    
     func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             self.researchNavigationController.view.frame.origin.x = targetPosition
