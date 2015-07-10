@@ -14,6 +14,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var resetMapButton: UIButton!
+    
+    @IBAction func resetMap(sender: AnyObject) {
+        let startLocation = CLLocationCoordinate2D(
+            //            62.89447956,-152.756170369
+            latitude: 62.89447956,
+            longitude: -152.756170369
+        )
+        let span = MKCoordinateSpanMake(20, 20)
+        let region = MKCoordinateRegion(center: startLocation, span: span)
+        
+        mapView.setRegion(region, animated: true)
+        
+    }
     var currentAnnotation = MKPointAnnotation()
     
     override func viewDidLoad() {
@@ -23,6 +37,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 //            62.89447956,-152.756170369
             latitude: 62.89447956,
             longitude: -152.756170369
+            
         )
     
         mapView.mapType = MKMapType.Hybrid
@@ -50,7 +65,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let annotation = MKPointAnnotation()
             annotation.coordinate = markerMap.location[i]
             annotation.title = markerMap.title[i]
-            annotation.subtitle = "Research Project: Tap for more"
+            annotation.subtitle = "Research Project: Tap picture for more"
             
             mapView.addAnnotation(annotation)
             
@@ -65,6 +80,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                     mapView.selectAnnotation(currentAnnotation, animated: true)}}
         currentLinkedProject = ""
         }
+        
+//        Setting up a left bar button
+//                resetMapButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!], forState: .Normal)
+        
+        
     }
     
 func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -81,7 +101,6 @@ func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -
             view.image = UIImage(named: "diamond_blue.png")
             view.canShowCallout = true
             let toResearch = UIButton()
-            println(annotation.title!)
             var imageTitle = (projectData[annotation.title!]!["preview_image"])!.lastPathComponent
             toResearch.setImage(storedImages[imageTitle], forState: .Normal)
             toResearch.frame = CGRectMake(0,0,40,40)
