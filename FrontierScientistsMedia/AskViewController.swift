@@ -17,13 +17,14 @@ class AskViewController: UIViewController, UITableViewDataSource, UITableViewDel
     
     @IBOutlet var askTableView: UITableView!
     
-    @IBAction func scientistBioClicked(sender: AnyObject) {        println("I am the image button")
+    @IBAction func scientistBioClicked(sender: AnyObject) {
+        println("Ask A Scientist: image button")
         performSegueWithIdentifier("scientist_bio",sender: nil)
     }
     @IBAction func sendMail(sender: AnyObject) {
-        println("I am the bottom button")
+        println("Ask A Scientists: I am the bottom button")
         var subject_prefix = "[frontsci]"
-        var recepient = ["sfarabaugh@alaska.edu"]
+        var recepient = ["liz@frontierscientists.com"]
         var mailer = MFMailComposeViewController()
         mailer.mailComposeDelegate = self
         mailer.setToRecipients(recepient)
@@ -43,7 +44,7 @@ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     
 override func viewDidLoad() {
         super.viewDidLoad()
-        println("askascientist view did load")
+        println("Ask A Scientist: View Did Load")
     
         askTableView.estimatedRowHeight = 110.0
         askTableView.rowHeight = UITableViewAutomaticDimension
@@ -66,12 +67,14 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
     {case 0:
             println("case 0")
             let cell: AskTableViewCell = tableView.dequeueReusableCellWithIdentifier("pageBlurb") as! AskTableViewCell
-            cell.pageBlurb.font = UIFont(name: "ChalkDuster", size: iPhoneFontSize)
+                cell.pageBlurb.font = UIFont(name: "ChalkDuster", size: iPhoneFontSize)
+            cell.backgroundColor = UIColor.clearColor()
 //            cell.pageBlurb.font = UIFont(name: "ChalkDuster", size: iPadFontSize)
             return cell
     case 1:
         println("case 1")
         let cell: AskTableViewCell = tableView.dequeueReusableCellWithIdentifier("biography") as! AskTableViewCell
+        cell.backgroundColor = UIColor.clearColor()
         // replacing default elements
         // Biography
         cell.scientistBio.text = scientistInfo["bio"]
@@ -97,7 +100,9 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
         return cell
     case 2:
         println("case 2")
+        
         let cell: AskTableViewCell = tableView.dequeueReusableCellWithIdentifier("askAScientist") as! AskTableViewCell
+        cell.backgroundColor = UIColor.clearColor()
         return cell
     default:
         return celll}
