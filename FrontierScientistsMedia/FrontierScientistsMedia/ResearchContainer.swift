@@ -21,6 +21,8 @@ var firstTime = true
 
 class ResearchContainer: UIViewController {
     
+    @IBOutlet var swipeGesture: UISwipeGestureRecognizer!
+    @IBOutlet var edgeSwipeGesture: UIScreenEdgePanGestureRecognizer!
     var researchNavigationController: UINavigationController!
     var projectView: ProjectView!
     var currentState: SlideOutState = .panelCollapsed
@@ -41,9 +43,27 @@ class ResearchContainer: UIViewController {
         firstTime = true
         navigationController?.popViewControllerAnimated(true)
     }
+    @IBAction func openDrawer(sender: AnyObject) {
+        if (currentState == .panelCollapsed) {
+            projectView.delegate?.togglePanel!()
+            projectView.scrollView.userInteractionEnabled = false
+        }
+    }
+    @IBAction func closeDrawer(sender: AnyObject) {
+        if (currentState == .panelExpanded) {
+            projectViewRef.delegate?.togglePanel!()
+            projectViewRef.scrollView.userInteractionEnabled = true
+        }
+        if firstTime {
+            firstTime = false
+            projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        edgeSwipeGesture.edges = UIRectEdge.Left
+        swipeGesture.direction = .Left
         researchContainerRef = self
         projectView = UIStoryboard.projectView()
         projectView.delegate = self

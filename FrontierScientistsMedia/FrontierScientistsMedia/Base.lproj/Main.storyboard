@@ -101,6 +101,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="AZM-3Y-b5Q" firstAttribute="top" secondItem="sac-4O-3LH" secondAttribute="topMargin" id="5aF-Si-SnN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YDx-nh-T3b" secondAttribute="trailing" constant="-20" id="Gfe-WI-yF6"/>
@@ -234,6 +235,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Eil-PJ-LjO" firstAttribute="leading" secondItem="0HP-Z5-g6A" secondAttribute="leadingMargin" constant="-16" id="SQX-4p-org"/>
                             <constraint firstItem="Feu-vL-uMD" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="bottom" id="q6L-Oj-xCb"/>
@@ -265,6 +267,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="62o-dq-Wjd" appends="YES" id="WUY-F4-s1U"/>
+                            <outletCollection property="gestureRecognizers" destination="miA-t4-PVQ" appends="YES" id="4hZ-TF-O7d"/>
+                        </connections>
                     </view>
                     <toolbarItems>
                         <barButtonItem title="Back" id="1RC-Vx-xgG"/>
@@ -282,11 +289,23 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="edgeSwipeGesture" destination="62o-dq-Wjd" id="q1K-BQ-woU"/>
+                        <outlet property="swipeGesture" destination="miA-t4-PVQ" id="MV8-2D-Yfz"/>
                         <segue destination="m0R-S3-sa9" kind="show" identifier="videosLink" id="bJn-nc-CCu"/>
                         <segue destination="fKn-3k-ilC" kind="show" identifier="mapsLink" id="0Iq-56-ydQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGR-I9-Gbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="62o-dq-Wjd">
+                    <connections>
+                        <action selector="openDrawer:" destination="als-D8-zIo" id="Qgl-SK-kic"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="miA-t4-PVQ">
+                    <connections>
+                        <action selector="closeDrawer:" destination="als-D8-zIo" id="AcX-9n-0YZ"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2741" y="1144"/>
         </scene>
