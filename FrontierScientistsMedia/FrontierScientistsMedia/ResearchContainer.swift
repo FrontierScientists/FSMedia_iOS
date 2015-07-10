@@ -74,6 +74,7 @@ class ResearchContainer: UIViewController {
         
         projectView.delegate?.togglePanel?()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -86,6 +87,13 @@ class ResearchContainer: UIViewController {
                     projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }
+        }
+    }
+    
+    func orientationChanged() {
+        if (currentState == .panelExpanded) {
+            researchNavigationController.view.frame.size.width = self.view.frame.width
+            animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
         }
     }
 }
