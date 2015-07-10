@@ -20,6 +20,8 @@ class ProjectView: UIViewController {
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
     @IBOutlet weak var links: UITableView!
+    //@IBOutlet weak var openDrawerButton: UIButton!
+    
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
@@ -31,6 +33,7 @@ class ProjectView: UIViewController {
         projectText.font = UIFont(name: "Chalkduster", size: 17)
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
+        //openDrawerButton.transform = CGAffineTransformMakeRotation((-3.14))
         projectTitle = orderedTitles[0]
         var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
         var text = (projectData[projectTitle]!["project_description"] as! String)
@@ -52,6 +55,8 @@ class ProjectView: UIViewController {
             scrollView.userInteractionEnabled = true
             currentLinkedProject = ""
         }
+        println("ProjectView: viewDidLoad")
+        //self.view.bringSubviewToFront(researchContainerRef.drawerButton)
     }
 }
 

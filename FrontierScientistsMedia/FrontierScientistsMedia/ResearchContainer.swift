@@ -18,6 +18,7 @@ var researchContainerRef = ResearchContainer()
 var projectViewRef: ProjectView!
 var currentLinkedProject = ""
 var firstTime = true
+var drawerButtonXPosition = 0;
 
 class ResearchContainer: UIViewController {
     
@@ -26,6 +27,8 @@ class ResearchContainer: UIViewController {
     var currentState: SlideOutState = .panelCollapsed
     var navigationViewController: ResearchNavigationTableView?
     let panelExpandedOffset: CGFloat = 60
+    @IBOutlet weak var drawerButton: UIButton!
+    
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()
         if (currentState == .panelExpanded) {
@@ -37,7 +40,7 @@ class ResearchContainer: UIViewController {
             projectView.scrollView.userInteractionEnabled = true
         }
     }
-    @IBAction func goToMenu(sender: AnyObject) {
+    @IBAction func goToMenu(sender: AnyObject) { // This is the "Back" button
         firstTime = true
         navigationController?.popViewControllerAnimated(true)
     }
@@ -56,6 +59,13 @@ class ResearchContainer: UIViewController {
         
         projectView.delegate?.togglePanel?()
         
+        if firstTime{
+        
+            drawerButtonXPosition = self.view
+        }
+        
+        self.view.bringSubviewToFront(drawerButton)
+
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -69,6 +79,11 @@ class ResearchContainer: UIViewController {
                 }
             }
         }
+    }
+    
+    func showProjets(){
+        
+        
     }
 }
 
@@ -102,13 +117,22 @@ extension ResearchContainer: ProjectViewDelegate {
             currentState = .panelExpanded
             
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
+            
+            println("Panel was expanded")
+            animateDrawerButtonXPositionAndRotation(targetPosition: -100)
+            
         } else {
+            
+            animateDrawerButtonXPositionAndRotation(targetPosition: self.view.frame.size.width + 100)
             animateProjectViewXPosition(targetPosition: 0) { finished in
                 self.currentState = .panelCollapsed
+                println("panelCollapsed")
                 
                 self.navigationViewController!.view.removeFromSuperview()
                 self.navigationViewController = nil;
+                
             }
+            
         }
     }
     
@@ -117,11 +141,19 @@ extension ResearchContainer: ProjectViewDelegate {
             self.researchNavigationController.view.frame.origin.x = targetPosition
             }, completion: completion)
     }
+    
+    func animateDrawerButtonXPositionAndRotation(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
+        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
+            self.drawerButton.center.x = targetPosition
+            }, completion: completion)
+    }
 }
 
 
 private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    class func mainStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    }
     
     class func navigationTableView() -> ResearchNavigationTableView? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("NavigationTableView") as? ResearchNavigationTableView

@@ -29,6 +29,9 @@ class ResearchNavigationTableView: UIViewController {
         shadow.backgroundColor = UIColor(patternImage: UIImage(named: "drawer_shadow.png")!)
         binding.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
         page.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
+        
+        println("ResearchNavigationTableView: viewDidLoad")
+
     }
 }
 
