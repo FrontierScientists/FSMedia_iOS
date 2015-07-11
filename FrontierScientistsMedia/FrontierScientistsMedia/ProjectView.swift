@@ -15,12 +15,12 @@ protocol ProjectViewDelegate {
 }
 
 class ProjectView: UIViewController {
-    
+
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
     @IBOutlet weak var links: UITableView!
-    //@IBOutlet weak var openDrawerButton: UIButton!
+    @IBOutlet weak var drawerButton: UIButton!
     
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
@@ -56,8 +56,13 @@ class ProjectView: UIViewController {
             currentLinkedProject = ""
         }
         println("ProjectView: viewDidLoad")
-        //self.view.bringSubviewToFront(researchContainerRef.drawerButton)
+        self.view.bringSubviewToFront(researchContainerRef.drawerButton)
     }
+    
+    /*override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool{
+        return !CGRectContainsPoint(researchContainerRef.drawerButton.frame, point)
+    }*/
+    
 }
 
 // TableView Data Source

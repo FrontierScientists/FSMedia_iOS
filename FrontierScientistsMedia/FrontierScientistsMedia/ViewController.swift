@@ -22,8 +22,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var loadingScreen: UIView!
     @IBOutlet weak var splashScreen: UIView!
     
-    let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About", "UAV Challenge"]
-    let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png", "uavIcon.png"]
+    let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
+    let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
     
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = false
@@ -131,11 +131,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             case 4:
                 performSegueWithIdentifier("ask", sender: nil)
                 break
-            case 5:
-                performSegueWithIdentifier("about", sender: nil)
             default:
-                performSegueWithIdentifier("game", sender:nil)
+                performSegueWithIdentifier("about", sender: nil)
                 break
+
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected row.
     }
@@ -147,5 +146,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func hideSplashScreen() {
         self.splashScreen.hidden = true
+    }
+    
+    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue){
+    
     }
 }

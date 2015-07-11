@@ -101,6 +101,7 @@
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="AZM-3Y-b5Q" firstAttribute="top" secondItem="sac-4O-3LH" secondAttribute="topMargin" id="5aF-Si-SnN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YDx-nh-T3b" secondAttribute="trailing" constant="-20" id="Gfe-WI-yF6"/>
@@ -207,6 +208,15 @@
                                                     <outlet property="delegate" destination="dxx-bl-zBY" id="8AI-dS-dth"/>
                                                 </connections>
                                             </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRr-of-xkO">
+                                                <rect key="frame" x="8" y="98" width="35" height="117"/>
+                                                <state key="normal" backgroundImage="Drawer_Button.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="showProjects:" destination="als-D8-zIo" eventType="touchUpInside" id="Fd1-hH-s4U"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -234,6 +244,7 @@
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Eil-PJ-LjO" firstAttribute="leading" secondItem="0HP-Z5-g6A" secondAttribute="leadingMargin" constant="-16" id="SQX-4p-org"/>
                             <constraint firstItem="Feu-vL-uMD" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="bottom" id="q6L-Oj-xCb"/>
@@ -264,32 +275,45 @@
                     <view key="view" contentMode="scaleToFill" id="Ws9-yP-9Cf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRr-of-xkO">
-                                <rect key="frame" x="283" y="209" width="35" height="117"/>
-                                <state key="normal" backgroundImage="Drawer_Button.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="miA-t4-PVQ" appends="YES" id="4hZ-TF-O7d"/>
+                            <outletCollection property="gestureRecognizers" destination="NzR-la-pwk" appends="YES" id="AE7-g1-0Sr"/>
+                        </connections>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Research" id="HjD-g6-gav">
-                        <barButtonItem key="leftBarButtonItem" title="Projects" id="RgT-w1-6Mh">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="RgT-w1-6Mh">
                             <connections>
-                                <action selector="showProjects:" destination="als-D8-zIo" id="K2j-d0-Auu"/>
+                                <action selector="goToMenu:" destination="als-D8-zIo" id="LAj-bX-ttf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Back" id="1RC-Vx-xgG"/>
+                        <barButtonItem key="rightBarButtonItem" title="Main Menu" id="1RC-Vx-xgG">
+                            <connections>
+                                <segue destination="bJJ-nJ-Bgi" kind="unwind" unwindAction="unwindToMainMenu:" id="Snb-1O-F3S"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="drawerButton" destination="cRr-of-xkO" id="DAc-Px-ECY"/>
+                        <outlet property="closeSwipe" destination="miA-t4-PVQ" id="zRr-0H-G8G"/>
+                        <outlet property="drawerButton" destination="cRr-of-xkO" id="LbB-s0-Uzm"/>
+                        <outlet property="openSwipe" destination="NzR-la-pwk" id="Akc-cg-vEp"/>
                         <segue destination="m0R-S3-sa9" kind="show" identifier="videosLink" id="bJn-nc-CCu"/>
                         <segue destination="fKn-3k-ilC" kind="show" identifier="mapsLink" id="0Iq-56-ydQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGR-I9-Gbd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="miA-t4-PVQ">
+                    <connections>
+                        <action selector="closeDrawer:" destination="als-D8-zIo" id="AcX-9n-0YZ"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="NzR-la-pwk">
+                    <connections>
+                        <action selector="openDrawer:" destination="als-D8-zIo" id="ndR-JF-MIU"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-2741" y="1144"/>
         </scene>
@@ -550,61 +574,14 @@
                         <segue destination="8ll-k3-VXg" kind="show" identifier="articles" id="0aM-QA-zvN"/>
                         <segue destination="19M-LF-YxW" kind="show" identifier="about" id="xqa-HY-ihQ"/>
                         <segue destination="als-D8-zIo" kind="show" identifier="research" id="KIv-co-ZEf"/>
-                        <segue destination="7Km-KD-9AQ" kind="show" identifier="game" id="qhv-6G-tew"/>
                         <segue destination="VIR-35-wMJ" kind="show" identifier="ask" id="1Oo-HF-Il5"/>
                         <segue destination="fKn-3k-ilC" kind="show" identifier="maps" id="zOa-FW-sRq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InU-ob-QOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bJJ-nJ-Bgi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="378" y="418"/>
-        </scene>
-        <!--Game View Controller-->
-        <scene sceneID="h1M-G3-Zd5">
-            <objects>
-                <viewController id="7Km-KD-9AQ" customClass="GameViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3NE-XG-KmH"/>
-                        <viewControllerLayoutGuide type="bottom" id="iEf-mL-IlY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5gU-7g-2a3" customClass="SKView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MHH-tP-hJa">
-                                <rect key="frame" x="545" y="565" width="46" height="30"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="next:" destination="7Km-KD-9AQ" eventType="touchUpInside" id="sMg-rF-oqs"/>
-                                </connections>
-                            </button>
-                            <view alpha="0.74999999999999978" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DT3-TA-PP2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="DT3-TA-PP2" firstAttribute="leading" secondItem="5gU-7g-2a3" secondAttribute="leadingMargin" constant="-16" id="GQ7-PB-kxC"/>
-                            <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="MHH-tP-hJa" secondAttribute="bottom" constant="5" id="acA-WJ-Btd"/>
-                            <constraint firstItem="DT3-TA-PP2" firstAttribute="top" secondItem="5gU-7g-2a3" secondAttribute="topMargin" id="cKz-NS-FHE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MHH-tP-hJa" secondAttribute="trailing" constant="-7" id="jMu-j7-Gsp"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="DT3-TA-PP2" secondAttribute="trailing" constant="-16" id="ukS-TQ-zc9"/>
-                            <constraint firstItem="iEf-mL-IlY" firstAttribute="top" secondItem="DT3-TA-PP2" secondAttribute="bottom" id="yQM-rj-hhK"/>
-                        </constraints>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="tapScreen" destination="DT3-TA-PP2" id="ONI-zi-lfY"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="azq-m4-vkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-417" y="-698"/>
         </scene>
         <!--About-->
         <scene sceneID="Ehw-ll-mDX">
@@ -868,23 +845,41 @@
                                     <outlet property="delegate" destination="Iz6-lw-96h" id="jez-0j-ksl"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U98-kV-oob">
+                                <rect key="frame" x="489" y="35" width="95" height="25"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="95" id="ADf-aH-4uS"/>
+                                    <constraint firstAttribute="height" constant="25" id="o8h-Q0-txU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="15"/>
+                                <state key="normal" title="Reset Map">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetMap:" destination="fKn-3k-ilC" eventType="touchUpInside" id="wF5-N1-MTq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="HKg-U7-qP9" firstAttribute="leading" secondItem="Iz6-lw-96h" secondAttribute="leading" id="0wD-pr-6Ej"/>
+                            <constraint firstItem="U98-kV-oob" firstAttribute="trailing" secondItem="Iz6-lw-96h" secondAttribute="trailingMargin" id="Hig-Df-wn5"/>
                             <constraint firstAttribute="bottom" secondItem="HKg-U7-qP9" secondAttribute="bottom" id="NRv-r5-Nkc"/>
                             <constraint firstAttribute="trailing" secondItem="HKg-U7-qP9" secondAttribute="trailing" id="QrO-as-HgB"/>
                             <constraint firstItem="HKg-U7-qP9" firstAttribute="top" secondItem="Iz6-lw-96h" secondAttribute="top" id="Ycz-Ap-aIl"/>
+                            <constraint firstItem="U98-kV-oob" firstAttribute="top" secondItem="3MH-B2-XAR" secondAttribute="bottom" constant="15" id="nch-dK-LCo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="HKg-U7-qP9" id="b9x-rf-Ije"/>
+                        <outlet property="resetMapButton" destination="U98-kV-oob" id="02f-BH-0LY"/>
                         <segue destination="als-D8-zIo" kind="show" identifier="fromMaps" id="ZpC-X0-fSa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JEd-Eu-aX4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="342" y="1502"/>
+            <point key="canvasLocation" x="316" y="1494"/>
         </scene>
         <!--Ask View Controller-->
         <scene sceneID="aGb-FL-Xj4">
@@ -903,7 +898,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn7-Mb-Tyj">
                                             <rect key="frame" x="8" y="8" width="584" height="111"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <string key="text">Here at Frontier Scientists we have a scientist on call to anwser your question! Below you can find information about the current scientist on call and an easy button that will help you send an email!</string>
+                                            <string key="text">Here at Frontier Scientists we have a scientist on call to answer your question! Below you can find information about the current scientist on call and an easy button that will help you send an email!</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -1017,14 +1012,6 @@
             </objects>
             <point key="canvasLocation" x="1203" y="1522"/>
         </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="oEe-Pz-Utp">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="6TH-lc-Dn1" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IW1-YJ-pGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="507" y="-910"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Drawer_Button.png" width="1440" height="2880"/>
@@ -1032,9 +1019,9 @@
         <image name="ask_a_scientist_icon.png" width="142" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkL-Qy-nlx"/>
         <segue reference="bJn-nc-CCu"/>
         <segue reference="KIv-co-ZEf"/>
+        <segue reference="1gU-HA-UUL"/>
         <segue reference="0Iq-56-ydQ"/>
     </inferredMetricsTieBreakers>
 </document>
