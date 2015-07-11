@@ -32,11 +32,13 @@ class ResearchContainer: UIViewController {
         projectView.delegate?.togglePanel?()
         if (currentState == .panelExpanded) {
             projectView.scrollView.userInteractionEnabled = false
+            projectView.shadow.hidden = false
         }
         if firstTime {
             firstTime = false
             projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
             projectView.scrollView.userInteractionEnabled = true
+            projectView.shadow.hidden = true
         }
     }
     @IBAction func goToMenu(sender: AnyObject) {
@@ -47,12 +49,14 @@ class ResearchContainer: UIViewController {
         if (currentState == .panelCollapsed) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = false
+            projectView.shadow.hidden = false
         }
     }
     @IBAction func closeDrawer(sender: AnyObject) {
         if (currentState == .panelExpanded) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = true
+            projectView.shadow.hidden = true
         }
         if firstTime {
             firstTime = false
@@ -84,6 +88,7 @@ class ResearchContainer: UIViewController {
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
                     projectView.scrollView.userInteractionEnabled = true
+                    projectView.shadow.hidden = true
                     projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }

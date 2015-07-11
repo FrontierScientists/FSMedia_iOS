@@ -20,6 +20,7 @@ class ProjectView: UIViewController {
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
     @IBOutlet weak var links: UITableView!
+    @IBOutlet weak var shadow: UIView!
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
@@ -50,6 +51,7 @@ class ProjectView: UIViewController {
             scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
             delegate?.togglePanel?()
             scrollView.userInteractionEnabled = true
+            shadow.hidden = true
             currentLinkedProject = ""
         }
     }
