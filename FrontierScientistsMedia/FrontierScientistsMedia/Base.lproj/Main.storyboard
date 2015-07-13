@@ -209,11 +209,12 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRr-of-xkO">
-                                                <rect key="frame" x="8" y="98" width="35" height="117"/>
+                                                <rect key="frame" x="25" y="164" width="22" height="71"/>
                                                 <state key="normal" backgroundImage="Drawer_Button.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="drawerButtonPressed:" destination="dxx-bl-zBY" eventType="touchUpInside" id="UfY-Ib-abr"/>
                                                     <action selector="showProjects:" destination="als-D8-zIo" eventType="touchUpInside" id="Fd1-hH-s4U"/>
                                                 </connections>
                                             </button>
@@ -230,12 +231,20 @@
                                             <constraint firstItem="0kf-eT-5m9" firstAttribute="leading" secondItem="WHG-nn-jx8" secondAttribute="leading" constant="25" id="vi6-iB-ZLa"/>
                                         </constraints>
                                     </view>
+                                    <view alpha="0.49999999999999961" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dIy-Y3-4Y0">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="dIy-Y3-4Y0" secondAttribute="bottom" id="18L-FS-nai"/>
+                                    <constraint firstItem="dIy-Y3-4Y0" firstAttribute="leading" secondItem="Eil-PJ-LjO" secondAttribute="leading" id="28r-hF-uFr"/>
                                     <constraint firstAttribute="bottom" secondItem="WHG-nn-jx8" secondAttribute="bottom" id="4JE-S7-d9U"/>
                                     <constraint firstItem="WHG-nn-jx8" firstAttribute="leading" secondItem="Eil-PJ-LjO" secondAttribute="leading" id="5xm-tY-XEi"/>
+                                    <constraint firstAttribute="trailing" secondItem="dIy-Y3-4Y0" secondAttribute="trailing" id="7hI-Vr-03H"/>
                                     <constraint firstAttribute="width" secondItem="WHG-nn-jx8" secondAttribute="width" id="9xY-c8-iQo"/>
                                     <constraint firstItem="WHG-nn-jx8" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="top" id="Jc6-IF-m8O"/>
+                                    <constraint firstItem="dIy-Y3-4Y0" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="top" id="NfI-ZX-1OF"/>
                                     <constraint firstAttribute="trailing" secondItem="WHG-nn-jx8" secondAttribute="trailing" id="dMx-Hj-YJ6"/>
                                 </constraints>
                                 <connections>
@@ -254,10 +263,12 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="drawerButton" destination="cRr-of-xkO" id="BDc-IP-Ssf"/>
                         <outlet property="links" destination="Hmu-EP-USy" id="jZH-8a-h2N"/>
                         <outlet property="projectImage" destination="AKV-6Q-gKc" id="Pmx-id-Pib"/>
                         <outlet property="projectText" destination="0kf-eT-5m9" id="ZAB-ru-10t"/>
                         <outlet property="scrollView" destination="Eil-PJ-LjO" id="8T5-wH-dtW"/>
+                        <outlet property="shadow" destination="dIy-Y3-4Y0" id="1o0-aV-1ip"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1q-Ne-13x" userLabel="First Responder" sceneMemberID="firstResponder"/>

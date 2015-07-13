@@ -33,27 +33,33 @@ class ResearchContainer: UIViewController {
         projectView.delegate?.togglePanel?()
         if (currentState == .panelExpanded) {
             projectView.scrollView.userInteractionEnabled = false
+            projectView.shadow.hidden = false
         }
         if firstTime {
             firstTime = false
             projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
             projectView.scrollView.userInteractionEnabled = true
+            projectView.shadow.hidden = true
         }
     }
     @IBAction func goToMenu(sender: AnyObject) { // This is the "Back" button
         firstTime = true
         navigationController?.popViewControllerAnimated(true)
     }
-    @IBAction func openDrawer(sender: AnyObject) {
+    @IBAction func openDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelCollapsed) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = false
+            projectView.shadow.hidden = false
+            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2)
         }
     }
-    @IBAction func closeDrawer(sender: AnyObject) {
+    @IBAction func closeDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelExpanded) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = true
+            projectView.shadow.hidden = true
+            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
         }
         if firstTime {
             firstTime = false
@@ -75,8 +81,7 @@ class ResearchContainer: UIViewController {
         
         projectView.delegate?.togglePanel?()
         
-        self.view.bringSubviewToFront(drawerButton)
-        self.drawerButton.center.x = self.view.bounds.width - 20
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -86,9 +91,21 @@ class ResearchContainer: UIViewController {
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
                     projectView.scrollView.userInteractionEnabled = true
+                    projectView.shadow.hidden = true
+                    projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
                     projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }
+        }
+    }
+    
+    func orientationChanged() {
+        if (currentState == .panelExpanded) {
+            researchNavigationController.view.frame.size.width = self.view.frame.width
+            animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
+        }
+        else{
+            projectView.drawerButton.center.x = 15
         }
     }
 }
@@ -118,14 +135,10 @@ extension ResearchContainer: ProjectViewDelegate {
         if (shouldExpand) {
             currentState = .panelExpanded
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
-            
-            println("Panel was expanded")
-            
         } else {
             animateProjectViewXPosition(targetPosition: 0) { finished in
                 self.currentState = .panelCollapsed
             }
-            
         }
     }
     func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {

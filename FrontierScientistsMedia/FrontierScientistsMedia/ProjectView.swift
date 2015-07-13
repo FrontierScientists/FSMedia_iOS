@@ -20,8 +20,8 @@ class ProjectView: UIViewController {
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
     @IBOutlet weak var links: UITableView!
+    @IBOutlet weak var shadow: UIView!
     @IBOutlet weak var drawerButton: UIButton!
-    
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
@@ -33,7 +33,6 @@ class ProjectView: UIViewController {
         projectText.font = UIFont(name: "Chalkduster", size: 17)
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
-        //openDrawerButton.transform = CGAffineTransformMakeRotation((-3.14))
         projectTitle = orderedTitles[0]
         var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
         var text = (projectData[projectTitle]!["project_description"] as! String)
@@ -53,16 +52,18 @@ class ProjectView: UIViewController {
             scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
             delegate?.togglePanel?()
             scrollView.userInteractionEnabled = true
+            shadow.hidden = true
+            drawerButton.center.x = 15
             currentLinkedProject = ""
         }
-        println("ProjectView: viewDidLoad")
-        self.view.bringSubviewToFront(researchContainerRef.drawerButton)
     }
     
-    /*override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool{
-        return !CGRectContainsPoint(researchContainerRef.drawerButton.frame, point)
-    }*/
-    
+    @IBAction func drawerButtonPressed(sender: AnyObject) {
+        delegate?.togglePanel?()
+        scrollView.userInteractionEnabled = false
+        shadow.hidden = false
+        drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2);
+    }
 }
 
 // TableView Data Source
@@ -102,3 +103,4 @@ extension ProjectView: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected link
     }
 }
+
