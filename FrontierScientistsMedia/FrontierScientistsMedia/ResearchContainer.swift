@@ -33,12 +33,13 @@ class ResearchContainer: UIViewController {
         if (currentState == .panelExpanded) {
             projectView.scrollView.userInteractionEnabled = false
             projectView.shadow.hidden = false
+        } else {
+            projectView.scrollView.userInteractionEnabled = true
+            projectView.shadow.hidden = true
         }
         if firstTime {
             firstTime = false
             projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
-            projectView.scrollView.userInteractionEnabled = true
-            projectView.shadow.hidden = true
         }
     }
     @IBAction func goToMenu(sender: AnyObject) {
@@ -114,7 +115,7 @@ extension ResearchContainer: ProjectViewDelegate {
         animatePanel(shouldExpand: notAlreadyExpanded)
     }
     func addPanelViewController() {
-        if (navigationViewController == nil) {
+        if (navigationViewController == nil) { // First time condition
             navigationViewController = UIStoryboard.navigationTableView()
             addChildSidePanelController(navigationViewController!)
         }
@@ -129,9 +130,8 @@ extension ResearchContainer: ProjectViewDelegate {
             currentState = .panelExpanded
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
         } else {
-            animateProjectViewXPosition(targetPosition: 0) { finished in
-                self.currentState = .panelCollapsed
-            }
+            self.currentState = .panelCollapsed
+            animateProjectViewXPosition(targetPosition: 0)
         }
     }
     func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
