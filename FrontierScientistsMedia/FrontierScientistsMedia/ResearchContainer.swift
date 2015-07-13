@@ -28,6 +28,7 @@ class ResearchContainer: UIViewController {
     var currentState: SlideOutState = .panelCollapsed
     var navigationViewController: ResearchNavigationTableView?
     let panelExpandedOffset: CGFloat = 60
+    
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()
         if (currentState == .panelExpanded) {
@@ -40,20 +41,22 @@ class ResearchContainer: UIViewController {
             projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
         }
     }
-    @IBAction func goToMenu(sender: AnyObject) {
+    @IBAction func goToMenu(sender: AnyObject) { // This is the "Back" button
         firstTime = true
         navigationController?.popViewControllerAnimated(true)
     }
-    @IBAction func openDrawer(sender: AnyObject) {
+    @IBAction func openDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelCollapsed) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = false
+            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2)
         }
     }
-    @IBAction func closeDrawer(sender: AnyObject) {
+    @IBAction func closeDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelExpanded) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = true
+            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
         }
         if firstTime {
             firstTime = false
@@ -85,6 +88,7 @@ class ResearchContainer: UIViewController {
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
                     projectView.scrollView.userInteractionEnabled = true
+                    projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
                     projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }
@@ -95,6 +99,9 @@ class ResearchContainer: UIViewController {
         if (currentState == .panelExpanded) {
             researchNavigationController.view.frame.size.width = self.view.frame.width
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
+        }
+        else{
+            projectView.drawerButton.center.x = 15
         }
     }
 }
@@ -146,7 +153,9 @@ extension ResearchContainer: ProjectViewDelegate {
 
 
 private extension UIStoryboard {
-    class func mainStoryboard() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()) }
+    class func mainStoryboard() -> UIStoryboard {
+        return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+    }
     
     class func navigationTableView() -> ResearchNavigationTableView? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("NavigationTableView") as? ResearchNavigationTableView

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -129,7 +129,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cGW-g4-Zb6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2014" y="1144"/>
+            <point key="canvasLocation" x="-2741" y="1866"/>
         </scene>
         <!--Project View-->
         <scene sceneID="rag-gd-zSK">
@@ -208,6 +208,16 @@
                                                     <outlet property="delegate" destination="dxx-bl-zBY" id="8AI-dS-dth"/>
                                                 </connections>
                                             </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRr-of-xkO">
+                                                <rect key="frame" x="25" y="164" width="22" height="71"/>
+                                                <state key="normal" backgroundImage="Drawer_Button.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="drawerButtonPressed:" destination="dxx-bl-zBY" eventType="touchUpInside" id="UfY-Ib-abr"/>
+                                                    <action selector="showProjects:" destination="als-D8-zIo" eventType="touchUpInside" id="Fd1-hH-s4U"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -253,6 +263,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="drawerButton" destination="cRr-of-xkO" id="BDc-IP-Ssf"/>
                         <outlet property="links" destination="Hmu-EP-USy" id="jZH-8a-h2N"/>
                         <outlet property="projectImage" destination="AKV-6Q-gKc" id="Pmx-id-Pib"/>
                         <outlet property="projectText" destination="0kf-eT-5m9" id="ZAB-ru-10t"/>
@@ -262,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1q-Ne-13x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1286" y="1160"/>
+            <point key="canvasLocation" x="-2038" y="1866"/>
         </scene>
         <!--Research-->
         <scene sceneID="uhu-nw-Wl5">
@@ -282,23 +293,22 @@
                             <outletCollection property="gestureRecognizers" destination="NzR-la-pwk" appends="YES" id="AE7-g1-0Sr"/>
                         </connections>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="Back" id="1RC-Vx-xgG"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Research" id="HjD-g6-gav">
-                        <barButtonItem key="leftBarButtonItem" title="Projects" id="RgT-w1-6Mh">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="RgT-w1-6Mh">
                             <connections>
-                                <action selector="showProjects:" destination="als-D8-zIo" id="K2j-d0-Auu"/>
+                                <action selector="goToMenu:" destination="als-D8-zIo" id="LAj-bX-ttf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Back" id="T3V-3F-ep7">
+                        <barButtonItem key="rightBarButtonItem" title="Main Menu" id="1RC-Vx-xgG">
                             <connections>
-                                <action selector="goToMenu:" destination="als-D8-zIo" id="J0v-Dq-uYP"/>
+                                <segue destination="bJJ-nJ-Bgi" kind="unwind" unwindAction="unwindToMainMenu:" id="Snb-1O-F3S"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="closeSwipe" destination="miA-t4-PVQ" id="zRr-0H-G8G"/>
+                        <outlet property="drawerButton" destination="cRr-of-xkO" id="LbB-s0-Uzm"/>
                         <outlet property="openSwipe" destination="NzR-la-pwk" id="Akc-cg-vEp"/>
                         <segue destination="m0R-S3-sa9" kind="show" identifier="videosLink" id="bJn-nc-CCu"/>
                         <segue destination="fKn-3k-ilC" kind="show" identifier="mapsLink" id="0Iq-56-ydQ"/>
@@ -580,6 +590,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InU-ob-QOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bJJ-nJ-Bgi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="378" y="418"/>
         </scene>
@@ -1014,13 +1025,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Drawer_Button.png" width="1440" height="2880"/>
         <image name="about_icon.png" width="144" height="144"/>
         <image name="ask_a_scientist_icon.png" width="142" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KIv-co-ZEf"/>
-        <segue reference="0Iq-56-ydQ"/>
         <segue reference="bJn-nc-CCu"/>
+        <segue reference="KIv-co-ZEf"/>
         <segue reference="1gU-HA-UUL"/>
+        <segue reference="0Iq-56-ydQ"/>
     </inferredMetricsTieBreakers>
 </document>

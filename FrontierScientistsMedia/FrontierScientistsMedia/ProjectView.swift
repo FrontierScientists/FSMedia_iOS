@@ -21,6 +21,7 @@ class ProjectView: UIViewController {
     @IBOutlet weak var projectText: UITextView!
     @IBOutlet weak var links: UITableView!
     @IBOutlet weak var shadow: UIView!
+    @IBOutlet weak var drawerButton: UIButton!
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
@@ -51,8 +52,16 @@ class ProjectView: UIViewController {
             scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
             delegate?.togglePanel?()
             scrollView.userInteractionEnabled = true
+            drawerButton.center.x = 15
             currentLinkedProject = ""
         }
+    }
+    
+    @IBAction func drawerButtonPressed(sender: AnyObject) {
+        delegate?.togglePanel?()
+        scrollView.userInteractionEnabled = false
+        shadow.hidden = false
+        drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2);
     }
 }
 
@@ -93,3 +102,4 @@ extension ProjectView: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected link
     }
 }
+

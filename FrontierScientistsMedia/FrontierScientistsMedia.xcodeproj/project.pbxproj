@@ -66,6 +66,7 @@
 		F56E9E6A1B1E15B80027D39B /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E691B1E15B80027D39B /* Assets */; };
 		F56E9E6C1B1E18260027D39B /* download_icon-web.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E6B1B1E18260027D39B /* download_icon-web.png */; };
 		F56E9E6E1B1E18450027D39B /* delete_icon-web.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E6D1B1E18450027D39B /* delete_icon-web.png */; };
+		F5DFA03E1B541B83006940BC /* Drawer_Button.png in Resources */ = {isa = PBXBuildFile; fileRef = F5DFA03D1B541B83006940BC /* Drawer_Button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		F56E9E691B1E15B80027D39B /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
 		F56E9E6B1B1E18260027D39B /* download_icon-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download_icon-web.png"; sourceTree = "<group>"; };
 		F56E9E6D1B1E18450027D39B /* delete_icon-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_icon-web.png"; sourceTree = "<group>"; };
+		F5DFA03D1B541B83006940BC /* Drawer_Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drawer_Button.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 				7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */,
 				F56E9E6B1B1E18260027D39B /* download_icon-web.png */,
 				3B6ED9FC1B0BD9A0003E8903 /* drawer_shadow.png */,
+				F5DFA03D1B541B83006940BC /* Drawer_Button.png */,
 				3B8170281B4DC3000027EB2B /* fs_icon.png */,
 				3B8170261B4DC2F50027EB2B /* gi_icon.png */,
 				3B6ED9F41B0BC95F003E8903 /* map_icon.png */,
@@ -367,6 +370,7 @@
 				3B6ED9E91B0BA5B9003E8903 /* navigation_bg.jpg in Resources */,
 				F56E9E6E1B1E18450027D39B /* delete_icon-web.png in Resources */,
 				7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */,
+				F5DFA03E1B541B83006940BC /* Drawer_Button.png in Resources */,
 				3BAA17E91B06C36D003510D7 /* Main.storyboard in Resources */,
 				F560C6FB1B290978007929A0 /* cancel_icon.png in Resources */,
 				F560C6F91B2908CE007929A0 /* blank_icon.png in Resources */,
@@ -560,7 +564,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FrontierScientistsMedia/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -575,7 +579,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FrontierScientistsMedia/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

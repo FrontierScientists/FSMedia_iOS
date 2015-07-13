@@ -29,6 +29,9 @@ class ResearchNavigationTableView: UIViewController {
         shadow.backgroundColor = UIColor(patternImage: UIImage(named: "drawer_shadow.png")!)
         binding.backgroundColor = UIColor(patternImage: UIImage(named: "navigation_bg.jpg")!)
         page.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
+        
+        println("ResearchNavigationTableView: viewDidLoad")
+
     }
 }
 
@@ -79,6 +82,7 @@ extension ResearchNavigationTableView: UITableViewDelegate {
         projectViewRef.scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
         projectViewRef.delegate?.togglePanel?()
         projectViewRef.scrollView.userInteractionEnabled = true
+        projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }
