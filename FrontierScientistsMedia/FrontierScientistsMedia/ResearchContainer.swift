@@ -32,10 +32,8 @@ class ResearchContainer: UIViewController {
         projectView.delegate?.togglePanel?()
         if (currentState == .panelExpanded) {
             projectView.scrollView.userInteractionEnabled = false
-            projectView.shadow.hidden = false
         } else {
             projectView.scrollView.userInteractionEnabled = true
-            projectView.shadow.hidden = true
         }
         if firstTime {
             firstTime = false
@@ -50,14 +48,12 @@ class ResearchContainer: UIViewController {
         if (currentState == .panelCollapsed) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = false
-            projectView.shadow.hidden = false
         }
     }
     @IBAction func closeDrawer(sender: AnyObject) {
         if (currentState == .panelExpanded) {
             projectView.delegate?.togglePanel!()
             projectView.scrollView.userInteractionEnabled = true
-            projectView.shadow.hidden = true
         }
         if firstTime {
             firstTime = false
@@ -89,7 +85,6 @@ class ResearchContainer: UIViewController {
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
                     projectView.scrollView.userInteractionEnabled = true
-                    projectView.shadow.hidden = true
                     projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }
@@ -129,9 +124,17 @@ extension ResearchContainer: ProjectViewDelegate {
         if (shouldExpand) {
             currentState = .panelExpanded
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
+            if (self.projectView.shadow != nil) {
+                UIView.animateWithDuration(0.3, animations: {
+                    self.projectView.shadow.alpha = 0.5
+                })
+            }
         } else {
             self.currentState = .panelCollapsed
             animateProjectViewXPosition(targetPosition: 0)
+            UIView.animateWithDuration(0.3, animations: {
+                self.projectView.shadow.alpha = 0.0
+            })
         }
     }
     func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {

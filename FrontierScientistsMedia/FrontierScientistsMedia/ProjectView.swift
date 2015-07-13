@@ -51,7 +51,6 @@ class ProjectView: UIViewController {
             scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
             delegate?.togglePanel?()
             scrollView.userInteractionEnabled = true
-            shadow.hidden = true
             currentLinkedProject = ""
         }
     }
