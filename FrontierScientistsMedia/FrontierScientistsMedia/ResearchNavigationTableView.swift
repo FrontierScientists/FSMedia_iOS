@@ -81,8 +81,6 @@ extension ResearchNavigationTableView: UITableViewDelegate {
         projectViewRef.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
         projectViewRef.scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
         projectViewRef.delegate?.togglePanel?()
-        projectViewRef.scrollView.userInteractionEnabled = true
-        projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }

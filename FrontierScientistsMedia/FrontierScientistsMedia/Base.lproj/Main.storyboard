@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="v4B-pN-bK3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -208,8 +208,12 @@
                                                     <outlet property="delegate" destination="dxx-bl-zBY" id="8AI-dS-dth"/>
                                                 </connections>
                                             </tableView>
+                                            <view alpha="0.49999999999999961" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dIy-Y3-4Y0">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRr-of-xkO">
-                                                <rect key="frame" x="25" y="164" width="22" height="71"/>
+                                                <rect key="frame" x="15" y="0.0" width="22" height="71"/>
                                                 <state key="normal" backgroundImage="Drawer_Button.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -231,20 +235,12 @@
                                             <constraint firstItem="0kf-eT-5m9" firstAttribute="leading" secondItem="WHG-nn-jx8" secondAttribute="leading" constant="25" id="vi6-iB-ZLa"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.49999999999999961" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dIy-Y3-4Y0">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="dIy-Y3-4Y0" secondAttribute="bottom" id="18L-FS-nai"/>
-                                    <constraint firstItem="dIy-Y3-4Y0" firstAttribute="leading" secondItem="Eil-PJ-LjO" secondAttribute="leading" id="28r-hF-uFr"/>
                                     <constraint firstAttribute="bottom" secondItem="WHG-nn-jx8" secondAttribute="bottom" id="4JE-S7-d9U"/>
                                     <constraint firstItem="WHG-nn-jx8" firstAttribute="leading" secondItem="Eil-PJ-LjO" secondAttribute="leading" id="5xm-tY-XEi"/>
-                                    <constraint firstAttribute="trailing" secondItem="dIy-Y3-4Y0" secondAttribute="trailing" id="7hI-Vr-03H"/>
                                     <constraint firstAttribute="width" secondItem="WHG-nn-jx8" secondAttribute="width" id="9xY-c8-iQo"/>
                                     <constraint firstItem="WHG-nn-jx8" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="top" id="Jc6-IF-m8O"/>
-                                    <constraint firstItem="dIy-Y3-4Y0" firstAttribute="top" secondItem="Eil-PJ-LjO" secondAttribute="top" id="NfI-ZX-1OF"/>
                                     <constraint firstAttribute="trailing" secondItem="WHG-nn-jx8" secondAttribute="trailing" id="dMx-Hj-YJ6"/>
                                 </constraints>
                                 <connections>
@@ -295,11 +291,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Research" id="HjD-g6-gav">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="RgT-w1-6Mh">
-                            <connections>
-                                <action selector="goToMenu:" destination="als-D8-zIo" id="LAj-bX-ttf"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Main Menu" id="1RC-Vx-xgG">
                             <connections>
                                 <segue destination="bJJ-nJ-Bgi" kind="unwind" unwindAction="unwindToMainMenu:" id="Snb-1O-F3S"/>

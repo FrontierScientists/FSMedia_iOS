@@ -39,6 +39,7 @@ class ProjectView: UIViewController {
         var image:UIImage = storedImages[imageTitle]!
         projectImage.image = image
         projectText.text = text
+        drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
         
         if currentLinkedProject != "" {
             // Go to that page
@@ -48,20 +49,13 @@ class ProjectView: UIViewController {
             var currentImage:UIImage = storedImages[imageTitle]!
             projectImage.image = currentImage
             projectText.text = text
-            projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
-            scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
             delegate?.togglePanel?()
-            scrollView.userInteractionEnabled = true
-            drawerButton.center.x = 15
             currentLinkedProject = ""
         }
     }
     
     @IBAction func drawerButtonPressed(sender: AnyObject) {
         delegate?.togglePanel?()
-        scrollView.userInteractionEnabled = false
-        shadow.hidden = false
-        drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2);
     }
 }
 

@@ -31,36 +31,15 @@ class ResearchContainer: UIViewController {
     
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()
-        if (currentState == .panelExpanded) {
-            projectView.scrollView.userInteractionEnabled = false
-        } else {
-            projectView.scrollView.userInteractionEnabled = true
-        }
-        if firstTime {
-            firstTime = false
-            projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
-        }
-    }
-    @IBAction func goToMenu(sender: AnyObject) { // This is the "Back" button
-        firstTime = true
-        navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func openDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelCollapsed) {
             projectView.delegate?.togglePanel!()
-            projectView.scrollView.userInteractionEnabled = false
-            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2)
         }
     }
     @IBAction func closeDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelExpanded) {
             projectView.delegate?.togglePanel!()
-            projectView.scrollView.userInteractionEnabled = true
-            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
-        }
-        if firstTime {
-            firstTime = false
-            projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
         }
     }
     
@@ -87,9 +66,6 @@ class ResearchContainer: UIViewController {
                 var touchPosition = touch.locationInView(self.view)
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
-                    projectView.scrollView.userInteractionEnabled = true
-                    projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
-                    projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }
         }
@@ -99,9 +75,8 @@ class ResearchContainer: UIViewController {
         if (currentState == .panelExpanded) {
             researchNavigationController.view.frame.size.width = self.view.frame.width
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
-        }
-        else{
-            projectView.drawerButton.center.x = 15
+        } else {
+            projectView.drawerButton.center.x = projectView.drawerButton.frame.width / 2
         }
     }
 }
@@ -135,6 +110,8 @@ extension ResearchContainer: ProjectViewDelegate {
                 UIView.animateWithDuration(0.3, animations: {
                     self.projectView.shadow.alpha = 0.5
                 })
+                projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
+                projectView.scrollView.userInteractionEnabled = false
             }
         } else {
             self.currentState = .panelCollapsed
@@ -142,6 +119,12 @@ extension ResearchContainer: ProjectViewDelegate {
             UIView.animateWithDuration(0.3, animations: {
                 self.projectView.shadow.alpha = 0.0
             })
+            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2)
+            projectView.scrollView.userInteractionEnabled = true
+            if firstTime {
+                firstTime = false
+                projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
+            }
         }
     }
     func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
