@@ -16,6 +16,7 @@ protocol ProjectViewDelegate {
 
 class ProjectView: UIViewController {
 
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
@@ -39,19 +40,7 @@ class ProjectView: UIViewController {
         var image:UIImage = storedImages[imageTitle]!
         projectImage.image = image
         projectText.text = text
-        drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
-        
-        if currentLinkedProject != "" {
-            // Go to that page
-            projectTitle = currentLinkedProject
-            var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-            var text = (projectData[projectTitle]!["project_description"] as! String)
-            var currentImage:UIImage = storedImages[imageTitle]!
-            projectImage.image = currentImage
-            projectText.text = text
-            delegate?.togglePanel?()
-            currentLinkedProject = ""
-        }
+        drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
     }
     
     @IBAction func drawerButtonPressed(sender: AnyObject) {
