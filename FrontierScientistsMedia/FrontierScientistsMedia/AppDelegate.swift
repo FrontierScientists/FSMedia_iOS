@@ -9,6 +9,8 @@
 import UIKit
 let iPadDeviceType = UIUserInterfaceIdiom.Pad
 let group = dispatch_group_create()
+var networkConnected = true
+var displayOldData = false
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,20 +22,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             reachability.startNotifier();
             netStatus = reachability.currentReachabilityStatus();
-            if(netStatus.value == NOTREACHABLE) {
-                println("noInternetConnectionAlert triggered.");
-                let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
-                var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
-                alert.show();
-                    
-                // Delay the dismissal
-                let delay = 4.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                dispatch_after(time, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                    alert.dismissWithClickedButtonIndex(-1, animated: true)
-                })
+            if (netStatus.value == NOTREACHABLE) {
+                networkConnected = false
             }
-                
+//            if(netStatus.value == NOTREACHABLE) {
+//                println("noInternetConnectionAlert triggered.");
+//                let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
+//                var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+//                alert.show();
+//                    
+//                // Delay the dismissal
+//                let delay = 4.0 * Double(NSEC_PER_SEC)
+//                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//                dispatch_after(time, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+//                    alert.dismissWithClickedButtonIndex(-1, animated: true)
+//                })
+//            }
+            
+            while (networkConnected == false) {
+                // Wait until a network connection is made or old data is present
+                if displayOldData {
+                    break
+                }
+            }
+            
             updateContent()
             processImages()
             println("UI Ready!")

@@ -14,7 +14,6 @@ var currentStoredImages = [String: NSData]()
 
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
-    
     if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {
         NSKeyedArchiver.archiveRootObject([String: UIImage](), toFile: getFileUrl("storedImages").path!)
     }
