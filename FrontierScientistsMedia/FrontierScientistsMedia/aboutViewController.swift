@@ -26,15 +26,20 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     @IBAction func emailDevs(sender: AnyObject) {
-        
-        var subject_prefix = "[frontscidevelopers] "
-        var recepient = ["developer@frontierscientists.com"]
+        netStatus = reachability.currentReachabilityStatus();
+        if(netStatus.value == NOTREACHABLE){
+            noEmailAlert();
+        }
+        else{
+            var subject_prefix = "[frontscidevelopers] "
+            var recepient = ["developer@frontierscientists.com"]
 
-        var mailer = MFMailComposeViewController()
-        mailer.mailComposeDelegate = self
-        mailer.setToRecipients(recepient)
-        mailer.setSubject(subject_prefix)
-        presentViewController(mailer, animated: true, completion: nil)
+            var mailer = MFMailComposeViewController()
+            mailer.mailComposeDelegate = self
+            mailer.setToRecipients(recepient)
+            mailer.setSubject(subject_prefix)
+            presentViewController(mailer, animated: true, completion: nil)
+        }
         
     }
     
@@ -65,8 +70,21 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         aboutTable.estimatedRowHeight = 110.0
         aboutTable.rowHeight = UITableViewAutomaticDimension
+        
     }//end viewDidLoad
     
+    func noEmailAlert(){
+        
+        let ALERTMESSAGE = "No network connection was found. Email is unavailable.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         println("debug numORows")

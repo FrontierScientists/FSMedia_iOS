@@ -18,18 +18,31 @@ class AskViewController: UIViewController, UITableViewDataSource, UITableViewDel
     @IBOutlet var askTableView: UITableView!
     
     @IBAction func scientistBioClicked(sender: AnyObject) {
-        println("Ask A Scientist: image button")
-        performSegueWithIdentifier("scientist_bio",sender: nil)
+        netStatus = reachability.currentReachabilityStatus();
+        if(netStatus.value == NOTREACHABLE){
+            noVideoAlert();
+        }
+        else{
+            println("Ask A Scientist: image button")
+            performSegueWithIdentifier("scientist_bio",sender: nil)
+        }
     }
     @IBAction func sendMail(sender: AnyObject) {
-        println("Ask A Scientists: I am the bottom button")
-        var subject_prefix = "[frontsci]"
-        var recepient = ["liz@frontierscientists.com"]
-        var mailer = MFMailComposeViewController()
-        mailer.mailComposeDelegate = self
-        mailer.setToRecipients(recepient)
-        mailer.setSubject(subject_prefix)
-        presentViewController(mailer, animated: true, completion: nil)
+        
+        netStatus = reachability.currentReachabilityStatus();
+        if(netStatus.value == NOTREACHABLE){
+            noEmailAlert();
+        }
+        else{
+            println("Ask A Scientists: I am the bottom button")
+            var subject_prefix = "[frontsci]"
+            var recepient = ["liz@frontierscientists.com"]
+            var mailer = MFMailComposeViewController()
+            mailer.mailComposeDelegate = self
+            mailer.setToRecipients(recepient)
+            mailer.setSubject(subject_prefix)
+            presentViewController(mailer, animated: true, completion: nil)
+        }
     }
 
     // MFMailComposeViewControllerDelegate
@@ -37,6 +50,7 @@ class AskViewController: UIViewController, UITableViewDataSource, UITableViewDel
 func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
     dismissViewControllerAnimated(true, completion: nil)
     }
+    
 override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let avc = segue.destinationViewController as? YouTubeStreaming;
         avc?.uTubeUrl=scientistInfo["video"]!
@@ -51,8 +65,55 @@ override func viewDidLoad() {
 
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Ask A Scientist"
-           }
+    
+    netStatus = reachability.currentReachabilityStatus();
+    if(netStatus.value == NOTREACHABLE){
+        noInternetAlert();
+    }
+}
 
+    func noInternetAlert(){
+        
+        let ALERTMESSAGE = "No network connection was found. Email and scientist bio video are unavailable.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
+    
+    func noEmailAlert(){
+        
+        let ALERTMESSAGE = "No network connection was found. Email cannot be sent.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
+    
+    func noVideoAlert(){
+        
+        let ALERTMESSAGE = "No network connection was found. Video cannot stream.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 3.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
+    
 func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 3
 }
