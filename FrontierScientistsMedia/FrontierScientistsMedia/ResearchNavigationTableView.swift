@@ -84,6 +84,7 @@ extension ResearchNavigationTableView: UITableViewDelegate {
         projectViewRef.scrollView.userInteractionEnabled = true
         projectViewRef.shadow.hidden = true
         projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
+        projectViewRef.drawerButton.center.x = 30
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
 }

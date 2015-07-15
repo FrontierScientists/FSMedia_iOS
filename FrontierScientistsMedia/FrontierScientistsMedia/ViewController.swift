@@ -36,11 +36,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         mainMenu.userInteractionEnabled = false // Start the menu off as unselectable
         
         // Format the splash screen
-        let imageDimension = self.view.frame.width / 4
+        let imageDimension = self.view.frame.width / 2.46
         let heightSpacer = self.view.frame.height / 4
         let fsLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 2) - (imageDimension / 2), heightSpacer / 2, imageDimension, imageDimension))
-        let arscLogo = UIImageView(frame: CGRectMake(imageDimension / 2, (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
-        let giLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 2) + (imageDimension / 2), (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
+        let arscLogo = UIImageView(frame: CGRectMake(self.view.frame.width / 16.7, (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
+        let giLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 16.7) + imageDimension + (self.view.frame.width / 16.7), (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
         fsLogo.image = UIImage(named: "fs_icon.png")
         arscLogo.image = UIImage(named: "arsc_icon.png")
         giLogo.image = UIImage(named: "gi_icon.png")

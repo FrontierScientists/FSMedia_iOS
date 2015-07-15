@@ -28,6 +28,7 @@ class ProjectView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.frame = CGRectMake(0, 0, self.view.bounds.width, researchContainerRef.view.bounds.height);
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         projectText.backgroundColor = UIColor.clearColor()
         projectText.font = UIFont(name: "Chalkduster", size: 17)
@@ -53,9 +54,10 @@ class ProjectView: UIViewController {
             delegate?.togglePanel?()
             scrollView.userInteractionEnabled = true
             shadow.hidden = true
-            drawerButton.center.x = 15
             currentLinkedProject = ""
         }
+        shadow.frame = CGRectMake(0, 0, self.view.bounds.width, 3000)
+        drawerButton.center.x = 15
     }
     
     @IBAction func drawerButtonPressed(sender: AnyObject) {
@@ -89,13 +91,36 @@ extension ProjectView: UITableViewDataSource {
     }
 }
 
+//noInternetConnectionAlert
+//
+func noVideosAlert(){
+    
+    let ALERTMESSAGE = "There are no videos for this research project. Would you still like to continue to videos?";
+    var alert = UIAlertController(title: ALERTMESSAGE,
+        message: "",
+        preferredStyle: UIAlertControllerStyle.Alert);
+    
+    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler:nil))
+    alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler:
+        {(action: UIAlertAction!) in
+            selectedResearchProjectIndex = 0;
+            researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
+    }));
+    researchContainerRef.presentViewController(alert, animated: true, completion: nil);
+}
+
 // TableView Delegate
 extension ProjectView: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 { // Videos
             selectedResearchProjectIndex = find(orderedTitles, projectTitle)!
-            researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
+            if(iosProjectData[selectedResearchProjectIndex]["videos"]?.count == 0){
+                noVideosAlert()
+            }
+            else{
+                researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
+            }
         } else { // Maps
             currentLinkedProject = projectTitle
             researchContainerRef.performSegueWithIdentifier("mapsLink", sender: nil)

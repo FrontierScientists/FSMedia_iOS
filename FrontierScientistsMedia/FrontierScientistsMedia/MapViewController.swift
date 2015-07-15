@@ -52,17 +52,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         for var i:Int = 0; i < projectData.keys.array.count; i++ {
             var projectTitle = orderedTitles[i]
-                var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-                var image:UIImage = storedImages[imageTitle]!
+            println("projectTitle: " + projectTitle)
+            var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+            println("imageTitle: " + imageTitle)
+            var image:UIImage = storedImages[imageTitle]!
             var latitude = projectData[projectTitle]!["latitude"] as! CLLocationDegrees
             var longitude = projectData[projectTitle]!["longitude"] as! CLLocationDegrees
-                var tempLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            var tempLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
             markerMap.location.append(tempLocation)
             markerMap.title.append((projectTitle))
             markerMap.image.append(image)
             
-        let annotation = MKPointAnnotation()
+            let annotation = MKPointAnnotation()
             annotation.coordinate = markerMap.location[i]
             annotation.title = markerMap.title[i]
             annotation.subtitle = "Research Project: Tap picture for more"

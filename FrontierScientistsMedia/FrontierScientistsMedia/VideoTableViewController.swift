@@ -73,23 +73,6 @@ class MySwiftVideoTableViewController: UITableViewController
         }
     }
     
-    //noInternetConnectionAlert
-    //
-    func noInternetConnectionAlert(){
-        
-        println("noInternetConnectionAlert triggered in video table.");
-        let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
-        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
-        alert.show();
-        
-        // Delay the dismissal
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissWithClickedButtonIndex(-1, animated: true)
-        })
-    }
-    
     //orientationChangeUpdate
     //
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -409,6 +392,7 @@ class MySwiftVideoTableViewController: UITableViewController
     }
     
     // Cell Selection and Alert Functions
+    //  noInternetConnectionAlert()
     //  cancel_Download_Alert(videoTitleString: String)
     //  HD_or_Compressed_Alert()
     //  downloadVideo()
@@ -417,6 +401,23 @@ class MySwiftVideoTableViewController: UITableViewController
     //  playDownloadedVideo(videoFilePath: String)
     //
     //
+    
+    
+    //noInternetConnectionAlert
+    //
+    func noInternetConnectionAlert(){
+        println("noInternetConnectionAlert triggered in video table.");
+        let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
     
     // cancel_Download_Alert
     // Alert that asks the user if they are sure they want to cancel their in-progress download
