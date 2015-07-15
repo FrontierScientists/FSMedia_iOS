@@ -33,6 +33,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        dispatch_async(dispatch_get_main_queue()) {
+            if !networkConnected {
+                self.checkNetwork()
+            }
+        }
+        
         mainMenu.userInteractionEnabled = false // Start the menu off as unselectable
         
         // Format the splash screen
@@ -148,7 +154,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.splashScreen.hidden = true
     }
     
+    func checkNetwork() {
+        var alert = UIAlertController()
+        if (NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) == nil) {
+            alert = UIAlertController(title: "No internet connection.", message: "Internet required for initial startup.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Try again", style: .Default, handler: { (action: UIAlertAction!) in
+                netStatus = reachability.currentReachabilityStatus();
+                if (netStatus.value == NOTREACHABLE) {
+                    self.checkNetwork()
+                } else {
+                    networkConnected = true
+                }
+            }))
+            
+        } else {
+            alert = UIAlertController(title: "No internet connection.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+            displayOldData = true
+        }
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func unwindToMainMenu(sender: UIStoryboardSegue){
     
     }
+    
+    
 }

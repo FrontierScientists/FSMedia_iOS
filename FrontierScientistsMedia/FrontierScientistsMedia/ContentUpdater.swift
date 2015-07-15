@@ -24,8 +24,12 @@ func updateContent() {
         let today = NSDate()
         
         if today.compare(nextUpdateDate) != NSComparisonResult.OrderedAscending { // If the next update date is either before today or is today, an update is needed.
-            println("Updating stored data...")
-            loadDataFromJson(filePath)
+            if displayOldData {
+                println("Displaying old content")
+            } else {
+                println("Updating stored data...")
+                loadDataFromJson(filePath)
+            }
         } else {
             println("Data is current.  No update needed.")
         }
