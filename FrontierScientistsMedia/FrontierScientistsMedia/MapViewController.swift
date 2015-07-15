@@ -72,6 +72,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.addAnnotation(annotation)
             
             markerMap.annotationDict[annotation.title] = annotation
+            
+            
+            println("viewDidLoad title: " + annotation.title)
+            println("viewDidLoad image:" + imageTitle)
+            println("viewDidLoad index: ")
+            println(i)
         }
         
         if currentLinkedProject != "" {
@@ -83,6 +89,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         currentLinkedProject = ""
         }
         
+        for (projectKey,projectAnnotation) in markerMap.annotationDict {
+            
+    }
 //        Setting up a left bar button
 //                resetMapButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!], forState: .Normal)
         
@@ -112,11 +121,25 @@ func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -
 //            view.rightCalloutAccessoryView = UIImageView(image: UIImage(named: "map_icon.png"))
 //            view.rightCalloutAccessoryView.frame = CGRectMake(0,0,40,40)
 
+            println("viewForAnnotation title: " + annotation.title!)
+            println("viewForAnnotation image: " + imageTitle)
+            
             return view
         }
     }
 return nil
 }
+    
+    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!){
+        var imageTitle = (projectData[view.annotation.title!]!["preview_image"])!.lastPathComponent
+        let toResearch = UIButton()
+        toResearch.setImage(storedImages[imageTitle], forState: .Normal)
+        toResearch.frame = CGRectMake(0,0,40,40)
+        toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        toResearch.titleLabel!.text = view.annotation.title
+        view.leftCalloutAccessoryView = toResearch
+    }
+    
     
     class MarkerMap {
         var image = [UIImage]()

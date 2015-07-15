@@ -16,6 +16,7 @@ protocol ProjectViewDelegate {
 
 class ProjectView: UIViewController {
 
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
     @IBOutlet weak var projectText: UITextView!
@@ -40,31 +41,11 @@ class ProjectView: UIViewController {
         var image:UIImage = storedImages[imageTitle]!
         projectImage.image = image
         projectText.text = text
-        
-        if currentLinkedProject != "" {
-            // Go to that page
-            projectTitle = currentLinkedProject
-            var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-            var text = (projectData[projectTitle]!["project_description"] as! String)
-            var currentImage:UIImage = storedImages[imageTitle]!
-            projectImage.image = currentImage
-            projectText.text = text
-            projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
-            scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
-            delegate?.togglePanel?()
-            scrollView.userInteractionEnabled = true
-            shadow.hidden = true
-            currentLinkedProject = ""
-        }
-        shadow.frame = CGRectMake(0, 0, self.view.bounds.width, 3000)
-        drawerButton.center.x = 15
+        drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
     }
     
     @IBAction func drawerButtonPressed(sender: AnyObject) {
         delegate?.togglePanel?()
-        scrollView.userInteractionEnabled = false
-        shadow.hidden = false
-        drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2);
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import QuartzCore
 
 enum SlideOutState {
@@ -27,44 +28,19 @@ class ResearchContainer: UIViewController {
     var projectView: ProjectView!
     var currentState: SlideOutState = .panelCollapsed
     var navigationViewController: ResearchNavigationTableView?
-    let panelExpandedOffset: CGFloat = 60
+    var panelExpandedOffset: CGFloat = 60
     
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()
-        if (currentState == .panelExpanded) {
-            projectView.scrollView.userInteractionEnabled = false
-            projectView.shadow.hidden = false
-        } else {
-            projectView.scrollView.userInteractionEnabled = true
-            projectView.shadow.hidden = true
-        }
-        if firstTime {
-            firstTime = false
-            projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
-        }
-    }
-    @IBAction func goToMenu(sender: AnyObject) { // This is the "Back" button
-        firstTime = true
-        navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func openDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelCollapsed) {
             projectView.delegate?.togglePanel!()
-            projectView.scrollView.userInteractionEnabled = false
-            projectView.shadow.hidden = false
-            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2)
         }
     }
     @IBAction func closeDrawer(sender: AnyObject) { // On swipe
         if (currentState == .panelExpanded) {
             projectView.delegate?.togglePanel!()
-            projectView.scrollView.userInteractionEnabled = true
-            projectView.shadow.hidden = true
-            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
-        }
-        if firstTime {
-            firstTime = false
-            projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
         }
     }
     
@@ -80,7 +56,26 @@ class ResearchContainer: UIViewController {
         addChildViewController(researchNavigationController)
         researchNavigationController.didMoveToParentViewController(self)
         
-        projectView.delegate?.togglePanel?()
+        self.projectView.delegate?.togglePanel?() // Toggle first to initialize the navigationViewController
+        
+        if currentLinkedProject != "" {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                let index = find(orderedTitles, currentLinkedProject)!
+                let rowToSelect:NSIndexPath = NSIndexPath(forRow: index, inSection: 0)
+                self.navigationViewController?.navigationTableView.scrollToRowAtIndexPath(rowToSelect, atScrollPosition: UITableViewScrollPosition.Top, animated: false)
+                self.navigationViewController!.tableView(self.navigationViewController!.navigationTableView, didSelectRowAtIndexPath: rowToSelect)
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.6 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                    self.projectView.projectText.setContentOffset(CGPointZero, animated: false)
+                }
+                currentLinkedProject = ""
+            }
+        } else {
+            // The purpose of this delay is to allow the project view to properly load before opening the drawer for initial display.
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.01 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.navigationViewController!.tableView(self.navigationViewController!.navigationTableView, didSelectRowAtIndexPath: NSIndexPath(forRow: 0, inSection: 0))
+                self.projectView.delegate?.togglePanel?() // Toggle again to start the display with the drawer open
+            }
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
@@ -91,10 +86,6 @@ class ResearchContainer: UIViewController {
                 var touchPosition = touch.locationInView(self.view)
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
-                    projectView.scrollView.userInteractionEnabled = true
-                    projectView.shadow.hidden = true
-                    projectViewRef.drawerButton.transform = CGAffineTransformMakeRotation(-3.14);
-                    projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
                 }
             }
         }
@@ -104,9 +95,6 @@ class ResearchContainer: UIViewController {
         if (currentState == .panelExpanded) {
             researchNavigationController.view.frame.size.width = self.view.frame.width
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
-        }
-        else{
-            projectView.drawerButton.center.x = 15
         }
     }
 }
@@ -136,9 +124,25 @@ extension ResearchContainer: ProjectViewDelegate {
         if (shouldExpand) {
             currentState = .panelExpanded
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
+            if (self.projectView.shadow != nil) {
+                UIView.animateWithDuration(0.3, animations: {
+                    self.projectView.shadow.alpha = 0.5
+                })
+                projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
+                projectView.scrollView.userInteractionEnabled = false
+            }
         } else {
             self.currentState = .panelCollapsed
             animateProjectViewXPosition(targetPosition: 0)
+            UIView.animateWithDuration(0.3, animations: {
+                self.projectView.shadow.alpha = 0.0
+            })
+            projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14*2)
+            projectView.scrollView.userInteractionEnabled = true
+            if firstTime {
+                firstTime = false
+                projectView.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
+            }
         }
     }
     func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
