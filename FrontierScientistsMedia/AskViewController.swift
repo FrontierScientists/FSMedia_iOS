@@ -163,7 +163,6 @@ func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexP
         println("case 2")
         let cell: AskTableViewCell = tableView.dequeueReusableCellWithIdentifier("askAScientist") as! AskTableViewCell
         cell.backgroundColor = UIColor.clearColor()
-        self.askTableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.None)
         return cell
     default:
         return celll}

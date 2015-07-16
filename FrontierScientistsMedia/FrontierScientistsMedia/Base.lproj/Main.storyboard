@@ -909,8 +909,8 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YAw-dL-Dlf" id="fVP-kL-P1c">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn7-Mb-Tyj">
-                                            <rect key="frame" x="8" y="8" width="584" height="111"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sn7-Mb-Tyj">
+                                            <rect key="frame" x="8" y="8" width="584" height="87"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <string key="text">Here at Frontier Scientists we have a scientist on call to answer your question! Below you can find information about the current scientist on call and an easy button to send an email!</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -919,10 +919,10 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="sn7-Mb-Tyj" firstAttribute="bottom" secondItem="fVP-kL-P1c" secondAttribute="bottomMargin" id="4CW-3K-6Co"/>
-                                        <constraint firstItem="sn7-Mb-Tyj" firstAttribute="trailing" secondItem="fVP-kL-P1c" secondAttribute="trailingMargin" id="Buh-T1-08H"/>
-                                        <constraint firstItem="sn7-Mb-Tyj" firstAttribute="leading" secondItem="fVP-kL-P1c" secondAttribute="leadingMargin" id="Etf-5v-9EU"/>
-                                        <constraint firstItem="sn7-Mb-Tyj" firstAttribute="top" secondItem="fVP-kL-P1c" secondAttribute="topMargin" id="z42-3p-pkv"/>
+                                        <constraint firstItem="sn7-Mb-Tyj" firstAttribute="leading" secondItem="fVP-kL-P1c" secondAttribute="leading" constant="8" id="MBF-a4-UxI"/>
+                                        <constraint firstAttribute="trailing" secondItem="sn7-Mb-Tyj" secondAttribute="trailing" constant="8" id="RO1-q0-dB3"/>
+                                        <constraint firstAttribute="bottom" secondItem="sn7-Mb-Tyj" secondAttribute="bottom" constant="33" id="VNo-dr-xMP"/>
+                                        <constraint firstItem="sn7-Mb-Tyj" firstAttribute="top" secondItem="fVP-kL-P1c" secondAttribute="top" constant="8" id="awA-b4-nCE"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
