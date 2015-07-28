@@ -8,6 +8,7 @@
 
 import UIKit
 
+var cannotContinue = false
 var reachability = Reachability.reachabilityForInternetConnection();
 var netStatus = reachability.currentReachabilityStatus();
 let NOTREACHABLE: Int = 0;
@@ -36,17 +37,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         dispatch_async(dispatch_get_main_queue()) {
             if !networkConnected {
                 self.checkNetwork()
+            } else if !connectedToServer {
+                if cannotContinue {
+                    var alert = UIAlertController(title: "Unable to connect to server.", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                } else {
+                    self.handleNoServerConnection()
+                }
             }
         }
         
         mainMenu.userInteractionEnabled = false // Start the menu off as unselectable
         
         // Format the splash screen
-        let imageDimension = self.view.frame.width / 2.46
+        let imageDimension = self.view.frame.width / 4
         let heightSpacer = self.view.frame.height / 4
         let fsLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 2) - (imageDimension / 2), heightSpacer / 2, imageDimension, imageDimension))
-        let arscLogo = UIImageView(frame: CGRectMake(self.view.frame.width / 16.7, (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
-        let giLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 16.7) + imageDimension + (self.view.frame.width / 16.7), (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
+        let arscLogo = UIImageView(frame: CGRectMake(imageDimension / 2, (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
+        let giLogo = UIImageView(frame: CGRectMake((self.view.frame.width / 2) + (imageDimension / 2), (self.view.frame.height / 2) + (heightSpacer / 2), imageDimension, imageDimension))
         fsLogo.image = UIImage(named: "fs_icon.png")
         arscLogo.image = UIImage(named: "arsc_icon.png")
         giLogo.image = UIImage(named: "gi_icon.png")
@@ -175,9 +183,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    @IBAction func unwindToMainMenu(sender: UIStoryboardSegue){
-    
+    func handleNoServerConnection() {
+        var alert = UIAlertController(title: "Unable to connect to server.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
-    
-    
 }

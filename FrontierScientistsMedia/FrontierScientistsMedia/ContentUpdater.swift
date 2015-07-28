@@ -13,6 +13,7 @@ var iosProjectData: Array<Dictionary<String, AnyObject>> = [];
 var scientistInfo = [String: String]()
 var aboutInfo = [String: AnyObject]()
 var orderedTitles = [String]()
+var connectedToServer = true
 
 func updateContent() {
     let filePath = "http://frontsci.arsc.edu/frontsci/frontSciData.json"
@@ -38,6 +39,11 @@ func updateContent() {
         loadDataFromJson(filePath)
     }
     
+    if (!connectedToServer && NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) == nil) {
+        cannotContinue = true
+        return
+    }
+    
     projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
     iosProjectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("iosProjectData").path!) as! [[String: AnyObject]]
     scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
@@ -54,8 +60,9 @@ func updateContent() {
 // This function establishes a connection with the VM, loads the content of frontSciData.json into a dictionary and saves data from that dictionary into storage.
 func loadDataFromJson(filePath: String) {
     let data: NSData? = NSData(contentsOfURL: NSURL(string: filePath)!)
-    if(data == nil){
+    if (data == nil) {
         println("Error: Could not update data because the downloaded json data was nil")
+        connectedToServer = false
         return
     }
     var error: NSError?

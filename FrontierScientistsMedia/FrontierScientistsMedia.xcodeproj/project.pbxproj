@@ -53,7 +53,7 @@
 		F560C6F91B2908CE007929A0 /* blank_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F81B2908CE007929A0 /* blank_icon.png */; };
 		F560C6FB1B290978007929A0 /* cancel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6FA1B290978007929A0 /* cancel_icon.png */; };
 		F56E9E3E1B1CCE170027D39B /* CellBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E3D1B1CCE170027D39B /* CellBorder.png */; };
-		F56E9E441B1CD0670027D39B /* ArticlesTableViewController_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */; };
+		F56E9E441B1CD0670027D39B /* ArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E421B1CD0670027D39B /* ArticlesTableViewController.swift */; };
 		F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */; };
 		F56E9E471B1CD1600027D39B /* new_icon-web.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E461B1CD1600027D39B /* new_icon-web.png */; };
 		F56E9E491B1CD1700027D39B /* Transition_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E481B1CD1700027D39B /* Transition_Icon.png */; };
@@ -130,7 +130,7 @@
 		F560C6F81B2908CE007929A0 /* blank_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank_icon.png; sourceTree = "<group>"; };
 		F560C6FA1B290978007929A0 /* cancel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_icon.png; sourceTree = "<group>"; };
 		F56E9E3D1B1CCE170027D39B /* CellBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellBorder.png; sourceTree = "<group>"; };
-		F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesTableViewController_Swift.swift; sourceTree = "<group>"; };
+		F56E9E421B1CD0670027D39B /* ArticlesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesTableViewController.swift; sourceTree = "<group>"; };
 		F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
 		F56E9E461B1CD1600027D39B /* new_icon-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_icon-web.png"; sourceTree = "<group>"; };
 		F56E9E481B1CD1700027D39B /* Transition_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Transition_Icon.png; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 				F56E9E4E1B1CD1890027D39B /* YTPlayerView.h */,
 				F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */,
 				3BAA17E31B06C36D003510D7 /* AppDelegate.swift */,
-				F56E9E421B1CD0670027D39B /* ArticlesTableViewController_Swift.swift */,
+				F56E9E421B1CD0670027D39B /* ArticlesTableViewController.swift */,
 				7E8E89B71B279C8300966C82 /* aboutViewController.swift */,
 				7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */,
 				F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */,
@@ -428,7 +428,7 @@
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
 				3BBBD4901B227CFC00C628B1 /* GameScene.swift in Sources */,
 				3B22C1C01B1790F3004AADAE /* ImageProcessor.swift in Sources */,
-				F56E9E441B1CD0670027D39B /* ArticlesTableViewController_Swift.swift in Sources */,
+				F56E9E441B1CD0670027D39B /* ArticlesTableViewController.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,
 				F56E9E521B1CD1890027D39B /* VideoTableViewController.swift in Sources */,
 				3B22C1BC1B1666E7004AADAE /* HelperFunctions.swift in Sources */,

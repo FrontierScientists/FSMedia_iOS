@@ -31,8 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             updateContent()
-            processImages()
-            println("UI Ready!")
+            if !cannotContinue {
+                processImages()
+                println("UI Ready!")
+            }
         }
         return true
     }
