@@ -1,0 +1,271 @@
+//
+//  VideoTableViewController.m
+//  FSDemo
+//
+//  Created by Andrew Clark on 4/17/14.
+//  Copyright (c) 2014 Andrew Clark. All rights reserved.
+//
+
+#import "VideoTableViewController.h"
+
+@interface VideoTableViewController ()
+
+@end
+
+@implementation VideoTableViewController
+
+@synthesize vtvcParsedData;
+@synthesize videoNameArray;
+@synthesize researchNameArray;
+@synthesize videoMP4Array;
+@synthesize video3GPArray;
+@synthesize videoUTubeArray;
+@synthesize vidLink;
+@synthesize youTubeLink;
+@synthesize pickedSection;
+@synthesize researchTopicCount;
+
+NSIndexPath *scrollPath;
+
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+   
+    return self;
+}
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    youTubeLink = @"https://www.youtube.com/watch?v=2r1VPxESfoY";
+
+    scrollPath = [NSIndexPath indexPathForRow:NSNotFound inSection:pickedSection];
+    NSLog(@"The video section is: %d", scrollPath.section);
+    [self.tableView scrollToRowAtIndexPath:scrollPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    
+    self.title = @"Videos";
+    
+    videoNameArray = [[NSMutableArray alloc]init];
+    researchNameArray = [[NSMutableArray alloc]init];
+    videoMP4Array = [[NSMutableArray alloc]init];
+    video3GPArray = [[NSMutableArray alloc]init];
+    videoUTubeArray = [[NSMutableArray alloc]init];
+    
+    //[self parseForVideoData];
+    
+<<<<<<< HEAD
+=======
+    /*
+    for(NSString *index in videoNameArray)
+    {
+        NSLog(@"The name of the videos are %@ ", index);
+    }
+     */
+    
+>>>>>>> f2928fc42bdf5393bf1087e6c5c2c5915ff12f3d
+    UIImage *navBarImage = [UIImage imageNamed:@"RiR_plainyellow_iphone"];
+    [self.navigationController.navigationBar setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    
+    UIImageView *backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"RiR_lined_iphone_V44px"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RiR_lined_iphone_V44px"]];
+    [self.view addSubview:backgroundView];
+    [self.view sendSubviewToBack:backgroundView];
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+
+#pragma mark - Table view data source
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+<<<<<<< HEAD
+    view.tintColor = [UIColor clearColor];
+=======
+
+    // Return the number of sections.
+    return 1;
+    //return [vtvcParsedData count];
+>>>>>>> f2928fc42bdf5393bf1087e6c5c2c5915ff12f3d
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // researchDict -> projects(Array) count
+    return [[vtvcParsedData objectForKey:@"projects"] count];
+}
+
+<<<<<<< HEAD
+
+=======
+/*
+>>>>>>> f2928fc42bdf5393bf1087e6c5c2c5915ff12f3d
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    // researchDict -> projects(Array) -> projectsDict -> (projects)Name
+    return [[vtvcParsedData objectForKey:@"projects"][section] objectForKey: @"name"];
+}
+*/
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+<<<<<<< HEAD
+{
+    int vidTotal = [[vtvcParsedData objectForKey:@"videos"] count];
+    int vidCount = 0;
+    NSString *vidName;
+                        // researchDict -> projects(Array) -> projectsDict -> (projects)Name
+    NSString *projName = [[vtvcParsedData objectForKey:@"projects"][section] objectForKey:@"name"];
+    for(int ii=0; ii<vidTotal; ++ii)
+    {
+        // researchDict -> videos(Array) -> videosDict -> (videos)Name
+        vidName = [[vtvcParsedData objectForKey:@"videos"][ii] objectForKey:@"name"];
+        if([projName isEqualToString:vidName])
+            ++vidCount;
+    }
+    return vidCount;
+=======
+{	
+    return 1;
+    //return [[[vtvcParsedData objectAtIndex:section] objectForKey:@"videos"] count];
+>>>>>>> f2928fc42bdf5393bf1087e6c5c2c5915ff12f3d
+}
+
+ 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor clearColor];
+    
+    cell.accessoryView = [[ UIImageView alloc ] initWithImage:[UIImage imageNamed:@"Transition_Icon.png"]];
+    [cell.accessoryView setFrame:CGRectMake(0, 0, 34, 34)];
+<<<<<<< HEAD
+
+    int videoIndex = 0;
+    int videoTotal = [[self.vtvcParsedData objectForKey:@"videos"] count];
+    NSString *projectName = [[self.vtvcParsedData objectForKey:@"projects"][indexPath.section] objectForKey:@"name"];
+    for(int ii=0; ii<videoTotal; ++ii)
+    {
+        if([projectName isEqualToString:[[self.vtvcParsedData objectForKey:@"videos"][ii] objectForKey:@"name"]])
+        {
+            videoIndex = ii + indexPath.row;
+            break;
+        }
+    }
+    cell.textLabel.text = [[self.vtvcParsedData objectForKey:@"videos"][videoIndex] objectForKey:@"post_title"];
+    cell.textLabel.font = [UIFont fontWithName:@"EraserDust" size:17.0];
+
+    for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    }
+    
+=======
+  
+    /*
+    // Set up the cell
+	int storyIndex = [indexPath indexAtPosition: [indexPath length] - 1];
+	
+	int offset = 0;
+	int count = [indexPath section] - 1;
+	
+	while (count >= 0) {
+		offset += [[[self.vtvcParsedData objectAtIndex:count] objectForKey:@"videos"] count];
+		count--;
+	}
+     */
+     
+    //cell.textLabel.text = [videoNameArray objectAtIndex:storyIndex+offset];
+    cell.textLabel.text = @"Video test";
+    cell.textLabel.font = [UIFont fontWithName:@"Go Boom!" size:17.0];
+     
+>>>>>>> f2928fc42bdf5393bf1087e6c5c2c5915ff12f3d
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+<<<<<<< HEAD
+    int videoIndex = 0;
+    int videoTotal = [[self.vtvcParsedData objectForKey:@"videos"] count];
+    NSString *projectName = [[self.vtvcParsedData objectForKey:@"projects"][indexPath.section] objectForKey:@"name"];
+    for(int ii=0; ii<videoTotal; ++ii)
+    {
+        if([projectName isEqualToString:[[self.vtvcParsedData objectForKey:@"videos"][ii] objectForKey:@"name"]])
+        {
+            videoIndex = ii + indexPath.row;
+            break;
+        }
+    }
+=======
+    
+    [self performSegueWithIdentifier:@"choosePlayback" sender:self];
+    
+    /*
+    int videoIndex = [indexPath indexAtPosition: [indexPath length] - 1];
+	
+	int offset = 0;
+	int count = [indexPath section] - 1;
+	
+	while (count >= 0) {
+		offset += [[[self.vtvcParsedData objectAtIndex:count] objectForKey:@"videos"] count];
+		count--;
+	}
+>>>>>>> f2928fc42bdf5393bf1087e6c5c2c5915ff12f3d
+	
+	//vidLink = [videoMP4Array objectAtIndex:videoIndex+offset];
+	youTubeLink = [[self.vtvcParsedData objectForKey:@"videos"][videoIndex] objectForKey:@"utubeurl"];
+    
+    [self performSegueWithIdentifier:@"choosePlayback" sender:self];*/
+}
+
+#pragma mark - Navigation
+
+// In a story board-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    chooseVideoPlaybackViewController *cvpc = [segue destinationViewController];
+    NSLog(@"Video Table View Controller, youTubeLink is %@", youTubeLink);
+    cvpc.urlString = youTubeLink;
+}
+
+- (void)parseForVideoData {
+		/*
+	int i = 0;
+	int j = 0;
+    
+	while (i < [vtvcParsedData count])
+    {
+		j = 0;
+		while (j < [[[vtvcParsedData objectAtIndex:i] objectForKey:@"videos"] count])
+        {
+			[videoNameArray addObject:[[[[vtvcParsedData objectAtIndex:i] objectForKey:@"videos"] objectAtIndex:j] objectForKey:@"title"]];
+         
+			[videoMP4Array addObject:[[[[vtvcParsedData objectAtIndex:i] objectForKey:@"videos"] objectAtIndex:j] objectForKey:@"download3GP"]];
+			[videoUTubeArray addObject:[[[[vtvcParsedData objectAtIndex:i] objectForKey:@"videos"] objectAtIndex:j] objectForKey:@"utubeurl"]];
+			j++;
+		}
+		i++;
+	}*/
+}
+
+@end

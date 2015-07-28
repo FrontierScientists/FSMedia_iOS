@@ -1,0 +1,422 @@
+//
+//  chooseVideoPlaybackViewController.m
+//  FSDemo
+//
+//  Created by Andrew Clark on 7/8/14.
+//  Copyright (c) 2014 Andrew Clark. All rights reserved.
+//
+
+#import "chooseVideoPlaybackViewController.h"
+
+@interface chooseVideoPlaybackViewController ()
+
+@end
+
+@implementation chooseVideoPlaybackViewController
+
+@synthesize moviePlayer;
+@synthesize urlString;
+@synthesize progressView;
+@synthesize progressValue;
+@synthesize HDURL;
+//@synthesize myDownloadTask;
+@synthesize finalData, inProgressData;
+@synthesize videoIndex;
+@synthesize directory;
+@synthesize videoHasBeenDownloaded;
+@synthesize fileDownloadDataArray;
+@synthesize downloadHD;
+@synthesize playHD;
+@synthesize goToDownloadedVideos;
+@synthesize playDownloadedVideo;
+
+static NSURLSession *mySession;
+static NSURLSessionDownloadTask *myDownloadTask;
+
+- (void)viewDidLoad
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveTableNotification:)
+                                                 name:@"updateDownloadedVideoPages"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNotification:)
+                                                 name:@"updateProgressView"
+                                               object:nil];
+    self.progressView.hidden = YES;
+    
+    directory = @"Documents/videos/";
+    
+    [self checkForVideoFolders];
+    [self checkForDownloadedVideo];
+    
+    UIImage *navBarImage = [UIImage imageNamed:@"RiR_plainyellow_iphone"];
+    [self.navigationController.navigationBar setBackgroundImage:navBarImage forBarMetrics:UIBarMetricsDefault];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"RiR_lined_iphone_V44px"]];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"videoDownloadInProgress"];
+    [self.progressView setTransform:CGAffineTransformMakeScale(1.0, 3.0)];
+    [super viewDidLoad];
+}
+
+-(void)receiveTableNotification:(NSNotification *)pNotification
+{
+    NSLog(@"Reload Downloaded Video Tabletime because a download finished!");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateDownloadedVideoPages" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateProgressView" object:nil];
+    [self viewDidLoad];
+}
+
+-(void)receiveNotification:(NSNotification *)pNotification
+{
+    NSLog(@"Update the progressview");
+    self.progressView.hidden = NO;
+    self.progressView.progress = [[NSUserDefaults standardUserDefaults] doubleForKey:@"progress"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"videoDownloadInProgress"];
+}
+
+-(void)deleteCurrentNotificationsNamed:(NSString *)name
+{
+    NSNotificationCenter *notifyCenter = [NSNotificationCenter defaultCenter];
+    [notifyCenter addObserverForName:nil
+                              object:nil
+                               queue:nil
+                          usingBlock:^(NSNotification* notification){
+                              // Explore notification
+                              NSLog(@"Notification found with name:%@", [notification name]);
+                          }];
+
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"videoDownloadInProgress"])
+    {
+        NSLog(@"Pausing download.");
+        [myDownloadTask cancelByProducingResumeData:^(NSData *resumeData) {
+            if (resumeData != nil) {
+                self.inProgressData = [[NSData alloc] initWithData:resumeData];
+            }
+        }];
+        [self displayAlert];
+        NSLog(@"inProgressData is %@", self.inProgressData);
+    }
+}
+
+- (void)displayAlert // Low memory alert
+{
+    NSLog(@"Low memory triggered.");
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"videoDownloadInProgress"];
+    NSString *alertMessage = [NSString stringWithFormat:@"Received a memory warning. Continue download? App may crash."];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:self cancelButtonTitle:@"Cancel Download." otherButtonTitles:@"Continue", nil];
+    [alert show];
+}
+
+- (void)downloadInProgressAlert
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"videoDownloadInProgress"];
+    
+    NSLog(@"Pausing download.");
+        [myDownloadTask cancelByProducingResumeData:^(NSData *resumeData) {
+            if (resumeData != nil) {
+                self.inProgressData = [[NSData alloc] initWithData:resumeData];
+                NSLog(@"inProgressData is %@", self.inProgressData);
+            }
+        }];
+    
+    NSLog(@"Download in-progress triggered.");
+    NSString *alertMessage = [NSString stringWithFormat:@"A video download is currently in progress."];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:alertMessage delegate:self cancelButtonTitle:@"Cancel Download." otherButtonTitles:@"Continue", nil];
+    [alert show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1) // A paused download session is resumed
+    {
+        NSLog(@"Button 1 pushed");
+        //mySession = nil;
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"videoDownloadInProgress"];
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            myDownloadTask = [mySession downloadTaskWithResumeData:self.inProgressData];
+            [myDownloadTask resume];
+        });
+    }
+    else // A paused download session is cancelled
+    {
+        NSLog(@"Button 0 pushed");
+        [mySession invalidateAndCancel];
+        mySession = nil;
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"videoDownloadInProgress"];
+        self.inProgressData = nil;
+        self.finalData = nil;
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"videoDownloadDirectory"];
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"videoDownloadURL"];
+        self.progressView.hidden = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"updateDownloadedVideoPages" object:nil];
+    }
+}
+
+- (IBAction)streamVideo:(id)sender
+{
+    //triggers segue to streamYoutubeViewController to stream YouTube videos
+    if([urlString isEqualToString:@"video not found"] || [urlString isEqualToString:@"TD"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] init];
+        alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, but this video is not available for streaming." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+    else
+    {
+        [self performSegueWithIdentifier:@"streamYoutube" sender:sender];
+    }
+}
+
+- (IBAction)downloadHDVideo:(id)sender
+{
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"videoDownloadInProgress"])
+    {
+        [self downloadInProgressAlert];
+    }
+    else
+    {
+        NSString *MP4Path = [[[[[NSUserDefaults standardUserDefaults] objectForKey:@"researchDict"] objectForKey:@"videos"] objectAtIndex:videoIndex] objectForKey:@"MP4"];
+        
+        if([MP4Path isEqualToString:@""])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] init];
+            alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, but this HD video is not available for download." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+        }
+        else
+        {
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+                //session = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+                mySession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+            });
+            NSString *videoName = [[[[[NSUserDefaults standardUserDefaults] objectForKey:@"researchDict"] objectForKey:@"videos"] objectAtIndex:videoIndex] objectForKey:@"MP4"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://frontsci.arsc.edu%@", videoName]];
+            NSLog(@"URL to video is %@", url);
+            myDownloadTask = [mySession downloadTaskWithURL:url];
+            directory = [NSString stringWithFormat:@"Documents/videos/%@", [self getVideoName:videoName]];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"videoDownloadInProgress"];
+            [[NSUserDefaults standardUserDefaults] setValue:directory forKey:@"videoDownloadDirectory"];
+            NSLog(@"Starting HD download");
+            [myDownloadTask resume];
+        }
+    }
+}
+
+- (IBAction)downloadCompressed:(id)sender
+{
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"videoDownloadInProgress"])
+    {
+        [self downloadInProgressAlert];
+    }
+    else
+    {
+        NSString *MP4Path = [[[[[NSUserDefaults standardUserDefaults] objectForKey:@"researchDict"] objectForKey:@"videos"] objectAtIndex:videoIndex] objectForKey:@"compressedMP4"];
+        
+        if([MP4Path isEqualToString:@""])
+        {
+            UIAlertView *alert = [[UIAlertView alloc] init];
+            alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Sorry, but this compressed video is not available for download." delegate:self    cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+        }
+        else
+        {
+            mySession = nil;
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+                mySession = [NSURLSession sessionWithConfiguration:sessionConfiguration delegate:self delegateQueue:nil];
+                
+            });
+            NSString *videoName = [[[[[NSUserDefaults standardUserDefaults] objectForKey:@"researchDict"] objectForKey:@"videos"] objectAtIndex:videoIndex] objectForKey:@"compressedMP4"];
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://frontsci.arsc.edu%@", videoName]];
+            NSLog(@"URL to video is %@", url);
+            myDownloadTask = [mySession downloadTaskWithURL:url];
+            directory = [NSString stringWithFormat:@"Documents/videosCompressed/%@", [self getVideoName:videoName]];
+            NSLog(@"Starting compressed download");
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"videoDownloadInProgress"];
+            [[NSUserDefaults standardUserDefaults] setValue:directory forKey:@"videoDownloadDirectory"];
+            [myDownloadTask resume];
+        }
+    }
+}
+
+- (IBAction)playDownloadedVideo:(id)sender
+{
+    //append the name of the video to play to the Documents path
+    NSString *stringPathToVideo = [NSHomeDirectory() stringByAppendingPathComponent:directory];
+    
+    NSLog(@"Path to video is %@", stringPathToVideo);
+    
+    NSURL *urlPathToVideo = [NSURL fileURLWithPath:stringPathToVideo];
+    moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:urlPathToVideo];
+    moviePlayer.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    
+    [self presentMoviePlayerViewControllerAnimated:moviePlayer];
+}
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification
+{
+    MPMoviePlayerController *player = [notification object];
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:MPMoviePlayerPlaybackDidFinishNotification
+     object:player];
+}
+
+- (IBAction)goToDownloadedVideos:(id)sender
+{
+    [self performSegueWithIdentifier:@"DownloadedVideos" sender:sender];
+}
+
+//this and the next two functions are required for URLSession
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes
+{
+    NSLog(@"Got into didResumeAtOffset");
+}
+
+-(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+{
+    NSLog(@"Got into didReceiveChallenge.");
+    NSURLCredential *cred = [NSURLCredential credentialWithUser:@"" password:@"" persistence:NSURLCredentialPersistencePermanent];
+    completionHandler(NSURLSessionAuthChallengeUseCredential, cred);
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateProgressView" object:nil];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"videoDownloadInProgress"];
+    progressValue = (double)totalBytesWritten / (double)totalBytesExpectedToWrite;
+    //NSLog(@"totalBytesExpectedToWrite: %f", (double)totalBytesExpectedToWrite);
+    NSLog(@"totalBytesWritten: %f", (double)totalBytesWritten);
+    //NSLog(@"The progressview is %f", self.progressView.progress);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSUserDefaults standardUserDefaults] setDouble:progressValue forKey:@"progress"];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"updateProgressView" object:nil];
+    });
+}
+
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location
+{
+    NSLog(@"Download should have finished");
+    // the path to write file
+    NSString *vidFile = [NSHomeDirectory() stringByAppendingPathComponent:[[NSUserDefaults standardUserDefaults] valueForKey:@"videoDownloadDirectory"]];
+    NSFileManager *FM = [NSFileManager defaultManager];
+    [FM moveItemAtURL:location toURL:[NSURL fileURLWithPath:vidFile] error:nil];
+    NSLog(@"Finished moving vidFile");
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"videoDownloadInProgress"];
+        self.progressValue = 0.0;
+        self.inProgressData = nil;
+        self.finalData = nil;
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"videoDownloadDirectory"];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:@"updateDownloadedVideoPages" object:nil];
+    });
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateDownloadedVideoPages" object:nil];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    
+}
+
+-(NSString *)getVideoName:(NSString *)url
+{
+    NSArray *compArray = [url pathComponents];
+    int size = [compArray count];
+    return compArray[size-1];
+}
+
+-(void)checkForVideoFolders
+{
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    NSError *error;
+    
+    NSString *fileDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/videos"];
+    if(![fileMgr fileExistsAtPath:fileDirectory])
+    {
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:fileDirectory
+                                       withIntermediateDirectories:NO
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+        }
+    }
+    
+    fileDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/videosCompressed"];
+    if(![fileMgr fileExistsAtPath:fileDirectory])
+    {
+        if (![[NSFileManager defaultManager] createDirectoryAtPath:fileDirectory
+                                       withIntermediateDirectories:NO
+                                                        attributes:nil
+                                                             error:&error])
+        {
+            NSLog(@"Create directory error: %@", error);
+        }
+    }
+    
+}
+
+-(void)checkForDownloadedVideo
+{
+    NSFileManager *fileMgr = [NSFileManager defaultManager];
+    
+    
+    NSString *MP4Path = [[[[[NSUserDefaults standardUserDefaults] objectForKey:@"researchDict"] objectForKey:@"videos"] objectAtIndex:videoIndex] objectForKey:@"MP4"];
+    
+    if(![MP4Path isEqualToString:@""])
+    {
+        NSString *fileDirectory = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/videos/%@", [self getVideoName:MP4Path]]];
+        
+        if([fileMgr fileExistsAtPath:fileDirectory])
+        {
+            NSLog(@"The fileDirectory for the HD is: %@", fileDirectory);
+            directory = [NSString stringWithFormat:@"Documents/videos/%@", [self getVideoName:MP4Path]];
+            playDownloadedVideo.enabled = YES;
+            //playDownloadedVideo.titleLabel.textColor = [UIColor blackColor];
+            return;
+        }
+        
+        fileDirectory = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/videosCompressed/%@", [self    getVideoName:MP4Path]]];
+        
+        if([fileMgr fileExistsAtPath:fileDirectory])
+        {
+            NSLog(@"The fileDirectory for the comp is: %@", fileDirectory);
+            directory = [NSString stringWithFormat:@"Documents/videosCompressed/%@", [self getVideoName:MP4Path]];
+            playDownloadedVideo.enabled = YES;
+            return;
+        }
+    }
+    
+    playDownloadedVideo.enabled = NO;
+}
+
+#pragma mark - Navigation
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    [[NSUserDefaults standardUserDefaults] setDouble:progressValue forKey:@"progress"];
+    
+    if([[segue identifier] isEqualToString:@"streamYoutube"])
+    {
+        streamYoutubeViewController *sytvc = [segue destinationViewController];
+        NSLog(@"Choose Video Playback urlString is %@", urlString);
+        sytvc.streamingURL = urlString;
+    }
+}
+
+@end

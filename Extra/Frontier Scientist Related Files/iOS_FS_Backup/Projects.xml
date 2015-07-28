@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<allPoints>
+<point>
+<name>Paleo-Eskimo</name>
+<latitude>66.433738</latitude>
+<longitude>-157.148438</longitude>
+<subtitle>Permafrost holds the history of Paleo-Eskimos</subtitle>
+<type>web</type>
+<link>http://frontierscientists.com/projects/project-paleo-eskimo/</link>
+<text>Paleo-Eskimos are the ancient ancestors of modern Eskimos, as recognized by archaeological studies throughout Alaska, Canada, and Greenland. In Alaska, the earliest members of this group are known by a distinctive stone tool technology called the Denbigh Flint Complex (say DEN-bee). Denbigh people were the first humans to colonize most of Arctic North America 5000 years ago.
+
+Although 75-100 Denbigh sites are known in Alaska, only a handful (literally) of bone fragments are known from all of these sites.  The condition of shallow permafrost and the ongoing formation of peat at Matcharak Lake were just right to preserve the animal remains of many Denbigh meals. The discovery of this frozen bone midden (prehistoric trash dump) will allow the archaeologists to reconstruct the behavior of these Native Alaskans.</text>
+<vid_count>5</vid_count>
+<vid_name>4,000 Year-Old Bones|Across The Arctic In An Archaelogical Instant|Fishhooks, Fishbones, and Fishing|The Dirt on Archaeology|What's In My Pocket</vid_name>
+<videos>http://fs-videos.s3.amazonaws.com/6f/4abd2b4f1c7dafee176c802fe2608d/Ref.4000YearOldBonesMaster_FastStart_512K.mp4,http://fs-videos.s3.amazonaws.com/82/cfe35deb41f96ef82ec5994fe75ea6/Ref.AcrossTheArticREMASTER_FastStart_512K.mp4,http://fs-videos.s3.amazonaws.com/a8/15b48c095d1e5a6ad951008f84bd64/Fishooks-FishbonesFishing_F6_HQ.mp4,http://fs-videos.s3.amazonaws.com/ce/6a57b673d869f24564eb50e5d36188/Ref.The-DirtonArcheology.Mast_FastStart_512K.mp4,http://fs-videos.s3.amazonaws.com/3e/312c3b46815d353048b4e1291db497/2Ref.WhatsInMyPocket_FastStart_512K.mp4</videos>
+<image>http://frontierscientists.com/wp-content/uploads/2011/03/PaleoBoneS-150x150.jpg</image>
+</point>
+<point>
+<name>Petroglyphs</name>
+<latitude>59.744588</latitude>
+<longitude>-151.347656</longitude>
+<subtitle>Rock art and history in a natural museum at Cape Alitak</subtitle>
+<type>web</type>
+<link>http://frontierscientists.com/projects/project-petroglyphs/</link>
+</point>
+<point>
+<name>Cook Inlet Volcanoes</name>
+<latitude>60.833491</latitude>
+<longitude>-152.138672</longitude>
+<subtitle>Cook Inlet Volcanoes are a beautiful scenic backdrop yet active and hazardous</subtitle>
+<type>web</type>
+<link>http://frontierscientists.com/projects/project-cook-inlet-volcanoes/</link>
+</point>
+<point>
+<name>Alutiiq Weavers</name>
+<latitude>57.455983</latitude>
+<longitude>-152.578125</longitude>
+<subtitle>Baskets tell stories of cultures from the past by the new weavers of today</subtitle>
+<type>web</type>
+<link>http://frontierscientists.com/projects/alutiiq-weavers/</link>
+</point>
+<point>
+<name>Grizzlies</name>
+<latitude>63.467527</latitude>
+<longitude>-150.424805</longitude>
+<subtitle>Grizzlies in Denali are a healthy population but need continued monitoring</subtitle>
+<type>web</type>
+<link>http://frontierscientists.com/projects/project-grizzlies/</link>
+</point>
+<point>
+<name>Glacier Bay Bears</name>
+<latitude>58.467657</latitude>
+<longitude>-136.757813</longitude>
+<subtitle>Research on the bears of Glacier Bay National Park</subtitle>
+<type>web</type>
+<link>http://frontierscientists.com/category/glacier_bay_bears/</link>
+</point>
+</allPoints>
+

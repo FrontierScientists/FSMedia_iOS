@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Modeling Arctic Waters</key>
+	<dict>
+		<key>Simulating Bering Strait Region Oceanography</key>
+		<string>http://www.youtube.com/watch?v=X2-H4b_MF-Q</string>
+		<key>Quinhagak Drifters</key>
+		<string>http://www.youtube.com/watch?v=JiqFQSPkz_8</string>
+		<key>Modeling ice in the Arctic</key>
+		<string>http://www.youtube.com/watch?v=ivGukrPRaYs</string>
+	</dict>
+	<key>Alaska&apos;s Unmanned Aircraft Research</key>
+	<dict>
+		<key>Fly Scout Fly</key>
+		<string>http://www.youtube.com/watch?v=0mc4Y7QVjQ0</string>
+		<key>Flying Tools</key>
+		<string>http://www.youtube.com/watch?v=s5dFBRVhIHA</string>
+		<key>Learning to Fly in the Aleutians</key>
+		<string>http://www.youtube.com/watch?v=IaTqnR2pzR4</string>
+	</dict>
+	<key>Iditarod</key>
+	<dict>
+		<key>Iditarod Ceremonial Start</key>
+		<string>https://www.youtube.com/watch?v=zM7CGTi3n0I</string>
+		<key>Iditarod Dog Handling</key>
+		<string>https://www.youtube.com/watch?v=LBz7OnGZRoQ</string>
+		<key>Iditarod Mike Santos</key>
+		<string>https://www.youtube.com/watch?v=e5mNIG8nWGo</string>
+	</dict>
+	<key>Grizzlies</key>
+	<dict>
+		<key>Great Grizzly Bear Q and A</key>
+		<string>http://www.youtube.com/watch?v=ceoce-L0Cpg</string>
+		<key>Grizzly Bears and People</key>
+		<string>http://www.youtube.com/watch?v=9Ow6Vs2h4Ro</string>
+		<key>Denali&apos;s Grizzly Population</key>
+		<string>http://www.youtube.com/watch?v=U61g-Fvoti4</string>
+		<key>Front Country Interactions</key>
+		<string>http://www.youtube.com/watch?v=kgKMT6J6ZNY</string>
+		<key>Backcountry Incidents</key>
+		<string>http://www.youtube.com/watch?v=h6pOoYh26xw</string>
+		<key>Pat&apos;s Big Bear</key>
+		<string>http://www.youtube.com/watch?v=O5KSOX5RCFY</string>
+	</dict>
+	<key>Arctic Snow</key>
+	<dict>
+		<key>Snow is White</key>
+		<string>http://www.youtube.com/watch?v=D4ltUZj-xNY</string>
+		<key>Imnaviat Creek Snowmelt</key>
+		<string>http://www.youtube.com/watch?v=WPVwTINk9DE</string>
+	</dict>
+	<key>Arctic Archeology</key>
+	<dict>
+		<key>Time Travel in the Alaskan Arctic</key>
+		<string>http://www.youtube.com/watch?v=m2fVKAosNFg</string>
+		<key>WOW a Biface!</key>
+		<string>http://www.youtube.com/watch?v=hq7PPh4OYAY</string>
+	</dict>
+	<key>Alutiiq Weavers</key>
+	<dict>
+		<key>Where Are My Grass Socks?</key>
+		<string>http://www.youtube.com/watch?v=s_wubt-QJSY</string>
+		<key>My Little Basket</key>
+		<string>http://www.youtube.com/watch?v=jK4LGvSsWUE</string>
+		<key>Coral&apos;s Basket Feat: Russian Inspired</key>
+		<string>http://www.youtube.com/watch?v=p3PbwJ0W4Bs</string>
+		<key>Coral&apos;s Cabinet</key>
+		<string>http://www.youtube.com/watch?v=i6Ucp3YUJbM</string>
+		<key>Collecting and Curling Grass</key>
+		<string>http://www.youtube.com/watch?v=F5ItkNlZ3uE</string>
+		<key>Karluk One Baskets</key>
+		<string>http://www.youtube.com/watch?v=RDRC2uRq0Bk</string>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<oncall>
+			<oncall_image>http://frontierscientists.com/wp-content/uploads/2011/10/PatHomeRightShare.jpg</oncall_image>
+			<brief>Marnie is the registrar at the Alutiiq Museum and Archaeological Repository. Her knowledge about their collection is awesome.</brief>
+	</oncall>
+	<research>
+		<research_title>Paleo-Eskimo</research_title>
+		<subtitle>Permafrost holds the history of Paleo-Eskimos.</subtitle>
+		<video-all>
+			<video>
+				<title>What’s In My Pocket?</title>
+				<downloadMP4>http://fs-videos.s3.amazonaws.com/3e/312c3b46815d353048b4e1291db497/2Ref.WhatsInMyPocket_FastStart_512K.mp4</downloadMP4>
+				<utubeurl>http://www.youtube.com/watch?v=NMeE33jei9w</utubeurl>
+				<preview>http://frontiersci.me3.net/wp-content/uploads/2011/02/map-paleo-eskimo.png</preview>
+			</video>
+			<video>
+				<title>The Dirt on Archaeology</title>
+				<downloadMP4>http://fs-videos.s3.amazonaws.com/ce/6a57b673d869f24564eb50e5d36188/Ref.The-DirtonArcheology.Mast_FastStart_512K.mp4</downloadMP4>
+				<utubeurl>http://www.youtube.com/watch?v=vcHdy2h9B-I</utubeurl>
+				<preview>http://frontiersci.me3.net/wp-content/uploads/2011/02/map-paleo-eskimo.png</preview>
+			</video>
+			<video>
+				<title>Fishhooks, Fishbones, and Fishing.</title>
+				<downloadMP4>http://fs-videos.s3.amazonaws.com/a8/15b48c095d1e5a6ad951008f84bd64/Fishooks-FishbonesFishing_F6_HQ.mp4</downloadMP4>
+				<utubeurl>http://www.youtube.com/watch?v=nT8urMQg5DY</utubeurl>
+				<preview>http://frontiersci.me3.net/wp-content/uploads/2011/02/map-paleo-eskimo.png</preview>
+			</video>
+			<video>
+				<title>Across The Arctic In An Archaeological Instant</title>
+				<downloadMP4>http://fs-videos.s3.amazonaws.com/82/cfe35deb41f96ef82ec5994fe75ea6/Ref.AcrossTheArticREMASTER_FastStart_512K.mp4</downloadMP4>
+				<utubeurl>http://www.youtube.com/watch?v=GdPkFgvU6Jk</utubeurl>
+				<preview>http://frontiersci.me3.net/wp-content/uploads/2011/02/map-paleo-eskimo.png</preview>
+			</video>
+			<video>
+				<title>4,000 Year-Old Bones</title>
+				<downloadMP4>http://fs-videos.s3.amazonaws.com/6f/4abd2b4f1c7dafee176c802fe2608d/Ref.4000YearOldBonesMaster_FastStart_512K.mp4</downloadMP4>
+				<utubeurl>http://www.youtube.com/watch?v=aMqGq-bFLJg</utubeurl>
+				<preview>http://frontiersci.me3.net/wp-content/uploads/2011/02/map-paleo-eskimo.png</preview>
+			</video>
+		</video-all>
+		<research_image>http://frontierscientists.com/wp-content/uploads/2011/03/PaleoBoneS-150x150.jpg</research_image>
+		<scientists-all>
+			<scientists>
+				<name>Victoria Florey</name>
+				<link>http://frontierscientists.com/scientists/victoria-florey/</link>
+				<brief>Field Archaeologist, Alaska Native Tribal Health Consortium (ANTHC)</brief>
+				<image>http://frontierscientists.com/wp-content/uploads/2011/04/LVictoria_Florey2-150x150.png</image>
+			</scientists>
+			<scientists>
+				<name>Natalia S. Slobodina</name>
+				<link>http://frontierscientists.com/scientists/natalia-s-slobodina/</link>
+				<brief>M.A. Graduate Student, Anthropology Department, University of Washington</brief>
+				<image>http://frontierscientists.com/wp-content/uploads/2011/03/LNatalia_Slobodina-150x150.png</image>
+			</scientists>
+			<scientists>
+				<name>Jeff Rasic</name>
+				<link>http://frontierscientists.com/scientists/profile-jeff-rasic/</link>
+				<brief>Chief Archaeologist, National Park Service, Gates of the Arctic National Park and Preserve, Yukon-Charley Rivers National Preserve, University of Alaska-Museum of the North</brief>
+				<image>http://frontierscientists.com/wp-content/uploads/2011/02/SJeff_Rasic-150x150.png</image>
+			</scientists>
+			<scientists>
+				<name>Andrew Tremayne</name>
+				<link>http://frontierscientists.com/scientists/profile-andrew-tremayne/</link>
+				<brief>PhD thesis student under Christyann M. Darwent, UCA, Davis</brief>
+				<image>http://frontierscientists.com/wp-content/uploads/2011/02/SAndrew_Tremayne-150x150.png</image>
+			</scientists>
+		</scientists-all>
+		<content>
+			Uncovering a Paleo-Eskimo CampPaleo-Eskimos are the ancient ancestors of modern Eskimos, as recognized by archaeological studies throughout Alaska, Canada, and Greenland. In Alaska, the earliest members of this group are known by a distinctive stone tool technology called the Denbigh Flint Complex (say DEN-bee). Denbigh people were the first humans to colonize most of Arctic North America 5000 years ago.Although 75-100 Denbigh sites are known in Alaska, only a handful (literally) of bone fragments are known from all of these sites.  The condition of shallow permafrost and the ongoing formation of peat at Matcharak Lake were just right to preserve the animal remains of many Denbigh meals. The discovery of this frozen bone midden (prehistoric trash dump) will allow the archaeologists to reconstruct the behavior of these Native Alaskans.
+		</content>
+	</research>
+</xml>

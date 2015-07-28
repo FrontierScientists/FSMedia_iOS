@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<resultset statement="SELECT * FROM sqlTest.wp_posts
+    " xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<row>
+	<field name="ID">41</field>
+	<field name="post_author">12</field>
+	<field name="post_date">2011-02-11 21:24:09</field>
+	<field name="post_date_gmt">2011-02-11 21:24:09</field>
+	<field name="post_content">&lt;h2&gt;Cape Alitak Petroglyphs - Alaska Native Art&lt;/h2&gt;
+        &lt;em&gt;The Cape Alitak Petroglyphs&lt;/em&gt; are a series of short videos which explore Alutiiq heritage through a study of Kodiak Island rock art and archaeology.
+        
+        &lt;a href=&quot;/wp-content/uploads/2011/03/SvenRubbingS.jpg&quot;&gt;&lt;img class=&quot;alignleft size-thumbnail wp-image-614&quot; title=&quot;spiral Native art Alutiiq petroglyph rubbings&quot; alt=&quot;&quot; src=&quot;/wp-content/uploads/2011/03/SvenRubbingS-150x147.jpg&quot; width=&quot;150&quot; height=&quot;147&quot; /&gt;&lt;/a&gt;For thousands of years, Alutiiq people lived in sod houses and hunted sea mammals, relying on special technologies, ancestral knowledge, and spiritual assistance to care for their families. The Cape Alitak petroglyphs are one of the only written records of their way of life. Pecked into Kodiak’s granite bedrock, images of people and animals preserve customs from the Alutiiq past. Museum scientists explain this amazing history in seven short films. We learn about the remarkable environment that surrounds Cape Alitak while hearing the stories its sites reveal.
+        
+        Produced with support from the National Park Service Shared Beringian Heritage Program and a Tribal Historic Preservation grant, the videos document recent archaeological research on Kodiak rock art. &lt;a href=&quot;/wp-content/uploads/2011/03/AlitakscenicS.jpg&quot;&gt;&lt;img class=&quot;alignright size-thumbnail wp-image-603&quot; title=&quot;Cape Alitak, Alaska&quot; alt=&quot;&quot; src=&quot;/wp-content/uploads/2011/03/AlitakscenicS-150x90.jpg&quot; width=&quot;150&quot; height=&quot;90&quot; /&gt;&lt;/a&gt;Collaboratively, the Alutiiq Museum &amp;amp; Archaeological Repository &lt;a title=&quot;Alutiiq Museum Archaeological Repository&quot; href=&quot;http://www.alutiiqmuseum.org/&quot; target=&quot;_blank&quot;&gt;www.alutiiqmuseum.org&lt;/a&gt; and the video production company WonderVisions &lt;a title=&quot;WonderVisions&quot; href=&quot;http://www.wondervisions.com/&quot; target=&quot;_blank&quot;&gt;www.wondervisions.com&lt;/a&gt; tell these stories.
+        
+        [ video ] &lt;a title=&quot;This Sod House video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/this-sod-house/&quot;&gt;This Sod House&lt;/a&gt;
+        [ video ] &lt;a title=&quot;They Hunt Whales With Poison Spears video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/they-hunt-whales-with-poison-spears/&quot;&gt;They Hunt Whales With Poison Spears&lt;/a&gt;
+        [ video ] &lt;a title=&quot;Storms of Cape Alitak video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/storms-of-cape-alitak/&quot;&gt;Storms of Cape Alitak&lt;/a&gt;
+        [ video ] &lt;a title=&quot;What’s in this Midden? video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/whats-in-this-midden/&quot;&gt;What’s in this Midden?&lt;/a&gt;
+        [ video ] &lt;a title=&quot;Going For Charcoal video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/going-for-charcoal/&quot;&gt;Going For Charcoal&lt;/a&gt;
+        [ video ] &lt;a title=&quot;Jewelry Alutiiq Style video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/jewelry-alutiiq-style/&quot;&gt;Jewelry Alutiiq Style&lt;/a&gt;
+        [ video ] &lt;a title=&quot;Petroglyphs of Cape Alitak video | FrontierScientists&quot; href=&quot;http://frontierscientists.com/videos/the-appearing-and-disappearing-petroglyphs-of-cape-alitak/&quot;&gt;Petroglyphs of Cape Alitak&lt;/a&gt;
+        &lt;p style=&quot;text-align: center;&quot;&gt;✧ Explore all articles related to &lt;a title=&quot;FrontierScientists category Petroglyphs&quot; href=&quot;http://frontierscientists.com/category/petroglyphs_native_art/&quot;&gt;Petroglyphs&lt;/a&gt; ✧&lt;/p&gt;
+        ✧&lt;a title=&quot;Cross-Cultural Art, a view of the Cape Alitak Petroglyphs | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2011/06/cross-cultural-art-the-cape-alitak-petroglyphs/&quot;&gt;Cross-Cultural Art, a view of the Cape Alitak Petroglyphs&lt;/a&gt; (Laura Nielsen) &lt;em&gt;Native Art&lt;/em&gt;
+        ✧&lt;a title=&quot;Shaman Whalers of Ancient Kodiak Island | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2011/06/shaman-whalers-of-ancient-kodiak-island/&quot;&gt;Shaman Whalers of Ancient Kodiak Island&lt;/a&gt; (Merry Ann Moore) &lt;em&gt;Native Art&lt;/em&gt;
+        ✧&lt;a title=&quot;Ancient Alaskan Labrets: jewelry that spoke louder than words | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2011/07/ancient-alaskan-labrets-jewelry-that-spoke-louder-than-words/&quot;&gt;Ancient Alaskan Labrets: jewelry that spoke louder than words&lt;/a&gt; (Merry Ann Moore) &lt;em&gt;Native Art&lt;/em&gt;
+        ✧&lt;a title=&quot;Tools of ancient Alaskans emerge from ice | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2012/05/tools-of-ancient-alaskans-emerge-from-ice/&quot;&gt;Tools of ancient Alaskans emerge from ice&lt;/a&gt; (Ned Rozell) &lt;em&gt;Arctic Archaeology&lt;/em&gt;
+        ✧&lt;a title=&quot;Memories from lost villages | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2012/04/memories-from-lost-villages/&quot;&gt;Memories from lost villages&lt;/a&gt; (Laura Nielsen) &lt;em&gt;Arctic Archaeology, Native&lt;/em&gt;
+        ✧&lt;a title=&quot;Dig Afognak: Revealing the Past, Strengthening the Future | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2012/05/dig-afognak-revealing-the-past-strengthening-the-future/&quot;&gt;Dig Afognak: Revealing the Past, Strengthening the Future&lt;/a&gt; (Laura Nielsen) &lt;em&gt;Arctic Archaeology, Native&lt;/em&gt;
+        ✧&lt;a title=&quot;Alutiiq Basket Weavers Share Insight with Russian Curators. Plus, a Frontier Scientists App! | FrontierScientists&quot; href=&quot;http://frontierscientists.com/2012/04/alutiiq-basket-weavers-share-insight-with-russian-curators-plus-a-frontier-scientists-app/&quot;&gt;Alutiiq Basket Weavers Share Insight with Russian Curators. Plus, a Frontier Scientists App!&lt;/a&gt; (Liz O'Connell) &lt;em&gt;Native Art&lt;/em&gt;, &lt;em&gt;***&lt;/em&gt;
+        
+        See another project highlighting Alaska-area Native culture: &lt;a title=&quot;Alutiiq Weavers project Alaska Native Art | FrontierScientists&quot; href=&quot;http://frontierscientists.com/projects/alutiiq-weavers/&quot;&gt;Alutiiq Weavers&lt;/a&gt;
+        For archaeology-related content, check out &lt;a title=&quot;Arctic Archaeology project | FrontierScientists&quot; href=&quot;http://frontierscientists.com/projects/arctic-archaeology/&quot;&gt;Arctic Archaeology&lt;/a&gt;. Want more archaeology? Join digger in the field uncovering a &lt;a title=&quot;Paleo-Eskimo Archaeology project | FrontierScientists&quot; href=&quot;http://frontierscientists.com/projects/paleo-eskimo/&quot;&gt;Paleo-Eskimo&lt;/a&gt; Camp.</field>
+	<field name="post_title">Petroglyphs</field>
+	<field name="post_excerpt"></field>
+	<field name="post_status">publish</field>
+	<field name="comment_status">open</field>
+	<field name="ping_status">open</field>
+	<field name="post_password"></field>
+	<field name="post_name">petroglyphs</field>
+	<field name="to_ping"></field>
+	<field name="pinged"></field>
+	<field name="post_modified">2014-01-27 11:21:06</field>
+	<field name="post_modified_gmt">2014-01-27 19:21:06</field>
+	<field name="post_content_filtered"></field>
+	<field name="post_parent">0</field>
+	<field name="guid">/?p=41</field>
+	<field name="menu_order">20</field>
+	<field name="post_type">projects</field>
+	<field name="post_mime_type"></field>
+	<field name="comment_count">1</field>
+</row>
+
+<row>
+	<field name="ID">135</field>
+	<field name="post_author">2</field>
+	<field name="post_date">2011-02-12 06:18:40</field>
+	<field name="post_date_gmt">2011-02-12 06:18:40</field>
+	<field name="post_content">FrontierScientists video Petroglyphs This Sod House
+        &lt;iframe src=&quot;http://www.youtube.com/embed/6oM9M8B_s8k&quot; height=&quot;315&quot; width=&quot;560&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+        &lt;h1&gt;This Sod House&lt;/h1&gt;
+        The Alutiiq Museum &amp;amp; Archaeological Repository and the video production company WonderVisions present &quot;The Cape Alitak Petroglyphs&quot;, a series of short vodcasts that explore Alutiiq heritage at the southern tip of Kodiak Island. Produced with support from the National Park Service Shared Beringian Heritage program and a Tribal Historic Preservation grant, the videos document recent archaeological research on Kodiak rock art.
+        
+        project &lt;a title=&quot;project Cape Alitak Petroglyphs&quot; href=&quot;http://frontierscientists.com/projects/project-petroglyphs/&quot;&gt;Cape Alitak Petroglyphs&lt;/a&gt;
+        
+        Embed Code:
+        
+        &amp;lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/6oM9M8B_s8k&quot; frameborder=&quot;0&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;</field>
+	<field name="post_title">This Sod House</field>
+	<field name="post_excerpt">Cozy Alutiiq homes before Russian colonization.</field>
+	<field name="post_status">publish</field>
+	<field name="comment_status">open</field>
+	<field name="ping_status">open</field>
+	<field name="post_password"></field>
+	<field name="post_name">this-sod-house</field>
+	<field name="to_ping"></field>
+	<field name="pinged"></field>
+	<field name="post_modified">2013-10-08 15:50:18</field>
+	<field name="post_modified_gmt">2013-10-08 22:50:18</field>
+	<field name="post_content_filtered"></field>
+	<field name="post_parent">0</field>
+	<field name="guid">/?p=135</field>
+	<field name="menu_order">0</field>
+	<field name="post_type">videos</field>
+	<field name="post_mime_type"></field>
+	<field name="comment_count">0</field>
+</row>
+
+<row>
+	<field name="ID">43</field>
+	<field name="post_author">12</field>
+	<field name="post_date">2011-02-11 21:29:38</field>
+	<field name="post_date_gmt">2011-02-11 21:29:38</field>
+	<field name="post_content">FrontierScientists video Paleo-Eskimo Across The Arctic In An Archaeological Instant
+        &lt;iframe src=&quot;http://www.youtube.com/embed/GdPkFgvU6Jk&quot; height=&quot;315&quot; width=&quot;560&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+        &lt;h1&gt;Across The Arctic In An Archaeological Instant&lt;/h1&gt;
+        Uncovering a Paleo Eskimo Camp.
+        Andrew Tremayne and Jeff Rasic discuss the Denbigh small tool tradition and how it seems it spread across the arctic.
+        
+        project &lt;a title=&quot;Paleo-Eskimo&quot; href=&quot;http://frontierscientists.com/projects/project-paleo-eskimo/&quot;&gt;Paleo-Eskimo&lt;/a&gt;
+        
+        Embed Code:
+        
+        &amp;lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;http://www.youtube.com/embed/GdPkFgvU6Jk&quot; frameborder=&quot;0&quot; allowfullscreen&amp;gt;&amp;lt;/iframe&amp;gt;</field>
+	<field name="post_title">Across The Arctic In An Archaeological Instant</field>
+	<field name="post_excerpt">This is the tool that identifies a Denbigh site.</field>
+	<field name="post_status">publish</field>
+	<field name="comment_status">open</field>
+	<field name="ping_status">open</field>
+	<field name="post_password"></field>
+	<field name="post_name">across-the-arctic-in-an-archaeological-instant</field>
+	<field name="to_ping"></field>
+	<field name="pinged"></field>
+	<field name="post_modified">2013-10-09 07:53:22</field>
+	<field name="post_modified_gmt">2013-10-09 14:53:22</field>
+	<field name="post_content_filtered"></field>
+	<field name="post_parent">0</field>
+	<field name="guid">/?p=43</field>
+	<field name="menu_order">0</field>
+	<field name="post_type">videos</field>
+	<field name="post_mime_type"></field>
+	<field name="comment_count">0</field>
+</row>
+</resultset>
