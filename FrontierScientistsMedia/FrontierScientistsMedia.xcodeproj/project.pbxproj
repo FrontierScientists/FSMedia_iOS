@@ -184,7 +184,6 @@
 		3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */ = {
 			isa = PBXGroup;
 			children = (
-				F56E9E551B1CD1A80027D39B /* BridgingHeader.h */,
 				F56E9E5F1B1CE3BC0027D39B /* Reachability.h */,
 				F56E9E601B1CE3BC0027D39B /* Reachability.m */,
 				F56E9E4E1B1CD1890027D39B /* YTPlayerView.h */,
@@ -197,6 +196,7 @@
 				7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */,
 				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
 				7EC248E91B438B2500C66357 /* AskTableViewCell.swift */,
+				F56E9E551B1CD1A80027D39B /* BridgingHeader.h */,
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,

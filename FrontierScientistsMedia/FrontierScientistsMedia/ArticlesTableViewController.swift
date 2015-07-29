@@ -1,318 +1,226 @@
-//
-//  ArticlesTableViewController_Swift.swift
-//  FSDemo
-//
-//  Created by alandrews3 on 5/13/15.
-//  Copyright (c) 2015 Andrew Clark. All rights reserved.
-//
+// ArticlesTableViewController.swift
 
 import Foundation
 import UIKit
 
-class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
-    @IBOutlet var articleTableView: UITableView?;
-    var posts = [[String(): String()]];
-    var parser = NSXMLParser.alloc();
-    var articleReadStatusFilePath: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/ArticlesReadStatus.txt");
+/*
+    Class overview goes here.
+*/
+class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
+    
+/*
+    Outlets
+*/
+    @IBOutlet var articleTableView: UITableView?
+/*
+    Class Constants
+*/
     let feed: String = "http://frontierscientists.com/feed"
-    var articleTitle: NSMutableString = NSMutableString()
+/*
+    Class Variables
+*/
     var articleLink: NSMutableString = NSMutableString()
-    var element: String = ""
-    var selectedArtcileIndex: Int = 0
     var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary.alloc()
+    var articleReadStatusFilePath: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/ArticlesReadStatus.txt")
+    var articleTitle: NSMutableString = NSMutableString()
+    var element: String = ""
+    var parser = NSXMLParser.alloc()
+    var posts = [[String(): String()]]
+    var selectedArtcileIndex: Int = 0
     
-    override func viewDidLoad(){
-        super.viewDidLoad();
+/*
+    Class Functions
+*/
+    // viewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        articleTableView?.delegate = self;
-        articleTableView?.dataSource = self;
+        // Setup
+        self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
+        self.title = "Articles"
         
-        self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!);
-        self.title = "About Frontier Scientists";
-        beginParsing();
-        
-        println("Above dict assignment");
-        articleReadStatusFileDict = [NSString(string: "dummy"): NSNumber(int: 0)];
-        
-        if(!NSFileManager.defaultManager().fileExistsAtPath(articleReadStatusFilePath)){
-            println("Above file create");
-            createReadArticlesFileIfNone();
+        beginParsing()
+        articleReadStatusFileDict = [NSString(string: "dummy"): NSNumber(int: 0)]
+        if (!NSFileManager.defaultManager().fileExistsAtPath(articleReadStatusFilePath)) {
+            createReadArticlesFileIfNone()
+        } else {
+            loadArticlesReadStatusFileToArticlesReadStatusDict()
         }
-        else{
-            println("Above load");
-            loadArticlesReadStatusFileToArticlesReadStatusDict();
-            println("do i get here")
-        }
-        
-        println("Above update");
-        updateArticlesReadStatusDict();
-        println("Above save");
-        saveArticlesReadStatusDictToArticlesReadStatusFile();
-        
-        println("Finished loading view");
-        
-        for ii in posts{
-            
-            println("\(ii)");
-        }
+        updateArticlesReadStatusDict()
+        saveArticlesReadStatusDictToArticlesReadStatusFile()
+        println("Finished loading articles.")
     }
-    
-    // Table Section Functions
-    //  numberOfSectionsInTableView(tableView: UITableView)
-    //  heightForHeaderInSection section: Int)
-    //
-    //
-    
-    // numberOfSectionsInTableView
-    //
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int{
-        return 1;
-    }
-    
-    // heightForHeaderInSection
-    //
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-        return 0.001;
-    }
-    
-    // Table Cell Functions
-    //  numberOfRowsInSection section: Int)
-    //  heightForRowAtIndexPath indexPath: NSIndexPath)
-    //  cellForRowAtIndexPath indexPath: NSIndexPath)
-    //  didSelectRowAtIndexPath indexPath: NSIndexPath)
-    //
-    //
-    
-    // numberOfRowsInSection
-    //
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) ->Int{
-        return 10;
-    }
-    
-    // heightForRowAtIndexPath
-    //
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat{
-        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
-            return 80;
-        }
-        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-            return 40;
-        }
-    }
-    
-    // cellForRowAtIndexPath
-    //
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->UITableViewCell{
-        var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ArticleTitle");
-        
-        cell.backgroundColor = UIColor.clearColor();
-        cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"));
-        cell.textLabel?.backgroundColor = UIColor.clearColor();
-        cell.textLabel!.text = posts[indexPath.row]["title"]!;
-        
-        var accessoryImageView: UIImageView;
-        
-        if(articleHasBeenRead(indexPath.row)){
-            accessoryImageView = UIImageView(image: UIImage(named: "Transition_Icon.png"));
-        }
-        else{
-            accessoryImageView = UIImageView(image: UIImage(named: "new_icon-web.png"));
-        }
-        
-        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
-            accessoryImageView.frame = CGRect(x: 0, y: 0, width: 80, height: 80);
-            cell.textLabel?.font = UIFont(name: "Chalkduster", size: 30);
-        }
-        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-            accessoryImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40);
-            cell.textLabel?.font = UIFont(name: "Chalkduster", size: 20);
-        }
-        
-        cell.accessoryView = accessoryImageView;
-        
-        cell.contentView.layer.borderColor = UIColor.clearColor().CGColor;
-        
-        return cell;
-    }
-    
-    // didSelectRowAtIndexPath
-    //
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        
-        selectedArtcileIndex = indexPath.row;
-        var articleStoryLink = posts[indexPath.row]["link"]!;
-        articleReadStatusFileDict[articleStoryLink] = NSNumber(int: 1);
-        saveArticlesReadStatusDictToArticlesReadStatusFile();
-        self.tableView.reloadData();
-        performSegueWithIdentifier("RSSFeed", sender: self);
-    }
-    
-    // readArticlesFile Functions
-    //  createReadArticlesFileIfNone()
-    //  loadArticlesReadStatusFileToArticlesReadStatusDict()
-    //  saveArticlesReadStatusDictToArticlesReadStatusFile()
-    //  updateArticlesReadStatusDict()
-    //  articleHasBeenRead(index: Int) -> Bool
-    //
-    //
-    
-    // createReadArticlesFileIfNone
-    //
-    func createReadArticlesFileIfNone(){
-        let fileMgr = NSFileManager.defaultManager();
-        
-        if(!fileMgr.fileExistsAtPath(articleReadStatusFilePath)){
-            if(!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as [NSObject: AnyObject])){
-                println("Error! Creating articleReadStatusFile failed to create at \(articleReadStatusFilePath)");
-            }
-        }
-    }
-    
-    // loadArticlesReadStatusFileToArticlesReadStatusDict
-    //
-    func loadArticlesReadStatusFileToArticlesReadStatusDict(){
-        var dict = NSMutableDictionary(contentsOfFile: articleReadStatusFilePath)!;
-        articleReadStatusFileDict = dict;
-    }
-    
-    // saveArticlesReadStatusDictToArticlesReadStatusFile
-    //
-    func saveArticlesReadStatusDictToArticlesReadStatusFile(){
-        articleReadStatusFileDict.writeToFile(articleReadStatusFilePath, atomically: true);
-    }
-    
-    // updateArticlesReadStatusDict
-    //
-    func updateArticlesReadStatusDict()
-    {
-        println("updateArticlesReadStatusDict");
-        var newArticlesReadStatusDict: NSMutableDictionary = NSMutableDictionary.alloc();
-        var dictHasBeenReadValue: NSNumber = 1;
-        var articleStoryLink: NSString = "";
-        
-        //articleStoryLink = posts[0]["link"] as! String;
-        newArticlesReadStatusDict = [:];
-        for ii in 0...posts.count-1{
-            println("updateArticlesReadStatusDict, in for loop");
-            articleStoryLink = posts[ii]["link"]!;
-            
-            if(articleReadStatusFileDict.objectForKey(articleStoryLink) != nil &&
-                articleReadStatusFileDict.objectForKey(articleStoryLink)!.integerValue == dictHasBeenReadValue.integerValue){
-                newArticlesReadStatusDict.setObject(NSNumber(int: 1), forKey: articleStoryLink);
-            }
-            else{
-                newArticlesReadStatusDict.setObject(NSNumber(int: 0), forKey: articleStoryLink);
-            }
-        }
-        articleReadStatusFileDict = newArticlesReadStatusDict;
-    }
-    
-    // articleHasBeenRead
-    //
-    func articleHasBeenRead(index: Int) -> Bool{
-        println("articleHasBeenRead");
-        var linkString: String = posts[index]["link"]!;
-        
-        if(articleReadStatusFileDict.objectForKey(linkString) != nil &&
-            articleReadStatusFileDict.objectForKey(linkString)?.integerValue == NSNumber(int: 1)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    
-    // Parser Functions
-    //  parseErrorOccurred parseError: NSError)
-    //  beginParsing()
-    //  didStartElement elementName: String
-    //  foundCharacters string: String?)
-    //  didEndElement elementName: String
-    //
-    //
-    
-    // parseErrorOccurred
-    //
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError){
-        println("error = \(parseError.localizedDescription)");
-    }
-    
-    // beginParsing
-    //
-    func beginParsing(){
-        //println("beginParsing");
-        posts = [];
-        parser = NSXMLParser(contentsOfURL: NSURL(string: feed))!;
-        parser.delegate = self;
-        if(!parser.parse()){
-            println("parser failed");
-            println("error is \(parser.parserError)");
-        }
-    }
-    
-    // didStartElement
-    //
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]){
-        // println("didStartElement with \(elementName)");
-        element = elementName;
-        if(element == "item"){
-            articleTitle = "";
-            articleLink = "";
-        }
-    }
-    
-    // foundCharacters
-    //
-    func parser(parser: NSXMLParser, foundCharacters string: String?){
-        //println("foundCharacters");
-        if(element == "title"){
-            articleTitle.appendString(string!);
-        }
-        else if(element == "link"){
-            articleLink.appendString(string!);
-        }
-    }
-    
-    // didEndElement
-    //
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?){
-        //println("didEndElement with \(elementName)");
-        
-        if(elementName == "title"){
-            println("title is \(articleTitle)");
-        }
-        else if(elementName == "link"){
-            println("link is \(articleLink)");
-        }
-        
-        if(elementName == "item"){
-            if(!(articleTitle.isEqual(nil)) && !articleLink.isEqual(nil)){
-                var dictionaryEntry: Dictionary = ["title": (articleTitle as String), "link": (articleLink as String)];
-                posts.append(dictionaryEntry);
-            }
-        }
-    }
-    
-    // Segue Functions
-    //  prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    //      RSSFeed, goes to the webview
-    //
-    //
-    
     // prepareForSegue
-    //
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
-        if(segue.identifier == "RSSFeed"){
-            let avc = segue.destinationViewController as? MySwiftArticlesViewController;
-            var str = posts[selectedArtcileIndex]["link"];
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "RSSFeed") {
+            let avc = segue.destinationViewController as? MySwiftArticlesViewController
+            var str = posts[selectedArtcileIndex]["link"]
+            // Ready link for use in WebView
+            str = str?.stringByReplacingOccurrencesOfString(" ", withString: "")
+            str = str?.stringByReplacingOccurrencesOfString("\n", withString: "")
+            str = str?.stringByReplacingOccurrencesOfString("   ", withString: "")
+            str = str?.stringByReplacingOccurrencesOfString("\t", withString: "")
+            // Set link string
+            avc?.articleLinkString = str
+        }
+    }
+    
+/*
+    TableView Functions
+*/
+    // numberOfSectionsInTableView
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    // heightForHeaderInSection
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
+    }
+    // numberOfRowsInSection
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) ->Int {
+        return 10
+    }
+    // heightForRowAtIndexPath
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
+            return 80
+        } else { // iPhone
+            return 40
+        }
+    }
+    // cellForRowAtIndexPath
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Initialize cell
+        var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ArticleTitle")
+        // Format cell
+        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"))
+        cell.textLabel?.backgroundColor = UIColor.clearColor()
+        cell.textLabel!.text = posts[indexPath.row]["title"]!
+        cell.contentView.layer.borderColor = UIColor.clearColor().CGColor
+        // Include "new" icon only when article is unread
+        var accessoryImageView: UIImageView
+        if (articleHasBeenRead(indexPath.row)) {
+            accessoryImageView = UIImageView(image: UIImage(named: "Transition_Icon.png"))
+        } else {
+            accessoryImageView = UIImageView(image: UIImage(named: "new_icon-web.png"))
+        }
+        // Change image text sizes based on screen size
+        if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
+            accessoryImageView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+            cell.textLabel?.font = UIFont(name: "Chalkduster", size: 30)
+        } else { // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+            accessoryImageView.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+            cell.textLabel?.font = UIFont(name: "Chalkduster", size: 20)
+        }
+        cell.accessoryView = accessoryImageView
+        
+        return cell
+    }
+    // didSelectRowAtIndexPath
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedArtcileIndex = indexPath.row
+        var articleStoryLink = posts[indexPath.row]["link"]!
+        articleReadStatusFileDict[articleStoryLink] = NSNumber(int: 1)
+        saveArticlesReadStatusDictToArticlesReadStatusFile()
+        self.tableView.reloadData()
+        performSegueWithIdentifier("RSSFeed", sender: self)
+    }
+    
+/*
+    Helper and Content Functions
+*/
+    // createReadArticlesFileIfNone
+    // This function creates a new "read articles" file if there is not one already present on the device.
+    func createReadArticlesFileIfNone() {
+        let fileMgr = NSFileManager.defaultManager()
+        if (!fileMgr.fileExistsAtPath(articleReadStatusFilePath)) {
+            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as [NSObject: AnyObject])) {
+                println("Error! Creating articleReadStatusFile failed to create at \(articleReadStatusFilePath)")
+            }
+        }
+    }
+    // loadArticlesReadStatusFileToArticlesReadStatusDict
+    // This function loads the contents of the "read articles" file in to the articleReadStatusFileDict
+    func loadArticlesReadStatusFileToArticlesReadStatusDict() {
+        articleReadStatusFileDict = NSMutableDictionary(contentsOfFile: articleReadStatusFilePath)!
+    }
+    // saveArticlesReadStatusDictToArticlesReadStatusFile
+    // This function saves the articleReadStatusFileDict data back into a file on the device
+    func saveArticlesReadStatusDictToArticlesReadStatusFile() {
+        articleReadStatusFileDict.writeToFile(articleReadStatusFilePath, atomically: true)
+    }
+    // updateArticlesReadStatusDict
+    // This function updates the articleReadStatusFileDict after a new article has been viewed
+    func updateArticlesReadStatusDict() {
+        var newArticlesReadStatusDict: NSMutableDictionary = NSMutableDictionary.alloc()
+        var dictHasBeenReadValue: NSNumber = 1
+        var articleStoryLink: NSString = ""
+        newArticlesReadStatusDict = [:]
+        for ii in 0...posts.count-1 {
+            articleStoryLink = posts[ii]["link"]!
             
-            str = str?.stringByReplacingOccurrencesOfString(" ", withString: "");
-            str = str?.stringByReplacingOccurrencesOfString("\n", withString: "");
-            str = str?.stringByReplacingOccurrencesOfString("   ", withString: "");
-            str = str?.stringByReplacingOccurrencesOfString("\t", withString: "");
-
-            avc?.articleLinkString = str;
-            println(avc!.articleLinkString);
+            if (articleReadStatusFileDict.objectForKey(articleStoryLink) != nil &&
+                articleReadStatusFileDict.objectForKey(articleStoryLink)!.integerValue == dictHasBeenReadValue.integerValue) {
+                newArticlesReadStatusDict.setObject(NSNumber(int: 1), forKey: articleStoryLink)
+            } else {
+                newArticlesReadStatusDict.setObject(NSNumber(int: 0), forKey: articleStoryLink)
+            }
+        }
+        articleReadStatusFileDict = newArticlesReadStatusDict
+    }
+    // articleHasBeenRead
+    // This function returns a bool based on whether or not the article at the passed index has been viewed
+    func articleHasBeenRead(index: Int) -> Bool {
+        var linkString: String = posts[index]["link"]!
+        if (articleReadStatusFileDict.objectForKey(linkString) != nil &&
+            articleReadStatusFileDict.objectForKey(linkString)?.integerValue == NSNumber(int: 1)) {
+            return true
+        }
+        return false
+    }
+    
+/*
+    Parser Functions
+*/
+    // parseErrorOccurred
+    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+        println("error = \(parseError.localizedDescription)")
+    }
+    // beginParsing
+    // This function begins the XML parsing process
+    func beginParsing() {
+        posts = []
+        parser = NSXMLParser(contentsOfURL: NSURL(string: feed))!
+        parser.delegate = self
+        if (!parser.parse()) {
+            println("parser failed")
+            println("error is \(parser.parserError)")
+        }
+    }
+    // didStartElement
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
+        element = elementName
+        if (element == "item") {
+            articleTitle = ""
+            articleLink = ""
+        }
+    }
+    // foundCharacters
+    func parser(parser: NSXMLParser, foundCharacters string: String?) {
+        if (element == "title") {
+            articleTitle.appendString(string!)
+        } else if (element == "link") {
+            articleLink.appendString(string!)
+        }
+    }
+    // didEndElement
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if (elementName == "item") {
+            if (!(articleTitle.isEqual(nil)) && !articleLink.isEqual(nil)) {
+                var dictionaryEntry: Dictionary = ["title": (articleTitle as String), "link": (articleLink as String)]
+                posts.append(dictionaryEntry)
+            }
         }
     }
 }

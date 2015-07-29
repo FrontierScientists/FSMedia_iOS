@@ -1,21 +1,21 @@
-//
 //  AppDelegate.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/15/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 
+/*
+    This is the AppDelegate class, responsable for handling specific events of the application.
+    The application function (only one currently used), is run at the very start of every launch
+    of the application.
+*/
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        // Spawn a thread with HIGH priority to do the initial content checking and updating.
         dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            
+            // Check for network connection
             reachability.startNotifier();
             netStatus = reachability.currentReachabilityStatus();
             networkConnected = netStatus.value != NOTREACHABLE
@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             updateContent()
+            // If there was an error connecting to the server on the very first launch of the application (no data present),
+            // the processImages function is skipped and the error dialog is present from ViewController.swift
             if !cannotContinue {
                 processImages()
                 println("UI Ready!")

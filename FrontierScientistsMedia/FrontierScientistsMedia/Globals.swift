@@ -1,6 +1,7 @@
 //  Globals.swift
 /* 
-    These are the global variables used throughout the project. They are listed along with every file they are set or referenced.
+    These are the global constants and variables used throughout the project. 
+    They are listed along with every file in which they are set or referenced.
 */
 
 //  Global Constant                                                    Files Containing Constant
@@ -9,7 +10,9 @@
 let group = dispatch_group_create()                                 // AppDelegate.swift
                                                                     // ViewController.swift
 
-let iPadDeviceType = UIUserInterfaceIdiom.Pad                       // VideoTableViewController.swift
+let iPadDeviceType = UIUserInterfaceIdiom.Pad                       // ArticlesTableViewController.swift
+                                                                    // AskViewController.swift
+                                                                    // VideoTableViewController.swift
 
 let NOTREACHABLE: Int = 0                                           // aboutViewController.swift
                                                                     // AppDelegate.swift
