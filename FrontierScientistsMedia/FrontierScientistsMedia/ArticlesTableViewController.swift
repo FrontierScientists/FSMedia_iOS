@@ -4,7 +4,8 @@ import Foundation
 import UIKit
 
 /*
-    Class overview goes here.
+    This is the ArticlesTableViewController class, responsable for parsing the articles feed and displaying
+    the articles in a TableView.
 */
 class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     
@@ -53,7 +54,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     // prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "RSSFeed") {
-            let avc = segue.destinationViewController as? MySwiftArticlesViewController
+            let avc = segue.destinationViewController as? ArticleViewController
             var str = posts[selectedArtcileIndex]["link"]
             // Ready link for use in WebView
             str = str?.stringByReplacingOccurrencesOfString(" ", withString: "")

@@ -1,15 +1,9 @@
-//
-//  ArticlesViewController.swift
-//  FSDemo
-//
-//  Created by alandrews3 on 5/13/15.
-//  Copyright (c) 2015 Andrew Clark. All rights reserved.
-//
+// ArticleViewController.swift
 
 import Foundation
 import UIKit
 
-class MySwiftArticlesViewController: UIViewController{
+class ArticleViewController: UIViewController{
     @IBOutlet var webView: UIWebView!;
     var articleLinkString: String?;
 

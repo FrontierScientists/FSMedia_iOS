@@ -1,35 +1,31 @@
-//
-//  aboutViewController.swift
-//  FrontierScientistsMedia
-//
-//  Created by sfarabaugh on 6/9/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
+// AboutViewController.swift
 
 import UIKit
 import MessageUI
 
-class aboutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
+/*
+    Put class overview here.
+*/
+class AboutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
-    
+/*
+    Outlets
+*/
     @IBOutlet var aboutTable: UITableView!
-   
-//    @IBAction func snippetImageClick(sender: AnyObject) {
-//        performSegueWithIdentifier("myimage", sender: nil)
-//    }
+/*
+    Actions
+*/
     @IBAction func snippetImageClick(sender: AnyObject) {
         aboutCurrentImage = aboutDisplayableContent.imageKeys[sender.tag - sections.count]
         performSegueWithIdentifier("myimage", sender: nil)
     }
-    
     @IBAction func emailDevs(sender: AnyObject) {
         netStatus = reachability.currentReachabilityStatus();
         if(netStatus.value == NOTREACHABLE){
             noEmailAlert();
-        }
-        else{
-            var subject_prefix = "[frontscidevelopers] "
-            var recepient = ["developer@frontierscientists.com"]
+        } else {
+            let subject_prefix = "[frontscidevelopers] "
+            let recepient = ["developer@frontierscientists.com"]
 
             var mailer = MFMailComposeViewController()
             mailer.mailComposeDelegate = self
@@ -37,16 +33,16 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
             mailer.setSubject(subject_prefix)
             presentViewController(mailer, animated: true, completion: nil)
         }
-        
     }
+/*
+    Class Constants
+*/
+    let sections = ["opening","goal"]
+    let aboutDisplayableContent = aboutDisplayableContentFrameworkized()
     
     func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    let sections = ["opening","goal"]
-    let aboutDisplayableContent = aboutDisplayableContentFrameworkized()
-//    let aboutContent = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +64,7 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
         aboutTable.estimatedRowHeight = 110.0
         aboutTable.rowHeight = UITableViewAutomaticDimension
         
-    }//end viewDidLoad
+    }
     
     func noEmailAlert(){
         
@@ -88,11 +84,6 @@ class aboutViewController: UIViewController, UITableViewDataSource, UITableViewD
         return sections.count + aboutDisplayableContent.snippets.count + aboutDisplayableContent.people.count + 1
 
     }
-//
-//    
-//    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//        aboutCurrentImage = aboutDisplayableContent.imageKeys[indexPath.row - sections.count]
-//    }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let devCell: AboutTableViewCell = tableView.dequeueReusableCellWithIdentifier("contactDevs") as! AboutTableViewCell
         
@@ -171,11 +162,4 @@ class aboutDisplayableContentFrameworkized{
     var snippets = [String]()
     var imageKeys = [String]()
     var people = [String]()
-    
 }
-
-//Setting up a left bar button
-//        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: customFont!], forState: UIControlState.Normal)
-//        aboutNavBar.leftBarButtonItem = UIBarButtonItem()
-//        aboutNavBar.leftBarButtonItem!.title = "< MainMenu"
-//        aboutNavBar.leftBarButtonItem!.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!], forState: .Normal)

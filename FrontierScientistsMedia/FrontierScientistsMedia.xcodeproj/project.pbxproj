@@ -39,7 +39,7 @@
 		7E31EFB31B0EA8FC00C05F0C /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E31EFB21B0EA8FC00C05F0C /* bg.png */; };
 		7E8D518A1B43AF6C0099EAD2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E8D51891B43AF6C0099EAD2 /* MapKit.framework */; };
 		7E8D518C1B43AFD10099EAD2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */; };
-		7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* aboutViewController.swift */; };
+		7E8E89B81B279C8300966C82 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* AboutViewController.swift */; };
 		7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */; };
 		7EBAF7641B4C7ECB00E287DD /* diamond_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */; };
 		7EC192581B38CA6500D0D421 /* AboutImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */; };
@@ -51,7 +51,7 @@
 		F560C6FB1B290978007929A0 /* cancel_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6FA1B290978007929A0 /* cancel_icon.png */; };
 		F56E9E3E1B1CCE170027D39B /* CellBorder.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E3D1B1CCE170027D39B /* CellBorder.png */; };
 		F56E9E441B1CD0670027D39B /* ArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E421B1CD0670027D39B /* ArticlesTableViewController.swift */; };
-		F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */; };
+		F56E9E451B1CD0670027D39B /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E431B1CD0670027D39B /* ArticleViewController.swift */; };
 		F56E9E471B1CD1600027D39B /* new_icon-web.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E461B1CD1600027D39B /* new_icon-web.png */; };
 		F56E9E491B1CD1700027D39B /* Transition_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E481B1CD1700027D39B /* Transition_Icon.png */; };
 		F56E9E501B1CD1890027D39B /* VideoDownloadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */; };
@@ -113,7 +113,7 @@
 		7E31EFB21B0EA8FC00C05F0C /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
 		7E8D51891B43AF6C0099EAD2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		7E8E89B71B279C8300966C82 /* aboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = aboutViewController.swift; sourceTree = "<group>"; };
+		7E8E89B71B279C8300966C82 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewCell.swift; sourceTree = "<group>"; };
 		7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_blue.png; sourceTree = "<group>"; };
 		7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutImageViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 		F560C6FA1B290978007929A0 /* cancel_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel_icon.png; sourceTree = "<group>"; };
 		F56E9E3D1B1CCE170027D39B /* CellBorder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CellBorder.png; sourceTree = "<group>"; };
 		F56E9E421B1CD0670027D39B /* ArticlesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesTableViewController.swift; sourceTree = "<group>"; };
-		F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticlesViewController.swift; sourceTree = "<group>"; };
+		F56E9E431B1CD0670027D39B /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
 		F56E9E461B1CD1600027D39B /* new_icon-web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_icon-web.png"; sourceTree = "<group>"; };
 		F56E9E481B1CD1700027D39B /* Transition_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Transition_Icon.png; sourceTree = "<group>"; };
 		F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadHelper.swift; sourceTree = "<group>"; };
@@ -190,9 +190,9 @@
 				F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */,
 				3BAA17E31B06C36D003510D7 /* AppDelegate.swift */,
 				F56E9E421B1CD0670027D39B /* ArticlesTableViewController.swift */,
-				7E8E89B71B279C8300966C82 /* aboutViewController.swift */,
+				7E8E89B71B279C8300966C82 /* AboutViewController.swift */,
 				7E8EFC3C1B335A0700E5D7DE /* AboutTableViewCell.swift */,
-				F56E9E431B1CD0670027D39B /* ArticlesViewController.swift */,
+				F56E9E431B1CD0670027D39B /* ArticleViewController.swift */,
 				7EC192571B38CA6500D0D421 /* AboutImageViewController.swift */,
 				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
 				7EC248E91B438B2500C66357 /* AskTableViewCell.swift */,
@@ -402,10 +402,10 @@
 			files = (
 				3B5780C01B681B6C00C31362 /* Globals.swift in Sources */,
 				3BBBD48A1B20CD9200C628B1 /* ResearchNavigationTableView.swift in Sources */,
-				F56E9E451B1CD0670027D39B /* ArticlesViewController.swift in Sources */,
+				F56E9E451B1CD0670027D39B /* ArticleViewController.swift in Sources */,
 				7EC192581B38CA6500D0D421 /* AboutImageViewController.swift in Sources */,
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
-				7E8E89B81B279C8300966C82 /* aboutViewController.swift in Sources */,
+				7E8E89B81B279C8300966C82 /* AboutViewController.swift in Sources */,
 				7E8EFC3D1B335A0700E5D7DE /* AboutTableViewCell.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */,

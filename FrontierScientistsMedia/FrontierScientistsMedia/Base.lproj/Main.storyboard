@@ -789,10 +789,10 @@
             </objects>
             <point key="canvasLocation" x="2061" y="418"/>
         </scene>
-        <!--My Swift Articles View Controller-->
+        <!--Article View Controller-->
         <scene sceneID="cIi-ei-zsT">
             <objects>
-                <viewController id="PvR-9z-8Zv" customClass="MySwiftArticlesViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PvR-9z-8Zv" customClass="ArticleViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEu-gA-EDh"/>
                         <viewControllerLayoutGuide type="bottom" id="7GV-c2-5gW"/>
