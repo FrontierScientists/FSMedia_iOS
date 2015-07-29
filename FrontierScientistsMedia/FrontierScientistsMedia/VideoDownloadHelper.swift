@@ -42,7 +42,7 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
         var downloadTask: NSURLSessionTask = self.session.downloadTaskWithURL(NSURL(string: self.videoUrlString, relativeToURL: nil)!);
         
         println("downloadTask.taskIdentifier: \(downloadTask.taskIdentifier)");
-        videoTitleForDownloadStatusDictionary[self.videoTitleString] = "\(downloadTask.taskIdentifier)";
+        videoTitleStatuses[self.videoTitleString] = "\(downloadTask.taskIdentifier)";
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "cancelDownloadNotification:",name:IDENTIFIER, object: nil);
         downloadTask.resume();
     }
@@ -58,7 +58,7 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
     // Called after downloading a chunk of the data
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64){
         println("Got into didWriteData");
-        videoTitleForDownloadStatusDictionary[self.videoTitleString] = "\(downloadTask.taskIdentifier)";
+        videoTitleStatuses[self.videoTitleString] = "\(downloadTask.taskIdentifier)";
     }
     
     // didFinishDownloadingToURL
@@ -91,7 +91,7 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
             self.session.invalidateAndCancel();
             NSNotificationCenter.defaultCenter().removeObserver(self);
             NSNotificationCenter.defaultCenter().postNotificationName("reloadVideosTableView", object: nil);
-            videoTitleForDownloadStatusDictionary[self.videoTitleString] = "none";
+            videoTitleStatuses[self.videoTitleString] = "none";
         })
     }
     
@@ -112,7 +112,7 @@ class videoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate
         dispatch_async(dispatch_get_main_queue(),{
             
                 NSNotificationCenter.defaultCenter().postNotificationName("reloadVideosTableView", object: nil);
-                videoTitleForDownloadStatusDictionary[self.videoTitleString] = "none";
+                videoTitleStatuses[self.videoTitleString] = "none";
         })
     }
     

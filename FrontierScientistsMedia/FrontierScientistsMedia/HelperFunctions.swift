@@ -19,7 +19,6 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
     )
 }
 
-
 // Returns the last component of a url string
 func lastComponentOfUrlString(url: String) -> String
 {

@@ -8,11 +8,6 @@
 
 import UIKit
 
-var cannotContinue = false
-var reachability = Reachability.reachabilityForInternetConnection();
-var netStatus = reachability.currentReachabilityStatus();
-let NOTREACHABLE: Int = 0;
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mainMenu: UITableView!

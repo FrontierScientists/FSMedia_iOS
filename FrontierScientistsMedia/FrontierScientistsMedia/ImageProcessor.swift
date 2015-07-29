@@ -8,10 +8,6 @@
 
 import UIKit
 
-var storedImages = [String: UIImage]()
-var savedImages = [String]()
-var currentStoredImages = [String: NSData]()
-
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
     if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {

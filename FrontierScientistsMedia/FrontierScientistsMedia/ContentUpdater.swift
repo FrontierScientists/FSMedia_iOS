@@ -8,13 +8,6 @@
 
 import UIKit
 
-var projectData = [String: [String: AnyObject]]()
-var iosProjectData: Array<Dictionary<String, AnyObject>> = [];
-var scientistInfo = [String: String]()
-var aboutInfo = [String: AnyObject]()
-var orderedTitles = [String]()
-var connectedToServer = true
-
 func updateContent() {
     let filePath = "http://frontsci.arsc.edu/frontsci/frontSciData.json"
     

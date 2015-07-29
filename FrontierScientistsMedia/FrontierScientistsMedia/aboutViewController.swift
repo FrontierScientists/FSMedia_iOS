@@ -9,9 +9,6 @@
 import UIKit
 import MessageUI
 
-var aboutCurrentImage = "about_icon.jpg"
-
-
 class aboutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     

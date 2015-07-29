@@ -9,18 +9,17 @@
 import Foundation
 import UIKit
 
-let feed: String = "http://frontierscientists.com/feed";
-var articleTitle: NSMutableString = NSMutableString();
-var articleLink: NSMutableString = NSMutableString();
-var element: String = "";
-var selectedArtcileIndex: Int = 0;
-var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary.alloc();
-
 class MySwiftArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     @IBOutlet var articleTableView: UITableView?;
     var posts = [[String(): String()]];
     var parser = NSXMLParser.alloc();
     var articleReadStatusFilePath: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/ArticlesReadStatus.txt");
+    let feed: String = "http://frontierscientists.com/feed"
+    var articleTitle: NSMutableString = NSMutableString()
+    var articleLink: NSMutableString = NSMutableString()
+    var element: String = ""
+    var selectedArtcileIndex: Int = 0
+    var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary.alloc()
     
     override func viewDidLoad(){
         super.viewDidLoad();

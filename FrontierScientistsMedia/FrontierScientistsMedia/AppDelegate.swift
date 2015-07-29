@@ -7,10 +7,6 @@
 //
 
 import UIKit
-let iPadDeviceType = UIUserInterfaceIdiom.Pad
-let group = dispatch_group_create()
-var networkConnected = true
-var displayOldData = false
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

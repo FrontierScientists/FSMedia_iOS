@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 import MessageUI
 
-var iPhoneFontSize:CGFloat = 20
-var iPadFontSize:CGFloat = 35
-
 class AskViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate {
     
     @IBOutlet var askTableView: UITableView!
+    var iPhoneFontSize:CGFloat = 20
+    var iPadFontSize:CGFloat = 35
     
     @IBAction func scientistBioClicked(sender: AnyObject) {
         netStatus = reachability.currentReachabilityStatus();

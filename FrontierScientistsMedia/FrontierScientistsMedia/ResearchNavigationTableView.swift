@@ -13,8 +13,6 @@ protocol ResearchNavigationTableViewDelegate {
     func projectSelected(title: String, image: UIImage)
 }
 
-var projectTitle = ""
-
 class ResearchNavigationTableView: UIViewController {
     
     @IBOutlet weak var navigationTableView: UITableView!

@@ -15,11 +15,6 @@ enum SlideOutState {
     case panelExpanded
 }
 
-var researchContainerRef = ResearchContainer()
-var projectViewRef: ProjectView!
-var currentLinkedProject = ""
-var firstTime = true
-
 class ResearchContainer: UIViewController {
     
     @IBOutlet var openSwipe: UISwipeGestureRecognizer!
@@ -29,6 +24,7 @@ class ResearchContainer: UIViewController {
     var currentState: SlideOutState = .panelCollapsed
     var navigationViewController: ResearchNavigationTableView?
     var panelExpandedOffset: CGFloat = 60
+    var firstTime = true
     
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()

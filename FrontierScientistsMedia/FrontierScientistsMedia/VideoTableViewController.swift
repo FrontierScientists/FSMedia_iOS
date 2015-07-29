@@ -10,9 +10,6 @@ import Foundation
 import UIKit
 import MediaPlayer
 
-var videoTitleForDownloadStatusDictionary: Dictionary<String, String> = ["video_title": "downloadTask.id"];
-var selectedResearchProjectIndex: Int = 0;
-
 class MySwiftVideoTableViewController: UITableViewController
 {
     @IBOutlet weak var changeVidoesModeButton: UIButton!
@@ -289,7 +286,7 @@ class MySwiftVideoTableViewController: UITableViewController
         let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH.stringByAppendingPathComponent("compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)");
         
         // Video is being downloaded
-        if(videoTitleForDownloadStatusDictionary[VIDEOTITLE] != "none"){
+        if(videoTitleStatuses[VIDEOTITLE] != "none"){
             
             var activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 5, 30, 30));
             activityIndicatorView.color = UIColor.blackColor();
@@ -358,7 +355,7 @@ class MySwiftVideoTableViewController: UITableViewController
         let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH.stringByAppendingPathComponent("compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)");
         
         // Video is being downloaded
-        if(videoTitleForDownloadStatusDictionary[VIDEOTITLE] != "none"){
+        if(videoTitleStatuses[VIDEOTITLE] != "none"){
             
             cancel_Download_Alert(VIDEOTITLE);
             selectedResearchProjectIndex = -1;
@@ -523,7 +520,7 @@ class MySwiftVideoTableViewController: UITableViewController
                 for rowIndex in 0...sectionVideoCount!-1{
                     var videoDict: Dictionary = iosProjectData[sectionIndex]["videos"]?[rowIndex] as! [String: String];
                     var videoTitle: String = videoDict["title"]!;
-                    videoTitleForDownloadStatusDictionary[videoTitle] = "none";
+                    videoTitleStatuses[videoTitle] = "none";
                 }
             }
         }
