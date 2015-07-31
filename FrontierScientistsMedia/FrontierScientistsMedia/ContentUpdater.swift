@@ -1,24 +1,24 @@
-//
-//  ContentUpdater.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/28/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
+// ContentUpdater.swift
 
 import UIKit
 
+/*
+    This is the updateContent function, called from the AppDelegate.swift file in the application function.
+    This function handles the updating of the data received from the frontSciData.json file, retreiving new
+    and updated data when needed and propegating those updates to the stored files on the device.  This function
+    uses NSKeyedArchiveer and NSKeyedUnarchiver to store the data in files on the device in dictionary form.
+*/
 func updateContent() {
     let filePath = "http://frontsci.arsc.edu/frontsci/frontSciData.json"
     
-    // Load content.
     if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) != nil { // There has been data previously stored.
         let nextUpdateString = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("nextUpdate").path!) as! String
         let nextUpdateDate = NSDate(dateString: nextUpdateString)
         let today = NSDate()
         
-        if today.compare(nextUpdateDate) != NSComparisonResult.OrderedAscending { // If the next update date is either before today or is today, an update is needed.
-            if displayOldData {
+        // If the next update date is either before today or is today, an update is needed.
+        if today.compare(nextUpdateDate) != NSComparisonResult.OrderedAscending { 
+            if displayOldData { // Set in the checkNetwork function in ViewController.swift
                 println("Displaying old content")
             } else {
                 println("Updating stored data...")
@@ -32,25 +32,30 @@ func updateContent() {
         loadDataFromJson(filePath)
     }
     
+    // If this is the first time retreiving data (there is none already present) but the server could not be connected to,
+    // there is nothing further to be done.  cannotContinue is set to true here and handled in ViewController.swift.
     if (!connectedToServer && NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) == nil) {
         cannotContinue = true
         return
     }
     
+    // Each of the global dictionaries responsable for holding the data are set here from the archived data to be used
+    // throughout the application for the remainder of the instance of the application.
     projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
     iosProjectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("iosProjectData").path!) as! [[String: AnyObject]]
     scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
     aboutInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("about").path!) as! Dictionary
-    for title in sorted(projectData.keys.array) {
+    for title in sorted(projectData.keys.array) { // orderedTitles is populated by sorting the titles from projectData
         orderedTitles.append(title)
     }
 }
 
 /*
-    Content Function
+    Helper and Content Functions
 */
 // loadDataFromJson
 // This function establishes a connection with the VM, loads the content of frontSciData.json into a dictionary and saves data from that dictionary into storage.
+// If a connection cannot be made, it simply sets connectionToServer to false.
 func loadDataFromJson(filePath: String) {
     let data: NSData? = NSData(contentsOfURL: NSURL(string: filePath)!)
     if (data == nil) {
@@ -67,10 +72,6 @@ func loadDataFromJson(filePath: String) {
     NSKeyedArchiver.archiveRootObject(jsonDict["scientist"]!, toFile: getFileUrl("scientist").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!) 
 }
-
-/*
-    Helper Function
-*/
 // getFileUrl
 // This function retrieves a valid url from the document directory.
 func getFileUrl(fileName: String) -> NSURL {
