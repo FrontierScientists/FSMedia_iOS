@@ -49,10 +49,6 @@ var displayOldData = false                                          // AppDelega
                                                                     // ContentUpdater.swift
                                                                     // ViewController.swift
 
-var iosProjectData: Array<Dictionary<String, AnyObject>> = []       // ContentUpdater.swift
-                                                                    // ProjectView.swift
-                                                                    // VideoTableViewController.swift
-
 var netStatus = reachability.currentReachabilityStatus()            // AboutViewController.swift
                                                                     // AppDelegate.swift
                                                                     // AskViewController.swift

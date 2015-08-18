@@ -74,13 +74,11 @@ extension ProjectView: UITableViewDataSource {
 
 //noInternetConnectionAlert
 //
-func noVideosAlert(){
-    
+func noVideosAlert() {
     let ALERTMESSAGE = "There are no videos for this research project. Would you still like to continue to videos?";
     var alert = UIAlertController(title: ALERTMESSAGE,
         message: "",
         preferredStyle: UIAlertControllerStyle.Alert);
-    
     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler:nil))
     alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler:
         {(action: UIAlertAction!) in
@@ -92,11 +90,10 @@ func noVideosAlert(){
 
 // TableView Delegate
 extension ProjectView: UITableViewDelegate {
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 { // Videos
             selectedResearchProjectIndex = find(orderedTitles, projectTitle)!
-            if(iosProjectData[selectedResearchProjectIndex]["videos"]?.count == 0){
+            if (projectData[projectTitle]!["videos"]?.count == 0) {
                 noVideosAlert()
             }
             else{

@@ -34,8 +34,7 @@ class MySwiftVideoTableViewController: UITableViewController
         // Check if there is a network connection, and alert the user if there isn't
         reachability.startNotifier();
         netStatus = reachability.currentReachabilityStatus();
-        if(netStatus.value == NOTREACHABLE && loadIsNotReloadBool)
-        {
+        if (netStatus.value == NOTREACHABLE && loadIsNotReloadBool) {
             noInternetConnectionAlert();
             loadIsNotReloadBool = false;
         }
@@ -47,8 +46,8 @@ class MySwiftVideoTableViewController: UITableViewController
         createFolderNamed("MP4"); // Calls to function in HelperFunctions.swift
         createFolderNamed("compressedMP4");
         
-        var sectionCount: Int = iosProjectData.count;
-        for sectionIndex in 0...sectionCount-2{
+        var sectionCount: Int = orderedTitles.count;
+        for sectionIndex in 0...(sectionCount - 2) {
             openSectionArray.append("closed");
         }
         
@@ -64,8 +63,7 @@ class MySwiftVideoTableViewController: UITableViewController
         // Apply differences for iPad and iPhone
         if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
             changeVidoesModeButton.frame = CGRectMake(0, 0, 320, 40);
-        }
-        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+        } else { // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
             changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20);
         }
     }
@@ -106,17 +104,17 @@ class MySwiftVideoTableViewController: UITableViewController
     // numberOfSectionsInTableView
     //
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int{
-        return iosProjectData.count;
+        return orderedTitles.count;
     }
     
     // heightForHeaderInSection
     //
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat{
-        var sectionVideoCount: Int? = iosProjectData[section]["videos"]?.count;
-        if(sectionVideoCount == 0){
-            return 1;
-        }
-        else{
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let project = orderedTitles[section]
+        var sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+        if (sectionVideoCount == 0) {
+            return 1
+        } else {
             return 110.0
         }
     }
@@ -124,11 +122,12 @@ class MySwiftVideoTableViewController: UITableViewController
     // viewForHeaderInSection
     //
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        //println("viewForHeaderInSection");
-        var sectionVideoCount: Int? = iosProjectData[section]["videos"]?.count;
+        let project = orderedTitles[section]
         
-        if(sectionVideoCount == 0){
-            return nil;
+        var sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+        
+        if (sectionVideoCount == 0) {
+            return nil
         }
         
         // The main header view that all subviews will go into
@@ -146,23 +145,21 @@ class MySwiftVideoTableViewController: UITableViewController
         // The arrow image subview
         var headerArrowImageView: UIImageView = UIImageView(frame: CGRect(x: 15, y: 20, width: 50, height: 50));
         headerArrowImageView.image = UIImage(named: "Transition_Icon.png");
-        if(openSectionArray[section] == "open"){
+        if (openSectionArray[section] == "open") {
             headerArrowImageView.transform = CGAffineTransformMakeRotation(-3.14/2); // ccw turn to point up
-        }
-        else{ //(openSectionArray[section] == "closed")
+        } else { //(openSectionArray[section] == "closed")
             headerArrowImageView.transform = CGAffineTransformMakeRotation(3.14/2); // cw turn to point down
         }
         
         // The research image subview
         let headerResearchImageView: UIImageView = UIImageView(frame: CGRect(x: 70, y: 10, width: 110, height: 70));
-        let researchImageUrl: String = iosProjectData[section]["preview_image"] as! String;
+        let researchImageUrl: String = projectData[project]!["preview_image"] as! String;
         headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH.stringByAppendingPathComponent("Images/\(researchImageUrl.lastPathComponent)"));
         
 
         // The header label subview
         var headerTitleView: UILabel = UILabel(frame: CGRectMake(190, 5, self.view.frame.size.width - 190, 104));
-        var researchTitle: String = iosProjectData[section]["title"] as! String;
-        headerTitleView.text = researchTitle;
+        headerTitleView.text = project
         headerTitleView.textColor = UIColor.blackColor();
         headerTitleView.userInteractionEnabled = false;
         headerTitleView.numberOfLines = 0;
@@ -175,10 +172,9 @@ class MySwiftVideoTableViewController: UITableViewController
         headerButton.addTarget(self, action: "dropDownListToggle:", forControlEvents: UIControlEvents.TouchUpInside);
         
         // Apply differences for iPad and iPhone
-        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
+        if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
             headerTitleView.font = UIFont(name: "Chalkduster", size: 25);
-        }
-        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+        } else { // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
             headerTitleView.font = UIFont(name: "Chalkduster", size: 20);
         }
         
@@ -204,10 +200,9 @@ class MySwiftVideoTableViewController: UITableViewController
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         var footerImageView: UIImageView =  UIImageView(frame: CGRectMake(0, 0, self.view.frame.size.width, 1));
         // The blue line seperating the headers when one is opened
-        if(openSectionArray[section] == "open"){
+        if (openSectionArray[section] == "open") {
             footerImageView.backgroundColor = UIColor.blueColor();
-        }
-        else{ //(openSectionArray[section] == "closed")
+        } else { //(openSectionArray[section] == "closed")
             footerImageView.backgroundColor = UIColor.clearColor();
         }
         return footerImageView;
@@ -224,12 +219,13 @@ class MySwiftVideoTableViewController: UITableViewController
     // numberOfRowsInSection
     // Get the number of rows per section
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if(openSectionArray[section] == "open"){
-            var sectionVideoCount: Int? = iosProjectData[section]["videos"]?.count;
-            return sectionVideoCount!;
-        }
-        else{
-            return 0;
+        let project = orderedTitles[section]
+        
+        if (openSectionArray[section] == "open") {
+            var sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+            return sectionVideoCount!
+        } else {
+            return 0
         }
     }
     
@@ -238,17 +234,19 @@ class MySwiftVideoTableViewController: UITableViewController
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
         // Apply differences for iPad and iPhone
-        if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
-            return 90;
-        }
-        else{ // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-            return 40;
+        if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
+            return 90
+        } else { // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
+            return 40
         }
     }
     
     // cellForRowAtIndexPath
     // Get the view for the cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        let project = orderedTitles[indexPath.section]
+        let videos = projectData[project]!["videos"] as! [String: [String: String]]
+        let video = videos.keys.array[indexPath.row]
         
         netStatus = reachability.currentReachabilityStatus();
         if(netStatus.value == NOTREACHABLE)
@@ -257,7 +255,7 @@ class MySwiftVideoTableViewController: UITableViewController
         }
         
         var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell");
-        var videoDict: Dictionary = iosProjectData[indexPath.section]["videos"]?[indexPath.row] as! [String: String];
+        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         var accessoryImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40));
         
         // cell background
@@ -295,14 +293,14 @@ class MySwiftVideoTableViewController: UITableViewController
             cell.imageView?.addSubview(activityIndicatorView);
             accessoryImageView.image = UIImage(named: "cancel_icon.png");
             // Apply differences for iPad
-            if(UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType){
+            if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
                 activityIndicatorView.frame = CGRectMake(0, 10, 60, 60);
             }
         }
         // Video managing options
         else if(currentMode == MANAGE){
             
-            if((VIDEOMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) ||
+            if ((VIDEOMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) ||
                (VIDEOCOMPRESSEDMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH))){
                 
                 println("MP4FILEPATH: \(MP4FILEPATH)");
@@ -345,8 +343,11 @@ class MySwiftVideoTableViewController: UITableViewController
     // didSelectRowAtIndexPath
     // Cell has been selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        let project = orderedTitles[indexPath.section]
+        let videos = projectData[project]!["videos"] as! [String: [String: String]]
+        let video = videos.keys.array[indexPath.row]
         
-        var videoDict: Dictionary = iosProjectData[indexPath.section]["videos"]?[indexPath.row] as! [String: String];
+        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         selectedIndexPath = indexPath;
         let VIDEOTITLE: String = videoDict["title"]!;
         let VIDEOMP4URL: String = videoDict["MP4"]!;
@@ -436,7 +437,11 @@ class MySwiftVideoTableViewController: UITableViewController
     // HD_or_Compressed_Alert
     // Alert that asks the user to choose between downloading the HD or compressed version of the video
     func HD_or_Compressed_Alert(){
-        var videoDict: Dictionary = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row] as! [String: String];
+        let project = orderedTitles[selectedIndexPath.section]
+        let videos = projectData[project]!["videos"] as! [String: [String: String]]
+        let video = videos.keys.array[selectedIndexPath.row]
+        
+        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         var alert = UIAlertController(title: "Choose video quality",
             message: "",
             preferredStyle: UIAlertControllerStyle.Alert);
@@ -460,8 +465,11 @@ class MySwiftVideoTableViewController: UITableViewController
     // downloadVideo
     // Downloads the chosen video at the chosen video quality
     func downloadVideo(){
+        let project = orderedTitles[selectedIndexPath.section]
+        let videos = projectData[project]!["videos"] as! [String: [String: String]]
+        let video = videos.keys.array[selectedIndexPath.row]
         
-        var videoDict: Dictionary = iosProjectData[self.selectedIndexPath.section]["videos"]?[self.selectedIndexPath.row] as! [String: String];
+        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         var videoDownloadHelperHandle: videoDownloadHelper = videoDownloadHelper.alloc();
         videoDownloadHelperHandle.videoQualityFolder = selectedVideoQuality;
         videoDownloadHelperHandle.videoTitleString = videoDict["title"]!;
@@ -513,12 +521,15 @@ class MySwiftVideoTableViewController: UITableViewController
     // setAllVideoDownloadsToNone
     // Inits the state of the video downloads, because empty entries cause an error
     func setAllVideoDownloadsToNone(){
-        var sectionCount: Int = iosProjectData.count;
-        for sectionIndex in 0...sectionCount-1{
-            var sectionVideoCount: Int? = iosProjectData[sectionIndex]["videos"]?.count;
+        var sectionCount: Int = orderedTitles.count;
+        for sectionIndex in 0...sectionCount-1 {
+            let project = orderedTitles[sectionIndex]
+            var sectionVideoCount: Int? = projectData[project]!["videos"]?.count
             if(sectionVideoCount > 0){
-                for rowIndex in 0...sectionVideoCount!-1{
-                    var videoDict: Dictionary = iosProjectData[sectionIndex]["videos"]?[rowIndex] as! [String: String];
+                for rowIndex in 0...sectionVideoCount!-1 {
+                    let videos = projectData[project]!["videos"] as! [String: [String: String]]
+                    let video = videos.keys.array[rowIndex]
+                    var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
                     var videoTitle: String = videoDict["title"]!;
                     videoTitleStatuses[videoTitle] = "none";
                 }
@@ -529,7 +540,7 @@ class MySwiftVideoTableViewController: UITableViewController
     // openManageDownloadsView
     // The user pressed the upper-right-hand button
     @IBAction func openManageDownloadsView(sender: AnyObject){
-        var sectionCount: Int? = iosProjectData.count;
+        var sectionCount: Int? = orderedTitles.count;
         if(currentMode == WATCH){
             // Open all sections
             for sectionIndex in 0...sectionCount!-1{

@@ -42,7 +42,6 @@ func updateContent() {
     // Each of the global dictionaries responsable for holding the data are set here from the archived data to be used
     // throughout the application for the remainder of the instance of the application.
     projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
-    iosProjectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("iosProjectData").path!) as! [[String: AnyObject]]
     scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
     aboutInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("about").path!) as! Dictionary
     for title in sorted(projectData.keys.array) { // orderedTitles is populated by sorting the titles from projectData
@@ -67,7 +66,6 @@ func loadDataFromJson(filePath: String) {
     var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
     // Load data into persistant storage
     NSKeyedArchiver.archiveRootObject(jsonDict["android"]!, toFile: getFileUrl("projectData").path!)
-    NSKeyedArchiver.archiveRootObject(jsonDict["ios"]!, toFile: getFileUrl("iosProjectData").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["next_update"]!, toFile: getFileUrl("nextUpdate").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["scientist"]!, toFile: getFileUrl("scientist").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!) 
