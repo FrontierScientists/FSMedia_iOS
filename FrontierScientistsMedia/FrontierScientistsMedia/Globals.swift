@@ -14,7 +14,7 @@ let iPadDeviceType = UIUserInterfaceIdiom.Pad                       // ArticlesT
                                                                     // AskViewController.swift
                                                                     // VideoTableViewController.swift
 
-let NOTREACHABLE: Int = 0                                           // aboutViewController.swift
+let NOTREACHABLE: Int = 0                                           // AboutViewController.swift
                                                                     // AppDelegate.swift
                                                                     // AskViewController.swift
                                                                     // MapViewController.swift
@@ -26,9 +26,9 @@ let NOTREACHABLE: Int = 0                                           // aboutView
 //  ---------------                                                    -------------------------
 
 var aboutCurrentImage = "about_icon.jpg"                            // AboutImageViewController.swift
-                                                                    // aboutViewController.swift
+                                                                    // AboutViewController.swift
 
-var aboutInfo = [String: AnyObject]()                               // aboutViewController.swift
+var aboutInfo = [String: AnyObject]()                               // AboutViewController.swift
                                                                     // ContentUpdater.swift
                                                                     // ImageProcessor.swift
 
@@ -53,7 +53,7 @@ var iosProjectData: Array<Dictionary<String, AnyObject>> = []       // ContentUp
                                                                     // ProjectView.swift
                                                                     // VideoTableViewController.swift
 
-var netStatus = reachability.currentReachabilityStatus()            // aboutViewController.swift
+var netStatus = reachability.currentReachabilityStatus()            // AboutViewController.swift
                                                                     // AppDelegate.swift
                                                                     // AskViewController.swift
                                                                     // MapViewController.swift
@@ -81,7 +81,7 @@ var projectTitle = ""                                               // ProjectVi
 var projectViewRef: ProjectView!                                    // ResearchContainer.swift
                                                                     // ResearchNavigationTableView.swift
 
-var reachability = Reachability.reachabilityForInternetConnection() // aboutViewController.swift
+var reachability = Reachability.reachabilityForInternetConnection() // AboutViewController.swift
                                                                     // AppDelegate.swift
                                                                     // AskViewController.swift
                                                                     // MapViewController.swift
@@ -101,7 +101,7 @@ var selectedResearchProjectIndex: Int = 0                           // ProjectVi
                                                                     // VideoTableViewController.swift
 
 var storedImages = [String: UIImage]()                              // AboutImageViewController.swift
-                                                                    // aboutViewController.swift
+                                                                    // AboutViewController.swift
                                                                     // AskViewController.swift
                                                                     // ImageProcessor.swift
                                                                     // MapViewController.swift

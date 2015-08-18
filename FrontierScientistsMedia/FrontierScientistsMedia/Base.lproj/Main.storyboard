@@ -586,177 +586,16 @@
                         <outlet property="splashScreen" destination="ghd-F6-ZNs" id="AN7-Mb-VyD"/>
                         <segue destination="m0R-S3-sa9" kind="show" identifier="videos" id="sk8-Dx-qZ6"/>
                         <segue destination="8ll-k3-VXg" kind="show" identifier="articles" id="0aM-QA-zvN"/>
-                        <segue destination="19M-LF-YxW" kind="show" identifier="about" id="xqa-HY-ihQ"/>
                         <segue destination="als-D8-zIo" kind="show" identifier="research" id="KIv-co-ZEf"/>
                         <segue destination="VIR-35-wMJ" kind="show" identifier="ask" id="1Oo-HF-Il5"/>
                         <segue destination="fKn-3k-ilC" kind="show" identifier="maps" id="zOa-FW-sRq"/>
+                        <segue destination="ISL-T4-jFV" kind="show" identifier="about" id="S7k-Z7-O03"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="InU-ob-QOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="bJJ-nJ-Bgi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="378" y="418"/>
-        </scene>
-        <!--About-->
-        <scene sceneID="Ehw-ll-mDX">
-            <objects>
-                <tableViewController title="About" id="19M-LF-YxW" customClass="aboutViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="110" sectionHeaderHeight="22" sectionFooterHeight="22" id="bPp-zv-AsG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="redraw" restorationIdentifier="opening" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="opening" rowHeight="110" id="DxL-L6-1fl" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DxL-L6-1fl" id="Jui-lx-EVb">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4yh-ZU-k32">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <string key="text">One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  One Liners!!!  </string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="4yh-ZU-k32" firstAttribute="leading" secondItem="Jui-lx-EVb" secondAttribute="leading" id="PX9-cg-LmT"/>
-                                        <constraint firstAttribute="trailing" secondItem="4yh-ZU-k32" secondAttribute="trailing" id="YdJ-yl-KRe"/>
-                                        <constraint firstItem="4yh-ZU-k32" firstAttribute="top" secondItem="Jui-lx-EVb" secondAttribute="top" id="uVu-ab-Kkr"/>
-                                        <constraint firstAttribute="bottom" secondItem="4yh-ZU-k32" secondAttribute="bottom" id="vNf-XU-pcB"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="openingLabel" destination="4yh-ZU-k32" id="Va3-GQ-Dsz"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="redraw" restorationIdentifier="snippets" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="snippets" rowHeight="110" id="nui-Oc-pZY" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nui-Oc-pZY" id="QQe-S6-ikr">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSC-0E-5hb">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSS-4Q-Nek">
-                                            <rect key="frame" x="8" y="8" width="113" height="93"/>
-                                            <state key="normal" title="Button" image="about_icon.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="snippetImageClick:" destination="19M-LF-YxW" eventType="touchUpInside" id="n9a-EH-Edx"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="XSC-0E-5hb" firstAttribute="leading" secondItem="QQe-S6-ikr" secondAttribute="leading" id="QYp-bM-6iX"/>
-                                        <constraint firstItem="XSC-0E-5hb" firstAttribute="top" secondItem="QQe-S6-ikr" secondAttribute="top" id="Z7E-N7-mTm"/>
-                                        <constraint firstAttribute="bottom" secondItem="XSC-0E-5hb" secondAttribute="bottom" id="bBA-oL-igl"/>
-                                        <constraint firstAttribute="trailing" secondItem="XSC-0E-5hb" secondAttribute="trailing" id="bJT-kJ-x7v"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="openingLabel" destination="XSC-0E-5hb" id="7FP-wB-RF6"/>
-                                    <outlet property="snippetImage" destination="XSS-4Q-Nek" id="drx-Pf-BJJ"/>
-                                    <outlet property="snippetLabel" destination="XSC-0E-5hb" id="7Kp-rg-Chh"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="redraw" restorationIdentifier="people" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="people" rowHeight="110" id="lQB-YH-UDv" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lQB-YH-UDv" id="yij-H3-hqm">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <textView autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uly-DG-fK0">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <string key="text">This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  This is random biographical information..  </string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcS-OO-R0C">
-                                            <rect key="frame" x="8" y="8" width="113" height="93"/>
-                                            <state key="normal" title="Button" image="about_icon.png">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="snippetImageClick:" destination="19M-LF-YxW" eventType="touchUpInside" id="gB0-lL-N0V"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="uly-DG-fK0" firstAttribute="top" secondItem="yij-H3-hqm" secondAttribute="top" id="1X3-lt-CZH"/>
-                                        <constraint firstAttribute="trailing" secondItem="uly-DG-fK0" secondAttribute="trailing" id="KFT-AM-YFJ"/>
-                                        <constraint firstItem="uly-DG-fK0" firstAttribute="leading" secondItem="yij-H3-hqm" secondAttribute="leading" id="PvP-4G-F5v"/>
-                                        <constraint firstAttribute="bottom" secondItem="uly-DG-fK0" secondAttribute="bottom" id="tJ5-yF-YrJ"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="openingLabel" destination="uly-DG-fK0" id="jXZ-AE-ahk"/>
-                                    <outlet property="peopleImage" destination="EcS-OO-R0C" id="pA3-9w-J8U"/>
-                                    <outlet property="peopleLabel" destination="uly-DG-fK0" id="TJd-JX-xBi"/>
-                                    <outlet property="snippetImage" destination="EcS-OO-R0C" id="W9N-Pj-cl7"/>
-                                    <outlet property="snippetLabel" destination="uly-DG-fK0" id="3dZ-9M-1jx"/>
-                                </connections>
-                            </tableViewCell>
-                            <tableViewCell contentMode="redraw" restorationIdentifier="contactDevs" selectionStyle="default" indentationWidth="0.0" reuseIdentifier="contactDevs" rowHeight="110" id="UTi-QI-sTY" customClass="AboutTableViewCell" customModule="FrontierScientistsMedia" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UTi-QI-sTY" id="lnS-TJ-mfc">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xJ-3d-jbH">
-                                            <rect key="frame" x="8" y="8" width="584" height="93"/>
-                                            <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="20"/>
-                                            <state key="normal" title="Contact the Developers">
-                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="emailDevs:" destination="19M-LF-YxW" eventType="touchUpInside" id="AaM-hd-F9G"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="5xJ-3d-jbH" firstAttribute="leading" secondItem="lnS-TJ-mfc" secondAttribute="leading" constant="8" id="2DT-Vy-fLU"/>
-                                        <constraint firstAttribute="trailing" secondItem="5xJ-3d-jbH" secondAttribute="trailing" constant="8" id="A7e-88-51b"/>
-                                        <constraint firstAttribute="bottom" secondItem="5xJ-3d-jbH" secondAttribute="bottom" constant="8" id="DyT-MW-M3B"/>
-                                        <constraint firstItem="5xJ-3d-jbH" firstAttribute="top" secondItem="lnS-TJ-mfc" secondAttribute="top" constant="8" id="vaa-cZ-cl9"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="contactDevs" destination="5xJ-3d-jbH" id="7ZV-3z-Jw2"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <sections/>
-                        <connections>
-                            <outlet property="dataSource" destination="19M-LF-YxW" id="asi-K6-Xx0"/>
-                            <outlet property="delegate" destination="19M-LF-YxW" id="VBj-FZ-qFU"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="aboutTable" destination="bPp-zv-AsG" id="fJY-Na-FBw"/>
-                        <segue destination="7ho-MY-dEf" kind="show" identifier="myimage" id="buP-WW-s4c"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Msm-j4-nqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-516" y="1522"/>
-        </scene>
-        <!--About Image View Controller-->
-        <scene sceneID="7lh-AM-em7">
-            <objects>
-                <viewController id="7ho-MY-dEf" customClass="AboutImageViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ajc-Tx-F8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-516" y="2391"/>
         </scene>
         <!--Articles Table View Controller-->
         <scene sceneID="sfJ-Xu-g0E">
@@ -840,6 +679,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2g-Gg-ROQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2823" y="418"/>
+        </scene>
+        <!--About-->
+        <scene sceneID="SeA-yT-SCs">
+            <objects>
+                <viewController title="About" id="ISL-T4-jFV" customClass="AboutViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9pi-hT-WXD"/>
+                        <viewControllerLayoutGuide type="bottom" id="ybA-pk-qO9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="p9S-JT-EpN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeK-0y-6MC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="SeK-0y-6MC" secondAttribute="trailing" id="C8d-4P-UOG"/>
+                            <constraint firstAttribute="bottom" secondItem="SeK-0y-6MC" secondAttribute="bottom" id="GVt-DF-F5A"/>
+                            <constraint firstItem="SeK-0y-6MC" firstAttribute="leading" secondItem="p9S-JT-EpN" secondAttribute="leading" id="Gf3-Ya-bTK"/>
+                            <constraint firstItem="SeK-0y-6MC" firstAttribute="top" secondItem="p9S-JT-EpN" secondAttribute="top" id="smX-kg-LYv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="SeK-0y-6MC" id="5KR-IR-msJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rpj-5T-mHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-495" y="1494"/>
         </scene>
         <!--Maps-->
         <scene sceneID="HTM-YU-uQc">
@@ -1030,7 +902,6 @@
     </scenes>
     <resources>
         <image name="Drawer_Button.png" width="1440" height="2880"/>
-        <image name="about_icon.png" width="144" height="144"/>
         <image name="ask_a_scientist_icon.png" width="142" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>

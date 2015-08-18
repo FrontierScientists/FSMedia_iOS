@@ -88,21 +88,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    func noArticlesAlert(){
-        
-        println("noArticlesAlert triggered.");
-        let ALERTMESSAGE = "No network connection was found. Articles are unavailable.";
-        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
-        alert.show();
-        
-        // Delay the dismissal by 5 seconds
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissWithClickedButtonIndex(-1, animated: true)
-        })
-    }
-    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
     }
@@ -118,6 +103,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
+        netStatus = reachability.currentReachabilityStatus()
         switch indexPath.row {
             case 0:
                 performSegueWithIdentifier("research", sender: nil)
@@ -129,11 +115,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("maps", sender: nil)
                 break
             case 3:
-                netStatus = reachability.currentReachabilityStatus();
-                if(netStatus.value == NOTREACHABLE){
-                    noArticlesAlert();
-                }
-                else{
+                if (netStatus.value == NOTREACHABLE) {
+                    noInternetAlert("Articles")
+                } else {
                     performSegueWithIdentifier("articles", sender: nil)
                 }
                 break
@@ -141,7 +125,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("ask", sender: nil)
                 break
             default:
-                performSegueWithIdentifier("about", sender: nil)
+                if (netStatus.value == NOTREACHABLE) {
+                    noInternetAlert("About page")
+                } else {
+                    performSegueWithIdentifier("about", sender: nil)
+                }
                 break
 
         }
@@ -155,6 +143,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func hideSplashScreen() {
         self.splashScreen.hidden = true
+    }
+    
+    func noInternetAlert(things: String) {
+        let ALERTMESSAGE = "No network connection was found. " + things + " unavailable.";
+        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        alert.show();
+        
+        // Delay the dismissal by 5 seconds
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
     }
     
     func checkNetwork() {
