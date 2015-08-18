@@ -65,7 +65,7 @@ func loadDataFromJson(filePath: String) {
     var error: NSError?
     var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
     // Load data into persistant storage
-    NSKeyedArchiver.archiveRootObject(jsonDict["android"]!, toFile: getFileUrl("projectData").path!)
+    NSKeyedArchiver.archiveRootObject(jsonDict["project_data"]!, toFile: getFileUrl("projectData").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["next_update"]!, toFile: getFileUrl("nextUpdate").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["scientist"]!, toFile: getFileUrl("scientist").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!) 
