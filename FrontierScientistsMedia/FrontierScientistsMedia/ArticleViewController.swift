@@ -3,36 +3,41 @@
 import Foundation
 import UIKit
 
-class ArticleViewController: UIViewController{
-    @IBOutlet var webView: UIWebView!;
-    var articleLinkString: String?;
-
-    override func viewDidLoad(){
-        
-        var str: String = articleLinkString!;
-        let url = NSURL(string: str);
-        let request = NSURLRequest(URL: url!);
-        webView.loadRequest(request);
-        webView.scalesPageToFit = true;
-        
-        super.viewDidLoad();
-    }
+/*
+    This is the ArticleViewController class, responsable for displaying a WebView of the selected article from 
+    the TableView of ArticlesTableViewController.  In addition to the simple WebView, there is a toolbar 
+    implemented at the bottom of the view, back and forward buttons for web navigation.
+*/
+class ArticleViewController: UIViewController {
     
-    // Button Functions
-    //  goBack(AnyObject)
-    //  goForward(AnyObject)
-    //
-    //
-    
-    // goBack
-    //
+/*
+    Outlets
+*/
+    @IBOutlet var webView: UIWebView!
+/*
+    Actions
+*/
     @IBAction func goBack(AnyObject){
-        webView.goBack();
+        webView.goBack() // Navigate back in WebView
     }
-    
-    // goForward
-    //
     @IBAction func goForward(AnyObject){
-        webView.goForward();
+        webView.goForward() // Navigate forward in WebView
+    }
+/*
+    Class Variables
+*/
+    var articleLinkString: String?
+
+/*
+    Class Functions
+*/
+    // viewDidLoad
+    override func viewDidLoad() {
+        // The articleLinkString is set in ArticlesTableViewController before the segue to this controller.
+        let url = NSURL(string: articleLinkString!)
+        let request = NSURLRequest(URL: url!)
+        webView.loadRequest(request)
+        webView.scalesPageToFit = true
+        super.viewDidLoad()
     }
 }
