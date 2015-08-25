@@ -17,7 +17,7 @@
                BlueprintIdentifier = "3BAA17DD1B06C36D003510D7"
                BuildableName = "FrontierScientistsMedia.app"
                BlueprintName = "FrontierScientistsMedia"
-               ReferencedContainer = "container:FrontierScientistsMedia.xcodeproj">
+               ReferencedContainer = "container:Frontier-Scientists.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,7 @@
                BlueprintIdentifier = "3BAA17F21B06C36E003510D7"
                BuildableName = "FrontierScientistsMediaTests.xctest"
                BlueprintName = "FrontierScientistsMediaTests"
-               ReferencedContainer = "container:FrontierScientistsMedia.xcodeproj">
+               ReferencedContainer = "container:Frontier-Scientists.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -49,7 +49,7 @@
                BlueprintIdentifier = "3BAA17F21B06C36E003510D7"
                BuildableName = "FrontierScientistsMediaTests.xctest"
                BlueprintName = "FrontierScientistsMediaTests"
-               ReferencedContainer = "container:FrontierScientistsMedia.xcodeproj">
+               ReferencedContainer = "container:Frontier-Scientists.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -59,7 +59,7 @@
             BlueprintIdentifier = "3BAA17DD1B06C36D003510D7"
             BuildableName = "FrontierScientistsMedia.app"
             BlueprintName = "FrontierScientistsMedia"
-            ReferencedContainer = "container:FrontierScientistsMedia.xcodeproj">
+            ReferencedContainer = "container:Frontier-Scientists.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -79,7 +79,7 @@
             BlueprintIdentifier = "3BAA17DD1B06C36D003510D7"
             BuildableName = "FrontierScientistsMedia.app"
             BlueprintName = "FrontierScientistsMedia"
-            ReferencedContainer = "container:FrontierScientistsMedia.xcodeproj">
+            ReferencedContainer = "container:Frontier-Scientists.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -98,7 +98,7 @@
             BlueprintIdentifier = "3BAA17DD1B06C36D003510D7"
             BuildableName = "FrontierScientistsMedia.app"
             BlueprintName = "FrontierScientistsMedia"
-            ReferencedContainer = "container:FrontierScientistsMedia.xcodeproj">
+            ReferencedContainer = "container:Frontier-Scientists.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -43,7 +43,6 @@ func updateContent() {
     // throughout the application for the remainder of the instance of the application.
     projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
     scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
-    aboutInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("about").path!) as! Dictionary
     for title in sorted(projectData.keys.array) { // orderedTitles is populated by sorting the titles from projectData
         orderedTitles.append(title)
     }
@@ -68,7 +67,6 @@ func loadDataFromJson(filePath: String) {
     NSKeyedArchiver.archiveRootObject(jsonDict["project_data"]!, toFile: getFileUrl("projectData").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["next_update"]!, toFile: getFileUrl("nextUpdate").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["scientist"]!, toFile: getFileUrl("scientist").path!)
-    NSKeyedArchiver.archiveRootObject(jsonDict["about"]!, toFile: getFileUrl("about").path!) 
 }
 // getFileUrl
 // This function retrieves a valid url from the document directory.

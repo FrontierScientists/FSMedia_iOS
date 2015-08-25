@@ -166,7 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				7E8D51891B43AF6C0099EAD2 /* MapKit.framework */,
-				3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */,
+				3BAA17E01B06C36D003510D7 /* Frontier-Scientists */,
 				3BAA17F61B06C36E003510D7 /* FrontierScientistsMediaTests */,
 				3BAA17DF1B06C36D003510D7 /* Products */,
 			);
@@ -181,7 +181,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3BAA17E01B06C36D003510D7 /* FrontierScientistsMedia */ = {
+		3BAA17E01B06C36D003510D7 /* Frontier-Scientists */ = {
 			isa = PBXGroup;
 			children = (
 				F56E9E5F1B1CE3BC0027D39B /* Reachability.h */,
@@ -218,6 +218,7 @@
 				F56E9E691B1E15B80027D39B /* Assets */,
 				3BAA17E11B06C36D003510D7 /* Supporting Files */,
 			);
+			name = "Frontier-Scientists";
 			path = FrontierScientistsMedia;
 			sourceTree = "<group>";
 		};
@@ -329,7 +330,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3BAA17D91B06C36D003510D7 /* Build configuration list for PBXProject "FrontierScientistsMedia" */;
+			buildConfigurationList = 3BAA17D91B06C36D003510D7 /* Build configuration list for PBXProject "Frontier-Scientists" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -612,7 +613,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3BAA17D91B06C36D003510D7 /* Build configuration list for PBXProject "FrontierScientistsMedia" */ = {
+		3BAA17D91B06C36D003510D7 /* Build configuration list for PBXProject "Frontier-Scientists" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BAA17FB1B06C36E003510D7 /* Debug */,

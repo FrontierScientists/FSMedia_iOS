@@ -19,14 +19,6 @@ func processImages() {
     for (title, data) in projectData {
         processImage(data["preview_image"] as! String)
     }
-    // Process all about page people images
-    for person in aboutInfo["people"] as! [[String: String]] {
-        processImage(person["image"]!)
-    }
-    // Process all about page snippet images
-    for snippet in aboutInfo["snippets"] as! [[String: String]] {
-        processImage(snippet["image"]!)
-    }
     // Process the Ask a Scientist image
     processImage(scientistInfo["image"]!)
     // Populate the storedImages dictionary, converting the data into UIImages
