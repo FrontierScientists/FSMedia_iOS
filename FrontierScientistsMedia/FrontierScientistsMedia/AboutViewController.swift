@@ -15,7 +15,7 @@ class AboutViewController: UIViewController {
 /*
     Class Constants
 */
-    let link = "http://fsci15.alpinewp.com/about/"
+    let link = "http://frontierscientists.com/about/"
     
 /*
     Class Functions
