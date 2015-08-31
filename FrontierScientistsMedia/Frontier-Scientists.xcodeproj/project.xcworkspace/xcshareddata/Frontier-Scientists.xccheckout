@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>DA980696-BD74-41C1-AE36-AE0EE0B85396</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Frontier-Scientists</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>3CE1AC8A2BA9E20412D1ABB055E0158F0418E8CE</key>
 		<string>https://github.alaska.edu/FrontierScientists/Swift_iOS.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FrontierScientistsMedia/Frontier-Scientists.xcodeproj/project.xcworkspace</string>
+	<string>FrontierScientistsMedia/Frontier-Scientists.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3CE1AC8A2BA9E20412D1ABB055E0158F0418E8CE</key>
