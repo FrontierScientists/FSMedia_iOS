@@ -16,13 +16,21 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     Outlets
 */
     @IBOutlet weak var intro: UITextView!
-    @IBOutlet weak var scientist: UIImageView!
+    @IBOutlet weak var scientist: UIButton!
     @IBOutlet weak var name: UITextView!
     @IBOutlet weak var bio: UITextView!
     @IBOutlet weak var exclusion: UIView!
 /*
     Actions
 */
+    @IBAction func imageTapped(sender: AnyObject) {
+        netStatus = reachability.currentReachabilityStatus()
+        if (netStatus.value == NOTREACHABLE) {
+            displayAlert("Video cannot stream.")
+        } else {
+            performSegueWithIdentifier("scientist_bio", sender: nil)
+        }
+    }
     @IBAction func sendMail(sender: AnyObject) {
         netStatus = reachability.currentReachabilityStatus();
         if (netStatus.value == NOTREACHABLE) {
@@ -49,10 +57,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
         self.title = "Ask A Scientist"
         intro.font = UIFont(name: "Chalkduster", size: 14)
         let imageName = scientistInfo["image"]?.lastPathComponent;
-        scientist.image = storedImages[imageName!];
-        // Make tapping the image segue to the bio video
-        var tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector("imageTapped"))
-        scientist.addGestureRecognizer(tapGestureRecognizer)
+        scientist.setImage(storedImages[imageName!], forState: UIControlState.Normal)
         name.font = UIFont(name: "Chalkduster", size: 14);
         name.text = "Name: " + scientistInfo["name"]!;
         // Make the text wrap around the image
@@ -83,15 +88,6 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
 /*
     Helper and Content Functions
 */
-    // imageTapped
-    func imageTapped() {
-        netStatus = reachability.currentReachabilityStatus()
-        if (netStatus.value == NOTREACHABLE) {
-            displayAlert("Video cannot stream.")
-        } else {
-            performSegueWithIdentifier("scientist_bio",sender: nil)
-        }
-    }
     // displayAlert
     func displayAlert(message: String) {
         var alert = UIAlertView(title: "", message: "No network connection was found.  " + message, delegate: self, cancelButtonTitle: nil)
