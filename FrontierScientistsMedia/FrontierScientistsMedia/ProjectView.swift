@@ -36,9 +36,9 @@ class ProjectView: UIViewController {
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
         projectTitle = orderedTitles[0]
-        var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-        var text = (projectData[projectTitle]!["project_description"] as! String)
-        var image:UIImage = storedImages[imageTitle]!
+        let imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+        let text = (projectData[projectTitle]!["project_description"] as! String)
+        let image:UIImage = storedImages[imageTitle]!
         projectImage.image = image
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
@@ -61,7 +61,7 @@ extension ProjectView: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("link") as! UITableViewCell
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("link")! 
         cell.textLabel?.text = linkTitles[indexPath.row]
         cell.imageView?.image = linkIcons[indexPath.row]
         cell.textLabel!.font = UIFont(name: "Chalkduster", size: 17)
@@ -76,12 +76,12 @@ extension ProjectView: UITableViewDataSource {
 //
 func noVideosAlert() {
     let ALERTMESSAGE = "There are no videos for this research project. Would you still like to continue to videos?";
-    var alert = UIAlertController(title: ALERTMESSAGE,
+    let alert = UIAlertController(title: ALERTMESSAGE,
         message: "",
         preferredStyle: UIAlertControllerStyle.Alert);
     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler:nil))
     alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler:
-        {(action: UIAlertAction!) in
+        {(action: UIAlertAction) in
             selectedResearchProjectIndex = 0;
             researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
     }));
@@ -92,7 +92,7 @@ func noVideosAlert() {
 extension ProjectView: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 { // Videos
-            selectedResearchProjectIndex = find(orderedTitles, projectTitle)!
+            selectedResearchProjectIndex = orderedTitles.indexOf(projectTitle)!
             if (projectData[projectTitle]!["videos"]?.count == 0) {
                 noVideosAlert()
             }

@@ -56,7 +56,7 @@ class ResearchContainer: UIViewController {
         
         if currentLinkedProject != "" {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                let index = find(orderedTitles, currentLinkedProject)!
+                let index = orderedTitles.indexOf(currentLinkedProject)!
                 let rowToSelect:NSIndexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.navigationViewController?.navigationTableView.scrollToRowAtIndexPath(rowToSelect, atScrollPosition: UITableViewScrollPosition.Top, animated: false)
                 self.navigationViewController!.tableView(self.navigationViewController!.navigationTableView, didSelectRowAtIndexPath: rowToSelect)
@@ -76,10 +76,10 @@ class ResearchContainer: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if (currentState == .panelExpanded) {
             for touch: AnyObject in touches {
-                var touchPosition = touch.locationInView(self.view)
+                let touchPosition = touch.locationInView(self.view)
                 if (CGRectContainsPoint(projectView.view.bounds, touchPosition)) {
                     projectView.delegate?.togglePanel?()
                 }
@@ -116,7 +116,7 @@ extension ResearchContainer: ProjectViewDelegate {
         addChildViewController(sidePanelController)
         sidePanelController.didMoveToParentViewController(self)
     }
-    func animatePanel(#shouldExpand: Bool) {
+    func animatePanel(shouldExpand shouldExpand: Bool) {
         if (shouldExpand) {
             currentState = .panelExpanded
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
@@ -141,7 +141,7 @@ extension ResearchContainer: ProjectViewDelegate {
             }
         }
     }
-    func animateProjectViewXPosition(#targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
+    func animateProjectViewXPosition(targetPosition targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             self.researchNavigationController.view.frame.origin.x = targetPosition
             }, completion: completion)

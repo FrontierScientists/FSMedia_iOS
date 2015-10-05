@@ -38,14 +38,14 @@ extension ResearchNavigationTableView: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projectData.keys.array.count
+        return projectData.keys.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("project") as! CustomTableViewCell
-        var projectTitle = orderedTitles[indexPath.row]
-        var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-        var image:UIImage = storedImages[imageTitle]!
+        let projectTitle = orderedTitles[indexPath.row]
+        let imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+        let image:UIImage = storedImages[imageTitle]!
         let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.15, 0.225))
         let hasAlpha = false
         let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
@@ -68,9 +68,9 @@ extension ResearchNavigationTableView: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         projectTitle = orderedTitles[indexPath.row]
-        var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-        var projectText = (projectData[projectTitle]!["project_description"] as! String)
-        var image:UIImage = storedImages[imageTitle]!
+        let imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+        let projectText = (projectData[projectTitle]!["project_description"] as! String)
+        let image:UIImage = storedImages[imageTitle]!
         projectViewRef.projectImage.image = image
         projectViewRef.projectText.text = projectText
         projectViewRef.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top

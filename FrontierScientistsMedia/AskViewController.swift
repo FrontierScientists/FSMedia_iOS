@@ -25,7 +25,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
 */
     @IBAction func imageTapped(sender: AnyObject) {
         netStatus = reachability.currentReachabilityStatus()
-        if (netStatus.value == NOTREACHABLE) {
+        if (netStatus.rawValue == NOTREACHABLE) {
             displayAlert("Video cannot stream.")
         } else {
             performSegueWithIdentifier("scientist_bio", sender: nil)
@@ -33,12 +33,12 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     }
     @IBAction func sendMail(sender: AnyObject) {
         netStatus = reachability.currentReachabilityStatus();
-        if (netStatus.value == NOTREACHABLE) {
+        if (netStatus.rawValue == NOTREACHABLE) {
             displayAlert("Email cannot be sent.")
         } else {
-            var subject_prefix = "[frontsci]"
-            var recepient = ["liz@frontierscientists.com"]
-            var mailer = MFMailComposeViewController()
+            let subject_prefix = "[frontsci]"
+            let recepient = ["liz@frontierscientists.com"]
+            let mailer = MFMailComposeViewController()
             mailer.mailComposeDelegate = self
             mailer.setToRecipients(recepient)
             mailer.setSubject(subject_prefix)
@@ -67,7 +67,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
         bio.text = "Background: " + scientistInfo["bio"]!;
         // Let the user know what will not be available without internet connection
         netStatus = reachability.currentReachabilityStatus()
-        if (netStatus.value == NOTREACHABLE) {
+        if (netStatus.rawValue == NOTREACHABLE) {
             displayAlert("Email and scientist bio video are unavailable.")
         }
     }
@@ -81,7 +81,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     MFMailComposeView Functions
 */
     // mailComposeController
-    func mailComposeController(controller: MFMailComposeViewController!, didFinishWithResult result: MFMailComposeResult, error: NSError!) {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -90,7 +90,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
 */
     // displayAlert
     func displayAlert(message: String) {
-        var alert = UIAlertView(title: "", message: "No network connection was found.  " + message, delegate: self, cancelButtonTitle: nil)
+        let alert = UIAlertView(title: "", message: "No network connection was found.  " + message, delegate: self, cancelButtonTitle: nil)
         alert.show()
         delayDismissal(alert)
     }

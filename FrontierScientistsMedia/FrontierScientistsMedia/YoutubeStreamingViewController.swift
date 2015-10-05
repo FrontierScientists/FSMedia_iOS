@@ -17,14 +17,15 @@ class YouTubeStreaming: UIViewController{
         super.viewDidLoad();
 //        self.navigationController?.navigationBar.setBackgroundImage((UIImage(named: "nav_bar_bg.png")), forBarMetrics: UIBarMetrics.Default);
         
-        println("uTubeUrl: \(uTubeUrl)");
+        print("uTubeUrl: \(uTubeUrl)");
         
         YouTubeStreamingView.loadWithVideoId(getUTubeUrlId(uTubeUrl));
     }
     
-    func getUTubeUrlId(fullUTubeUrl: String) -> String{
-        var urlArray: Array = fullUTubeUrl.pathComponents
-        var arraySize: Int = urlArray.count;
+    func getUTubeUrlId(fullUTubeUrl: String) -> String {
+        let nsURL = NSURL(string: fullUTubeUrl)
+        var urlArray: Array = nsURL!.pathComponents!
+        let arraySize: Int = urlArray.count;
         return urlArray[arraySize-1].stringByReplacingOccurrencesOfString("watch?v=", withString: "");
     }
 }

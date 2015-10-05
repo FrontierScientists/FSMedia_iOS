@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Check for network connection
             reachability.startNotifier();
             netStatus = reachability.currentReachabilityStatus();
-            networkConnected = netStatus.value != NOTREACHABLE
+            networkConnected = netStatus.rawValue != NOTREACHABLE
             while !networkConnected {
                 // Wait until a network connection is made or old data is confirmed as present
                 if displayOldData {
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // the processImages function is skipped and the error dialog is present from ViewController.swift
             if !cannotContinue {
                 processImages()
-                println("UI Ready!")
+                print("UI Ready!")
             }
         }
         return true

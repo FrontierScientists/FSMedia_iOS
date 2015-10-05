@@ -17,10 +17,10 @@ class ArticleViewController: UIViewController {
 /*
     Actions
 */
-    @IBAction func goBack(AnyObject){
+    @IBAction func goBack(_: AnyObject){
         webView.goBack() // Navigate back in WebView
     }
-    @IBAction func goForward(AnyObject){
+    @IBAction func goForward(_: AnyObject){
         webView.goForward() // Navigate forward in WebView
     }
 /*

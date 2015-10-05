@@ -308,6 +308,8 @@
 		3BAA17D61B06C36D003510D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = FrontierScientists;
 				TargetAttributes = {

@@ -20,12 +20,12 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
 /*
     Class Variables
 */
-    var articleLink: NSMutableString = NSMutableString()
-    var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary.alloc()
-    var articleReadStatusFilePath: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/ArticlesReadStatus.txt")
+    var articleLink: String = ""
+    var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary()
+    var articleReadStatusFilePath: String = NSHomeDirectory() + "Library/Caches/ArticlesReadStatus.txt"
     var articleTitle: NSMutableString = NSMutableString()
     var element: String = ""
-    var parser = NSXMLParser.alloc()
+    var parser = NSXMLParser()
     var posts = [[String(): String()]]
     var selectedArtcileIndex: Int = 0
     
@@ -49,7 +49,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
         }
         updateArticlesReadStatusDict()
         saveArticlesReadStatusDictToArticlesReadStatusFile()
-        println("Finished loading articles.")
+        print("Finished loading articles.")
     }
     // prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -92,7 +92,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     // cellForRowAtIndexPath
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Initialize cell
-        var cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ArticleTitle")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "ArticleTitle")
         // Format cell
         cell.backgroundColor = UIColor.clearColor()
         cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"))
@@ -121,7 +121,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     // didSelectRowAtIndexPath
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedArtcileIndex = indexPath.row
-        var articleStoryLink = posts[indexPath.row]["link"]!
+        let articleStoryLink = posts[indexPath.row]["link"]!
         articleReadStatusFileDict[articleStoryLink] = NSNumber(int: 1)
         saveArticlesReadStatusDictToArticlesReadStatusFile()
         self.tableView.reloadData()
@@ -136,8 +136,8 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     func createReadArticlesFileIfNone() {
         let fileMgr = NSFileManager.defaultManager()
         if (!fileMgr.fileExistsAtPath(articleReadStatusFilePath)) {
-            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as [NSObject: AnyObject])) {
-                println("Error! Creating articleReadStatusFile failed to create at \(articleReadStatusFilePath)")
+            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as [String : AnyObject])) {
+                print("Error! Creating articleReadStatusFile failed to create at \(articleReadStatusFilePath)")
             }
         }
     }
@@ -154,8 +154,8 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     // updateArticlesReadStatusDict
     // This function updates the articleReadStatusFileDict after a new article has been viewed
     func updateArticlesReadStatusDict() {
-        var newArticlesReadStatusDict: NSMutableDictionary = NSMutableDictionary.alloc()
-        var dictHasBeenReadValue: NSNumber = 1
+        var newArticlesReadStatusDict: NSMutableDictionary = NSMutableDictionary()
+        let dictHasBeenReadValue: NSNumber = 1
         var articleStoryLink: NSString = ""
         newArticlesReadStatusDict = [:]
         for ii in 0...posts.count-1 {
@@ -173,7 +173,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     // articleHasBeenRead
     // This function returns a bool based on whether or not the article at the passed index has been viewed
     func articleHasBeenRead(index: Int) -> Bool {
-        var linkString: String = posts[index]["link"]!
+        let linkString: String = posts[index]["link"]!
         if (articleReadStatusFileDict.objectForKey(linkString) != nil &&
             articleReadStatusFileDict.objectForKey(linkString)?.integerValue == NSNumber(int: 1)) {
             return true
@@ -186,21 +186,21 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
 */
     // parseErrorOccurred
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
-        println("error = \(parseError.localizedDescription)")
+        print("error = \(parseError.localizedDescription)")
     }
     // beginParsing
     // This function begins the XML parsing process
     func beginParsing() {
         posts = []
-        parser = NSXMLParser(contentsOfURL: NSURL(string: feed))!
+        parser = NSXMLParser(contentsOfURL: NSURL(string: feed)!)!
         parser.delegate = self
         if (!parser.parse()) {
-            println("parser failed")
-            println("error is \(parser.parserError)")
+            print("parser failed")
+            print("error is \(parser.parserError)")
         }
     }
     // didStartElement
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         element = elementName
         if (element == "item") {
             articleTitle = ""
@@ -208,18 +208,18 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
         }
     }
     // foundCharacters
-    func parser(parser: NSXMLParser, foundCharacters string: String?) {
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
         if (element == "title") {
-            articleTitle.appendString(string!)
+            articleTitle.appendString(string)
         } else if (element == "link") {
-            articleLink.appendString(string!)
+            articleLink.appendString(string)
         }
     }
     // didEndElement
     func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if (elementName == "item") {
             if (!(articleTitle.isEqual(nil)) && !articleLink.isEqual(nil)) {
-                var dictionaryEntry: Dictionary = ["title": (articleTitle as String), "link": (articleLink as String)]
+                let dictionaryEntry: Dictionary = ["title": (articleTitle as String), "link": (articleLink as String)]
                 posts.append(dictionaryEntry)
             }
         }

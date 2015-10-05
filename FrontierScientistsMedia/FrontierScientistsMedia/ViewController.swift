@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 self.checkNetwork()
             } else if !connectedToServer {
                 if cannotContinue {
-                    var alert = UIAlertController(title: "Unable to connect to server.", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Unable to connect to server.", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
                     self.presentViewController(alert, animated: true, completion: nil)
                 } else {
                     self.handleNoServerConnection()
@@ -115,7 +115,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("maps", sender: nil)
                 break
             case 3:
-                if (netStatus.value == NOTREACHABLE) {
+                if (netStatus.rawValue == NOTREACHABLE) {
                     noInternetAlert("Articles")
                 } else {
                     performSegueWithIdentifier("articles", sender: nil)
@@ -125,7 +125,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 performSegueWithIdentifier("ask", sender: nil)
                 break
             default:
-                if (netStatus.value == NOTREACHABLE) {
+                if (netStatus.rawValue == NOTREACHABLE) {
                     noInternetAlert("About page")
                 } else {
                     performSegueWithIdentifier("about", sender: nil)
@@ -147,12 +147,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func noInternetAlert(things: String) {
         let ALERTMESSAGE = "No network connection was found. " + things + " unavailable.";
-        var alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
+        let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
         alert.show();
         
         // Delay the dismissal by 5 seconds
         let delay = 2.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(time, dispatch_get_main_queue(), {
             alert.dismissWithClickedButtonIndex(-1, animated: true)
         })
@@ -162,9 +162,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var alert = UIAlertController()
         if (NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) == nil) {
             alert = UIAlertController(title: "No internet connection.", message: "Internet required for initial startup.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Try again", style: .Default, handler: { (action: UIAlertAction!) in
+            alert.addAction(UIAlertAction(title: "Try again", style: .Default, handler: { (action: UIAlertAction) in
                 netStatus = reachability.currentReachabilityStatus();
-                if (netStatus.value == NOTREACHABLE) {
+                if (netStatus.rawValue == NOTREACHABLE) {
                     self.checkNetwork()
                 } else {
                     networkConnected = true
@@ -180,7 +180,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func handleNoServerConnection() {
-        var alert = UIAlertController(title: "Unable to connect to server.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Unable to connect to server.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
