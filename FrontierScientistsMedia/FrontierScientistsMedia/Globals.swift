@@ -1,4 +1,5 @@
 //  Globals.swift
+
 /* 
     These are the global constants and variables used throughout the project. 
     They are listed along with every file in which they are set or referenced.
@@ -11,26 +12,16 @@ let group = dispatch_group_create()                                 // AppDelega
                                                                     // ViewController.swift
 
 let iPadDeviceType = UIUserInterfaceIdiom.Pad                       // ArticlesTableViewController.swift
-                                                                    // AskViewController.swift
                                                                     // VideoTableViewController.swift
 
-let NOTREACHABLE: Int = 0                                           // AboutViewController.swift
-                                                                    // AppDelegate.swift
+let NOTREACHABLE: Int = 0                                           // AppDelegate.swift
                                                                     // AskViewController.swift
                                                                     // MapViewController.swift
                                                                     // VideoTableViewController.swift
                                                                     // ViewController.swift
 
-
 //  Global Variable                                                    Files Containing Variable
 //  ---------------                                                    -------------------------
-
-var aboutCurrentImage = "about_icon.jpg"                            // AboutImageViewController.swift
-                                                                    // AboutViewController.swift
-
-var aboutInfo = [String: AnyObject]()                               // AboutViewController.swift
-                                                                    // ContentUpdater.swift
-                                                                    // ImageProcessor.swift
 
 var cannotContinue = false                                          // AppDelegate.swift
                                                                     // ContentUpdater.swift
@@ -49,8 +40,7 @@ var displayOldData = false                                          // AppDelega
                                                                     // ContentUpdater.swift
                                                                     // ViewController.swift
 
-var netStatus = reachability.currentReachabilityStatus()            // AboutViewController.swift
-                                                                    // AppDelegate.swift
+var netStatus = reachability.currentReachabilityStatus()            // AppDelegate.swift
                                                                     // AskViewController.swift
                                                                     // MapViewController.swift
                                                                     // VideoTableViewController.swift
@@ -64,21 +54,23 @@ var orderedTitles = [String]()                                      // ContentUp
                                                                     // ProjectView.swift
                                                                     // ResearchContainer.swift
                                                                     // ResearchNavigationTableView.swift
+                                                                    // VideoTableViewController.swift
 
 var projectData = [String: [String: AnyObject]]()                   // ContentUpdater.swift
                                                                     // ImageProcessor.swift
                                                                     // MapViewController.swift
                                                                     // ProjectView.swift
                                                                     // ResearchNavigationTableView.swift
+                                                                    // VideoTableViewController.swift
 
-var projectTitle = ""                                               // ProjectView.swift
+var projectTitle = ""                                               // MapViewController.swift
+                                                                    // ProjectView.swift
                                                                     // ResearchNavigationTableView.swift
 
 var projectViewRef: ProjectView!                                    // ResearchContainer.swift
                                                                     // ResearchNavigationTableView.swift
 
-var reachability = Reachability.reachabilityForInternetConnection() // AboutViewController.swift
-                                                                    // AppDelegate.swift
+var reachability = Reachability.reachabilityForInternetConnection() // AppDelegate.swift
                                                                     // AskViewController.swift
                                                                     // MapViewController.swift
                                                                     // VideoTableViewController.swift
@@ -96,9 +88,7 @@ var scientistInfo = [String: String]()                              // AskViewCo
 var selectedResearchProjectIndex: Int = 0                           // ProjectView.swift
                                                                     // VideoTableViewController.swift
 
-var storedImages = [String: UIImage]()                              // AboutImageViewController.swift
-                                                                    // AboutViewController.swift
-                                                                    // AskViewController.swift
+var storedImages = [String: UIImage]()                              // AskViewController.swift
                                                                     // ImageProcessor.swift
                                                                     // MapViewController.swift
                                                                     // ProjectView.swift

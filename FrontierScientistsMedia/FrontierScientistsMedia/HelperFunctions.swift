@@ -1,12 +1,10 @@
-//
 //  HelperFunctions.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/27/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
+
+/*
+    These are helper functions that are used throughtout the project, all accessible here.
+*/
 
 // UIColorFromRGB
 // This function generated a UIColor object from an RGB value
@@ -45,6 +43,8 @@ func createFolderNamed(folderName: String) {
     }
 }
 
+// delayDismissal
+// Delays dismissal for 5 seconds then hides the given alert
 func delayDismissal(alert: UIAlertView) {
     // Delay the dismissal by 5 seconds
     let delay = 3.0 * Double(NSEC_PER_SEC)

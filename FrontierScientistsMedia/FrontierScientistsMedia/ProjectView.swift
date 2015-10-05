@@ -1,10 +1,4 @@
-//
 //  ProjectView.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 6/4/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 
@@ -14,8 +8,15 @@ protocol ProjectViewDelegate {
     optional func collapsePanel()
 }
 
+/*
+    Class description goes here.
+*/
+
 class ProjectView: UIViewController {
 
+/*
+    Outlets
+*/
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
@@ -23,10 +24,22 @@ class ProjectView: UIViewController {
     @IBOutlet weak var links: UITableView!
     @IBOutlet weak var shadow: UIView!
     @IBOutlet weak var drawerButton: UIButton!
+/*
+    Actions
+*/
+    @IBAction func drawerButtonPressed(sender: AnyObject) {
+        delegate?.togglePanel?()
+    }
+/*
+    Class Variables
+*/
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
     
+/*
+    Class Functions
+*/
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.frame = CGRectMake(0, 0, self.view.bounds.width, researchContainerRef.view.bounds.height);
@@ -42,10 +55,6 @@ class ProjectView: UIViewController {
         projectImage.image = image
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
-    }
-    
-    @IBAction func drawerButtonPressed(sender: AnyObject) {
-        delegate?.togglePanel?()
     }
 }
 

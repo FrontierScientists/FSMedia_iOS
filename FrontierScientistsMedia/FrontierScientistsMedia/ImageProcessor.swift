@@ -1,13 +1,10 @@
-//
 //  ImageProcessor.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/28/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 
+/*
+    File descriptions goes here.
+*/
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
     if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {
@@ -16,7 +13,7 @@ func processImages() {
     // Retrieve the data.
     currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     // Process all project images
-    for (title, data) in projectData {
+    for (_, data) in projectData {
         processImage(data["preview_image"] as! String)
     }
     // Process the Ask a Scientist image

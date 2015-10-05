@@ -1,53 +1,44 @@
-//
 //  MapViewController.swift
-//  FrontierScientistsMedia
-//
-//  Created by sfarabaugh on 6/30/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import Foundation
 import MapKit
 
-
+/*
+    Class description does here.
+*/
 class MapViewController: UIViewController, MKMapViewDelegate {
 
+/*
+    Outlets
+*/
     @IBOutlet weak var mapView: MKMapView!
-    
     @IBOutlet weak var resetMapButton: UIButton!
-    
+/*
+    Actions
+*/
     @IBAction func resetMap(sender: AnyObject) {
-        let startLocation = CLLocationCoordinate2D(
-            //            62.89447956,-152.756170369
-            latitude: 62.89447956,
-            longitude: -152.756170369
-        )
+        let startLocation = CLLocationCoordinate2D(latitude: 62.89447956, longitude: -152.756170369)
         let span = MKCoordinateSpanMake(20, 20)
         let region = MKCoordinateRegion(center: startLocation, span: span)
-        
         mapView.setRegion(region, animated: true)
-        
     }
+/*
+    Class Variables
+*/
     var currentAnnotation = MKPointAnnotation()
     
+/*
+    Class Functions
+*/
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let startLocation = CLLocationCoordinate2D(
-//            62.89447956,-152.756170369
-            latitude: 62.89447956,
-            longitude: -152.756170369
-            
-        )
-    
+        let startLocation = CLLocationCoordinate2D(latitude: 62.89447956, longitude: -152.756170369)
         mapView.mapType = MKMapType.Hybrid
         mapView.delegate = self
-        
         let span = MKCoordinateSpanMake(20, 20)
         let region = MKCoordinateRegion(center: startLocation, span: span)
-        
         mapView.setRegion(region, animated: true)
-        
         let markerMap = MarkerMap()
         
         for var i:Int = 0; i < projectData.keys.count; i++ {
@@ -70,37 +61,30 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotation.subtitle = "Research Project: Tap picture for more"
             
             mapView.addAnnotation(annotation)
-            
             markerMap.annotationDict[annotation.title!] = annotation
-            
-            
-            print("viewDidLoad title: " + annotation.title!)
-            print("viewDidLoad image:" + imageTitle)
-            print("viewDidLoad index: ")
-            print(i)
         }
         
         if currentLinkedProject != "" {
             print(currentLinkedProject)
-            for (projectKey,projectAnnotation) in markerMap.annotationDict {
+            for (projectKey, projectAnnotation) in markerMap.annotationDict {
                 if currentLinkedProject == projectKey {
                     currentAnnotation = projectAnnotation
-                    mapView.selectAnnotation(currentAnnotation, animated: true)}}
-        currentLinkedProject = ""
+                    mapView.selectAnnotation(currentAnnotation, animated: true)
+                }
+            }
+            currentLinkedProject = ""
         }
-        
-//        Setting up a left bar button
-//                resetMapButton.setTitleTextAttributes([NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!], forState: .Normal)
         
         netStatus = reachability.currentReachabilityStatus();
         if(netStatus.rawValue == NOTREACHABLE){
             noInternetAlert();
         }
-        
     }
     
-    func noInternetAlert(){
-        
+/*
+    Helper and Content Functions
+*/
+    func noInternetAlert() {
         let ALERTMESSAGE = "No network connection was found. Map cannot load.";
         let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
         alert.show();
@@ -112,38 +96,41 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             alert.dismissWithClickedButtonIndex(-1, animated: true)
         })
     }
-    
-func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-    if let annotationn = annotation{
-            var view: MKAnnotationView
-        if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
-            pinView.annotation = annotation
-            view = pinView
-            view.image = UIImage(named: "diamond_blue.png")
-            return view
-        }
-        else
-        {   view = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-            view.image = UIImage(named: "diamond_blue.png")
-            view.canShowCallout = true
-            let toResearch = UIButton()
-            var imageTitle = (projectData[annotation.title!!]!["preview_image"])!.lastPathComponent
-            toResearch.setImage(storedImages[imageTitle], forState: .Normal)
-            toResearch.frame = CGRectMake(0,0,40,40)
-            toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-            toResearch.titleLabel!.text = annotation.title!
-            view.leftCalloutAccessoryView = toResearch
-//            view.rightCalloutAccessoryView = UIImageView(image: UIImage(named: "map_icon.png"))
-//            view.rightCalloutAccessoryView.frame = CGRectMake(0,0,40,40)
-
-            print("viewForAnnotation title: " + annotation.title!!)
-            print("viewForAnnotation image: " + imageTitle)
-            
-            return view
-        }
+    func pressed(sender: UIButton!){
+        print("A button Press!")
+        // Set currentLinkedProject to whatever name of project is
+        print(sender.titleLabel!.text!)
+        currentLinkedProject = sender.titleLabel!.text!
+        performSegueWithIdentifier("fromMaps",sender: nil)
     }
-return nil
-}
+    
+/*
+    MapView Functions
+*/
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotationn = annotation {
+            var view: MKAnnotationView
+            if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
+                pinView.annotation = annotation
+                view = pinView
+                view.image = UIImage(named: "diamond_blue.png")
+                return view
+            } else {
+                view = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+                view.image = UIImage(named: "diamond_blue.png")
+                view.canShowCallout = true
+                let toResearch = UIButton()
+                var imageTitle = (projectData[annotation.title!!]!["preview_image"])!.lastPathComponent
+                toResearch.setImage(storedImages[imageTitle], forState: .Normal)
+                toResearch.frame = CGRectMake(0,0,40,40)
+                toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+                toResearch.titleLabel!.text = annotation.title!
+                view.leftCalloutAccessoryView = toResearch
+                return view
+            }
+        }
+        return nil
+    }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView){
         let imageTitle = (projectData[view.annotation!.title!!]!["preview_image"])!.lastPathComponent
@@ -155,26 +142,17 @@ return nil
         view.leftCalloutAccessoryView = toResearch
     }
     
-    
+/*
+    MarkerMap description goes here
+*/
     class MarkerMap {
+    
+    /*
+        Class Variables
+    */
         var image = [UIImage]()
         var title = [String]()
         var location = [CLLocationCoordinate2D]()
         var annotationDict = Dictionary<String, MKPointAnnotation>()
     }
-    
-    func pressed(sender: UIButton!){
-        print("A button Press!")
-        // Set currentLinkedProject to whatever name of project is
-        print(sender.titleLabel!.text!)
-        currentLinkedProject = sender.titleLabel!.text!
-        performSegueWithIdentifier("fromMaps",sender: nil)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
 }
