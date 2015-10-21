@@ -49,9 +49,10 @@ class ProjectView: UIViewController {
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
         projectTitle = orderedTitles[0]
-        let imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
+        let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
+        let imageTitle = imageURL.lastPathComponent
         let text = (projectData[projectTitle]!["project_description"] as! String)
-        let image:UIImage = storedImages[imageTitle]!
+        let image:UIImage = storedImages[imageTitle!]!
         projectImage.image = image
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)

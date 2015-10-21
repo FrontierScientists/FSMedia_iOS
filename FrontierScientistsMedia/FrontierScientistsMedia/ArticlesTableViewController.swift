@@ -136,7 +136,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     func createReadArticlesFileIfNone() {
         let fileMgr = NSFileManager.defaultManager()
         if (!fileMgr.fileExistsAtPath(articleReadStatusFilePath)) {
-            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as [String : AnyObject])) {
+            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as! [String: AnyObject])) {
                 print("Error! Creating articleReadStatusFile failed to create at \(articleReadStatusFilePath)")
             }
         }
@@ -212,7 +212,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
         if (element == "title") {
             articleTitle.appendString(string)
         } else if (element == "link") {
-            articleLink.appendString(string)
+            articleLink += string
         }
     }
     // didEndElement

@@ -56,10 +56,11 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Ask A Scientist"
         intro.font = UIFont(name: "Chalkduster", size: 14)
-        let imageName = scientistInfo["image"]?.lastPathComponent;
+        let imageURL = NSURL(fileURLWithPath: scientistInfo["image"]!)
+        let imageName = imageURL.lastPathComponent
         scientist.setImage(storedImages[imageName!], forState: UIControlState.Normal)
-        name.font = UIFont(name: "Chalkduster", size: 14);
-        name.text = "Name: " + scientistInfo["name"]!;
+        name.font = UIFont(name: "Chalkduster", size: 14)
+        name.text = "Name: " + scientistInfo["name"]!
         // Make the text wrap around the image
         let exclusionPath = UIBezierPath(rect: exclusion.bounds);
         bio.textContainer.exclusionPaths = [exclusionPath];

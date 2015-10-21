@@ -153,7 +153,7 @@ class MySwiftVideoTableViewController: UITableViewController
         
         // The research image subview
         let headerResearchImageView: UIImageView = UIImageView(frame: CGRect(x: 70, y: 10, width: 110, height: 70));
-        let researchImageUrl: String = projectData[project]!["preview_image"] as! String;
+        let researchImageUrl = NSURL(fileURLWithPath: projectData[project]!["preview_image"] as! String)
         headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH + "Images/\(researchImageUrl.lastPathComponent)");
         
 
@@ -246,7 +246,7 @@ class MySwiftVideoTableViewController: UITableViewController
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let project = orderedTitles[indexPath.section]
         let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = videos.keys.array[indexPath.row]
+        let video = Array(videos.keys)[indexPath.row]
         
         netStatus = reachability.currentReachabilityStatus();
         if(netStatus.rawValue == NOTREACHABLE)
@@ -278,8 +278,8 @@ class MySwiftVideoTableViewController: UITableViewController
             accessoryImageView.frame = CGRectMake(0, 0, 30, 30);
         }
         
-        let VIDEOMP4URL: String = videoDict["MP4"]!;
-        let VIDEOCOMPRESSEDMP4URL: String = videoDict["compressedMP4"]!;
+        let VIDEOMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["MP4"]!)
+        let VIDEOCOMPRESSEDMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["compressedMP4"]!)
         let MP4FILEPATH: String = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent)"
         let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)"
         
@@ -345,13 +345,13 @@ class MySwiftVideoTableViewController: UITableViewController
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         let project = orderedTitles[indexPath.section]
         let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = videos.keys.array[indexPath.row]
+        let video = Array(videos.keys)[indexPath.row]
         
         var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         selectedIndexPath = indexPath;
         let VIDEOTITLE: String = videoDict["title"]!;
-        let VIDEOMP4URL: String = videoDict["MP4"]!;
-        let VIDEOCOMPRESSEDMP4URL: String = videoDict["compressedMP4"]!;
+        let VIDEOMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["MP4"]!)
+        let VIDEOCOMPRESSEDMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["compressedMP4"]!)
         let MP4FILEPATH: String = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent)"
         let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)"
         
@@ -439,7 +439,7 @@ class MySwiftVideoTableViewController: UITableViewController
     func HD_or_Compressed_Alert(){
         let project = orderedTitles[selectedIndexPath.section]
         let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = videos.keys.array[selectedIndexPath.row]
+        let video = Array(videos.keys)[selectedIndexPath.row]
         
         var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         let alert = UIAlertController(title: "Choose video quality",
@@ -467,7 +467,7 @@ class MySwiftVideoTableViewController: UITableViewController
     func downloadVideo(){
         let project = orderedTitles[selectedIndexPath.section]
         let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = videos.keys.array[selectedIndexPath.row]
+        let video = Array(videos.keys)[selectedIndexPath.row]
         
         var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         let videoDownloadHelperHandle: videoDownloadHelper = videoDownloadHelper()
@@ -531,7 +531,7 @@ class MySwiftVideoTableViewController: UITableViewController
             if(sectionVideoCount > 0){
                 for rowIndex in 0...sectionVideoCount!-1 {
                     let videos = projectData[project]!["videos"] as! [String: [String: String]]
-                    let video = videos.keys.array[rowIndex]
+                    let video = Array(videos.keys)[rowIndex]
                     var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
                     let videoTitle: String = videoDict["title"]!;
                     videoTitleStatuses[videoTitle] = "none";

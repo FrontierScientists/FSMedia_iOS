@@ -44,9 +44,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         for var i:Int = 0; i < projectData.keys.count; i++ {
             let projectTitle = orderedTitles[i]
             print("projectTitle: " + projectTitle)
-            let imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-            print("imageTitle: " + imageTitle)
-            let image:UIImage = storedImages[imageTitle]!
+            let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
+            let imageTitle = imageURL.lastPathComponent
+            let image:UIImage = storedImages[imageTitle!]!
             let latitude = projectData[projectTitle]!["latitude"] as! CLLocationDegrees
             let longitude = projectData[projectTitle]!["longitude"] as! CLLocationDegrees
             let tempLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -108,28 +108,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     MapView Functions
 */
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotationn = annotation {
-            var view: MKAnnotationView
-            if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
-                pinView.annotation = annotation
-                view = pinView
-                view.image = UIImage(named: "diamond_blue.png")
-                return view
-            } else {
-                view = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
-                view.image = UIImage(named: "diamond_blue.png")
-                view.canShowCallout = true
-                let toResearch = UIButton()
-                var imageTitle = (projectData[annotation.title!!]!["preview_image"])!.lastPathComponent
-                toResearch.setImage(storedImages[imageTitle], forState: .Normal)
-                toResearch.frame = CGRectMake(0,0,40,40)
-                toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-                toResearch.titleLabel!.text = annotation.title!
-                view.leftCalloutAccessoryView = toResearch
-                return view
-            }
+        var view: MKAnnotationView
+        if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
+            pinView.annotation = annotation
+            view = pinView
+            view.image = UIImage(named: "diamond_blue.png")
+        } else {
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: "pin")
+            view.image = UIImage(named: "diamond_blue.png")
+            view.canShowCallout = true
+            let toResearch = UIButton()
+            let imageTitle = (projectData[annotation.title!!]!["preview_image"])!.lastPathComponent
+            toResearch.setImage(storedImages[imageTitle], forState: .Normal)
+            toResearch.frame = CGRectMake(0,0,40,40)
+            toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+            toResearch.titleLabel!.text = annotation.title!
+            view.leftCalloutAccessoryView = toResearch
         }
-        return nil
+        return view
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView){
