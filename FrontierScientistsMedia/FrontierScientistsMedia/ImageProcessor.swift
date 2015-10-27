@@ -1,13 +1,10 @@
-//
 //  ImageProcessor.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/28/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 
+/*
+    File descriptions goes here.
+*/
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
     if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {
@@ -16,7 +13,7 @@ func processImages() {
     // Retrieve the data.
     currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
     // Process all project images
-    for (title, data) in projectData {
+    for (_, data) in projectData {
         processImage(data["preview_image"] as! String)
     }
     // Process the Ask a Scientist image
@@ -27,16 +24,16 @@ func processImages() {
     }
     // Remove any images that need not be there.
     for title in storedImages.keys {
-        if !contains(savedImages, title) {
-            println("Deleting " + title + ".")
+        if !savedImages.contains(title) {
+            print("Deleting " + title + ".")
             storedImages[title] = nil
         }
     }
     // Restore the updated data.
     currentStoredImages = [String: NSData]()
-    let IMAGEFILEPATH: String = NSHomeDirectory().stringByAppendingPathComponent("Library/Caches/Images");
+    let IMAGEFILEPATH: String = NSHomeDirectory() + "Library/Caches/Images/"
     for (title, image) in storedImages {
-        UIImagePNGRepresentation(image).writeToFile(IMAGEFILEPATH.stringByAppendingPathComponent(title), atomically: true)
+        UIImagePNGRepresentation(image)!.writeToFile(IMAGEFILEPATH + title, atomically: true)
         currentStoredImages[title] = UIImagePNGRepresentation(image)
     }
     NSKeyedArchiver.archiveRootObject(currentStoredImages, toFile: getFileUrl("storedImages").path!)
@@ -52,15 +49,15 @@ func processImage(imagePath: String) {
     savedImages.append(imageTitle!) // Add the image to the list of images to be saved, not purged.
     // Make sure it hasn't already been stored.
     if currentStoredImages[imageTitle!] == nil {
-        println("Downloading " + imageTitle! + "...")
-        println(imagePath)
-        var image = UIImage.alloc();
+        print("Downloading " + imageTitle! + "...")
+        print(imagePath)
+        var image = UIImage();
         if(NSData(contentsOfURL: NSURL(string: imagePath)!) != nil){
             image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)!)!)!
         }
         currentStoredImages[imageTitle!] = UIImagePNGRepresentation(image)
-        println(imageTitle! + " now stored.")
+        print(imageTitle! + " now stored.")
     } else {
-        println(imageTitle! + " already stored.")
+        print(imageTitle! + " already stored.")
     }
 }

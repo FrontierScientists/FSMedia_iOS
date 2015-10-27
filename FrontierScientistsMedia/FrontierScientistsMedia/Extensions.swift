@@ -1,12 +1,11 @@
-//
 //  Extensions.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/28/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
+
+/*
+    These are the extensions made to various classes in order to more easily achieve
+    tasks in this project.
+*/
 
 // This extension for NSDate allows for easier NSDate creation from a String.
 extension NSDate {

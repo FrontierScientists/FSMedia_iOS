@@ -1,10 +1,4 @@
-//
 //  ProjectView.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 6/4/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 
@@ -14,8 +8,15 @@ protocol ProjectViewDelegate {
     optional func collapsePanel()
 }
 
+/*
+    Class description goes here.
+*/
+
 class ProjectView: UIViewController {
 
+/*
+    Outlets
+*/
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
@@ -23,10 +24,22 @@ class ProjectView: UIViewController {
     @IBOutlet weak var links: UITableView!
     @IBOutlet weak var shadow: UIView!
     @IBOutlet weak var drawerButton: UIButton!
+/*
+    Actions
+*/
+    @IBAction func drawerButtonPressed(sender: AnyObject) {
+        delegate?.togglePanel?()
+    }
+/*
+    Class Variables
+*/
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
     
+/*
+    Class Functions
+*/
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.frame = CGRectMake(0, 0, self.view.bounds.width, researchContainerRef.view.bounds.height);
@@ -36,16 +49,13 @@ class ProjectView: UIViewController {
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
         projectTitle = orderedTitles[0]
-        var imageTitle = (projectData[projectTitle]!["preview_image"] as! String).lastPathComponent
-        var text = (projectData[projectTitle]!["project_description"] as! String)
-        var image:UIImage = storedImages[imageTitle]!
+        let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
+        let imageTitle = imageURL.lastPathComponent
+        let text = (projectData[projectTitle]!["project_description"] as! String)
+        let image:UIImage = storedImages[imageTitle!]!
         projectImage.image = image
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
-    }
-    
-    @IBAction func drawerButtonPressed(sender: AnyObject) {
-        delegate?.togglePanel?()
     }
 }
 
@@ -61,7 +71,7 @@ extension ProjectView: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("link") as! UITableViewCell
+        let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("link")! 
         cell.textLabel?.text = linkTitles[indexPath.row]
         cell.imageView?.image = linkIcons[indexPath.row]
         cell.textLabel!.font = UIFont(name: "Chalkduster", size: 17)
@@ -76,12 +86,12 @@ extension ProjectView: UITableViewDataSource {
 //
 func noVideosAlert() {
     let ALERTMESSAGE = "There are no videos for this research project. Would you still like to continue to videos?";
-    var alert = UIAlertController(title: ALERTMESSAGE,
+    let alert = UIAlertController(title: ALERTMESSAGE,
         message: "",
         preferredStyle: UIAlertControllerStyle.Alert);
     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler:nil))
     alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler:
-        {(action: UIAlertAction!) in
+        {(action: UIAlertAction) in
             selectedResearchProjectIndex = 0;
             researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
     }));
@@ -92,7 +102,7 @@ func noVideosAlert() {
 extension ProjectView: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 { // Videos
-            selectedResearchProjectIndex = find(orderedTitles, projectTitle)!
+            selectedResearchProjectIndex = orderedTitles.indexOf(projectTitle)!
             if (projectData[projectTitle]!["videos"]?.count == 0) {
                 noVideosAlert()
             }

@@ -19,16 +19,16 @@ func updateContent() {
         // If the next update date is either before today or is today, an update is needed.
         if today.compare(nextUpdateDate) != NSComparisonResult.OrderedAscending { 
             if displayOldData { // Set in the checkNetwork function in ViewController.swift
-                println("Displaying old content")
+                print("Displaying old content")
             } else {
-                println("Updating stored data...")
+                print("Updating stored data...")
                 loadDataFromJson(filePath)
             }
         } else {
-            println("Data is current.  No update needed.")
+            print("Data is current.  No update needed.")
         }
     } else { // There is no previously stored data.
-        println("Retrieving data for first time...")
+        print("Retrieving data for first time...")
         loadDataFromJson(filePath)
     }
     
@@ -43,7 +43,7 @@ func updateContent() {
     // throughout the application for the remainder of the instance of the application.
     projectData = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) as! Dictionary
     scientistInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("scientist").path!) as! Dictionary
-    for title in sorted(projectData.keys.array) { // orderedTitles is populated by sorting the titles from projectData
+    for title in projectData.keys.sort() { // orderedTitles is populated by sorting the titles from projectData
         orderedTitles.append(title)
     }
 }
@@ -57,12 +57,11 @@ func updateContent() {
 func loadDataFromJson(filePath: String) {
     let data: NSData? = NSData(contentsOfURL: NSURL(string: filePath)!)
     if (data == nil) {
-        println("Error: Could not update data because the downloaded json data was nil")
+        print("Error: Could not update data because the downloaded json data was nil")
         connectedToServer = false
         return
     }
-    var error: NSError?
-    var jsonDict: NSDictionary = NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers, error: &error) as! NSDictionary
+    let jsonDict: NSDictionary = (try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers)) as! NSDictionary
     // Load data into persistant storage
     NSKeyedArchiver.archiveRootObject(jsonDict["project_data"]!, toFile: getFileUrl("projectData").path!)
     NSKeyedArchiver.archiveRootObject(jsonDict["next_update"]!, toFile: getFileUrl("nextUpdate").path!)
@@ -72,7 +71,7 @@ func loadDataFromJson(filePath: String) {
 // This function retrieves a valid url from the document directory.
 func getFileUrl(fileName: String) -> NSURL {
     let manager = NSFileManager.defaultManager()
-    let dirURL = manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false, error: nil)
+    let dirURL = try? manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
     return dirURL!.URLByAppendingPathComponent(fileName)
 }
 

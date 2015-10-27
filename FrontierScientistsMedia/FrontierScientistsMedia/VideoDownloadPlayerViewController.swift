@@ -11,8 +11,8 @@ import MediaPlayer
 import MobileCoreServices
 
 class MySwiftDownloadedVideoPlayer: UIViewController{
-    @IBOutlet var videoPlayerView: UIView!;
-    var downloadedMoviePlayer: MPMoviePlayerController = MPMoviePlayerController.alloc();
+    @IBOutlet var videoPlayerView: UIView!
+    var downloadedMoviePlayer: MPMoviePlayerController = MPMoviePlayerController()
     var videoFullPathString: String = String();
     
     override func viewDidLoad(){

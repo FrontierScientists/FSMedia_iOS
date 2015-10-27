@@ -41,7 +41,6 @@
 		7E8D518C1B43AFD10099EAD2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */; };
 		7E8E89B81B279C8300966C82 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* AboutViewController.swift */; };
 		7EBAF7641B4C7ECB00E287DD /* diamond_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */; };
-		7EC248EA1B438B2500C66357 /* AskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC248E91B438B2500C66357 /* AskTableViewCell.swift */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
 		F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F01B28ED87007929A0 /* nav_bar_bg.png */; };
 		F560C6F31B28FBB5007929A0 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F21B28FBB5007929A0 /* play_icon.png */; };
@@ -113,7 +112,6 @@
 		7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7E8E89B71B279C8300966C82 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_blue.png; sourceTree = "<group>"; };
-		7EC248E91B438B2500C66357 /* AskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AskTableViewCell.swift; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
 		F560C6F01B28ED87007929A0 /* nav_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_bg.png; sourceTree = "<group>"; };
 		F560C6F21B28FBB5007929A0 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				7E8E89B71B279C8300966C82 /* AboutViewController.swift */,
 				F56E9E431B1CD0670027D39B /* ArticleViewController.swift */,
 				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
-				7EC248E91B438B2500C66357 /* AskTableViewCell.swift */,
 				F56E9E551B1CD1A80027D39B /* BridgingHeader.h */,
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
@@ -311,6 +308,8 @@
 		3BAA17D61B06C36D003510D7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = FrontierScientists;
 				TargetAttributes = {
@@ -406,7 +405,6 @@
 				3B22C1BE1B178BA7004AADAE /* ContentUpdater.swift in Sources */,
 				3B22C1C21B1791ED004AADAE /* Extensions.swift in Sources */,
 				F56E9E511B1CD1890027D39B /* VideoDownloadPlayerViewController.swift in Sources */,
-				7EC248EA1B438B2500C66357 /* AskTableViewCell.swift in Sources */,
 				3BBBD48C1B20D38300C628B1 /* ResearchContainer.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* ViewController.swift in Sources */,
 				3B22C1C01B1790F3004AADAE /* ImageProcessor.swift in Sources */,
