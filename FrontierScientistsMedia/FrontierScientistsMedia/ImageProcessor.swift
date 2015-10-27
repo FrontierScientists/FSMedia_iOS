@@ -3,7 +3,13 @@
 import UIKit
 
 /*
-    File descriptions goes here.
+    This is the processImages function, called from the AppDelegate.swift file in the application function.
+    This function goes through all of the image data in the project:
+        projectData - project images
+        scientistInfo - scientist image
+    When all images in the data are confirmed as present on the device (downloaded if not previously present),
+    the storedImages dictionary is updated and the images on the device that are not specified in the data are
+    deleted.
 */
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
