@@ -4,7 +4,11 @@ import Foundation
 import MapKit
 
 /*
-    Class description does here.
+    This is the MapViewController class, responsable for displaying an MKMapView of Alaska,
+    along with markers at the longitude/latitude points of each project, specified in 
+    projectData. Each marker is displayed as a diamond icon and, when pressed, expands into
+    a quick preview of the project for that location. Selecting the expanded marker navigates
+    the user to the specified project page in the Research section.
 */
 class MapViewController: UIViewController, MKMapViewDelegate {
 
@@ -17,11 +21,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     Actions
 */
     @IBAction func resetMap(sender: AnyObject) {
-        let startLocation = CLLocationCoordinate2D(latitude: 62.89447956, longitude: -152.756170369)
-        let span = MKCoordinateSpanMake(20, 20)
         let region = MKCoordinateRegion(center: startLocation, span: span)
         mapView.setRegion(region, animated: true)
     }
+/*
+    Class Constants
+*/
+    let startLocation = CLLocationCoordinate2D(latitude: 62.89447956, longitude: -152.756170369)
+    let span = MKCoordinateSpanMake(20, 20)
 /*
     Class Variables
 */
@@ -30,20 +37,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 /*
     Class Functions
 */
+    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let startLocation = CLLocationCoordinate2D(latitude: 62.89447956, longitude: -152.756170369)
         mapView.mapType = MKMapType.Hybrid
         mapView.delegate = self
-        let span = MKCoordinateSpanMake(20, 20)
-        let region = MKCoordinateRegion(center: startLocation, span: span)
-        mapView.setRegion(region, animated: true)
+        resetMap(self);
         let markerMap = MarkerMap()
         
-        for var i:Int = 0; i < projectData.keys.count; i++ {
-            let projectTitle = orderedTitles[i]
-            print("projectTitle: " + projectTitle)
+        // For each project, grab the latitude and longitude data from projectData and create a marker.
+        for projectTitle in orderedTitles {
             let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
             let imageTitle = imageURL.lastPathComponent
             let image:UIImage = storedImages[imageTitle!]!
@@ -52,12 +55,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let tempLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
             markerMap.location.append(tempLocation)
-            markerMap.title.append((projectTitle))
+            markerMap.title.append(projectTitle)
             markerMap.image.append(image)
             
             let annotation = MKPointAnnotation()
-            annotation.coordinate = markerMap.location[i]
-            annotation.title = markerMap.title[i]
+            annotation.coordinate = tempLocation
+            annotation.title = projectTitle
             annotation.subtitle = "Research Project: Tap picture for more"
             
             mapView.addAnnotation(annotation)
@@ -65,7 +68,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         if currentLinkedProject != "" {
-            print(currentLinkedProject)
             for (projectKey, projectAnnotation) in markerMap.annotationDict {
                 if currentLinkedProject == projectKey {
                     currentAnnotation = projectAnnotation
@@ -75,6 +77,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             currentLinkedProject = ""
         }
         
+        // Do an internet check
         netStatus = reachability.currentReachabilityStatus();
         if(netStatus.rawValue == NOTREACHABLE){
             noInternetAlert();
@@ -82,34 +85,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 /*
-    Helper and Content Functions
-*/
-    func noInternetAlert() {
-        let ALERTMESSAGE = "No network connection was found. Map cannot load.";
-        let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
-        alert.show();
-        
-        // Delay the dismissal by 5 seconds
-        let delay = 3.0 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissWithClickedButtonIndex(-1, animated: true)
-        })
-    }
-    func pressed(sender: UIButton!){
-        print("A button Press!")
-        // Set currentLinkedProject to whatever name of project is
-        print(sender.titleLabel!.text!)
-        currentLinkedProject = sender.titleLabel!.text!
-        performSegueWithIdentifier("fromMaps",sender: nil)
-    }
-    
-/*
     MapView Functions
 */
+    // viewForAnnotation
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var view: MKAnnotationView
-        if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin"){
+        if let pinView = mapView.dequeueReusableAnnotationViewWithIdentifier("pin") {
             pinView.annotation = annotation
             view = pinView
             view.image = UIImage(named: "diamond_blue.png")
@@ -127,7 +108,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         return view
     }
-    
+    // didSelectAnnotationView
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView){
         let imageTitle = (projectData[view.annotation!.title!!]!["preview_image"])!.lastPathComponent
         let toResearch = UIButton()
@@ -139,12 +120,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
 /*
-    MarkerMap description goes here
+    Helper and Content Functions
+*/
+    // noInternetAlert
+    // This function simply displays then dismisses an alert
+    func noInternetAlert() {
+        let ALERTMESSAGE = "No network connection was found. Map cannot load."
+        let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil)
+        alert.show()
+        delayDismissal(alert)
+    }
+    // pressed
+    // This function is called when an expanded marker is selected. It simply sets currentLinkedProject to
+    // the title of the project of the selected marker.
+    func pressed(sender: UIButton!) {
+        currentLinkedProject = sender.titleLabel!.text!
+        performSegueWithIdentifier("fromMaps",sender: nil)
+    }
+    
+/*
+    This is the MarkerMap class, a very simple class that represents a marker and includes member variable that
+    store needed data for any given marker.
 */
     class MarkerMap {
     
     /*
-        Class Variables
+        Class Member Variables
     */
         var image = [UIImage]()
         var title = [String]()
