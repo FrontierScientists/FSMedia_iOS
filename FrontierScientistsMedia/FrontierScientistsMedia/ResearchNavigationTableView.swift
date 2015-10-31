@@ -1,10 +1,4 @@
-//
 //  ResearchNavigationTableView.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 6/4/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 
@@ -13,15 +7,28 @@ protocol ResearchNavigationTableViewDelegate {
     func projectSelected(title: String, image: UIImage)
 }
 
+/*
+    This is the ResearchNavigationTableView class, responsable for displaying the research project titles in
+    a TableView. When a cell is selected, the panel is toggled and the ProjectView with the information of the
+    specified project is displayed.
+*/
 class ResearchNavigationTableView: UIViewController {
     
+/*
+    Outlets
+*/
     @IBOutlet weak var navigationTableView: UITableView!
     @IBOutlet weak var binding: UIView!
     @IBOutlet weak var page: UIView!
     @IBOutlet weak var shadow: UIImageView!
     
+/*
+    Class Functions
+*/
+    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Beautification
         navigationTableView.separatorColor = UIColor.clearColor()
         navigationTableView.backgroundColor = UIColor.clearColor()
         shadow.backgroundColor = UIColor(patternImage: UIImage(named: "drawer_shadow.png")!)
@@ -30,18 +37,22 @@ class ResearchNavigationTableView: UIViewController {
     }
 }
 
+/*
+    TableView Functions
+*/
 // TableView Data Source
 extension ResearchNavigationTableView: UITableViewDataSource {
-    
+    // numberOfSectionsInTableView
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-    
+    // numberOfRowsInSection
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return projectData.keys.count
     }
-    
+    // cellForRowAtIndexPath
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        // Cell setup with current project image and title
         let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("project") as! CustomTableViewCell
         let projectTitle = orderedTitles[indexPath.row]
         let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
@@ -63,16 +74,16 @@ extension ResearchNavigationTableView: UITableViewDataSource {
         return cell
     }
 }
-
 // TableView Delegate
 extension ResearchNavigationTableView: UITableViewDelegate {
-    
+    // didSelectRowAtIndexPath
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         projectTitle = orderedTitles[indexPath.row]
         let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
         let imageTitle = imageURL.lastPathComponent
         let projectText = (projectData[projectTitle]!["project_description"] as! String)
         let image:UIImage = storedImages[imageTitle!]!
+        // Set the referenced ProjectView with the selected project's information
         projectViewRef.projectImage.image = image
         projectViewRef.projectText.text = projectText
         projectViewRef.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
