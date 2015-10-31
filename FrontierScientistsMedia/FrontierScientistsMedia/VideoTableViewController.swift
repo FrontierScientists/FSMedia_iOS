@@ -470,7 +470,7 @@ class MySwiftVideoTableViewController: UITableViewController
         let video = Array(videos.keys)[selectedIndexPath.row]
         
         var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
-        let videoDownloadHelperHandle: videoDownloadHelper = videoDownloadHelper()
+        let videoDownloadHelperHandle: VideoDownloadHelper = VideoDownloadHelper()
         videoDownloadHelperHandle.videoQualityFolder = selectedVideoQuality;
         videoDownloadHelperHandle.videoTitleString = videoDict["title"]!;
         videoDownloadHelperHandle.videoUrlString = videoDict[selectedVideoQuality]!;
