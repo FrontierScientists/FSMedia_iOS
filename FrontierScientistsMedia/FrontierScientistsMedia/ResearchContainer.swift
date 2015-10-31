@@ -1,10 +1,4 @@
-//
 //  ResearchContainer.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 6/4/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
 
 import UIKit
 import Foundation
@@ -15,17 +9,22 @@ enum SlideOutState {
     case panelExpanded
 }
 
+/*
+    This is the ResearchContainer class, responsable for handling the two different components
+    of the Research section: ResearchNavigationTableView and ProjectView. The two scenes interact
+    with each other through TableView cell selection, an open/close drawer button and swipe gestures.
+    The side panel is the ResearchNavigationTableView.
+*/
 class ResearchContainer: UIViewController {
     
+/*
+    Outlets
+*/
     @IBOutlet var openSwipe: UISwipeGestureRecognizer!
     @IBOutlet var closeSwipe: UISwipeGestureRecognizer!
-    var researchNavigationController: UINavigationController!
-    var projectView: ProjectView!
-    var currentState: SlideOutState = .panelCollapsed
-    var navigationViewController: ResearchNavigationTableView?
-    var panelExpandedOffset: CGFloat = 60
-    var firstTime = true
-    
+/*
+    Actions
+*/
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()
     }
@@ -39,9 +38,23 @@ class ResearchContainer: UIViewController {
             projectView.delegate?.togglePanel!()
         }
     }
+/*
+    Class Variables
+*/
+    var researchNavigationController: UINavigationController!
+    var projectView: ProjectView!
+    var currentState: SlideOutState = .panelCollapsed
+    var navigationViewController: ResearchNavigationTableView?
+    var panelExpandedOffset: CGFloat = 60
+    var firstTime = true
     
+/*
+    Class Functions
+*/
+    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Formalities: set UIStoryboard components
         researchContainerRef = self
         projectView = UIStoryboard.projectView()
         projectView.delegate = self
@@ -75,7 +88,7 @@ class ResearchContainer: UIViewController {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
-    
+    // touchesBegan
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if (currentState == .panelExpanded) {
             for touch: AnyObject in touches {
@@ -87,6 +100,12 @@ class ResearchContainer: UIViewController {
         }
     }
     
+/*
+    Helper and Content Functions
+*/
+    // orientationChanged
+    // This function resets the width of the ResearchNavigationTableView component due to abnormal constaint performance
+    // on the occurance of an oriantation change.
     func orientationChanged() {
         if (currentState == .panelExpanded) {
             researchNavigationController.view.frame.size.width = self.view.frame.width
@@ -95,8 +114,11 @@ class ResearchContainer: UIViewController {
     }
 }
 
+// ProjectView Delegate
 extension ResearchContainer: ProjectViewDelegate {
-
+    // togglePanel
+    // This function ensures the ResearchNavigationTableView controller is added to the ResearchContainer and animates 
+    // the panel to open or close.
     func togglePanel() {
         let notAlreadyExpanded = (currentState != .panelExpanded)
         
@@ -105,19 +127,26 @@ extension ResearchContainer: ProjectViewDelegate {
         }
         animatePanel(shouldExpand: notAlreadyExpanded)
     }
+    // addPanelViewController
+    // This function only executes its content on the first time it is called. It simply adds the 
+    // ResearchNavigationTableView controller to the ResearchContainer.
     func addPanelViewController() {
         if (navigationViewController == nil) { // First time condition
             navigationViewController = UIStoryboard.navigationTableView()
             addChildSidePanelController(navigationViewController!)
         }
     }
+    // addChildSidePanelController
     func addChildSidePanelController(sidePanelController: ResearchNavigationTableView) {
         view.insertSubview(sidePanelController.view, atIndex: 0)
         addChildViewController(sidePanelController)
         sidePanelController.didMoveToParentViewController(self)
     }
+    // animatePanel
+    // This function is called when the side panel is to be closed or opened (collapsed or expanded). It ensures proper
+    // animations in both cases.
     func animatePanel(shouldExpand shouldExpand: Bool) {
-        if (shouldExpand) {
+        if (shouldExpand) { // When closed (being opened)
             currentState = .panelExpanded
             animateProjectViewXPosition(targetPosition: CGRectGetWidth(researchNavigationController.view.frame) - panelExpandedOffset)
             if (self.projectView.shadow != nil) {
@@ -127,7 +156,7 @@ extension ResearchContainer: ProjectViewDelegate {
                 projectView.drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
                 projectView.scrollView.userInteractionEnabled = false
             }
-        } else {
+        } else { // When opened (being closed)
             self.currentState = .panelCollapsed
             animateProjectViewXPosition(targetPosition: 0)
             UIView.animateWithDuration(0.3, animations: {
@@ -141,6 +170,9 @@ extension ResearchContainer: ProjectViewDelegate {
             }
         }
     }
+    // animateProjectViewXPosition
+    // This is the animation function for the panel, called for opening and closing. It is a simple call to
+    // UIView.animateWithDuration().
     func animateProjectViewXPosition(targetPosition targetPosition: CGFloat, completion: ((Bool) -> Void)! = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .CurveEaseInOut, animations: {
             self.researchNavigationController.view.frame.origin.x = targetPosition
@@ -148,16 +180,19 @@ extension ResearchContainer: ProjectViewDelegate {
     }
 }
 
-
+/*
+    UIStoryboard Extension
+*/
 private extension UIStoryboard {
+    // mainStoryboard
     class func mainStoryboard() -> UIStoryboard {
         return UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
     }
-    
+    // This component is for the ResearchNavigationTableView
     class func navigationTableView() -> ResearchNavigationTableView? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("NavigationTableView") as? ResearchNavigationTableView
     }
-    
+    // This component is for the ProjectView
     class func projectView() -> ProjectView? {
         return mainStoryboard().instantiateViewControllerWithIdentifier("ProjectView") as? ProjectView
     }
