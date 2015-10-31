@@ -576,7 +576,7 @@ class MySwiftVideoTableViewController: UITableViewController
     //
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
         if(segue.identifier == "playDownloadedVideo"){
-            let downloadedVideoPlayerView = segue.destinationViewController as? MySwiftDownloadedVideoPlayer;
+            let downloadedVideoPlayerView = segue.destinationViewController as? DownloadedVideoPlayerController
             print("selectedVideoPath: \(selectedVideoPath)");
             downloadedVideoPlayerView?.videoFullPathString = self.selectedVideoPath;
         }
