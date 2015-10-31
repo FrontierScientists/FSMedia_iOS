@@ -1,15 +1,15 @@
-//
-//  ViewController.swift
-//  FrontierScientistsMedia
-//
-//  Created by Jay Byam on 5/15/15.
-//  Copyright (c) 2015 FrontierScientists. All rights reserved.
-//
+//  MainViewController.swift
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+/*
+    Class description goes here.
+*/
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+/*
+    Outlets
+*/
     @IBOutlet weak var mainMenu: UITableView!
     @IBOutlet var bindingBack: UIView!
     @IBOutlet var pageBack: UIView!
@@ -17,18 +17,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var loadingDialog: UIView!
     @IBOutlet weak var loadingScreen: UIView!
     @IBOutlet weak var splashScreen: UIView!
-    
+/*
+    Class Constants
+*/
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
     
+/*
+    Class Functions
+*/
+    // viewDidAppear
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = false
         mainMenu.reloadData()
     }
-    
+    // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Check the network before continuing
         dispatch_async(dispatch_get_main_queue()) {
             if !networkConnected {
                 self.checkNetwork()
@@ -58,20 +65,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         splashScreen.addSubview(giLogo)
         // Hide the splash screen after 3 seconds
         NSTimer.scheduledTimerWithTimeInterval(3, target: self, selector: Selector("hideSplashScreen"), userInfo: nil, repeats: false)
-            
-        //Define the nav bar colors
-        // brown color UIColor(red:153.0, green:75.0, blue:34.0, alpha:1.0)
-        // yellow color UIColor(red:249.0/255.0 , green:244.0/255.0 , blue:174.0/255.0 , alpha:1.0)
-        // make nav bar brown
-        navigationController!.navigationBar.barTintColor = UIColor(red:153.0/255.0, green:75.0/255.0, blue:34.0/255.0, alpha:1.0)
-        // makes title font ChalkDuster
-        navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!]
-        // makes all of the text in the bar white
-        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
-        // makes topmost bar stuff white
-        navigationController!.navigationBar.barStyle = UIBarStyle.Black
         
         // Beautify.
+        navigationController!.navigationBar.barTintColor = UIColor(red:153.0/255.0, green:75.0/255.0, blue:34.0/255.0, alpha:1.0)
+        navigationController!.navigationBar.titleTextAttributes = [NSFontAttributeName: UIFont(name: "ChalkDuster", size: 20)!]
+        navigationController!.navigationBar.tintColor = UIColor.whiteColor()
+        navigationController!.navigationBar.barStyle = UIBarStyle.Black
         loadingDialog.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Frontier Scientists"
         mainMenu.rowHeight = 80
@@ -88,10 +87,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+/*
+    TableView Functions
+*/
+    // numberOfRowsInSection
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections.count
     }
-    
+    // cellForRowAtIndexPath
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("section") as! CustomTableViewCell
         cell.cellImage.image = UIImage(named: icons[indexPath.row])
@@ -101,9 +104,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.backgroundColor = UIColor.clearColor()
         return cell
     }
-    
+    // didSelectRowAtIndexPath
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) -> Void {
         netStatus = reachability.currentReachabilityStatus()
+        // Navigate to correct scene based on selected cell
         switch indexPath.row {
             case 0:
                 performSegueWithIdentifier("research", sender: nil)
@@ -131,46 +135,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     performSegueWithIdentifier("about", sender: nil)
                 }
                 break
-
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected row.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+/*
+    Helper and Content Functions
+*/
+    // hideSplashScreen
+    // This function quite simply hides the splash screen (duh)
     func hideSplashScreen() {
         self.splashScreen.hidden = true
     }
-    
+    // notInternetAlert
+    // This function displays and dismisses an alert message (given)
     func noInternetAlert(things: String) {
         let ALERTMESSAGE = "No network connection was found. " + things + " unavailable.";
         let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
         alert.show();
-        
-        // Delay the dismissal by 5 seconds
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissWithClickedButtonIndex(-1, animated: true)
-        })
+        delayDismissal(alert);
     }
-    
+    // checkNetwork
+    // This function checks the network status and engages in dialog with the user until the network situation is resolved
     func checkNetwork() {
         var alert = UIAlertController()
         if (NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("projectData").path!) == nil) {
             alert = UIAlertController(title: "No internet connection.", message: "Internet required for initial startup.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Try again", style: .Default, handler: { (action: UIAlertAction) in
-                netStatus = reachability.currentReachabilityStatus();
+                netStatus = reachability.currentReachabilityStatus()
                 if (netStatus.rawValue == NOTREACHABLE) {
                     self.checkNetwork()
                 } else {
                     networkConnected = true
                 }
             }))
-            
         } else {
             alert = UIAlertController(title: "No internet connection.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
@@ -178,7 +176,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         self.presentViewController(alert, animated: true, completion: nil)
     }
-    
+    // handleNoServerConnection
     func handleNoServerConnection() {
         let alert = UIAlertController(title: "Unable to connect to server.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
