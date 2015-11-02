@@ -5,7 +5,10 @@ import UIKit
 import MediaPlayer
 
 /*
-    This is the VideoTableViewController class,
+    This is the VideoTableViewController class, responsable for displaying and controlling the expandable TableView holding
+    the video titles, catagorized under project titles. When a project title cell is selected the section is collapsed/
+    expended to hide/reveal the video titles under that project. When a video title cell is selected the video is played, 
+    from the device if downloaded and streamed if not downloaded.
 */
 class VideoTableViewController: UITableViewController {
     
@@ -103,7 +106,7 @@ class VideoTableViewController: UITableViewController {
             let downloadedVideoPlayerView = segue.destinationViewController as? DownloadedVideoPlayerController
             downloadedVideoPlayerView?.videoFullPathString = self.selectedVideoPath
         } else if (segue.identifier == "YoutubeStreaming") {
-            let youTubePlayerView = segue.destinationViewController as? YouTubeStreaming
+            let youTubePlayerView = segue.destinationViewController as? YouTubeStreamingViewController
             youTubePlayerView?.uTubeUrl = self.selectedVideoUrl
         }
     }

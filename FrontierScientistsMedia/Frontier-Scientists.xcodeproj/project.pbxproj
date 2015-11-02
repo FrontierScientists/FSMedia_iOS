@@ -54,7 +54,7 @@
 		F56E9E501B1CD1890027D39B /* VideoDownloadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */; };
 		F56E9E511B1CD1890027D39B /* DownloadedVideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4B1B1CD1890027D39B /* DownloadedVideoPlayerController.swift */; };
 		F56E9E521B1CD1890027D39B /* VideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */; };
-		F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4D1B1CD1890027D39B /* YoutubeStreamingViewController.swift */; };
+		F56E9E531B1CD1890027D39B /* YouTubeStreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4D1B1CD1890027D39B /* YouTubeStreamingViewController.swift */; };
 		F56E9E541B1CD1890027D39B /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */; };
 		F56E9E611B1CE3BC0027D39B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E601B1CE3BC0027D39B /* Reachability.m */; };
 		F56E9E6A1B1E15B80027D39B /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E691B1E15B80027D39B /* Assets */; };
@@ -125,7 +125,7 @@
 		F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadHelper.swift; sourceTree = "<group>"; };
 		F56E9E4B1B1CD1890027D39B /* DownloadedVideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedVideoPlayerController.swift; sourceTree = "<group>"; };
 		F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewController.swift; sourceTree = "<group>"; };
-		F56E9E4D1B1CD1890027D39B /* YoutubeStreamingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeStreamingViewController.swift; sourceTree = "<group>"; };
+		F56E9E4D1B1CD1890027D39B /* YouTubeStreamingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeStreamingViewController.swift; sourceTree = "<group>"; };
 		F56E9E4E1B1CD1890027D39B /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
 		F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
 		F56E9E551B1CD1A80027D39B /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 				3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */,
 				F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */,
 				F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */,
-				F56E9E4D1B1CD1890027D39B /* YoutubeStreamingViewController.swift */,
+				F56E9E4D1B1CD1890027D39B /* YouTubeStreamingViewController.swift */,
 				3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */,
 				3BAA17E71B06C36D003510D7 /* Main.storyboard */,
 				3BAA17EA1B06C36D003510D7 /* Images.xcassets */,
@@ -400,7 +400,7 @@
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,
 				7E8E89B81B279C8300966C82 /* AboutViewController.swift in Sources */,
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
-				F56E9E531B1CD1890027D39B /* YoutubeStreamingViewController.swift in Sources */,
+				F56E9E531B1CD1890027D39B /* YouTubeStreamingViewController.swift in Sources */,
 				3BBBD4881B20CC6600C628B1 /* ProjectView.swift in Sources */,
 				3B22C1BE1B178BA7004AADAE /* ContentUpdater.swift in Sources */,
 				3B22C1C21B1791ED004AADAE /* Extensions.swift in Sources */,

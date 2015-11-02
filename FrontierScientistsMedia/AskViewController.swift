@@ -74,7 +74,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     }
     // prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let avc = segue.destinationViewController as? YouTubeStreaming
+        let avc = segue.destinationViewController as? YouTubeStreamingViewController
         avc?.uTubeUrl = scientistInfo["video"]!
     }
     
