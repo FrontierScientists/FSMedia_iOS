@@ -53,7 +53,7 @@
 		F56E9E491B1CD1700027D39B /* Transition_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F56E9E481B1CD1700027D39B /* Transition_Icon.png */; };
 		F56E9E501B1CD1890027D39B /* VideoDownloadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */; };
 		F56E9E511B1CD1890027D39B /* DownloadedVideoPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4B1B1CD1890027D39B /* DownloadedVideoPlayerController.swift */; };
-		F56E9E521B1CD1890027D39B /* VideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */; };
+		F56E9E521B1CD1890027D39B /* VideosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4C1B1CD1890027D39B /* VideosTableViewController.swift */; };
 		F56E9E531B1CD1890027D39B /* YouTubeStreamingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4D1B1CD1890027D39B /* YouTubeStreamingViewController.swift */; };
 		F56E9E541B1CD1890027D39B /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */; };
 		F56E9E611B1CE3BC0027D39B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = F56E9E601B1CE3BC0027D39B /* Reachability.m */; };
@@ -124,7 +124,7 @@
 		F56E9E481B1CD1700027D39B /* Transition_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Transition_Icon.png; sourceTree = "<group>"; };
 		F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDownloadHelper.swift; sourceTree = "<group>"; };
 		F56E9E4B1B1CD1890027D39B /* DownloadedVideoPlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedVideoPlayerController.swift; sourceTree = "<group>"; };
-		F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoTableViewController.swift; sourceTree = "<group>"; };
+		F56E9E4C1B1CD1890027D39B /* VideosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideosTableViewController.swift; sourceTree = "<group>"; };
 		F56E9E4D1B1CD1890027D39B /* YouTubeStreamingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouTubeStreamingViewController.swift; sourceTree = "<group>"; };
 		F56E9E4E1B1CD1890027D39B /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
 		F56E9E4F1B1CD1890027D39B /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 				3BBBD48B1B20D38300C628B1 /* ResearchContainer.swift */,
 				3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */,
 				F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */,
-				F56E9E4C1B1CD1890027D39B /* VideoTableViewController.swift */,
+				F56E9E4C1B1CD1890027D39B /* VideosTableViewController.swift */,
 				F56E9E4D1B1CD1890027D39B /* YouTubeStreamingViewController.swift */,
 				3BAA17EC1B06C36D003510D7 /* LaunchScreen.xib */,
 				3BAA17E71B06C36D003510D7 /* Main.storyboard */,
@@ -410,7 +410,7 @@
 				3B22C1C01B1790F3004AADAE /* ImageProcessor.swift in Sources */,
 				F56E9E441B1CD0670027D39B /* ArticlesTableViewController.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,
-				F56E9E521B1CD1890027D39B /* VideoTableViewController.swift in Sources */,
+				F56E9E521B1CD1890027D39B /* VideosTableViewController.swift in Sources */,
 				3B22C1BC1B1666E7004AADAE /* HelperFunctions.swift in Sources */,
 				F56E9E541B1CD1890027D39B /* YTPlayerView.m in Sources */,
 				F56E9E501B1CD1890027D39B /* VideoDownloadHelper.swift in Sources */,

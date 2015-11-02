@@ -360,7 +360,7 @@
         <!--VideosTableViewController-->
         <scene sceneID="MQn-MB-3Bf">
             <objects>
-                <tableViewController title="VideosTableViewController" id="m0R-S3-sa9" customClass="MySwiftVideoTableViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="VideosTableViewController" id="m0R-S3-sa9" customClass="VideosTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hmz-tY-CE0">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -432,10 +432,10 @@
             </objects>
             <point key="canvasLocation" x="1919" y="-1177"/>
         </scene>
-        <!--You Tube Streaming-->
+        <!--You Tube Streaming View Controller-->
         <scene sceneID="iPV-0J-OmN">
             <objects>
-                <viewController id="j7W-gc-TiM" customClass="YouTubeStreaming" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="j7W-gc-TiM" customClass="YouTubeStreamingViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aQ9-86-MKV"/>
                         <viewControllerLayoutGuide type="bottom" id="ae1-wv-2pX"/>
@@ -975,9 +975,9 @@
         <image name="Drawer_Button.png" width="1440" height="2880"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sk8-Dx-qZ6"/>
-        <segue reference="KIv-co-ZEf"/>
-        <segue reference="zOa-FW-sRq"/>
         <segue reference="Y5N-xy-hoZ"/>
+        <segue reference="zOa-FW-sRq"/>
+        <segue reference="sk8-Dx-qZ6"/>
+        <segue reference="ZpC-X0-fSa"/>
     </inferredMetricsTieBreakers>
 </document>

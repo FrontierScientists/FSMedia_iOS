@@ -9,7 +9,7 @@
 //  ---------------                                                    -------------------------
 
 let group = dispatch_group_create()                                 // AppDelegate.swift
-                                                                    // ViewController.swift
+                                                                    // MainViewController.swift
 
 let iPadDeviceType = UIUserInterfaceIdiom.Pad                       // ArticlesTableViewController.swift
                                                                     // VideoTableViewController.swift
