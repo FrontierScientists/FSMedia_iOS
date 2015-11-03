@@ -55,7 +55,12 @@ func updateContent() {
 // This function establishes a connection with the VM, loads the content of frontSciData.json into a dictionary and saves data from that dictionary into storage.
 // If a connection cannot be made, it simply sets connectionToServer to false.
 func loadDataFromJson(filePath: String) {
-    let data: NSData? = NSData(contentsOfURL: NSURL(string: filePath)!)
+    var data: NSData?
+    do {
+        data = try NSData(contentsOfURL: NSURL(string: filePath)!, options: NSDataReadingOptions.DataReadingUncached)
+    } catch {
+        print(error)
+    }
     if (data == nil) {
         print("Error: Could not update data because the downloaded json data was nil")
         connectedToServer = false

@@ -308,10 +308,10 @@
             </objects>
             <point key="canvasLocation" x="-2038" y="1866"/>
         </scene>
-        <!--Research-->
+        <!--Research Container-->
         <scene sceneID="uhu-nw-Wl5">
             <objects>
-                <viewController id="als-D8-zIo" customClass="ResearchContainer" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Research Container" id="als-D8-zIo" customClass="ResearchContainer" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="XhM-fi-h4V"/>
                         <viewControllerLayoutGuide type="bottom" id="n8U-kH-jd2"/>
@@ -357,10 +357,10 @@
             </objects>
             <point key="canvasLocation" x="-2741" y="1144"/>
         </scene>
-        <!--VideosTableViewController-->
+        <!--Videos TableView-->
         <scene sceneID="MQn-MB-3Bf">
             <objects>
-                <tableViewController title="VideosTableViewController" id="m0R-S3-sa9" customClass="VideosTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Videos TableView" id="m0R-S3-sa9" customClass="VideosTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="hmz-tY-CE0">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -410,10 +410,10 @@
             </objects>
             <point key="canvasLocation" x="1203" y="-910"/>
         </scene>
-        <!--Downloaded Video Player Controller-->
+        <!--Downloaded Video Player-->
         <scene sceneID="JJU-dB-Zqn">
             <objects>
-                <viewController id="Zta-Ee-zOf" customClass="DownloadedVideoPlayerController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Downloaded Video Player" id="Zta-Ee-zOf" customClass="DownloadedVideoPlayerController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fbn-Ha-X9v"/>
                         <viewControllerLayoutGuide type="bottom" id="vOu-QB-EFl"/>
@@ -432,10 +432,10 @@
             </objects>
             <point key="canvasLocation" x="1919" y="-1177"/>
         </scene>
-        <!--You Tube Streaming View Controller-->
+        <!--YouTubeStreamingView-->
         <scene sceneID="iPV-0J-OmN">
             <objects>
-                <viewController id="j7W-gc-TiM" customClass="YouTubeStreamingViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="YouTubeStreamingView" id="j7W-gc-TiM" customClass="YouTubeStreamingViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aQ9-86-MKV"/>
                         <viewControllerLayoutGuide type="bottom" id="ae1-wv-2pX"/>
@@ -648,10 +648,10 @@
             </objects>
             <point key="canvasLocation" x="378" y="418"/>
         </scene>
-        <!--Articles Table View Controller-->
+        <!--Articles TableView-->
         <scene sceneID="sfJ-Xu-g0E">
             <objects>
-                <tableViewController id="8ll-k3-VXg" customClass="ArticlesTableViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Articles TableView" id="8ll-k3-VXg" customClass="ArticlesTableViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="j5E-0S-eTN">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -684,10 +684,10 @@
             </objects>
             <point key="canvasLocation" x="2061" y="418"/>
         </scene>
-        <!--Article View Controller-->
+        <!--Article-->
         <scene sceneID="cIi-ei-zsT">
             <objects>
-                <viewController id="PvR-9z-8Zv" customClass="ArticleViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Article" id="PvR-9z-8Zv" customClass="ArticleViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dEu-gA-EDh"/>
                         <viewControllerLayoutGuide type="bottom" id="7GV-c2-5gW"/>
@@ -831,10 +831,10 @@
             </objects>
             <point key="canvasLocation" x="316" y="1494"/>
         </scene>
-        <!--Ask View Controller-->
+        <!--Ask A Scientist-->
         <scene sceneID="9CE-zF-mVH">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2nA-SR-U9c" customClass="AskViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Ask A Scientist" automaticallyAdjustsScrollViewInsets="NO" id="2nA-SR-U9c" customClass="AskViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SRk-O7-7Ln"/>
                         <viewControllerLayoutGuide type="bottom" id="zQj-lK-xnx"/>
@@ -975,9 +975,9 @@
         <image name="Drawer_Button.png" width="1440" height="2880"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y5N-xy-hoZ"/>
         <segue reference="zOa-FW-sRq"/>
+        <segue reference="KIv-co-ZEf"/>
         <segue reference="sk8-Dx-qZ6"/>
-        <segue reference="ZpC-X0-fSa"/>
+        <segue reference="Y5N-xy-hoZ"/>
     </inferredMetricsTieBreakers>
 </document>

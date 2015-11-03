@@ -58,7 +58,7 @@ func processImage(imagePath: String) {
         print("Downloading " + imageTitle! + "...")
         print(imagePath)
         var image = UIImage();
-        if(NSData(contentsOfURL: NSURL(string: imagePath)!) != nil){
+        if (NSData(contentsOfURL: NSURL(string: imagePath)!) != nil) {
             image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)!)!)!
         }
         currentStoredImages[imageTitle!] = UIImagePNGRepresentation(image)
