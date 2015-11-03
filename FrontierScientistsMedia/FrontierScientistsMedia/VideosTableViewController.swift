@@ -1,16 +1,16 @@
-//  VideoTableViewController.swift
+//  VideosTableViewController.swift
 
 import Foundation
 import UIKit
 import MediaPlayer
 
 /*
-    This is the VideoTableViewController class, responsable for displaying and controlling the expandable TableView holding
+    This is the VideosTableViewController class, responsable for displaying and controlling the expandable TableView holding
     the video titles, catagorized under project titles. When a project title cell is selected the section is collapsed/
     expended to hide/reveal the video titles under that project. When a video title cell is selected the video is played, 
     from the device if downloaded and streamed if not downloaded.
 */
-class VideoTableViewController: UITableViewController {
+class VideosTableViewController: UITableViewController {
     
 /*
     Outlets
@@ -46,7 +46,7 @@ class VideoTableViewController: UITableViewController {
 */
     let MANAGE: String = "Manage_downloads"
     let WATCH: String = "Watch_videos"
-    let CACHESDIRECTORYPATH: String = NSHomeDirectory() + "Library/Caches/"
+    let CACHESDIRECTORYPATH: String = NSHomeDirectory() + "/Library/Caches/Images/"
 /*
     Class Variables
 */
@@ -64,7 +64,7 @@ class VideoTableViewController: UITableViewController {
 */
     // viewDidLoad
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadVideosTableView:",name:"reloadVideosTableView", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadVideosTableView:", name:"reloadVideosTableView", object: nil)
         // Check if there is a network connection, and alert the user if there isn't
         reachability.startNotifier()
         netStatus = reachability.currentReachabilityStatus()
@@ -180,7 +180,7 @@ class VideoTableViewController: UITableViewController {
         // The research image subview
         let headerResearchImageView: UIImageView = UIImageView(frame: CGRect(x: 70, y: 10, width: 110, height: 70))
         let researchImageUrl = NSURL(fileURLWithPath: projectData[project]!["preview_image"] as! String)
-        headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH + "Images/\(researchImageUrl.lastPathComponent)")
+        headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH + "\(researchImageUrl.lastPathComponent!)")
         
         // The header label subview
         let headerTitleView: UILabel = UILabel(frame: CGRectMake(190, 5, self.view.frame.size.width - 190, 104))

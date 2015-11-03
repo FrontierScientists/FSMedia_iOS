@@ -3,7 +3,7 @@
 import UIKit
 
 /*
-    Class description goes here.
+    This is the MainViewController class, responsable for handling some startup operations as well as display the main menu as a TableView.
 */
 class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     

@@ -33,7 +33,7 @@ func lastComponentOfUrlString(url: String) -> String {
 // createFolderNamed
 // Creates the folder if it doesn't exist in the Library/Caches/ directory
 func createFolderNamed(folderName: String) {
-    let FOLDEREPATH: String = NSHomeDirectory() + "Library/Caches/\(folderName)"
+    let FOLDEREPATH: String = NSHomeDirectory() + "/Library/Caches/\(folderName)"
     var isDir = ObjCBool(true)
     NSFileManager.defaultManager().fileExistsAtPath(FOLDEREPATH, isDirectory: &isDir)
     do {
