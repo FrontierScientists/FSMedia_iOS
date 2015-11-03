@@ -37,7 +37,7 @@ func processImages() {
     }
     // Restore the updated data.
     currentStoredImages = [String: NSData]()
-    let IMAGEFILEPATH: String = NSHomeDirectory() + "Library/Caches/Images/"
+    let IMAGEFILEPATH: String = NSHomeDirectory() + "/Library/Caches/Images/"
     for (title, image) in storedImages {
         UIImagePNGRepresentation(image)!.writeToFile(IMAGEFILEPATH + title, atomically: true)
         currentStoredImages[title] = UIImagePNGRepresentation(image)
@@ -57,7 +57,7 @@ func processImage(imagePath: String) {
     if currentStoredImages[imageTitle!] == nil {
         print("Downloading " + imageTitle! + "...")
         print(imagePath)
-        var image = UIImage();
+        var image = UIImage()
         if (NSData(contentsOfURL: NSURL(string: imagePath)!) != nil) {
             image =  UIImage(data: NSData(contentsOfURL: NSURL(string: imagePath)!)!)!
         }
