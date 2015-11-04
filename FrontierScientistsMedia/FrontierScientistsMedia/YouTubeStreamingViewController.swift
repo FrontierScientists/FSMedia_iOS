@@ -32,7 +32,7 @@ class YouTubeStreamingViewController: UIViewController {
     // getUTubeUrlId
     // This function takes the full URL and parses out and returns the YouTube Id.
     func getUTubeUrlId(fullUTubeUrl: String) -> String {
-        if (fullUTubeUrl[0...4] == "http:") {
+        if fullUTubeUrl[0...4] == "http:" {
             return fullUTubeUrl.stringByReplacingOccurrencesOfString("http://www.youtube.com/watch?v=", withString: "")
         }
         return fullUTubeUrl.stringByReplacingOccurrencesOfString("https://www.youtube.com/watch?v=", withString: "")

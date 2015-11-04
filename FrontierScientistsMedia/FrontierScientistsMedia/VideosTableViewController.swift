@@ -72,6 +72,13 @@ class VideosTableViewController: UITableViewController {
             noInternetConnectionAlert()
             loadIsNotReloadBool = false
         }
+        // If the showSilentModeWarning archived file doesn't exist...
+        if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("showSilentModeWarning").path!) == nil {
+            NSKeyedArchiver.archiveRootObject(true, toFile: getFileUrl("showSilentModeWarning").path!) // create it and set it to true.
+        }
+        if (NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("showSilentModeWarning").path!) as! Bool) {
+            showSilentModeWarning()
+        }
         
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
@@ -367,6 +374,13 @@ class VideosTableViewController: UITableViewController {
 /*
     Helper and Content Functions
 */
+    // getFileUrl
+    // This function retrieves a valid url from the document directory.
+    func getFileUrl(fileName: String) -> NSURL {
+        let manager = NSFileManager.defaultManager()
+        let dirURL = try? manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
+        return dirURL!.URLByAppendingPathComponent(fileName)
+    }
     // noInternetConnectionAlert
     // This function simply displays and dismisses a "no internet" alert
     func noInternetConnectionAlert() {
@@ -413,6 +427,18 @@ class VideosTableViewController: UITableViewController {
                 self.downloadVideo()
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    // showSilentModeWarning
+    func showSilentModeWarning() {
+        let alert = UIAlertController(title: "Make sure your device is not in Silent Mode",
+            message: "If it is, you won't be able to hear the videos",
+            preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Don't show again", style: UIAlertActionStyle.Default, handler: {
+            (action: UIAlertAction) in
+            NSKeyedArchiver.archiveRootObject(false, toFile: self.getFileUrl("showSilentModeWarning").path!)
+        }))
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }
     // downloadVideo
