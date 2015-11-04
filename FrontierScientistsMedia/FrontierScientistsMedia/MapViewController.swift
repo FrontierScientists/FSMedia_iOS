@@ -16,7 +16,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     Outlets
 */
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var resetMapButton: UIButton!
+    @IBOutlet weak var resetMap: UIBarButtonItem!
 /*
     Actions
 */
@@ -83,7 +83,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             noInternetAlert();
         }
     }
-    
+
 /*
     MapView Functions
 */
