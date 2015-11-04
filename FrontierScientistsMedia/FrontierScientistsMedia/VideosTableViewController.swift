@@ -15,7 +15,7 @@ class VideosTableViewController: UITableViewController {
 /*
     Outlets
 */
-    @IBOutlet weak var changeVidoesModeButton: UIButton!
+   // @IBOutlet weak var changeVidoesModeButton: UIButton!
     @IBOutlet var videoTableView: UITableView!
 /*
     Actions
@@ -95,9 +95,9 @@ class VideosTableViewController: UITableViewController {
         
         // Apply differences for iPad and iPhone
         if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
-            changeVidoesModeButton.frame = CGRectMake(0, 0, 320, 40)
+            //changeVidoesModeButton.frame = CGRectMake(0, 0, 320, 40)
         } else { // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
-            changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20)
+            //changeVidoesModeButton.frame = CGRectMake(0, 0, 180, 20)
         }
     }
     // prepareForSegue
@@ -459,7 +459,7 @@ class VideosTableViewController: UITableViewController {
         self.performSegueWithIdentifier("playDownloadedVideo", sender: self)
     }
     // Reload the table's data
-    @objc func reloadVideosTableView(notification: NSNotification){
+    @objc func reloadVideosTableView(notification: NSNotification) {
         self.tableView.reloadData();
     }
     // setAllVideoDownloadsToNone
