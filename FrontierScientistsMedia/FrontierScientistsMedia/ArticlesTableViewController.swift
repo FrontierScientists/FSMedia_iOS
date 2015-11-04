@@ -22,7 +22,7 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
 */
     var articleLink: String = ""
     var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary()
-    var articleReadStatusFilePath: String = NSHomeDirectory() + "Library/Caches/ArticlesReadStatus.txt"
+    var articleReadStatusFilePath: String = NSHomeDirectory() + "/Library/Caches/ArticlesReadStatus.txt"
     var articleTitle: NSMutableString = NSMutableString()
     var element: String = ""
     var parser = NSXMLParser()
