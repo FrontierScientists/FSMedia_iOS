@@ -675,7 +675,9 @@
                             <outlet property="delegate" destination="8ll-k3-VXg" id="L48-qo-bbp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="cgx-c1-q5p"/>
+                    <navigationItem key="navigationItem" title="Articles" id="cgx-c1-q5p">
+                        <barButtonItem key="backBarButtonItem" title="BACK" id="u4K-ar-91x"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="articleTableView" destination="j5E-0S-eTN" id="hmV-tN-Fuy"/>
                         <segue destination="PvR-9z-8Zv" kind="show" identifier="RSSFeed" id="RCj-HX-rgm"/>
