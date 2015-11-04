@@ -38,7 +38,7 @@ class VideoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate {
     // didFinishDownloadingToURL
     // Called when finished downloading to a temporary url in memory
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        let LIBPATHSTRING: String = "Library/Caches/\(self.videoQualityFolder)/\(lastComponentOfUrlString(self.videoUrlString))"
+        let LIBPATHSTRING: String = "/Library/Caches/\(self.videoQualityFolder)/\(lastComponentOfUrlString(self.videoUrlString))"
         let VIDFILEPATHSTRING: String = NSHomeDirectory() + LIBPATHSTRING
         let urlPath: NSURL = NSURL(fileURLWithPath: VIDFILEPATHSTRING)
         

@@ -433,10 +433,10 @@
             </objects>
             <point key="canvasLocation" x="1919" y="-1177"/>
         </scene>
-        <!--YouTubeStreamingView-->
+        <!--You Tube Streaming View Controller-->
         <scene sceneID="iPV-0J-OmN">
             <objects>
-                <viewController title="YouTubeStreamingView" id="j7W-gc-TiM" customClass="YouTubeStreamingViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="j7W-gc-TiM" customClass="YouTubeStreamingViewController" customModule="FrontierScientistsMedia" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aQ9-86-MKV"/>
                         <viewControllerLayoutGuide type="bottom" id="ae1-wv-2pX"/>
