@@ -35,6 +35,7 @@ class ArticleViewController: UIViewController {
     override func viewDidLoad() {
         // The articleLinkString is set in ArticlesTableViewController before the segue to this controller.
         let url = NSURL(string: articleLinkString!)
+        print(articleLinkString)
         let request = NSURLRequest(URL: url!)
         webView.loadRequest(request)
         webView.scalesPageToFit = true
