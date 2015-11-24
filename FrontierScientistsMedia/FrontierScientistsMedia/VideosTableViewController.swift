@@ -12,33 +12,33 @@ import MediaPlayer
 */
 class VideosTableViewController: UITableViewController {
     
+
 /*
     Outlets
 */
    // @IBOutlet weak var changeVidoesModeButton: UIButton!
     @IBOutlet var videoTableView: UITableView!
 /*
+    
     Actions
 */
     // openManageDownloadsView
     // The user pressed the upper-right-hand button
-    @IBAction func openManageDownloadsView(sender: AnyObject) {
+    @IBAction func openManageDownloadsView(sender: UIBarButtonItem) {
         let sectionCount: Int? = orderedTitles.count
         if (currentMode == WATCH) {
-            // Open all sections
+            // open all drop-downs
             for sectionIndex in 0...sectionCount!-1 {
                 openSectionArray[sectionIndex] = "open"
             }
             // Switch to downloads view
             currentMode = MANAGE
-            sender.setTitle("Done", forState: UIControlState.Normal)
-        } else { // (currentMode == MANAGE)
+            sender.title = "Done"
+        } else {
             // Switch to downloads view
             currentMode = WATCH
-            sender.setTitle("Manage Downloads", forState: UIControlState.Normal)
+            sender.title = "Manage Downloads"
         }
-        sender.setAttributedTitle(nil, forState: UIControlState.Normal)
-        sender.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         self.tableView.reloadData()
     }
 /*
@@ -46,10 +46,12 @@ class VideosTableViewController: UITableViewController {
 */
     let MANAGE: String = "Manage_downloads"
     let WATCH: String = "Watch_videos"
-    let CACHESDIRECTORYPATH: String = NSHomeDirectory() + "/Library/Caches/Images/"
+    let CACHESDIRECTORYPATH: String = NSHomeDirectory() + "/Library/Caches/"
 /*
     Class Variables
 */
+    var watching: Bool = true
+    
     var loadIsNotReloadBool: Bool = true
     var openSectionArray: Array<String> = ["closed"]
     var scrollPath: NSIndexPath = NSIndexPath(forRow: NSNotFound, inSection: NSNotFound)
@@ -187,7 +189,7 @@ class VideosTableViewController: UITableViewController {
         // The research image subview
         let headerResearchImageView: UIImageView = UIImageView(frame: CGRect(x: 70, y: 10, width: 110, height: 70))
         let researchImageUrl = NSURL(fileURLWithPath: projectData[project]!["preview_image"] as! String)
-        headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH + "\(researchImageUrl.lastPathComponent!)")
+        headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH + "Images/\(researchImageUrl.lastPathComponent!)")
         
         // The header label subview
         let headerTitleView: UILabel = UILabel(frame: CGRectMake(190, 5, self.view.frame.size.width - 190, 104))
@@ -288,8 +290,15 @@ class VideosTableViewController: UITableViewController {
         
         let VIDEOMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["MP4"]!)
         let VIDEOCOMPRESSEDMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["compressedMP4"]!)
-        let MP4FILEPATH: String = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent)"
-        let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)"
+        
+        var MP4FILEPATH: String = ""
+        if (VIDEOMP4URL.lastPathComponent != nil) {
+            MP4FILEPATH = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent!)"
+        }
+        var COMPRESSEDMP4FILEPATH: String = ""
+        if (VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil) {
+            COMPRESSEDMP4FILEPATH = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent!)"
+        }
         
         // Video is being downloaded
         if (videoTitleStatuses[VIDEOTITLE] != "none") {
@@ -304,11 +313,13 @@ class VideosTableViewController: UITableViewController {
                 activityIndicatorView.frame = CGRectMake(0, 10, 60, 60)
             }
         } else if (currentMode == MANAGE) { // Video managing options
-            if ((VIDEOMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) ||
-               (VIDEOCOMPRESSEDMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH))) {
+            print(MP4FILEPATH)
+            print(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH))
+            if ((VIDEOMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) ||
+               (VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH))) {
                 accessoryImageView.image = UIImage(named: "delete_icon-web.png")
             } else if (netStatus.rawValue != NOTREACHABLE &&
-                (VIDEOMP4URL != "" || VIDEOCOMPRESSEDMP4URL != "")) {
+                (VIDEOMP4URL.lastPathComponent != nil || VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil)) {
                     accessoryImageView.image = UIImage(named: "download_icon-web.png")
             } else {
                 // There is no downloaded video or network connection, so show nothing
@@ -316,8 +327,8 @@ class VideosTableViewController: UITableViewController {
             }
         } else if (currentMode == WATCH) { // Video watching options
             if (netStatus.rawValue != NOTREACHABLE ||
-                (NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL != "") ||
-                (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL != "")) {
+                (NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL.lastPathComponent != nil) ||
+                (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil)) {
                     cell.textLabel?.textColor = UIColor.blackColor()
                     accessoryImageView.image = UIImage(named: "play_icon.png")
             } else {
@@ -350,19 +361,19 @@ class VideosTableViewController: UITableViewController {
             cancel_Download_Alert(VIDEOTITLE)
             selectedResearchProjectIndex = -1
         } else if (currentMode == MANAGE) {
-            if (VIDEOMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) {
+            if (VIDEOMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) {
                 delete_Video_Alert(MP4FILEPATH)
-            } else if (VIDEOCOMPRESSEDMP4URL != "" && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)) {
+            } else if (VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)) {
                 delete_Video_Alert(COMPRESSEDMP4FILEPATH)
             } else if (netStatus.rawValue != NOTREACHABLE &&
-                VIDEOMP4URL != "") {
+                VIDEOMP4URL.lastPathComponent != nil) {
                 HD_or_Compressed_Alert()
             }
             selectedResearchProjectIndex = indexPath.section
         } else if (currentMode == WATCH) {
-            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL != "") {
+            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL.lastPathComponent != nil) {
                 playDownloadedVideo(MP4FILEPATH)
-            } else if (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL != "") {
+            } else if (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil) {
                 playDownloadedVideo(COMPRESSEDMP4FILEPATH)
             } else if (netStatus.rawValue != NOTREACHABLE) {
                 self.selectedVideoUrl = videoDict["utubeurl"]!
@@ -458,7 +469,7 @@ class VideosTableViewController: UITableViewController {
     // delete_Video_Alert
     // Alert that asks the user if they are sure they want to delete their downloaded video
     func delete_Video_Alert(videoFilePath: String) {
-        let alert = UIAlertController(title: "About to delete video",
+        let alert = UIAlertController(title: "Remove stored video",
             message: "Are you sure?",
             preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: {

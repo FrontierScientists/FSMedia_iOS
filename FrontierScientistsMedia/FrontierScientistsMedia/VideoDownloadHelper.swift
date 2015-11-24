@@ -40,6 +40,7 @@ class VideoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate {
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         let LIBPATHSTRING: String = "/Library/Caches/\(self.videoQualityFolder)/\(lastComponentOfUrlString(self.videoUrlString))"
         let VIDFILEPATHSTRING: String = NSHomeDirectory() + LIBPATHSTRING
+        print(VIDFILEPATHSTRING)
         let urlPath: NSURL = NSURL(fileURLWithPath: VIDFILEPATHSTRING)
         
         // Handle error
