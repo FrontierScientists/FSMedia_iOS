@@ -353,8 +353,8 @@ class VideosTableViewController: UITableViewController {
         let VIDEOTITLE: String = videoDict["title"]!
         let VIDEOMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["MP4"]!)
         let VIDEOCOMPRESSEDMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["compressedMP4"]!)
-        let MP4FILEPATH: String = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent)"
-        let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent)"
+        let MP4FILEPATH: String = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent!)"
+        let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent!)"
         
         // Video is being downloaded
         if (videoTitleStatuses[VIDEOTITLE] != "none") {
