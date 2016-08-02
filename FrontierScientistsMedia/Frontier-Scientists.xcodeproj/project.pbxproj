@@ -41,6 +41,8 @@
 		7E8D518C1B43AFD10099EAD2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */; };
 		7E8E89B81B279C8300966C82 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E89B71B279C8300966C82 /* AboutViewController.swift */; };
 		7EBAF7641B4C7ECB00E287DD /* diamond_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */; };
+		7EC15FD61D500F9F0082B681 /* ResearchObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC15FD51D500F9F0082B681 /* ResearchObjects.swift */; };
+		7EC15FD81D500FA80082B681 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC15FD71D500FA80082B681 /* Downloader.swift */; };
 		7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFEB1B41B0E8DD40056100A /* AskViewController.swift */; };
 		F560C6F11B28ED87007929A0 /* nav_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F01B28ED87007929A0 /* nav_bar_bg.png */; };
 		F560C6F31B28FBB5007929A0 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F560C6F21B28FBB5007929A0 /* play_icon.png */; };
@@ -112,6 +114,8 @@
 		7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		7E8E89B71B279C8300966C82 /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		7EBAF7631B4C7ECB00E287DD /* diamond_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond_blue.png; sourceTree = "<group>"; };
+		7EC15FD51D500F9F0082B681 /* ResearchObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResearchObjects.swift; sourceTree = "<group>"; };
+		7EC15FD71D500FA80082B681 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		7EFEB1B41B0E8DD40056100A /* AskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AskViewController.swift; path = ../AskViewController.swift; sourceTree = "<group>"; };
 		F560C6F01B28ED87007929A0 /* nav_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nav_bar_bg.png; sourceTree = "<group>"; };
 		F560C6F21B28FBB5007929A0 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				F56E9E551B1CD1A80027D39B /* BridgingHeader.h */,
 				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
+				7EC15FD71D500FA80082B681 /* Downloader.swift */,
 				F56E9E4B1B1CD1890027D39B /* DownloadedVideoPlayerController.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,
 				3B5780BF1B681B6C00C31362 /* Globals.swift */,
@@ -198,6 +203,7 @@
 				3BAA17E51B06C36D003510D7 /* MainViewController.swift */,
 				7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */,
 				3BBBD4871B20CC6600C628B1 /* ProjectView.swift */,
+				7EC15FD51D500F9F0082B681 /* ResearchObjects.swift */,
 				3BBBD48B1B20D38300C628B1 /* ResearchContainer.swift */,
 				3BBBD4891B20CD9200C628B1 /* ResearchNavigationTableView.swift */,
 				F56E9E4A1B1CD1890027D39B /* VideoDownloadHelper.swift */,
@@ -394,7 +400,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EC15FD61D500F9F0082B681 /* ResearchObjects.swift in Sources */,
 				3B5780C01B681B6C00C31362 /* Globals.swift in Sources */,
+				7EC15FD81D500FA80082B681 /* Downloader.swift in Sources */,
 				3BBBD48A1B20CD9200C628B1 /* ResearchNavigationTableView.swift in Sources */,
 				F56E9E451B1CD0670027D39B /* ArticleViewController.swift in Sources */,
 				7EFEB1B51B0E8DD40056100A /* AskViewController.swift in Sources */,

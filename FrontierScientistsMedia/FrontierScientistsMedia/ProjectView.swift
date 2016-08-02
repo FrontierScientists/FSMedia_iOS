@@ -53,11 +53,13 @@ class ProjectView: UIViewController {
         projectText.font = UIFont(name: "Chalkduster", size: 17)
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
-        projectTitle = orderedTitles[0] // Default the project to the first one in the list
-        let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
-        let imageTitle = imageURL.lastPathComponent
-        let text = (projectData[projectTitle]!["project_description"] as! String)
-        let image:UIImage = storedImages[imageTitle!]!
+        // Default the project to the first one in the list
+        projectTitle = RPMap[0].title
+
+        let text = RPMap[0].description
+
+        let image:UIImage = RPMap[0].image
+        
         projectImage.image = image
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)

@@ -33,6 +33,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     Class Variables
 */
     var currentAnnotation = MKPointAnnotation()
+    let markerMap = MarkerMap()
     
 /*
     Class Functions
@@ -43,28 +44,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.mapType = MKMapType.Hybrid
         mapView.delegate = self
         resetMap(self);
-        let markerMap = MarkerMap()
+
         
         // For each project, grab the latitude and longitude data from projectData and create a marker.
-        for projectTitle in orderedTitles {
-            let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
-            let imageTitle = imageURL.lastPathComponent
-            let image:UIImage = storedImages[imageTitle!]!
-            let latitude = projectData[projectTitle]!["latitude"] as! CLLocationDegrees
-            let longitude = projectData[projectTitle]!["longitude"] as! CLLocationDegrees
+        var index = 0
+        for RP in RPMap {
+
+            let image = RP.image
+            let latitude = RP.mapData.lat as! CLLocationDegrees
+            let longitude = RP.mapData.long as! CLLocationDegrees
             let tempLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
             markerMap.location.append(tempLocation)
-            markerMap.title.append(projectTitle)
+            markerMap.title.append(RP.title)
             markerMap.image.append(image)
             
             let annotation = MKPointAnnotation()
             annotation.coordinate = tempLocation
-            annotation.title = projectTitle
+            annotation.title = RP.title
             annotation.subtitle = "Research Project: Tap picture for more"
             
             mapView.addAnnotation(annotation)
             markerMap.annotationDict[annotation.title!] = annotation
+            
+            markerMap.titleToIndex[RP.title] = index
+
+            index += 1
         }
         
         if currentLinkedProject != "" {
@@ -99,23 +104,23 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             view.image = UIImage(named: "diamond_blue.png")
             view.canShowCallout = true
             let toResearch = UIButton()
-            let imageTitle = (projectData[annotation.title!!]!["preview_image"])!.lastPathComponent
-            toResearch.setImage(storedImages[imageTitle], forState: .Normal)
+             toResearch.setImage(RPMap[markerMap.titleToIndex[annotation.title!!]!].image, forState: .Normal)
             toResearch.frame = CGRectMake(0,0,40,40)
             toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-            toResearch.titleLabel!.text = annotation.title!
+             toResearch.titleLabel!.text = RPMap[markerMap.titleToIndex[annotation.title!!]!].title
             view.leftCalloutAccessoryView = toResearch
+            print(Int(annotation.title!!))
         }
         return view
     }
     // didSelectAnnotationView
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView){
-        let imageTitle = (projectData[view.annotation!.title!!]!["preview_image"])!.lastPathComponent
         let toResearch = UIButton()
-        toResearch.setImage(storedImages[imageTitle], forState: .Normal)
+         toResearch.setImage(RPMap[markerMap.titleToIndex[view.annotation!.title!!]!].image, forState: .Normal)
         toResearch.frame = CGRectMake(0,0,40,40)
         toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
-        toResearch.titleLabel!.text = view.annotation!.title!
+         toResearch.titleLabel!.text = RPMap[markerMap.titleToIndex[view.annotation!.title!!]!].title
+        print(view.annotation!.title!!)
         view.leftCalloutAccessoryView = toResearch
     }
     
@@ -151,5 +156,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var title = [String]()
         var location = [CLLocationCoordinate2D]()
         var annotationDict = Dictionary<String, MKPointAnnotation>()
+        var titleToIndex = Dictionary<String,Int>()
     }
 }

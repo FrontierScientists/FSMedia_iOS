@@ -4,7 +4,8 @@
     These are the global constants and variables used throughout the project. 
     They are listed along with every file in which they are set or referenced.
 */
-
+var jsonDownload : NSData = NSData ()
+var RPMap : [ResearchProject] = []
 //  Global Constant                                                    Files Containing Constant
 //  ---------------                                                    -------------------------
 

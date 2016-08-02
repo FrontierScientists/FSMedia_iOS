@@ -48,16 +48,15 @@ extension ResearchNavigationTableView: UITableViewDataSource {
     }
     // numberOfRowsInSection
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return projectData.keys.count
+        // return projectData.keys.count
+        return RPMap.count
     }
     // cellForRowAtIndexPath
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         // Cell setup with current project image and title
         let cell: CustomTableViewCell = tableView.dequeueReusableCellWithIdentifier("project") as! CustomTableViewCell
-        let projectTitle = orderedTitles[indexPath.row]
-        let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
-        let imageTitle = imageURL.lastPathComponent
-        let image:UIImage = storedImages[imageTitle!]!
+        let projectTitle = RPMap[indexPath.row].title
+        let image:UIImage = RPMap[indexPath.row].image
         let size = CGSizeApplyAffineTransform(image.size, CGAffineTransformMakeScale(0.15, 0.225))
         let hasAlpha = false
         let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
@@ -78,11 +77,9 @@ extension ResearchNavigationTableView: UITableViewDataSource {
 extension ResearchNavigationTableView: UITableViewDelegate {
     // didSelectRowAtIndexPath
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        projectTitle = orderedTitles[indexPath.row]
-        let imageURL = NSURL(fileURLWithPath: projectData[projectTitle]!["preview_image"] as! String)
-        let imageTitle = imageURL.lastPathComponent
-        let projectText = (projectData[projectTitle]!["project_description"] as! String)
-        let image:UIImage = storedImages[imageTitle!]!
+        projectTitle = RPMap[indexPath.row].title
+        let projectText = RPMap[indexPath.row].description
+        let image:UIImage = RPMap[indexPath.row].image
         // Set the referenced ProjectView with the selected project's information
         projectViewRef.projectImage.image = image
         projectViewRef.projectText.text = projectText

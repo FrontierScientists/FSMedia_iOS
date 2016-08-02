@@ -25,7 +25,7 @@ class VideosTableViewController: UITableViewController {
     // openManageDownloadsView
     // The user pressed the upper-right-hand button
     @IBAction func openManageDownloadsView(sender: UIBarButtonItem) {
-        let sectionCount: Int? = orderedTitles.count
+        let sectionCount: Int? = RPMap.count
         if (currentMode == WATCH) {
             // open all drop-downs
             for sectionIndex in 0...sectionCount!-1 {
@@ -89,7 +89,7 @@ class VideosTableViewController: UITableViewController {
         createFolderNamed("MP4") // Calls to function in HelperFunctions.swift
         createFolderNamed("compressedMP4")
         
-        let sectionCount: Int = orderedTitles.count
+        let sectionCount: Int = RPMap.count
         for _ in 0...(sectionCount - 2) {
             openSectionArray.append("closed")
         }
@@ -142,13 +142,14 @@ class VideosTableViewController: UITableViewController {
     }
     // numberOfSectionsInTableView
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return orderedTitles.count
+        // return orderedTitles.count
+        return RPMap.count
     }
     
     // heightForHeaderInSection
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let project = orderedTitles[section]
-        let sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+        let project = RPMap[section].title
+        let sectionVideoCount: Int? = RPMap[section].videos.count
         if (sectionVideoCount == 0) {
             return 1
         } else {
@@ -157,8 +158,8 @@ class VideosTableViewController: UITableViewController {
     }
     // viewForHeaderInSection
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let project = orderedTitles[section]
-        let sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+        let project = RPMap[section].title
+        let sectionVideoCount: Int? = RPMap[section].videos.count
         
         if (sectionVideoCount == 0) {
             return nil
@@ -188,12 +189,11 @@ class VideosTableViewController: UITableViewController {
         
         // The research image subview
         let headerResearchImageView: UIImageView = UIImageView(frame: CGRect(x: 70, y: 10, width: 110, height: 70))
-        let researchImageUrl = NSURL(fileURLWithPath: projectData[project]!["preview_image"] as! String)
-        headerResearchImageView.image = UIImage(contentsOfFile: CACHESDIRECTORYPATH + "Images/\(researchImageUrl.lastPathComponent!)")
+        headerResearchImageView.image = RPMap[section].image
         
         // The header label subview
         let headerTitleView: UILabel = UILabel(frame: CGRectMake(190, 5, self.view.frame.size.width - 190, 104))
-        headerTitleView.text = project
+        headerTitleView.text = RPMap[section].title
         headerTitleView.textColor = UIColor.blackColor()
         headerTitleView.userInteractionEnabled = false
         headerTitleView.numberOfLines = 0
@@ -240,9 +240,9 @@ class VideosTableViewController: UITableViewController {
     // numberOfRowsInSection
     // Get the number of rows per section
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let project = orderedTitles[section]
+        let project = RPMap[section].title
         if (openSectionArray[section] == "open") {
-            let sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+            let sectionVideoCount: Int? = RPMap[section].videos.count
             return sectionVideoCount!
         } else {
             return 0
@@ -261,12 +261,9 @@ class VideosTableViewController: UITableViewController {
     // cellForRowAtIndexPath
     // Get the view for the cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let project = orderedTitles[indexPath.section]
-        let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = Array(videos.keys)[indexPath.row]
+        let video = RPMap[indexPath.section].videos[indexPath.row].youtube
         
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
-        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
         let accessoryImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         
         // Cell background
@@ -275,8 +272,7 @@ class VideosTableViewController: UITableViewController {
         cell.backgroundView = UIImageView(image: UIImage(named: "CellBorder.png"))
         
         // Cell title
-        let VIDEOTITLE: String = videoDict["title"]!
-        cell.textLabel?.text = VIDEOTITLE
+        cell.textLabel?.text = RPMap[indexPath.section].videos[indexPath.row].title
         cell.textLabel?.font = UIFont(name: "Chalkduster", size: 17)
         cell.textLabel?.textAlignment = NSTextAlignment.Left
         cell.textLabel?.frame = CGRectMake(0, 0, self.view.frame.size.width, 44)
@@ -287,99 +283,17 @@ class VideosTableViewController: UITableViewController {
         } else { // (UIDevice.currentDevice().userInterfaceIdiom.rawValue == iPhoneDeviceType)
             accessoryImageView.frame = CGRectMake(0, 0, 30, 30)
         }
-        
-        let VIDEOMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["MP4"]!)
-        let VIDEOCOMPRESSEDMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["compressedMP4"]!)
-        
-        var MP4FILEPATH: String = ""
-        if (VIDEOMP4URL.lastPathComponent != nil) {
-            MP4FILEPATH = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent!)"
-        }
-        var COMPRESSEDMP4FILEPATH: String = ""
-        if (VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil) {
-            COMPRESSEDMP4FILEPATH = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent!)"
-        }
-        
-        // Video is being downloaded
-        if (videoTitleStatuses[VIDEOTITLE] != "none") {
-            let activityIndicatorView: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 5, 30, 30))
-            activityIndicatorView.color = UIColor.blackColor()
-            activityIndicatorView.startAnimating()
-            cell.imageView?.image = UIImage(named: "blank_icon.png")
-            cell.imageView?.addSubview(activityIndicatorView)
-            accessoryImageView.image = UIImage(named: "cancel_icon.png")
-            // Apply differences for iPad
-            if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
-                activityIndicatorView.frame = CGRectMake(0, 10, 60, 60)
-            }
-        } else if (currentMode == MANAGE) { // Video managing options
-            print(MP4FILEPATH)
-            print(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH))
-            if ((VIDEOMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) ||
-               (VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH))) {
-                accessoryImageView.image = UIImage(named: "delete_icon-web.png")
-            } else if (netStatus.rawValue != NOTREACHABLE &&
-                (VIDEOMP4URL.lastPathComponent != nil || VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil)) {
-                    accessoryImageView.image = UIImage(named: "download_icon-web.png")
-            } else {
-                // There is no downloaded video or network connection, so show nothing
-                cell.textLabel?.textColor = UIColor.grayColor()
-            }
-        } else if (currentMode == WATCH) { // Video watching options
-            if (netStatus.rawValue != NOTREACHABLE ||
-                (NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL.lastPathComponent != nil) ||
-                (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil)) {
-                    cell.textLabel?.textColor = UIColor.blackColor()
-                    accessoryImageView.image = UIImage(named: "play_icon.png")
-            } else {
-                // There is no network connection, so show nothing
-                cell.textLabel?.textColor = UIColor.grayColor()
-            }
-        } else { // Video can't be accessed
-            cell.textLabel?.textColor = UIColor.grayColor()
-        }
-        
         cell.accessoryView = accessoryImageView
         return cell
     }
     // didSelectRowAtIndexPath
     // Cell has been selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        let project = orderedTitles[indexPath.section]
-        let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = Array(videos.keys)[indexPath.row]
-        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
+
+        let video = RPMap[indexPath.section].videos[indexPath.row].youtube
         selectedIndexPath = indexPath
-        let VIDEOTITLE: String = videoDict["title"]!
-        let VIDEOMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["MP4"]!)
-        let VIDEOCOMPRESSEDMP4URL: NSURL = NSURL(fileURLWithPath: videoDict["compressedMP4"]!)
-        let MP4FILEPATH: String = CACHESDIRECTORYPATH + "MP4/\(VIDEOMP4URL.lastPathComponent!)"
-        let COMPRESSEDMP4FILEPATH: String = CACHESDIRECTORYPATH + "compressedMP4/\(VIDEOCOMPRESSEDMP4URL.lastPathComponent!)"
+        let VIDEOTITLE = RPMap[indexPath.section].videos[indexPath.row].title
         
-        // Video is being downloaded
-        if (videoTitleStatuses[VIDEOTITLE] != "none") {
-            cancel_Download_Alert(VIDEOTITLE)
-            selectedResearchProjectIndex = -1
-        } else if (currentMode == MANAGE) {
-            if (VIDEOMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH)) {
-                delete_Video_Alert(MP4FILEPATH)
-            } else if (VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil && NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH)) {
-                delete_Video_Alert(COMPRESSEDMP4FILEPATH)
-            } else if (netStatus.rawValue != NOTREACHABLE &&
-                VIDEOMP4URL.lastPathComponent != nil) {
-                HD_or_Compressed_Alert()
-            }
-            selectedResearchProjectIndex = indexPath.section
-        } else if (currentMode == WATCH) {
-            if(NSFileManager.defaultManager().fileExistsAtPath(MP4FILEPATH) && VIDEOMP4URL.lastPathComponent != nil) {
-                playDownloadedVideo(MP4FILEPATH)
-            } else if (NSFileManager.defaultManager().fileExistsAtPath(COMPRESSEDMP4FILEPATH) && VIDEOCOMPRESSEDMP4URL.lastPathComponent != nil) {
-                playDownloadedVideo(COMPRESSEDMP4FILEPATH)
-            } else if (netStatus.rawValue != NOTREACHABLE) {
-                self.selectedVideoUrl = videoDict["utubeurl"]!
-                self.performSegueWithIdentifier("YoutubeStreaming", sender: self)
-            }
-        }
     }
     
 /*
@@ -417,7 +331,7 @@ class VideosTableViewController: UITableViewController {
     // HD_or_Compressed_Alert
     // Alert that asks the user to choose between downloading the HD or compressed version of the video
     func HD_or_Compressed_Alert() {
-        let project = orderedTitles[selectedIndexPath.section]
+        let project = RPMap[selectedIndexPath.section].title
         let videos = projectData[project]!["videos"] as! [String: [String: String]]
         let video = Array(videos.keys)[selectedIndexPath.row]
         
@@ -455,7 +369,7 @@ class VideosTableViewController: UITableViewController {
     // downloadVideo
     // Downloads the chosen video at the chosen video quality
     func downloadVideo() {
-        let project = orderedTitles[selectedIndexPath.section]
+        let project = RPMap[selectedIndexPath.section].title
         let videos = projectData[project]!["videos"] as! [String: [String: String]]
         let video = Array(videos.keys)[selectedIndexPath.row]
         var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
@@ -502,16 +416,14 @@ class VideosTableViewController: UITableViewController {
     // setAllVideoDownloadsToNone
     // Inits the state of the video downloads, because empty entries cause an error
     func setAllVideoDownloadsToNone() {
-        let sectionCount: Int = orderedTitles.count
+        let sectionCount: Int = RPMap.count
         for sectionIndex in 0...sectionCount-1 {
-            let project = orderedTitles[sectionIndex]
-            let sectionVideoCount: Int? = projectData[project]!["videos"]?.count
+            let project = RPMap[sectionIndex].title
+            let sectionVideoCount: Int? = RPMap[sectionIndex].videos.count
             if (sectionVideoCount > 0) {
                 for rowIndex in 0...sectionVideoCount!-1 {
-                    let videos = projectData[project]!["videos"] as! [String: [String: String]]
-                    let video = Array(videos.keys)[rowIndex]
-                    var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
-                    let videoTitle: String = videoDict["title"]!
+                    let video = RPMap[sectionIndex].videos[rowIndex].youtube
+                    let videoTitle = RPMap[sectionIndex].videos[rowIndex].title
                     videoTitleStatuses[videoTitle] = "none"
                 }
             }

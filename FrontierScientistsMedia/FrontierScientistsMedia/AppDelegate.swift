@@ -26,11 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
             
-            updateContent()
+//            updateContent()
+            downloadData()
             // If there was an error connecting to the server on the very first launch of the application (no data present),
             // the processImages function is skipped and the error dialog is presented from MainViewController.swift
             if !cannotContinue {
-                processImages()
+//                processImages()
                 print("UI Ready!")
             }
         }
