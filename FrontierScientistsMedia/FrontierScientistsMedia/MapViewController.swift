@@ -65,21 +65,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             annotation.subtitle = "Research Project: Tap picture for more"
             
             mapView.addAnnotation(annotation)
-            markerMap.annotationDict[annotation.title!] = annotation
+            markerMap.annotationDict[index] = annotation
             
             markerMap.titleToIndex[RP.title] = index
 
             index += 1
         }
         
-        if currentLinkedProject != "" {
+        if currentLinkedProject != -1 {
             for (projectKey, projectAnnotation) in markerMap.annotationDict {
                 if currentLinkedProject == projectKey {
                     currentAnnotation = projectAnnotation
                     mapView.selectAnnotation(currentAnnotation, animated: true)
                 }
             }
-            currentLinkedProject = ""
+            // currentLinkedProject = -1
         }
         
         // Do an internet check
@@ -109,7 +109,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
              toResearch.titleLabel!.text = RPMap[markerMap.titleToIndex[annotation.title!!]!].title
             view.leftCalloutAccessoryView = toResearch
-            print(Int(annotation.title!!))
         }
         return view
     }
@@ -139,7 +138,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // This function is called when an expanded marker is selected. It simply sets currentLinkedProject to
     // the title of the project of the selected marker.
     func pressed(sender: UIButton!) {
-        currentLinkedProject = sender.titleLabel!.text!
+        currentLinkedProject = markerMap.titleToIndex[sender.titleLabel!.text!]!
+        print(currentLinkedProject)
         performSegueWithIdentifier("fromMaps",sender: nil)
     }
     
@@ -155,7 +155,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var image = [UIImage]()
         var title = [String]()
         var location = [CLLocationCoordinate2D]()
-        var annotationDict = Dictionary<String, MKPointAnnotation>()
+        var annotationDict = Dictionary<Int, MKPointAnnotation>()
         var titleToIndex = Dictionary<String,Int>()
     }
 }

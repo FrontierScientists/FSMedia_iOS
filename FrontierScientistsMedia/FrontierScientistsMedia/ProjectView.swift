@@ -59,7 +59,7 @@ class ProjectView: UIViewController {
         let text = RPMap[0].description
 
         let image:UIImage = RPMap[0].image
-        
+
         projectImage.image = image
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
@@ -114,14 +114,13 @@ extension ProjectView: UITableViewDelegate {
     // didSelectRowAtIndexPath
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 { // Videos
-            selectedResearchProjectIndex = orderedTitles.indexOf(projectTitle)!
-            if (projectData[projectTitle]!["videos"]?.count == 0) {
+            if (RPMap[currentLinkedProject].videos.count == 0) {
                 noVideosAlert()
             } else {
+                print(RPMap[currentLinkedProject].title)
                 researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
             }
         } else { // Maps
-            currentLinkedProject = projectTitle
             researchContainerRef.performSegueWithIdentifier("mapsLink", sender: nil)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true) // Deselect the selected link

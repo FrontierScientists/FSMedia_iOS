@@ -358,13 +358,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="ncd-ye-eco">
-                        <barButtonItem key="rightBarButtonItem" title="Manage Downloads" id="Cgo-Vc-K4x">
-                            <connections>
-                                <action selector="openManageDownloadsView:" destination="m0R-S3-sa9" id="wH5-BN-GNc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="ncd-ye-eco"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="videoTableView" destination="hmz-tY-CE0" id="5vq-9Y-Wlu"/>

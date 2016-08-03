@@ -24,12 +24,7 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
     Actions
 */
     @IBAction func imageTapped(sender: AnyObject) {
-        netStatus = reachability.currentReachabilityStatus()
-        if (netStatus.rawValue == NOTREACHABLE) {
-            displayAlert("Video cannot stream.")
-        } else {
-            performSegueWithIdentifier("scientist_bio", sender: nil)
-        }
+		print("image tapped")
     }
     @IBAction func sendMail(sender: AnyObject) {
         netStatus = reachability.currentReachabilityStatus();
@@ -56,26 +51,26 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "bg.png")!)
         self.title = "Ask A Scientist"
         intro.font = UIFont(name: "Chalkduster", size: 14)
-        let imageURL = NSURL(fileURLWithPath: scientistInfo["image"]!)
-        let imageName = imageURL.lastPathComponent
-        scientist.setImage(storedImages[imageName!], forState: UIControlState.Normal)
+		
+        scientist.setImage(sciOnCall.image, forState: UIControlState.Normal)
         name.font = UIFont(name: "Chalkduster", size: 14)
-        name.text = "Name: " + scientistInfo["name"]!
+        name.text = "Name: " + sciOnCall.name
+		
         // Make the text wrap around the image
-        let exclusionPath = UIBezierPath(rect: exclusion.bounds);
-        bio.textContainer.exclusionPaths = [exclusionPath];
-        bio.font = UIFont(name: "Chalkduster", size: 14);
-        bio.text = "Background: " + scientistInfo["bio"]!;
+        let exclusionPath = UIBezierPath(rect: exclusion.bounds)
+        bio.textContainer.exclusionPaths = [exclusionPath]
+        bio.font = UIFont(name: "Chalkduster", size: 14)
+        bio.text = "Background: " + sciOnCall.bio
+		
         // Let the user know what will not be available without internet connection
         netStatus = reachability.currentReachabilityStatus()
         if (netStatus.rawValue == NOTREACHABLE) {
-            displayAlert("Email and scientist bio video are unavailable.")
+            displayAlert("Email and scientist bio video are unavailable. Connect to the internet")
         }
     }
     // prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let avc = segue.destinationViewController as? YouTubeStreamingViewController
-        avc?.uTubeUrl = scientistInfo["video"]!
+		print("WHAT ARE YOU DOING?")
     }
     
 /*

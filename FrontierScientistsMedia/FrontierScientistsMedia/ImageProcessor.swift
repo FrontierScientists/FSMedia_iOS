@@ -13,28 +13,15 @@ import UIKit
 */
 func processImages() {
     createFolderNamed("Images") // Call to function in HelperFunctions.swift
-    if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) == nil {
-        NSKeyedArchiver.archiveRootObject([String: UIImage](), toFile: getFileUrl("storedImages").path!)
-    }
-    // Retrieve the data.
-    currentStoredImages = NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("storedImages").path!) as! [String: NSData]
-    // Process all project images
-    for (_, data) in projectData {
-        processImage(data["preview_image"] as! String)
-    }
+
     // Process the Ask a Scientist image
     processImage(scientistInfo["image"]!)
+    
     // Populate the storedImages dictionary, converting the data into UIImages
     for (title, imageData) in currentStoredImages {
         storedImages[title] = UIImage(data: imageData)
     }
-    // Remove any images that need not be there.
-    for title in storedImages.keys {
-        if !savedImages.contains(title) {
-            print("Deleting " + title + ".")
-            storedImages[title] = nil
-        }
-    }
+
     // Restore the updated data.
     currentStoredImages = [String: NSData]()
     let IMAGEFILEPATH: String = NSHomeDirectory() + "/Library/Caches/Images/"
@@ -42,7 +29,6 @@ func processImages() {
         UIImagePNGRepresentation(image)!.writeToFile(IMAGEFILEPATH + title, atomically: true)
         currentStoredImages[title] = UIImagePNGRepresentation(image)
     }
-    NSKeyedArchiver.archiveRootObject(currentStoredImages, toFile: getFileUrl("storedImages").path!)
 }
 
 /*

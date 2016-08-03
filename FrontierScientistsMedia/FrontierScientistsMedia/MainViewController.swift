@@ -29,12 +29,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // viewDidAppear
     override func viewDidAppear(animated: Bool) {
         self.navigationController?.navigationBar.hidden = false
+		currentLinkedProject = -1
         mainMenu.reloadData()
     }
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Check the network before continuing
         dispatch_async(dispatch_get_main_queue()) {
             if !networkConnected {
@@ -47,6 +48,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     self.handleNoServerConnection()
                 }
             }
+
         }
         
         mainMenu.userInteractionEnabled = false // Start the menu off as unselectable

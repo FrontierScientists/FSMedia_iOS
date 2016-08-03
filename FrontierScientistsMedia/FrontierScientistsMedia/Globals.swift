@@ -6,6 +6,7 @@
 */
 var jsonDownload : NSData = NSData ()
 var RPMap : [ResearchProject] = []
+var sciOnCall : FSScientist = FSScientist ()
 //  Global Constant                                                    Files Containing Constant
 //  ---------------                                                    -------------------------
 
@@ -31,7 +32,7 @@ var cannotContinue = false                                          // AppDelega
 var connectedToServer = true                                        // ContentUpdater.swift
                                                                     // ViewController.swift
 
-var currentLinkedProject = ""                                       // MapViewController.swift
+var currentLinkedProject = -1                                       // MapViewController.swift
                                                                     // ProjectView.swift
                                                                     // ResearchContainer.swift
 

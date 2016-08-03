@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        print("Hello World! (app started)")
         // Spawn a thread with HIGH priority to do the initial content checking and updating.
         dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             // Check for network connection
@@ -25,13 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     break
                 }
             }
-            
-//            updateContent()
             downloadData()
+            print("Download Complete")
             // If there was an error connecting to the server on the very first launch of the application (no data present),
             // the processImages function is skipped and the error dialog is presented from MainViewController.swift
             if !cannotContinue {
-//                processImages()
                 print("UI Ready!")
             }
         }

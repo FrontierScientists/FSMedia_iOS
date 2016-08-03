@@ -78,11 +78,13 @@ extension ResearchNavigationTableView: UITableViewDelegate {
     // didSelectRowAtIndexPath
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         projectTitle = RPMap[indexPath.row].title
-        let projectText = RPMap[indexPath.row].description
-        let image:UIImage = RPMap[indexPath.row].image
+
+        currentLinkedProject = indexPath.row
+
         // Set the referenced ProjectView with the selected project's information
-        projectViewRef.projectImage.image = image
-        projectViewRef.projectText.text = projectText
+        projectViewRef.projectImage.image = RPMap[indexPath.row].image
+        projectViewRef.projectText.text = RPMap[indexPath.row].description
+        
         projectViewRef.projectText.setContentOffset(CGPointZero, animated: false) // Start text at top
         projectViewRef.scrollView.setContentOffset(CGPointMake(0, -64), animated: false) // Start scroll view at top (below naviagtion bar)
         projectViewRef.delegate?.togglePanel?()

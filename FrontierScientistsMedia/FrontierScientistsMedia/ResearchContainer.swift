@@ -67,16 +67,16 @@ class ResearchContainer: UIViewController {
         
         self.projectView.delegate?.togglePanel?() // Toggle first to initialize the navigationViewController
         
-        if currentLinkedProject != "" {
+        if currentLinkedProject != -1 {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                let index = orderedTitles.indexOf(currentLinkedProject)!
+                let index = currentLinkedProject
                 let rowToSelect:NSIndexPath = NSIndexPath(forRow: index, inSection: 0)
                 self.navigationViewController?.navigationTableView.scrollToRowAtIndexPath(rowToSelect, atScrollPosition: UITableViewScrollPosition.Top, animated: false)
                 self.navigationViewController!.tableView(self.navigationViewController!.navigationTableView, didSelectRowAtIndexPath: rowToSelect)
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.6 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
                     self.projectView.projectText.setContentOffset(CGPointZero, animated: false)
                 }
-                currentLinkedProject = ""
+                // currentLinkedProject = -1
             }
         } else {
             // The purpose of this delay is to allow the project view to properly load before opening the drawer for initial display.

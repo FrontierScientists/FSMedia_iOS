@@ -18,29 +18,7 @@ class VideosTableViewController: UITableViewController {
 */
    // @IBOutlet weak var changeVidoesModeButton: UIButton!
     @IBOutlet var videoTableView: UITableView!
-/*
-    
-    Actions
-*/
-    // openManageDownloadsView
-    // The user pressed the upper-right-hand button
-    @IBAction func openManageDownloadsView(sender: UIBarButtonItem) {
-        let sectionCount: Int? = RPMap.count
-        if (currentMode == WATCH) {
-            // open all drop-downs
-            for sectionIndex in 0...sectionCount!-1 {
-                openSectionArray[sectionIndex] = "open"
-            }
-            // Switch to downloads view
-            currentMode = MANAGE
-            sender.title = "Done"
-        } else {
-            // Switch to downloads view
-            currentMode = WATCH
-            sender.title = "Manage Downloads"
-        }
-        self.tableView.reloadData()
-    }
+
 /*
     Class Constants
 */
@@ -74,14 +52,7 @@ class VideosTableViewController: UITableViewController {
             noInternetConnectionAlert()
             loadIsNotReloadBool = false
         }
-        // If the showSilentModeWarning archived file doesn't exist...
-        if NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("showSilentModeWarning").path!) == nil {
-            NSKeyedArchiver.archiveRootObject(true, toFile: getFileUrl("showSilentModeWarning").path!) // create it and set it to true.
-        }
-        if (NSKeyedUnarchiver.unarchiveObjectWithFile(getFileUrl("showSilentModeWarning").path!) as! Bool) {
-            showSilentModeWarning()
-        }
-        
+
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
         
@@ -95,11 +66,11 @@ class VideosTableViewController: UITableViewController {
         }
         
         // Open a section if coming from a research project page
-        if (selectedResearchProjectIndex != -1) {
-            self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: selectedResearchProjectIndex)
+        if (currentLinkedProject != -1) {
+            self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: currentLinkedProject)
             self.tableView.scrollToRowAtIndexPath(self.scrollPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-            openSectionArray[selectedResearchProjectIndex] = "open"
-            selectedResearchProjectIndex = -1
+            openSectionArray[currentLinkedProject] = "open"
+            // currentLinkedProject = -1
         }
         
         // Apply differences for iPad and iPhone
@@ -289,23 +260,12 @@ class VideosTableViewController: UITableViewController {
     // didSelectRowAtIndexPath
     // Cell has been selected
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-
-        let video = RPMap[indexPath.section].videos[indexPath.row].youtube
-        selectedIndexPath = indexPath
-        let VIDEOTITLE = RPMap[indexPath.section].videos[indexPath.row].title
-        
+        self.selectedVideoUrl = RPMap[indexPath.section].videos[indexPath.row].youtube
+        self.performSegueWithIdentifier("YoutubeStreaming", sender: self)
     }
-    
 /*
     Helper and Content Functions
 */
-    // getFileUrl
-    // This function retrieves a valid url from the document directory.
-    func getFileUrl(fileName: String) -> NSURL {
-        let manager = NSFileManager.defaultManager()
-        let dirURL = try? manager.URLForDirectory(.DocumentDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: false)
-        return dirURL!.URLByAppendingPathComponent(fileName)
-    }
     // noInternetConnectionAlert
     // This function simply displays and dismisses a "no internet" alert
     func noInternetConnectionAlert() {
@@ -314,102 +274,7 @@ class VideosTableViewController: UITableViewController {
         alert.show()
         delayDismissal(alert)
     }
-    // cancel_Download_Alert
-    // Alert that asks the user if they are sure they want to cancel their in-progress download
-    func cancel_Download_Alert(videoTitleString: String) {
-        let alert = UIAlertController(title: "Download in Progress",
-            message: "Cancel the download?",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Cancel Download", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction) in
-                let IDENTIFIER: String = "com.scientistsfrontier.\(videoTitleString)"
-                NSNotificationCenter.defaultCenter().postNotificationName(IDENTIFIER, object: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Continue Download", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    // HD_or_Compressed_Alert
-    // Alert that asks the user to choose between downloading the HD or compressed version of the video
-    func HD_or_Compressed_Alert() {
-        let project = RPMap[selectedIndexPath.section].title
-        let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = Array(videos.keys)[selectedIndexPath.row]
-        
-        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
-        let alert = UIAlertController(title: "Choose video quality",
-            message: "",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "MP4", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction) in
-                self.selectedVideoQuality = "MP4"
-                self.selectedVideoUrl = videoDict["MP4"]!
-                self.downloadVideo()
-        }))
-        alert.addAction(UIAlertAction(title: "compressedMP4", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction) in
-                self.selectedVideoQuality = "compressedMP4"
-                self.selectedVideoUrl = videoDict["compressedMP4"]!
-                self.downloadVideo()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    // showSilentModeWarning
-    func showSilentModeWarning() {
-        let alert = UIAlertController(title: "Make sure your device is not in Silent Mode",
-            message: "If it is, you won't be able to hear the videos",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Don't show again", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction) in
-            NSKeyedArchiver.archiveRootObject(false, toFile: self.getFileUrl("showSilentModeWarning").path!)
-        }))
-        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    // downloadVideo
-    // Downloads the chosen video at the chosen video quality
-    func downloadVideo() {
-        let project = RPMap[selectedIndexPath.section].title
-        let videos = projectData[project]!["videos"] as! [String: [String: String]]
-        let video = Array(videos.keys)[selectedIndexPath.row]
-        var videoDict: Dictionary = projectData[project]!["videos"]?[video] as! [String: String]
-        let videoDownloadHelperHandle: VideoDownloadHelper = VideoDownloadHelper()
-        videoDownloadHelperHandle.videoQualityFolder = selectedVideoQuality
-        videoDownloadHelperHandle.videoTitleString = videoDict["title"]!
-        videoDownloadHelperHandle.videoUrlString = videoDict[selectedVideoQuality]!
-        videoDownloadHelperHandle.executeBackgroundDownloadForURL()
-        self.tableView.reloadData()
-    }
-    // delete_Video_Alert
-    // Alert that asks the user if they are sure they want to delete their downloaded video
-    func delete_Video_Alert(videoFilePath: String) {
-        let alert = UIAlertController(title: "Remove stored video",
-            message: "Are you sure?",
-            preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Default, handler: {
-            (action: UIAlertAction) in
-                self.deleteVideo(videoFilePath)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    // deleteVideo
-    // Deletes the selected downloaded video
-    func deleteVideo(videoFilePath: String){
-        do {
-            try NSFileManager.defaultManager().removeItemAtPath(videoFilePath)
-        } catch _ {
-            // Nothing need be done with this exception.
-        }
-        self.tableView.reloadData()
-    }
-    // playDownloadedVideo
-    // Plays a downloaded video
-    func playDownloadedVideo(videoFilePath: String) {
-        self.selectedVideoPath = videoFilePath
-        self.performSegueWithIdentifier("playDownloadedVideo", sender: self)
-    }
-    // Reload the table's data
+       // Reload the table's data
     @objc func reloadVideosTableView(notification: NSNotification) {
         self.tableView.reloadData();
     }
