@@ -272,20 +272,4 @@ class VideosTableViewController: UITableViewController {
     @objc func reloadVideosTableView(notification: NSNotification) {
         self.tableView.reloadData();
     }
-    // setAllVideoDownloadsToNone
-    // Inits the state of the video downloads, because empty entries cause an error
-    func setAllVideoDownloadsToNone() {
-        let sectionCount: Int = RPMap.count
-        for sectionIndex in 0...sectionCount-1 {
-            let project = RPMap[sectionIndex].title
-            let sectionVideoCount: Int? = RPMap[sectionIndex].videos.count
-            if (sectionVideoCount > 0) {
-                for rowIndex in 0...sectionVideoCount!-1 {
-                    let video = RPMap[sectionIndex].videos[rowIndex].youtube
-                    let videoTitle = RPMap[sectionIndex].videos[rowIndex].title
-                    videoTitleStatuses[videoTitle] = "none"
-                }
-            }
-        }
-    }
 }
