@@ -27,7 +27,7 @@ class VideoDownloadHelper: NSURLSession, NSURLSessionDownloadDelegate {
         self.session = NSURLSession(configuration: sessionConfiguration, delegate: self, delegateQueue: nil)
         let downloadTask: NSURLSessionTask = self.session.downloadTaskWithURL(NSURL(string: self.videoUrlString, relativeToURL: nil)!)
         videoTitleStatuses[self.videoTitleString] = "\(downloadTask.taskIdentifier)"
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "cancelDownloadNotification:",name:IDENTIFIER, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideoDownloadHelper.cancelDownloadNotification(_:)),name:IDENTIFIER, object: nil)
         downloadTask.resume()
     }
     // didWriteData

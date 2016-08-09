@@ -53,8 +53,6 @@ class ProjectView: UIViewController {
         projectText.font = UIFont(name: "Chalkduster", size: 17)
         links.backgroundColor = UIColor.clearColor()
         links.separatorColor = UIColor.clearColor()
-        // Default the project to the first one in the list
-        projectTitle = RPMap[0].title
 
         let text = RPMap[0].description
 
@@ -77,7 +75,6 @@ class ProjectView: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler:nil))
         alert.addAction(UIAlertAction(title: "Continue", style: UIAlertActionStyle.Default, handler: {
             (action: UIAlertAction) in
-            selectedResearchProjectIndex = 0;
             researchContainerRef.performSegueWithIdentifier("videosLink", sender: nil)
         }));
         researchContainerRef.presentViewController(alert, animated: true, completion: nil)

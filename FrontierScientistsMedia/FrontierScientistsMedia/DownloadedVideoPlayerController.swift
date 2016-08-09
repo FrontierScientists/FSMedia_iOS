@@ -28,7 +28,7 @@ class DownloadedVideoPlayerController: UIViewController {
         super.viewDidLoad()
         // Quick initial setup
         self.navigationController?.navigationBar.translucent = false
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "resetVideoFrameToMatchNewOrientation", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(DownloadedVideoPlayerController.resetVideoFrameToMatchNewOrientation), name: UIDeviceOrientationDidChangeNotification, object: nil)
         // Play video
         playDownloadedVideo()
     }

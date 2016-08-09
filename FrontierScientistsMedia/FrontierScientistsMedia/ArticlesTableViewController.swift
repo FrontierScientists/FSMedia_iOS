@@ -2,24 +2,19 @@
 
 import Foundation
 import UIKit
-
-/*
-    This is the ArticlesTableViewController class, responsable for parsing the articles feed and displaying
-    the articles in a TableView.
-*/
+// ###############################################################
+//    This is the ArticlesTableViewController class, responsable for parsing the articles feed and displaying
+//    the articles in a TableView.
+// ###############################################################
 class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
-    
-/*
-    Outlets
-*/
+// ###############################################################
+//    Outlets
+// ###############################################################
     @IBOutlet var articleTableView: UITableView?
-/*
-    Class Constants
-*/
+// ###############################################################
+// Variables
+// ###############################################################
     let feed: String = "http://frontierscientists.com/feed"
-/*
-    Class Variables
-*/
     var articleLink: String = ""
     var articleReadStatusFileDict: NSMutableDictionary = NSMutableDictionary()
     var articleReadStatusFilePath: String = NSHomeDirectory() + "/Library/Caches/ArticlesReadStatus.txt"
@@ -28,18 +23,15 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
     var parser = NSXMLParser()
     var posts = [[String(): String()]]
     var selectedArtcileIndex: Int = 0
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Setup
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
         self.title = "Articles"
-        
         beginParsing()
         articleReadStatusFileDict = [NSString(string: "dummy"): NSNumber(int: 0)]
         if (!NSFileManager.defaultManager().fileExistsAtPath(articleReadStatusFilePath)) {
@@ -65,10 +57,9 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
             avc?.articleLinkString = str
         }
     }
-    
-/*
-    TableView Functions
-*/
+// ###############################################################
+//	TableView Functions
+// ###############################################################
     // numberOfSectionsInTableView
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -127,16 +118,15 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
         self.tableView.reloadData()
         performSegueWithIdentifier("RSSFeed", sender: self)
     }
-    
-/*
-    Helper and Content Functions
-*/
+// ###############################################################
+//    Helper and Content Functions
+// ###############################################################
     // createReadArticlesFileIfNone
     // This function creates a new "read articles" file if there is not one already present on the device.
     func createReadArticlesFileIfNone() {
         let fileMgr = NSFileManager.defaultManager()
         if (!fileMgr.fileExistsAtPath(articleReadStatusFilePath)) {
-            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as! [String: AnyObject])) {
+            if (!fileMgr.createFileAtPath(articleReadStatusFilePath, contents: nil, attributes: articleReadStatusFileDict as? [String: AnyObject])) {
                 print("Error! Creating articleReadStatusFile failed to create at \(articleReadStatusFilePath)")
             }
         }
@@ -180,11 +170,10 @@ class ArticlesTableViewController: UITableViewController, NSXMLParserDelegate{
         }
         return false
     }
-    
-/*
-    Parser Functions
-*/
-    // parseErrorOccurred
+// ###############################################################
+//    Parser Functions
+// ###############################################################    
+	// parseErrorOccurred
     func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
         print("error = \(parseError.localizedDescription)")
     }

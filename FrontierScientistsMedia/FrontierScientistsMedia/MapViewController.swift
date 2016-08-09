@@ -51,8 +51,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         for RP in RPMap {
 
             let image = RP.image
-            let latitude = RP.mapData.lat as! CLLocationDegrees
-            let longitude = RP.mapData.long as! CLLocationDegrees
+            let latitude = RP.mapData.lat 
+            let longitude = RP.mapData.long
             let tempLocation = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             
             markerMap.location.append(tempLocation)
@@ -106,7 +106,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             let toResearch = UIButton()
              toResearch.setImage(RPMap[markerMap.titleToIndex[annotation.title!!]!].image, forState: .Normal)
             toResearch.frame = CGRectMake(0,0,40,40)
-            toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+            toResearch.addTarget(self, action: #selector(MapViewController.pressed(_:)), forControlEvents: .TouchUpInside)
              toResearch.titleLabel!.text = RPMap[markerMap.titleToIndex[annotation.title!!]!].title
             view.leftCalloutAccessoryView = toResearch
         }
@@ -117,7 +117,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         let toResearch = UIButton()
          toResearch.setImage(RPMap[markerMap.titleToIndex[view.annotation!.title!!]!].image, forState: .Normal)
         toResearch.frame = CGRectMake(0,0,40,40)
-        toResearch.addTarget(self, action: "pressed:", forControlEvents: .TouchUpInside)
+        toResearch.addTarget(self, action: #selector(MapViewController.pressed(_:)), forControlEvents: .TouchUpInside)
          toResearch.titleLabel!.text = RPMap[markerMap.titleToIndex[view.annotation!.title!!]!].title
         print(view.annotation!.title!!)
         view.leftCalloutAccessoryView = toResearch

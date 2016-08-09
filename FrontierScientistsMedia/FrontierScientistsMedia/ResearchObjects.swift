@@ -84,18 +84,17 @@ class ResearchProject {
         image = image_
         imagePath = imagePath_
 	}
+	// Used for debugging to print this class object
+	func prettyPrint () {
+		print("title:  " + title)
+		print("description:  " + description)
+		for video in videos {
+			print("video title:  " + video.title)
+			print("youtube link:  " + video.youtube)
+		}
+		print("mapData.lat:  " + String(mapData.lat))
+		print("mapData.long:  " + String(mapData.long))
+		print("imagePath:  " + imagePath)
+	}
 }
 
-// Used for debugging to print this class object
-func prettyPrint (RPin: ResearchProject) {
-    print(RPin.title)
-    print(RPin.description)
-    for video in RPin.videos {
-        print(video.title)
-        print(video.youtube)
-    }
-    print(RPin.mapData.lat)
-    print(RPin.mapData.long)
-    print(RPin.imagePath)
-    print(RPin.image) 
-}

@@ -1,12 +1,8 @@
-//  Extensions.swift
-
 import UIKit
-
-/*
-    These are the extensions made to various classes in order to more easily achieve
-    tasks in this project.
-*/
-
+// ###############################################################
+// These are the extensions made to various classes in order to more easily achieve
+// tasks in this project.
+// ###############################################################
 // This extension for NSDate allows for easier NSDate creation from a String.
 extension NSDate {
     convenience
@@ -18,8 +14,9 @@ extension NSDate {
         self.init(timeInterval:0, sinceDate:d!)
     }
 }
-
+// ###############################################################
 // This extension for String allows for random access by index and range-based substrings.
+// ###############################################################
 extension String {
     subscript (i: Int) -> Character {
         return self[self.startIndex.advancedBy(i)]

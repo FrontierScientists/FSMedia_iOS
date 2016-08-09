@@ -44,7 +44,7 @@ class VideosTableViewController: UITableViewController {
 */
     // viewDidLoad
     override func viewDidLoad() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadVideosTableView:", name:"reloadVideosTableView", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideosTableViewController.reloadVideosTableView(_:)), name:"reloadVideosTableView", object: nil)
         // Check if there is a network connection, and alert the user if there isn't
         reachability.startNotifier()
         netStatus = reachability.currentReachabilityStatus()
@@ -56,8 +56,6 @@ class VideosTableViewController: UITableViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
         
-//        setAllVideoDownloadsToNone()
-		
         let sectionCount: Int = RPMap.count
         for _ in 0...(sectionCount - 2) {
             openSectionArray.append("closed")
@@ -105,8 +103,7 @@ class VideosTableViewController: UITableViewController {
             openSectionArray[pressedButton.tag] = "open"
         }
         self.tableView.reloadData()
-        selectedResearchProjectIndex = pressedButton.tag
-        self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: selectedResearchProjectIndex)
+        self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: pressedButton.tag)
         self.tableView.scrollToRowAtIndexPath(self.scrollPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }
     // numberOfSectionsInTableView
@@ -117,7 +114,6 @@ class VideosTableViewController: UITableViewController {
     
     // heightForHeaderInSection
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let project = RPMap[section].title
         let sectionVideoCount: Int? = RPMap[section].videos.count
         if (sectionVideoCount == 0) {
             return 1
@@ -289,7 +285,6 @@ class VideosTableViewController: UITableViewController {
                     let videoTitle = RPMap[sectionIndex].videos[rowIndex].title
                     videoTitleStatuses[videoTitle] = "none"
                 }
-				
             }
         }
     }

@@ -1,30 +1,25 @@
-//  ResearchNavigationTableView.swift
-
 import UIKit
 
 @objc
 protocol ResearchNavigationTableViewDelegate {
     func projectSelected(title: String, image: UIImage)
 }
-
-/*
-    This is the ResearchNavigationTableView class, responsable for displaying the research project titles in
-    a TableView. When a cell is selected, the panel is toggled and the ProjectView with the information of the
-    specified project is displayed.
-*/
+// ###############################################################
+// This is the ResearchNavigationTableView class, responsable for displaying the research project titles in
+// a TableView. When a cell is selected, the panel is toggled and the ProjectView with the information of the
+// specified project is displayed.
+// ###############################################################
 class ResearchNavigationTableView: UIViewController {
-    
-/*
-    Outlets
-*/
+// ###############################################################
+// Outlets
+// ###############################################################
     @IBOutlet weak var navigationTableView: UITableView!
     @IBOutlet weak var binding: UIView!
     @IBOutlet weak var page: UIView!
     @IBOutlet weak var shadow: UIImageView!
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// Class Functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +31,9 @@ class ResearchNavigationTableView: UIViewController {
         page.backgroundColor = UIColor(patternImage: UIImage(named: "page.jpeg")!)
     }
 }
-
-/*
-    TableView Functions
-*/
+// ###############################################################
+// TableView Functions
+// ###############################################################
 // TableView Data Source
 extension ResearchNavigationTableView: UITableViewDataSource {
     // numberOfSectionsInTableView
@@ -77,8 +71,6 @@ extension ResearchNavigationTableView: UITableViewDataSource {
 extension ResearchNavigationTableView: UITableViewDelegate {
     // didSelectRowAtIndexPath
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        projectTitle = RPMap[indexPath.row].title
-
         currentLinkedProject = indexPath.row
 
         // Set the referenced ProjectView with the selected project's information

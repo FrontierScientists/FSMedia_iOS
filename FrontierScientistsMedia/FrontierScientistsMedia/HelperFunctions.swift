@@ -1,11 +1,9 @@
-//  HelperFunctions.swift
-
 import UIKit
-
-/*
-    These are helper functions that are used throughtout the project, all accessible here.
-*/
-
+// ###############################################################
+// These are helper functions that are used throughtout the project, all accessible here.
+// ###############################################################
+// Helper Functions
+// ###############################################################
 // UIColorFromRGB
 // This function generated a UIColor object from an RGB value
 func UIColorFromRGB(rgbValue: UInt) -> UIColor {
@@ -16,7 +14,7 @@ func UIColorFromRGB(rgbValue: UInt) -> UIColor {
         alpha: CGFloat(1.0)
     )
 }
-
+// ###############################################################
 // Returns the last component of a url string
 func lastComponentOfUrlString(url: String) -> String {
     if (url != "") {
@@ -29,7 +27,7 @@ func lastComponentOfUrlString(url: String) -> String {
     }
     return "";
 }
-
+// ###############################################################
 // createFolderNamed
 // Creates the folder if it doesn't exist in the Library/Caches/ directory
 func createFolderNamed(folderName: String) {
@@ -42,7 +40,7 @@ func createFolderNamed(folderName: String) {
         error.description
     }
 }
-
+// ###############################################################
 // delayDismissal
 // Delays dismissal for 5 seconds then hides the given alert
 func delayDismissal(alert: UIAlertView) {
