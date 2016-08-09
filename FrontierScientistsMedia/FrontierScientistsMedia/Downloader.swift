@@ -79,12 +79,15 @@ func ParseJSON() {
 			pairArray = inString.componentsSeparatedByString("][")
 			// Split string futher and save into FSVideo Array
 			for i in 0...pairArray.count - 1 {
+				if (pairArray[i].containsString("PROMO")) {
+					continue
+				}
 				let tempFSVideo = FSVideo()
 				
-				tempArray=pairArray[i].componentsSeparatedByString(", ")
+				tempArray=pairArray[i].componentsSeparatedByString(", https")
 				//
 				tempArray[0] = tempArray[0].stringByReplacingOccurrencesOfString("[", withString: "")
-				tempArray[1] = tempArray[1].stringByReplacingOccurrencesOfString("]", withString: "")
+				tempArray[1] = "https" + tempArray[1].stringByReplacingOccurrencesOfString("]", withString: "")
 				
 				tempFSVideo.title = tempArray[0]
 				tempFSVideo.youtube = tempArray[1]

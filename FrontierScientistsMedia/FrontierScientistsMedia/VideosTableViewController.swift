@@ -56,10 +56,8 @@ class VideosTableViewController: UITableViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
         
-        setAllVideoDownloadsToNone()
-        createFolderNamed("MP4") // Calls to function in HelperFunctions.swift
-        createFolderNamed("compressedMP4")
-        
+//        setAllVideoDownloadsToNone()
+		
         let sectionCount: Int = RPMap.count
         for _ in 0...(sectionCount - 2) {
             openSectionArray.append("closed")
@@ -291,6 +289,7 @@ class VideosTableViewController: UITableViewController {
                     let videoTitle = RPMap[sectionIndex].videos[rowIndex].title
                     videoTitleStatuses[videoTitle] = "none"
                 }
+				
             }
         }
     }
