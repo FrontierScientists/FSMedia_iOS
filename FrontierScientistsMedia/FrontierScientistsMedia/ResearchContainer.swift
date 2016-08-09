@@ -86,7 +86,7 @@ class ResearchContainer: UIViewController {
             }
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "orientationChanged", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ResearchContainer.orientationChanged), name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     // touchesBegan
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

@@ -1,28 +1,21 @@
-//  AskViewController.swift
-
 import Foundation
 import UIKit
 import MessageUI
-
-/*
-    This is the AskViewController class, responsable for displaying the on-call scientist's information
-    and providing a way to contact that scientist.  The information displayed comes from the 
-    scientistInfo dictionary populated in ContentUpdater.swift.  This class uses a MFMailComposeView to
-    display an email client.
-*/
+// ###############################################################
+// This is the AskViewController class, responsable for displaying the on-call scientist's information
+//  and providing a way to contact that scientist.  The information displayed comes from the
+//  scientistInfo dictionary populated in ContentUpdater.swift.  This class uses a MFMailComposeView to
+//  display an email client.
+// ###############################################################
 class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
-    
-/*
-    Outlets
-*/
+// ###############################################################
+// Outlets
+// ###############################################################
     @IBOutlet weak var intro: UITextView!
     @IBOutlet weak var scientist: UIButton!
     @IBOutlet weak var name: UITextView!
     @IBOutlet weak var bio: UITextView!
     @IBOutlet weak var exclusion: UIView!
-/*
-    Actions
-*/
     @IBAction func imageTapped(sender: AnyObject) {
 		print("image tapped")
     }
@@ -40,10 +33,9 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
             presentViewController(mailer, animated: true, completion: nil)
         }
     }
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// Class Functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,22 +60,14 @@ class AskViewController: UIViewController, MFMailComposeViewControllerDelegate {
             displayAlert("Email and scientist bio video are unavailable. Connect to the internet")
         }
     }
-    // prepareForSegue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		print("WHAT ARE YOU DOING?")
-    }
-    
-/*
-    MFMailComposeView Functions
-*/
+// ###############################################################
+// MFMailComposeView Functions
+// ###############################################################
     // mailComposeController
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
-/*
-    Helper and Content Functions
-*/
+// ###############################################################    
     // displayAlert
     func displayAlert(message: String) {
         let alert = UIAlertView(title: "", message: "No network connection was found.  " + message, delegate: self, cancelButtonTitle: nil)

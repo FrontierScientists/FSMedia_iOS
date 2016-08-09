@@ -1,12 +1,10 @@
-//  AppDelegate.swift
-
 import UIKit
-
-/*
-    This is the AppDelegate class, responsable for handling specific events of the application.
-    The application function (only one currently used), is run at the very start of every launch
-    of the application.
-*/
+// ###############################################################
+//    This is the AppDelegate class, responsable for handling specific events of the application.
+//
+//    The application function (only one currently used), is run at the very start of every launch
+//    of the application.
+// ###############################################################
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

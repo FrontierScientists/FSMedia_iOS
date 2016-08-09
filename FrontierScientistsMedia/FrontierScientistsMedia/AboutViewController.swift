@@ -1,25 +1,21 @@
-// AboutViewController.swift
-
 import Foundation
 import UIKit
 
-/*
-    This is the AboutViewController, a simple class responsable for displaying the About page in a WebView.
-*/
+// ###############################################################
+// This is the AboutViewController, a simple class responsable for displaying the About page in a WebView.
+// ###############################################################
 class AboutViewController: UIViewController {
-    
-/*
-    Outlets
-*/
+// ###############################################################
+// Outlets
+// ###############################################################
     @IBOutlet weak var webView: UIWebView!
-/*
-    Class Constants
-*/
+// ###############################################################
+// Variables
+// ###############################################################
     let link = "http://frontierscientists.com/about/"
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// UIViewController Functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         let url = NSURL(string: link)

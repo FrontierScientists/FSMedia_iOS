@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3B22C1BC1B1666E7004AADAE /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B22C1BB1B1666E7004AADAE /* HelperFunctions.swift */; };
-		3B22C1BE1B178BA7004AADAE /* ContentUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */; };
-		3B22C1C01B1790F3004AADAE /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B22C1BF1B1790F3004AADAE /* ImageProcessor.swift */; };
 		3B22C1C21B1791ED004AADAE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B22C1C11B1791ED004AADAE /* Extensions.swift */; };
 		3B4507A11B2B803300BEFD24 /* uavIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4507A01B2B803300BEFD24 /* uavIcon.png */; };
 		3B5780C01B681B6C00C31362 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5780BF1B681B6C00C31362 /* Globals.swift */; };
@@ -77,8 +75,6 @@
 
 /* Begin PBXFileReference section */
 		3B22C1BB1B1666E7004AADAE /* HelperFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
-		3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentUpdater.swift; sourceTree = "<group>"; };
-		3B22C1BF1B1790F3004AADAE /* ImageProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		3B22C1C11B1791ED004AADAE /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3B4507A01B2B803300BEFD24 /* uavIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uavIcon.png; sourceTree = "<group>"; };
 		3B5780BF1B681B6C00C31362 /* Globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
@@ -192,14 +188,12 @@
 				F56E9E431B1CD0670027D39B /* ArticleViewController.swift */,
 				7EFEB1B41B0E8DD40056100A /* AskViewController.swift */,
 				F56E9E551B1CD1A80027D39B /* BridgingHeader.h */,
-				3B22C1BD1B178BA7004AADAE /* ContentUpdater.swift */,
 				3B6EDA041B0E4FB2003E8903 /* CustomTableViewCell.swift */,
 				7EC15FD71D500FA80082B681 /* Downloader.swift */,
 				F56E9E4B1B1CD1890027D39B /* DownloadedVideoPlayerController.swift */,
 				3B22C1C11B1791ED004AADAE /* Extensions.swift */,
 				3B5780BF1B681B6C00C31362 /* Globals.swift */,
 				3B22C1BB1B1666E7004AADAE /* HelperFunctions.swift */,
-				3B22C1BF1B1790F3004AADAE /* ImageProcessor.swift */,
 				3BAA17E51B06C36D003510D7 /* MainViewController.swift */,
 				7E8D518B1B43AFD10099EAD2 /* MapViewController.swift */,
 				3BBBD4871B20CC6600C628B1 /* ProjectView.swift */,
@@ -410,12 +404,10 @@
 				3B6EDA051B0E4FB2003E8903 /* CustomTableViewCell.swift in Sources */,
 				F56E9E531B1CD1890027D39B /* YouTubeStreamingViewController.swift in Sources */,
 				3BBBD4881B20CC6600C628B1 /* ProjectView.swift in Sources */,
-				3B22C1BE1B178BA7004AADAE /* ContentUpdater.swift in Sources */,
 				3B22C1C21B1791ED004AADAE /* Extensions.swift in Sources */,
 				F56E9E511B1CD1890027D39B /* DownloadedVideoPlayerController.swift in Sources */,
 				3BBBD48C1B20D38300C628B1 /* ResearchContainer.swift in Sources */,
 				3BAA17E61B06C36D003510D7 /* MainViewController.swift in Sources */,
-				3B22C1C01B1790F3004AADAE /* ImageProcessor.swift in Sources */,
 				F56E9E441B1CD0670027D39B /* ArticlesTableViewController.swift in Sources */,
 				3BAA17E41B06C36D003510D7 /* AppDelegate.swift in Sources */,
 				F56E9E521B1CD1890027D39B /* VideosTableViewController.swift in Sources */,
