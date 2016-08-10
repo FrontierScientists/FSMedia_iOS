@@ -1,25 +1,20 @@
-//  ProjectView.swift
-
 import UIKit
-
+// ###############################################################
 @objc
 protocol ProjectViewDelegate {
     optional func togglePanel()
     optional func collapsePanel()
 }
-
-/*
-    This is the ProjectView class, responsable for displaying the preview image and project description for
-    each project, as specified in projectData.
-    Included are a link to the Videos section, which will open to the listing for the current project, and a
-    link to the Maps section, which will open zoomed in on the expanded marker for the current project.
-*/
-
+// ###############################################################
+//    This is the ProjectView class, responsable for displaying the preview image and project description for
+//    each project, as specified in projectData.
+//    Included are a link to the Videos section, which will open to the listing for the current project, and a
+//    link to the Maps section, which will open zoomed in on the expanded marker for the current project.
+// ###############################################################
 class ProjectView: UIViewController {
-
-/*
-    Outlets
-*/
+// ###############################################################
+// Outlets
+// ###############################################################
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var projectImage: UIImageView!
@@ -27,22 +22,21 @@ class ProjectView: UIViewController {
     @IBOutlet weak var links: UITableView!
     @IBOutlet weak var shadow: UIView!
     @IBOutlet weak var drawerButton: UIButton!
-/*
-    Actions
-*/
+// ###############################################################
+// Actions
+// ###############################################################
     @IBAction func drawerButtonPressed(sender: AnyObject) {
         delegate?.togglePanel?()
     }
-/*
-    Class Variables
-*/
+// ###############################################################
+// Class Variables
+// ###############################################################
     var linkTitles = ["Videos", "Maps"]
     var linkIcons = [UIImage(named: "video_icon.png"), UIImage(named: "map_icon.png")]
     var delegate: ProjectViewDelegate?
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// Functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,10 +56,6 @@ class ProjectView: UIViewController {
         projectText.text = text
         drawerButton.transform = CGAffineTransformMakeRotation(-3.14)
     }
-    
-/*
-    Helper and Content Functions
-*/
     // noVideosAlert
     // This function alerts the user when there are no videos available for the current project. The options given are
     // to continue to the Videos section or stay on the current page.
@@ -80,10 +70,9 @@ class ProjectView: UIViewController {
         researchContainerRef.presentViewController(alert, animated: true, completion: nil)
     }
 }
-
-/*
-    TableView Functions
-*/
+// ###############################################################
+// TableView Functions
+// ###############################################################
 // TableView Data Source
 extension ProjectView: UITableViewDataSource {
     // numberOfSectionsInTableView

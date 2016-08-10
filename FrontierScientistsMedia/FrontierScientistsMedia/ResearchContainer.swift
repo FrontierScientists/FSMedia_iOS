@@ -1,30 +1,23 @@
-//  ResearchContainer.swift
-
 import UIKit
 import Foundation
 import QuartzCore
-
+// ###############################################################
 enum SlideOutState {
     case panelCollapsed
     case panelExpanded
 }
-
-/*
-    This is the ResearchContainer class, responsable for handling the two different components
-    of the Research section: ResearchNavigationTableView and ProjectView. The two scenes interact
-    with each other through TableView cell selection, an open/close drawer button and swipe gestures.
-    The side panel is the ResearchNavigationTableView.
-*/
+// ###############################################################
+//    This is the ResearchContainer class, responsable for handling the two different components
+//    of the Research section: ResearchNavigationTableView and ProjectView. The two scenes interact
+//    with each other through TableView cell selection, an open/close drawer button and swipe gestures.
+//    The side panel is the ResearchNavigationTableView.
+// ###############################################################
 class ResearchContainer: UIViewController {
-    
-/*
-    Outlets
-*/
+// ###############################################################
+// Outlets
+// ###############################################################
     @IBOutlet var openSwipe: UISwipeGestureRecognizer!
     @IBOutlet var closeSwipe: UISwipeGestureRecognizer!
-/*
-    Actions
-*/
     @IBAction func showProjects(sender: AnyObject) {
         projectView.delegate?.togglePanel?()
     }
@@ -38,19 +31,18 @@ class ResearchContainer: UIViewController {
             projectView.delegate?.togglePanel!()
         }
     }
-/*
-    Class Variables
-*/
+// ###############################################################
+// Class Variables
+// ###############################################################
     var researchNavigationController: UINavigationController!
     var projectView: ProjectView!
     var currentState: SlideOutState = .panelCollapsed
     var navigationViewController: ResearchNavigationTableView?
     var panelExpandedOffset: CGFloat = 60
     var firstTime = true
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// Class Functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,10 +91,9 @@ class ResearchContainer: UIViewController {
             }
         }
     }
-    
-/*
-    Helper and Content Functions
-*/
+// ###############################################################
+// Helper and Content Functions
+// ###############################################################
     // orientationChanged
     // This function resets the width of the ResearchNavigationTableView component due to abnormal constaint performance
     // on the occurance of an oriantation change.
@@ -113,7 +104,7 @@ class ResearchContainer: UIViewController {
         }
     }
 }
-
+// ###############################################################
 // ProjectView Delegate
 extension ResearchContainer: ProjectViewDelegate {
     // togglePanel
@@ -179,10 +170,9 @@ extension ResearchContainer: ProjectViewDelegate {
             }, completion: completion)
     }
 }
-
-/*
-    UIStoryboard Extension
-*/
+// ###############################################################
+// UIStoryboard Extension
+// ###############################################################
 private extension UIStoryboard {
     // mainStoryboard
     class func mainStoryboard() -> UIStoryboard {

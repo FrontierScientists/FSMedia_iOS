@@ -1,47 +1,32 @@
-//  VideosTableViewController.swift
-
 import Foundation
 import UIKit
 import MediaPlayer
-
-/*
-    This is the VideosTableViewController class, responsable for displaying and controlling the expandable TableView holding
-    the video titles, catagorized under project titles. When a project title cell is selected the section is collapsed/
-    expended to hide/reveal the video titles under that project. When a video title cell is selected the video is played, 
-    from the device if downloaded and streamed if not downloaded.
-*/
+// ###############################################################
+//    This is the VideosTableViewController class, responsable for displaying and controlling the expandable TableView holding
+//    the video titles, catagorized under project titles. When a project title cell is selected the section is collapsed/
+//    expended to hide/reveal the video titles under that project. When a video title cell is selected the video is played, 
+//    from the device if downloaded and streamed if not downloaded.
+// ###############################################################
 class VideosTableViewController: UITableViewController {
-    
-
-/*
-    Outlets
-*/
+// ###############################################################
+// Outlets
+// ###############################################################
    // @IBOutlet weak var changeVidoesModeButton: UIButton!
     @IBOutlet var videoTableView: UITableView!
-
-/*
-    Class Constants
-*/
-    let MANAGE: String = "Manage_downloads"
+// ###############################################################
+// Variables
+// ###############################################################
     let WATCH: String = "Watch_videos"
-    let CACHESDIRECTORYPATH: String = NSHomeDirectory() + "/Library/Caches/"
-/*
-    Class Variables
-*/
-    var watching: Bool = true
-    
+	var watching: Bool = true
     var loadIsNotReloadBool: Bool = true
     var openSectionArray: Array<String> = ["closed"]
     var scrollPath: NSIndexPath = NSIndexPath(forRow: NSNotFound, inSection: NSNotFound)
     var selectedIndexPath: NSIndexPath = NSIndexPath(forRow: NSNotFound, inSection: NSNotFound)
-    var selectedVideoQuality: String = String()
-    var selectedVideoPath: String = String()
     var selectedVideoUrl: String = String()
     var currentMode: String = "Watch_videos"
-    
-/*
-    Class Functions
-*/
+// ###############################################################
+// Functions
+// ###############################################################
     // viewDidLoad
     override func viewDidLoad() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(VideosTableViewController.reloadVideosTableView(_:)), name:"reloadVideosTableView", object: nil)
@@ -52,15 +37,12 @@ class VideosTableViewController: UITableViewController {
             noInternetConnectionAlert()
             loadIsNotReloadBool = false
         }
-
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage:UIImage(named: "bg.png")!)
-        
         let sectionCount: Int = RPMap.count
         for _ in 0...(sectionCount - 2) {
             openSectionArray.append("closed")
         }
-        
         // Open a section if coming from a research project page
         if (currentLinkedProject != -1) {
             self.scrollPath = NSIndexPath(forRow: NSNotFound, inSection: currentLinkedProject)
@@ -68,7 +50,6 @@ class VideosTableViewController: UITableViewController {
             openSectionArray[currentLinkedProject] = "open"
             // currentLinkedProject = -1
         }
-        
         // Apply differences for iPad and iPhone
         if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
             //changeVidoesModeButton.frame = CGRectMake(0, 0, 320, 40)
@@ -78,10 +59,7 @@ class VideosTableViewController: UITableViewController {
     }
     // prepareForSegue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "playDownloadedVideo") {
-            let downloadedVideoPlayerView = segue.destinationViewController as? DownloadedVideoPlayerController
-            downloadedVideoPlayerView?.videoFullPathString = self.selectedVideoPath
-        } else if (segue.identifier == "YoutubeStreaming") {
+		if (segue.identifier == "YoutubeStreaming") {
             let youTubePlayerView = segue.destinationViewController as? YouTubeStreamingViewController
             youTubePlayerView?.uTubeUrl = self.selectedVideoUrl
         }
@@ -90,10 +68,9 @@ class VideosTableViewController: UITableViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         self.tableView.reloadData()
     }
-    
-/*
-    TableView Functions
-*/
+// ###############################################################
+// TableView Functions
+// ###############################################################
     // dropDownListToggle
     // Button command to open/close a section
     func dropDownListToggle(pressedButton: UIButton!) {
@@ -111,7 +88,6 @@ class VideosTableViewController: UITableViewController {
         // return orderedTitles.count
         return RPMap.count
     }
-    
     // heightForHeaderInSection
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let sectionVideoCount: Int? = RPMap[section].videos.count
@@ -123,7 +99,6 @@ class VideosTableViewController: UITableViewController {
     }
     // viewForHeaderInSection
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let project = RPMap[section].title
         let sectionVideoCount: Int? = RPMap[section].videos.count
         
         if (sectionVideoCount == 0) {
@@ -168,7 +143,7 @@ class VideosTableViewController: UITableViewController {
         let headerButton: UIButton = UIButton(frame: CGRectMake(0, 0, self.view.frame.size.width, 104.0))
         headerButton.backgroundColor = UIColor.clearColor()
         headerButton.tag = section
-        headerButton.addTarget(self, action: "dropDownListToggle:", forControlEvents: UIControlEvents.TouchUpInside)
+        headerButton.addTarget(self, action: #selector(VideosTableViewController.dropDownListToggle(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         // Apply differences for iPad and iPhone
         if (UIDevice.currentDevice().userInterfaceIdiom == iPadDeviceType) {
@@ -205,7 +180,6 @@ class VideosTableViewController: UITableViewController {
     // numberOfRowsInSection
     // Get the number of rows per section
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let project = RPMap[section].title
         if (openSectionArray[section] == "open") {
             let sectionVideoCount: Int? = RPMap[section].videos.count
             return sectionVideoCount!
@@ -226,8 +200,8 @@ class VideosTableViewController: UITableViewController {
     // cellForRowAtIndexPath
     // Get the view for the cell
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let video = RPMap[indexPath.section].videos[indexPath.row].youtube
-        
+//        let video = RPMap[indexPath.section].videos[indexPath.row].youtube
+		
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "Cell")
         let accessoryImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         
@@ -257,9 +231,9 @@ class VideosTableViewController: UITableViewController {
         self.selectedVideoUrl = RPMap[indexPath.section].videos[indexPath.row].youtube
         self.performSegueWithIdentifier("YoutubeStreaming", sender: self)
     }
-/*
-    Helper and Content Functions
-*/
+// ###############################################################
+// Helper and Content Functions
+// ###############################################################
     // noInternetConnectionAlert
     // This function simply displays and dismisses a "no internet" alert
     func noInternetConnectionAlert() {
