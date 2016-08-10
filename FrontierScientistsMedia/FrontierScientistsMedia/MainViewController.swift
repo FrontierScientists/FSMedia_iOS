@@ -17,6 +17,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //	Variables
     let sections = ["Research", "Videos", "Maps", "Articles", "Ask a Scientist", "About"]
     let icons = ["research_icon.png", "video_icon.png", "map_icon.png", "article_icon.png", "ask_a_scientist_icon.png", "about_icon.png"]
+	var alertDisplaying = false
 // ###############################################################
     // viewDidAppear
     override func viewDidAppear(animated: Bool) {
@@ -31,15 +32,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Check the network before continuing
         dispatch_async(dispatch_get_main_queue()) {
             if !networkConnected {
-                self.checkNetwork()
-            } else if !connectedToServer {
-                if cannotContinue {
-                    let alert = UIAlertController(title: "Unable to connect to server.", message: "Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
-                    self.presentViewController(alert, animated: true, completion: nil)
-                } else {
-                    self.handleNoServerConnection()
-                }
-            }
+				self.displayNetworkAlert()
+			}
         }
 		// ............
 		// Start the menu off as unselectable
@@ -92,30 +86,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	}
 	// ***************************************************************
 	// checkNetwork checks the network status and engages in dialog with the user until the network situation is resolved
-	func checkNetwork() {
+	func displayNetworkAlert() {
 		var alert = UIAlertController()
-		if (false) {
-			alert = UIAlertController(title: "No internet connection.", message: "Internet required for initial startup.", preferredStyle: UIAlertControllerStyle.Alert)
-			alert.addAction(UIAlertAction(title: "Try again", style: .Default, handler: { (action: UIAlertAction) in
-				netStatus = reachability.currentReachabilityStatus()
-				if (netStatus.rawValue == NOTREACHABLE) {
-					self.checkNetwork()
-				} else {
-					networkConnected = true
-				}
-			}))
-		} else {
-			alert = UIAlertController(title: "No internet connection.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
-			alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
-			displayOldData = true
-		}
-		self.presentViewController(alert, animated: true, completion: nil)
-	}
-	// ***************************************************************
-	// handleNoServerConnection
-	func handleNoServerConnection() {
-		let alert = UIAlertController(title: "Unable to connect to server.", message: "Content may not be up to date.", preferredStyle: UIAlertControllerStyle.Alert)
-		alert.addAction(UIAlertAction(title: "Okay", style: .Default, handler: nil))
+		alert = UIAlertController(title: "No internet connection.", message: "This app requiures an internet connection.", preferredStyle: UIAlertControllerStyle.Alert)
+		let tryAgain = UIAlertAction( title: "Try again", style: UIAlertActionStyle.Default) {
+				(action) in
+				print("Retry Downloads")
+				self.retryDownload()
+				self.viewDidLoad()
+			}
+		let close = UIAlertAction( title: "Close", style: UIAlertActionStyle.Destructive) {
+				(action) in
+				exit(86)
+			}
+		alert.addAction(tryAgain)
+		alert.addAction(close)
 		self.presentViewController(alert, animated: true, completion: nil)
 	}
 	// ***************************************************************
@@ -125,6 +110,27 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 		let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil);
 		alert.show();
 		delayDismissal(alert);
+	}
+	// ***************************************************************
+	// retryDownload
+	func retryDownload() {
+		dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
+			// Check for network connection
+			reachability.startNotifier();
+			netStatus = reachability.currentReachabilityStatus();
+			networkConnected = netStatus.rawValue != NOTREACHABLE
+			// if there is no network connections, fail the async download
+			if (!networkConnected) {
+				return
+			}
+			downloadData()
+			print("Download Complete")
+			// If there was an error connecting to the server on the very first launch of the application (no data present),
+			// the processImages function is skipped and the error dialog is presented from MainViewController.swift
+			if !cannotContinue {
+				print("UI Ready!")
+			}
+		}
 	}
 // ###############################################################
 // TableView Functions
@@ -154,10 +160,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 performSegueWithIdentifier("research", sender: nil)
                 break
             case 1:
-                performSegueWithIdentifier("videos", sender: nil)
+				if (netStatus.rawValue == NOTREACHABLE) {
+					noInternetAlert("Videos")
+				} else {
+					performSegueWithIdentifier("videos", sender: nil)
+				}
                 break
             case 2:
-                performSegueWithIdentifier("maps", sender: nil)
+				if (netStatus.rawValue == NOTREACHABLE) {
+					noInternetAlert("Maps")
+				} else {
+					performSegueWithIdentifier("maps", sender: nil)
+				}
                 break
             case 3:
                 if (netStatus.rawValue == NOTREACHABLE) {
@@ -167,7 +181,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 }
                 break
             case 4:
-                performSegueWithIdentifier("ask", sender: nil)
+				if (netStatus.rawValue == NOTREACHABLE) {
+					noInternetAlert("Ask a Scientist")
+				} else {
+					performSegueWithIdentifier("ask", sender: nil)
+				}
                 break
             default:
                 if (netStatus.rawValue == NOTREACHABLE) {

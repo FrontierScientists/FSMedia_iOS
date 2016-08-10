@@ -237,7 +237,7 @@ class VideosTableViewController: UITableViewController {
     // noInternetConnectionAlert
     // This function simply displays and dismisses a "no internet" alert
     func noInternetConnectionAlert() {
-        let ALERTMESSAGE = "No network connection was found. Some features are unavailable or limited."
+        let ALERTMESSAGE = "No network connection was found. Video streaming will not work."
         let alert = UIAlertView(title: "", message: ALERTMESSAGE, delegate: self, cancelButtonTitle: nil)
         alert.show()
         delayDismissal(alert)

@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     break
                 }
             }
+			// if there is no network connections, fail the async download
+			if (!networkConnected) {
+				return
+			}
             downloadData()
             print("Download Complete")
             // If there was an error connecting to the server on the very first launch of the application (no data present),
